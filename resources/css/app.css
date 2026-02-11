@@ -1,0 +1,8 @@
+/* Bootstrap está siendo cargado desde CDN en app.blade.php */
+/* Estilos personalizados de la aplicación */
+
+@import './sobreescribirBoostrap.css';
+
+:root {
+    --bs-font-sans-serif: 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+}
