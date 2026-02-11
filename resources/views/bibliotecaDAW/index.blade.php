@@ -4,19 +4,19 @@
 
 @section('content')
     <main>
-        
+
         <section class="destacados carrusel">
             <!-- Aqui buscamos en la base de datos de libros y ponemos el libro mas nuevo o destacado -->
-             @foreach($libros as $libro)
+            @foreach($libros as $libro)
                 <div class="libro">
-                    <img src="/resources/img/portada-Destacado.jpg"
-                   alt="Portada de {{ $libro->titulo }}" class="portada"/>
+                    <img src="/resources/img/portada-Destacado.jpg" alt="Portada de {{ $libro->titulo }}" class="portada" />
                     <h2>{{ $libro->titulo }}</h2>
                     <p>{{ $libro->descripcion }}</p>
-                    <p>Autor: {{ $libro->autor }} | Año: {{ $libro->anio }} | Premios: {{ $libro->premios }} | Precio: {{ $libro->precio }}</p>
+                    <p>Autor: {{ $libro->autor }} | Año: {{ $libro->anio }} | Premios: {{ $libro->premios }} | Precio:
+                        {{ $libro->precio }}</p>
                     <button>Buscar en el catálogo</button>
                 </div>
-                @endforeach
+            @endforeach
         </section>
         <section>
             <h2>Acceso Rápido</h2>

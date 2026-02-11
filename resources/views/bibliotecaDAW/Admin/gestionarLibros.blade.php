@@ -6,7 +6,7 @@
     <h1>Gestionar Libros</h1>
     <p>Desde aquí puedes gestionar los libros de la Biblioteca DAW.</p>
     <!-- Aquí puedes agregar un formulario para añadir nuevos libros, una tabla para mostrar los libros existentes, y opciones para editar o eliminar libros -->
-     <form action="{{ route('admin.libros.store') }}" method="POST">
+    <form action="{{ route('admin.libros.store') }}" method="POST">
         @csrf
         <div>
             <label for="titulo">Título:</label>
@@ -28,7 +28,7 @@
             <label for="editorial">Editorial:</label>
             <input type="text" id="editorial" name="editorial" required>
         </div>
-        <div class="disponnilidad">
+        <div class="disponibilidad">
             <label for="disponibilidad">Disponibilidad:</label>
             <select id="disponibilidad" name="disponibilidad" required>
                 <option value="disponible">Disponible</option>
