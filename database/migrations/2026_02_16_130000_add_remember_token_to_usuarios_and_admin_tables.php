@@ -1,0 +1,44 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        if (!Schema::hasColumn('usuarios', 'remember_token')) {
+            Schema::table('usuarios', function (Blueprint $table) {
+                $table->rememberToken();
+            });
+        }
+
+        if (!Schema::hasColumn('admin', 'remember_token')) {
+            Schema::table('admin', function (Blueprint $table) {
+                $table->rememberToken();
+            });
+        }
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        if (Schema::hasColumn('usuarios', 'remember_token')) {
+            Schema::table('usuarios', function (Blueprint $table) {
+                $table->dropRememberToken();
+            });
+        }
+
+        if (Schema::hasColumn('admin', 'remember_token')) {
+            Schema::table('admin', function (Blueprint $table) {
+                $table->dropRememberToken();
+            });
+        }
+    }
+};

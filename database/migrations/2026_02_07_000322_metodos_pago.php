@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('metodos_pago', function(Blueprint $table) {
             $table->id();
-            $table->foreignId('usuario_id')->constrained('usuarios')->onDelete('cascade');
+            $table->foreignId('usuario_id')
+                ->constrained('usuarios')
+                ->cascadeOnDelete();
 
             $table->enum('type', [
                 'tarjeta_credito',

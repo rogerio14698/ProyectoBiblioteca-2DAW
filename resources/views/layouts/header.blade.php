@@ -1,4 +1,3 @@
-
 <header>
     <nav class="navbar bg-body-tertiary">
         <div class="container-fluid">
@@ -12,7 +11,8 @@
                 <li class="nav-item"><a href="{{ url('/registro') }}" class="nav-link text-dark">Registro</a></li>
             </ul>
             <form class="d-flex" role="search" method="GET" action="{{ url('/buscar') }}">
-                <input class="form-control me-2" type="search" placeholder="Buscar libro..." aria-label="Search" name="q"/>
+                <input class="form-control me-2" type="search" placeholder="Buscar libro..." aria-label="Search"
+                    name="q" />
                 <button class="btn btn-outline-success" type="submit">Buscar</button>
             </form>
         </div>

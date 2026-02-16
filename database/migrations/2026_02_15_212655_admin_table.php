@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('usuarios', function (Blueprint $table) {
+        Schema::create('admin', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('dni')->unique();
-            $table->string('movil')->nullable()->unique();
-            $table->string('password'); // contraseña hasheada
-            $table->string('nSocio', 7)->nullable()->unique(); // 5 números + 2 letras - nullable de momento
-            //Deberia de poner el last_login, pero esto más adelante 
+            $table->string('password');
+            $table->dateTime('last_login')->nullable();
+            $table->enum('rol', ['superadmin', 'editor', 'moderador']);
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('usuarios');
+        Schema::dropIfExists('admin');
     }
 };
