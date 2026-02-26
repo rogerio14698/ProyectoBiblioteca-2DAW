@@ -1,0 +1,10 @@
+@import '../main.css';
+
+.footer {
+    background-color: var(--color-secundario);
+    padding: 20px;
+    color: var(--color-texto);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}

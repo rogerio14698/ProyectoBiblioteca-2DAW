@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+
 class DatabaseSeeder extends Seeder
 {
     use WithoutModelEvents;
@@ -18,6 +19,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsuarioSeeder::class,
             AdminSeeder::class,
+            EventosSeeder::class,
+
         ]);
     }
 }

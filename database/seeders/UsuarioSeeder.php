@@ -16,22 +16,26 @@ class UsuarioSeeder extends Seeder
         // Usuario de prueba para desarrollo local
         // Email: usuario@test.com
         // Contraseña: password123
-        Usuario::create([
-            'name' => 'Juan Usuario',
-            'email' => 'usuario@test.com',
-            'dni' => '12345678A',
-            'movil' => '666123456',
-            'password' => 'password123', // Se hasheará automáticamente en el modelo
-            'nSocio' => '12345AB', // Se genera automáticamente en booted(), pero lo ponemos aquí como respaldo
-        ]);
+        Usuario::updateOrCreate(
+            ['email' => 'usuario@test.com'],
+            [
+                'name' => 'Juan Usuario',
+                'dni' => '12345678A',
+                'movil' => '666123456',
+                'password' => 'password123', // Se hasheará automáticamente en el modelo
+                'nSocio' => '12345AB', // Se genera automáticamente en booted(), pero lo ponemos aquí como respaldo
+            ]
+        );
 
-        Usuario::create([
-            'name' => 'María Lectora',
-            'email' => 'maria@test.com',
-            'dni' => '87654321B',
-            'movil' => '666654321',
-            'password' => 'password123',
-            'nSocio' => '54321CD', // Se genera automáticamente en booted(), pero lo ponemos aquí como respaldo
-        ]);
+        Usuario::updateOrCreate(
+            ['email' => 'maria@test.com'],
+            [
+                'name' => 'María Lectora',
+                'dni' => '87654321B',
+                'movil' => '666654321',
+                'password' => 'password123',
+                'nSocio' => '54321CD', // Se genera automáticamente en booted(), pero lo ponemos aquí como respaldo
+            ]
+        );
     }
 }

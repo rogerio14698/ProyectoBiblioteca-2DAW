@@ -1,0 +1,62 @@
+/*Tengo que importar las variables*/
+@import '../variables/variables.css';
+
+.acceso_rapido {
+    background-color: var(--color-secundario);
+    padding: 20px;
+    margin-bottom: 20px;
+    color: var(--color-texto);
+    display: flex;
+    flex-direction: row;
+}
+
+.acceso_rapido h2 {
+    margin-right: 20px;
+}
+
+.acceso_rapido ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 5px;
+}
+
+.acceso_rapido ul li {
+    background-color: var(--color-primario);
+    border-radius: 5px;
+    color: white;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.acceso_rapido ul li:hover {
+    background-color: var(--color-secundario);
+}
+
+.agenda {
+    display: flex;
+    align-items: start;
+    background-color: var(--color-secundario);
+    padding: 20px;
+    color: var(--color-texto);
+}
+
+.noticias {
+    background-color: var(--color-secundario);
+    padding: 20px;
+    color: var(--color-texto);
+}
+
+.avisos {
+    background-color: var(--color-secundario);
+    padding: 20px;
+    color: var(--color-texto);
+}
+
+.horarios {
+    background-color: var(--color-secundario);
+    padding: 20px;
+    color: var(--color-texto);
+}

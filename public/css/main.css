@@ -1,0 +1,16 @@
+@import 'normalize/normalize.css';
+@import 'variables/variables.css';
+@import 'Globales/globales.css';
+/*Mantener este orden es importante ya que las variables deben cargarse antes de los estilos globales*/
+
+/*Emepzamos con las paginas, panel de invitado*/
+
+/*Pagina de inicio*/
+@import 'secciones/header.css';
+@import 'secciones/footer.css';
+
+/*Panel de administrador*/
+@import 'panelAdmin/navAdmin.css';
+@import 'panelAdmin/dashboard.css';
+
+@import 'paneles/Invitado/paginaPrincipal.css';

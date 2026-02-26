@@ -13,7 +13,7 @@ class LoginControllerUsuario extends Controller
     //Validacion
     public function mostrarLogin()
     {
-        return view('bibliotecaDAW.login');
+        return view('bibliotecaDAW.publicViews.login');
     }
 
     //Hacer el login

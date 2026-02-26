@@ -13,7 +13,7 @@ class UsuarioController extends Controller
      */
     public function showRegistro()
     {
-        return view('bibliotecaDAW.registro');
+        return view('bibliotecaDAW.publicViews.registro');
     }
 
     /**

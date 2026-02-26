@@ -1,7 +1,7 @@
 <header>
     <nav class="navbar bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ url('/biblioteca') }}">📚 Biblioteca DAW</a>
+            <a class="navbar-brand" href="{{ url('/biblioteca') }}"> Biblioteca DAW</a>
             <ul class="nav d-flex justify-content-evenly align-items-center w-50">
                 <li class="nav-item"><a href="{{ url('/biblioteca') }}" class="nav-link text-dark">Inicio</a></li>
                 <li class="nav-item"><a href="{{ url('/catalogo') }}" class="nav-link text-dark">Catálogo</a></li>

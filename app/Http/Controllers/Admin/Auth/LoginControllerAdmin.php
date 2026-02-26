@@ -64,6 +64,6 @@ class LoginControllerAdmin extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         //Una vez se cierre la sesion ir a la biblioteca pagina del login
-        return redirect()->route('login');
+        return redirect()->route('admin.login.mostrar');
     }
 }

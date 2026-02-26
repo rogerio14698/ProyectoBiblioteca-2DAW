@@ -1,0 +1,118 @@
+@import 'normalize/normalize.css';
+@import 'variables/variables.css';
+@import 'Globales/globales.css';
+
+.dashboard {
+    padding: 20px;
+    color: var(--color-blanco);
+    background-color: rgb(99, 99, 99);
+    position: relative;
+}
+
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    position: relative;
+    z-index: 3;
+    margin-bottom: -40px;
+}
+
+.card-contenidoTotal {
+    padding: 5px;
+    gap: 5px;
+    background-color: var(--color-secundario);
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-noticias {
+    padding: 5px;
+    gap: 5px;
+    background-color: var(--color-secundario);
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-paginas {
+    padding: 5px;
+    gap: 5px;
+    background-color: var(--color-secundario);
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-elementosMenu {
+    padding: 5px;
+    gap: 5px;
+    background-color: var(--color-secundario);
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/*parte principal del dashboard*/
+.dashboard-body {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+    padding-top: 40px;
+}
+
+.dashboard-nuevoCatalogo {
+    margin-top: 20px;
+    padding: 5px;
+    gap: 5px;
+    background-color: var(--color-secundario);
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    border-radius: 5px 5px 0 0;
+}
+
+.body-nuevoCatalogo {
+    padding: 10px;
+    background-color: var(--color-secundario);
+    border-radius: 0 0 5px 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.dashboard-informacionSistema {
+    margin-top: 20px;
+    padding: 5px;
+    gap: 5px;
+    background-color: var(--color-secundario);
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-informacionSistema h5 {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
+}
+
+@media (max-width: 768px) {
+    .dashboard-cards {
+        margin-bottom: 0;
+    }
+
+    .dashboard-body {
+        grid-template-columns: 1fr;
+        padding-top: 20px;
+    }
+}

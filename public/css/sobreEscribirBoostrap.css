@@ -1,4 +1,4 @@
-body {
+/*body {
     background-color: #f8f9fa;
     padding: 20px;
     margin: 40px;
@@ -13,7 +13,7 @@ body {
 .columna-izquierda,
 .columna-derecha {
     flex: 1;
-    /* Cada columna ocupa el mismo espacio */
+    /* Cada columna ocupa el mismo espacio 
 }
 
 .columna-derecha form {
@@ -71,3 +71,5 @@ body {
     margin-bottom: 10px;
     max-width: 200px;
 }
+
+*/

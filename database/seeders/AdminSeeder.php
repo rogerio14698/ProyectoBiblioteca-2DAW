@@ -16,18 +16,22 @@ class AdminSeeder extends Seeder
         // Admin de prueba para desarrollo local
         // Email: admin@test.com
         // Contraseña: admin123
-        Admin::create([
-            'name' => 'Administrador Principal',
-            'email' => 'admin@test.com',
-            'password' => 'admin123', // Se hasheará automáticamente en el modelo
-            'rol' => 'superadmin',
-        ]);
+        Admin::updateOrCreate(
+            ['email' => 'admin@test.com'],
+            [
+                'name' => 'Administrador Principal',
+                'password' => 'admin123', // Se hasheará automáticamente en el modelo
+                'rol' => 'superadmin',
+            ]
+        );
 
-        Admin::create([
-            'name' => 'Editor de Contenido',
-            'email' => 'editor@test.com',
-            'password' => 'editor123',
-            'rol' => 'editor',
-        ]);
+        Admin::updateOrCreate(
+            ['email' => 'editor@test.com'],
+            [
+                'name' => 'Editor de Contenido',
+                'password' => 'editor123',
+                'rol' => 'editor',
+            ]
+        );
     }
 }
