@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Evento;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -31,39 +32,34 @@ class EventosSeeder extends Seeder
             ]);
         }
 
-        $eventos = [
-            [
-                'titulo' => 'Club de Lectura',
-                'descripcion' => 'Sesión mensual del club de lectura.',
-                'fecha_hora' => now()->addDays(7),
-                'ubicacion' => 'Sala Principal',
-            ],
-            [
-                'titulo' => 'Taller de Escritura',
-                'descripcion' => 'Taller práctico de escritura creativa.',
-                'fecha_hora' => now()->addDays(14),
-                'ubicacion' => 'Aula 2',
-            ],
-            [
-                'titulo' => 'Presentación de Libro',
-                'descripcion' => 'Presentación y firma con autor invitado.',
-                'fecha_hora' => now()->addDays(21),
-                'ubicacion' => 'Auditorio',
-            ],
-        ];
-
-        foreach ($eventos as $evento) {
-            Evento::updateOrCreate(
+        Evento::factory()
+            ->count(3)
+            ->state(new Sequence(
                 [
-                    'titulo' => $evento['titulo'],
-                    'fecha_hora' => $evento['fecha_hora'],
+                    'titulo' => 'Club de Lectura',
+                    'descripcion' => 'Sesión mensual del club de lectura.',
+                    'fecha_hora' => now()->addDays(7),
+                    'ubicacion' => 'Sala Principal',
+                    'usuario_id' => 4,
+                    'prioridad' => 2,
                 ],
                 [
-                    'descripcion' => $evento['descripcion'],
-                    'ubicacion' => $evento['ubicacion'],
+                    'titulo' => 'Taller de Escritura',
+                    'descripcion' => 'Taller práctico de escritura creativa.',
+                    'fecha_hora' => now()->addDays(14),
+                    'ubicacion' => 'Aula 2',
                     'usuario_id' => 4,
-                ]
-            );
-        }
+                    'prioridad' => 3,
+                ],
+                [
+                    'titulo' => 'Presentación de Libro',
+                    'descripcion' => 'Presentación y firma con autor invitado.',
+                    'fecha_hora' => now()->addDays(21),
+                    'ubicacion' => 'Auditorio',
+                    'usuario_id' => 4,
+                    'prioridad' => 1,
+                ],
+            ))
+            ->create();
     }
 }

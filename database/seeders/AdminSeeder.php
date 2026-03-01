@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Admin;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class AdminSeeder extends Seeder
@@ -13,25 +12,36 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        // Admin de prueba para desarrollo local
-        // Email: admin@test.com
-        // Contraseña: admin123
-        Admin::updateOrCreate(
-            ['email' => 'admin@test.com'],
+        $admins = [
             [
+                'email' => 'admin@test.com',
                 'name' => 'Administrador Principal',
-                'password' => 'admin123', // Se hasheará automáticamente en el modelo
+                'password' => 'admin123',
                 'rol' => 'superadmin',
-            ]
-        );
-
-        Admin::updateOrCreate(
-            ['email' => 'editor@test.com'],
+            ],
             [
+                'email' => 'editor@test.com',
                 'name' => 'Editor de Contenido',
                 'password' => 'editor123',
                 'rol' => 'editor',
-            ]
-        );
+            ],
+            [
+                'email' => 'moderador@test.com',
+                'name' => 'Moderador General',
+                'password' => 'moderador123',
+                'rol' => 'moderador',
+            ],
+        ];
+
+        foreach ($admins as $admin) {
+            Admin::updateOrCreate(
+                ['email' => $admin['email']],
+                [
+                    'name' => $admin['name'],
+                    'password' => $admin['password'],
+                    'rol' => $admin['rol'],
+                ]
+            );
+        }
     }
 }

@@ -5,19 +5,14 @@
 @section('content')
     <main>
         <section class="contenedor agenda">
-            <div class=" contenedor">
-                <h2>Agenda</h2>
-                <p>Próximos eventos y actividades en la biblioteca <br>
-                    Actualizar - carrusel ya que tiene seeders y no viene de la BD <br>
-                    Tambien ver donde poner uan foto del evento y flechas para navegar en el carrusel</p>
-            </div>
+
             <!--
-                                                            Aqui ahora tengo que definir una especie de foreach para mostrar los eventos que se crean en la base de datos:
-                                                            Entonces primero tengo que definir como es la tabla de eventos en la migracion, 
-                                                            relacionarla con el usuario que lo ha creado 
-                                                            Mostrar todo en la pagina principal en la seccion de agenda
-                                                            Buscar como podria hacer esto
-                                                        -->
+                                                                Aqui ahora tengo que definir una especie de foreach para mostrar los eventos que se crean en la base de datos:
+                                                                Entonces primero tengo que definir como es la tabla de eventos en la migracion, 
+                                                                relacionarla con el usuario que lo ha creado 
+                                                                Mostrar todo en la pagina principal en la seccion de agenda
+                                                                Buscar como podria hacer esto
+                                                            -->
             <!-- Y todo esto va a formar parte de un carrusel -->
             <div id="eventoCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">

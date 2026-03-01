@@ -6,53 +6,13 @@
     <h1>Gestionar Libros</h1>
     <p>Desde aquí puedes gestionar los libros de la Biblioteca DAW.</p>
     <!-- Aquí puedes agregar un formulario para añadir nuevos libros, una tabla para mostrar los libros existentes, y opciones para editar o eliminar libros -->
-    <form action="{{ route('admin.libros.store') }}" method="POST">
-        @csrf
-        <div>
-            <label for="titulo">Título:</label>
-            <input type="text" id="titulo" name="titulo" required>
-        </div>
-        <div>
-            <label for="autor">Autor:</label>
-            <input type="text" id="autor" name="autor" required>
-        </div>
-        <div>
-            <label for="genero">Género:</label>
-            <input type="text" id="genero" name="genero" required>
-        </div>
-        <div>
-            <label for="anio">Año de Publicación:</label>
-            <input type="number" id="anio" name="anio" required>
-        </div>
-        <div class="editorial">
-            <label for="editorial">Editorial:</label>
-            <input type="text" id="editorial" name="editorial" required>
-        </div>
-        <div class="disponibilidad">
-            <label for="disponibilidad">Disponibilidad:</label>
-            <select id="disponibilidad" name="disponibilidad" required>
-                <option value="disponible">Disponible</option>
-                <option value="prestado">Prestado</option>
-            </select>
-        </div>
-        <div class="formato">
-            <label for="formato">Formato:</label>
-            <select id="formato" name="formato" required>
-                <option value="fisico">Físico</option>
-                <option value="digital">Digital</option>
-            </select>
-        </div>
-        <div class="opcion-compra">
-            <label for="opcion_compra">Opción de Compra:</label>
-            <select id="opcion_compra" name="opcion_compra" required>
-                <option value="compra">Compra</option>
-                <option value="prestamo">Préstamo</option>
-            </select>
-        </div>
-        <div class="cantidad-ejemplares">
-            <label for="cantidad_ejemplares">Cantidad de Ejemplares:</label>
-            <input type="number" id="cantidad_ejemplares" name="cantidad_ejemplares" required>
-        </div>
+    <!-- Aun tengo que pensar como lo haré, si hago una tabla con los libros existentes y un botón para añadir nuevos libros, 
+            o si hago un formulario para añadir nuevos libros y 
+            debajo una tabla con los libros existentes -->
+    <!--También voy a necesitar un btn para añadir y eliminar libros -->
+    <!-- Tambien voy a necesitar un formulario para añadir los libros a la BD, con campos como título, autor, año de publicación, género, etc. -->
+    <!-- Y una tabla para mostrar los libros existentes, con columnas como ID, título, autor, año de publicación, género, etc. -->
+    <!-- Y opciones para editar o eliminar libros, como botones de acción en cada fila de la tabla. -->
+    <!-- Aquí un formulario para añadir nuevos libros -->
 
-        <button type="submit">Añadir Libro</button>
 @endsection
