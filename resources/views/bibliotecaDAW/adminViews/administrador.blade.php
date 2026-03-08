@@ -9,8 +9,7 @@
         <h1>Dashboard</h1>
         <!-- Aquí puedes agregar más secciones o funcionalidades específicas para el administrador -->
 
-        <!-- Aqui la idea ahora es poner varios cards tipo un panel de control 
-                                                                    con diferentes secciones -->
+        <!-- Aqui la idea ahora es poner varios cards tipo un panel de control                                  con diferentes secciones -->
         <div class="dashboard-cards">
             <div class="card-contenidoTotal">
                 <h5>Contenido Total: <span>12</span></h5>

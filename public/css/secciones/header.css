@@ -1,0 +1,96 @@
+/* Importación obligatoria (Regla 4) */
+@import "./variables.css";
+
+.headerPrincipal {
+    background-color: var(--color-blanco);
+    box-shadow: var(--sombra-suave);
+    padding: var(--unidad-espaciado) 0;
+    position: sticky;
+}
+
+.skipLink {
+    display: none;
+}
+
+.navContenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    /* Separa Logo, Links y Buscador */
+    gap: var(--grid-gap);
+}
+
+.navLogo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-primario-oscuro);
+    text-decoration: underline;
+}
+
+.navLista {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+    box-shadow: none;
+    padding: 0;
+    gap: 10px;
+    font-weight: 500;
+}
+.navLista:first-child {
+    color: var(--color-primario-oscuro);
+}
+
+
+.navListaVisible {
+    display: flex;
+    /*Muestra el menú cuando se activa la clase .navListaVisible*/
+}
+
+.navEnlace {
+    display: block;
+    padding: 8px 12px;
+    color: var(--color-texto-principal);
+    transition: color var(--transicion-rapida);
+}
+
+.navEnlace:hover {
+    color: var(--color-primario-oscuro);
+}
+
+/* Estilos del Buscador */
+.navBuscador {
+    display: none;
+    gap: 8px;
+}
+
+.inputBuscador {
+    padding: 8px 12px;
+    border: 1px solid var(--input-border);
+    border-radius: var(--radio-pequeno);
+    font-family: var(--fuente-familia);
+    background-color: var(--input-bg);
+}
+
+.inputBuscador:focus {
+    outline: none;
+    border-color: var(--color-primario);
+    box-shadow: var(--input-focus-shadow);
+}
+
+@media (min-width: 1200px) {
+    .navContenedor{
+        flex-direction: row;
+    }
+    .navLista {
+        display: flex;
+        flex-direction: row;
+    }
+    .btnMenu {
+        display: none;
+    }
+    .navBuscador{
+        display: flex;
+    }
+}

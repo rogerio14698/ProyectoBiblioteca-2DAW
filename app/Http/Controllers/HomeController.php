@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Evento;
 use App\Models\Libro;
+use App\Models\Noticias;
 
 class HomeController extends Controller
 {
@@ -14,12 +14,14 @@ class HomeController extends Controller
     public function index()
     {
         //Obtener eventos ordenados por fecha
-        $eventos = Evento::with('usuario:id,name')->orderBy('fecha_hora')->get();
+        $eventos = Evento::with('usuario:id,name')->orderBy('fecha_hora')->paginate(6);
         $libros = Libro::all();
+        $noticias = Noticias::orderBy('created_at', 'desc')->paginate(4);
 
         return view('bibliotecaDAW.index', [
             'eventos' => $eventos,
             'libros' => $libros,
+            'noticias' => $noticias,
         ]);
 
         //Aqui se pondría mas informacion para la pagina principal.
@@ -34,12 +36,13 @@ class HomeController extends Controller
 
     public function destacados()
     {
-        $eventos = Evento::with('usuario:id,name')->orderBy('fecha_hora')->get();
+        $eventos = Evento::with('usuario:id,name')->orderBy('fecha_hora')->paginate(6);
         $libros = Libro::where('destacado', true)->get();
-
+        $noticias = Noticias::orderBy('created_at', 'desc')->paginate(4);
         return view('bibliotecaDAW.index', [
             'eventos' => $eventos,
             'libros' => $libros,
+            'noticias' => $noticias,
         ]);
     }
 

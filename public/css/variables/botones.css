@@ -1,0 +1,73 @@
+/* Botón Base */
+.btn-base {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    font-family: var(--fuente-familia);
+    font-weight: 500;
+    border-radius: var(--radio-medio);
+    transition: var(--transicion-rapida);
+    cursor: pointer;
+    border: 1px solid transparent;
+    text-decoration: none;
+    
+}
+
+/* Botón Primario (Azul DAW) */
+.btn-primario {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+}
+.btn-verde{
+    width: 100%;
+    background-color: var(--color-exito);
+    color: var(--color-blanco);
+}
+.btn-verde:hover{
+    cursor: pointer;
+    background-color: var(--color-info);
+    box-shadow: var(--sombra-media);
+}
+.btn-verde:active{
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+.btn-primario:hover {
+    background-color: var(--color-primario-oscuro);
+    transform: translateY(-1px);
+    box-shadow: var(--sombra-media);
+}
+
+/* Botón Secundario (Turquesa / Acento) */
+.btn-turquesa {
+    background-color: var(--color-secundario);
+    color: var(--color-texto-principal);
+}
+.btn-novedad{
+    
+}
+/* Botón Admin (Para acciones administrativas) */
+.btn-admin {
+    background-color: transparent;
+    border: 2px solid var(--color-primario);
+    color: var(--color-primario);
+}
+
+.btn-admin:hover {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+}
+
+/*btn menu*/
+
+.btnMenu{
+    display:block;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--color-primario);
+    cursor: pointer;
+    padding: 5px;
+}

@@ -7,7 +7,9 @@
 <p>Desde aquí puedes gestionar el contenido de la página de inicio de la Biblioteca DAW.</p>
 <!-- Aquí puedes agregar un formulario para editar el contenido principal, una sección para gestionar noticias o destacados, avisos importantes, horarios, etc. -->
 
-<table>
+<div class="tabla-agenda">
+    <h4>Contenido de agenda</h4>
+    <table>
     <thead>
         <th>id</th>
         <th>Nombre Contenido</th>
@@ -23,3 +25,4 @@
         </form>
     </tbody>
 </table>
+</div>

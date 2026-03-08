@@ -1,16 +1,22 @@
 @import 'normalize/normalize.css';
 @import 'variables/variables.css';
+@import 'variables/botones.css';
 @import 'Globales/globales.css';
+@import 'variables/paginacion.css';
+@import 'variables/btnSlider.css';
+
+
+
+
 /*Mantener este orden es importante ya que las variables deben cargarse antes de los estilos globales*/
-
-/*Emepzamos con las paginas, panel de invitado*/
-
-/*Pagina de inicio*/
 @import 'secciones/header.css';
 @import 'secciones/footer.css';
+/*Paginas publicas*/
+@import 'paneles/Invitado/paginaPrincipal.css';
+
+
+/*Paginas usuarios autentificados*/
 
 /*Panel de administrador*/
 @import 'panelAdmin/navAdmin.css';
 @import 'panelAdmin/dashboard.css';
-
-@import 'paneles/Invitado/paginaPrincipal.css';

@@ -1,11 +1,14 @@
 body {
-    line-height: 1.5;
     /* 1 */
     -webkit-text-size-adjust: 100%;
     /* 2 */
-    background-color: var(--color-fondo);
+    background-color: var(--color-fondo-global);
     max-width: 100%;
     overflow-x: hidden;
+    font-family: var(--fuente-familia);
+    font-size: var(--fuente-tamano-base);
+    line-height: var(--fuente-altura-linea);
+
 }
 
 .contenedor {
@@ -24,4 +27,15 @@ li {
     list-style: none;
     padding: 0;
     margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0;
+    padding: 0;
 }

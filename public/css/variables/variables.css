@@ -1,7 +1,144 @@
 :root {
-    --color-primario: #4A90E2;
-    --color-secundario: #50E3C2;
-    --color-fondo: #F5F5F5;
-    --color-texto: #333333;
+    /* =========================================
+       1. PALETA DE COLORES (BRANDING)
+       ========================================= */
+    --color-primario: #4A90E2;          /* Azul Principal DAW */
+    --color-primario-oscuro: #357ABD;   /* Azul para enlaces/contraste AA */
+    --color-secundario: #50E3C2;        /* Turquesa de acento */
+    --color-fondo-global: #e9e9e9;      /* Gris muy claro de fondo */
     --color-blanco: #FFFFFF;
+    --color-texto-principal: #333333;   /* Títulos y cuerpo */
+    --color-texto-mutado: #666666;
+    --color-card-evento: #f0f7ff;    /* Descripciones y etiquetas */
+    --color-borde: #e2e8f0;
+    
+    /* Colores de Estado (Feedback) */
+    --color-exito: #28a745;
+    --color-error: #dc3545;
+    --color-alerta: #ffc107;
+    --color-info: #17a2b8;
+
+    /* =========================================
+       2. TIPOGRAFÍA Y TEXTO
+       ========================================= */
+    --fuente-familia: 'Inter', system-ui, -apple-system, sans-serif;
+    --fuente-tamano-base: 16px;
+    --fuente-altura-linea: 1.6;
+
+    /* =========================================
+       3. SOMBRAS Y ELEVACIÓN (ELEGANCIA)
+       ========================================= */
+    --sombra-suave: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --sombra-media: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --sombra-fuerte: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --sombra-portada-libro: 0 15px 30px rgba(0, 0, 0, 0.15);
+
+    /* =========================================
+       4. BORDES, RADIOS Y ESPACIADO
+       ========================================= */
+    --radio-pequeno: 4px;
+    --radio-medio: 8px;                 /* Estándar para Cards e Inputs */
+    --radio-grande: 12px;
+    --unidad-espaciado: 8px;            /* Base para escala (8, 16, 24, 32...) */
+    --relleno-interno-card: 32px;
+    --transicion-rapida: 0.2s ease;
+
+    /* =========================================
+       5. COMPONENTES ESPECÍFICOS (UI)
+       ========================================= */
+    /* Navegación y Paneles */
+    --ancho-sidebar: 260px;
+    --altura-progreso: 6px;
+    --transformacion-hover-card: translateY(-4px);
+
+    /* Etiquetas (Tags) y Categorías */
+    --color-fondo-tag: rgba(80, 227, 194, 0.15);
+    --color-texto-tag: #3AA38C;
+    --ancho-etiqueta-detalle: 120px;     /* Alineación Autor:, ISBN:, etc. */
+
+    /* Buscador y Filtros */
+    --margen-seccion-filtro: 24px;
+    --hueco-rejilla: 24px;              /* Grid Gap */
+
+    /* Formularios y Login */
+    --login-proporcion-pantalla: 50%;
+    --input-relleno: 12px 16px;
+    --formulario-ancho-maximo: 400px;
+    --color-fondo-capa: rgba(74, 144, 226, 0.05);
+    --input-borde: #D1D5DB;
+    --input-foco-sombra: 0 0 0 3px rgba(74, 144, 226, 0.2);
+
+    /* =========================================
+       6. ACCESIBILIDAD Y RESPONSIVE
+       ========================================= */
+    --ancho-anillo-foco: 3px;
+    --color-anillo-foco: rgba(74, 144, 226, 0.4);
+    --relleno-movil: 16px;
+    --altura-boton-movil: 50px;
+
+   /* =========================================
+       7. BREAKPOINTS (RESPONSIVE)
+       ========================================= */
+      --MQ-movil: 576px ;
+      --MQ-Tablet: 768px;
+      --MQ-Desktop: 1200px;
+      --MQ-Desktop-XL: 1400px;
+
+      --relleno-movil: 16px;
+      --altura-boton-movil: 50px;
+      
+
+}  
+      
+
+/* =========================================
+   ESTILOS GLOBALES NECESARIOS
+   ========================================= */
+
+/* Foco de Accesibilidad */
+a:focus, button:focus, input:focus {
+    outline: none;
+    box-shadow: 0 0 0 var(--ancho-anillo-foco) var(--color-anillo-foco);
+    border-radius: var(--radio-pequeno);
 }
+
+/* Clase para el Skip Link */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-primario);
+    color: var(--color-blanco);
+    padding: 12px 24px;
+    z-index: 9999;
+    border-radius: 0 0 var(--radio-medio) var(--radio-medio);
+    text-decoration: none;
+    font-weight: 600;
+    transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* ==========================================================================
+   GUÍA DE PROGRAMACIÓN Y UX (RECORDATORIOS)
+   ==========================================================================
+      
+   1. ESTRUCTURA LARAVEL (app.blade.php):
+      - Colocar el <a href="#contenido-principal" class="skip-link"> justo tras el <body>.
+      - El <main> debe tener id="contenido-principal" y tabindex="-1".
+
+   2. ACCESIBILIDAD (ARIA & SEMÁNTICA):
+      - Portadas de libros: alt="Portada del libro: [Título]" (o alt="" si es decorativa).
+      - Formularios: Todo <input> DEBE tener un <label> asociado por ID.
+      - Errores de validación: No solo usar color, añadir texto descriptivo "Error: ...".
+      - Jerarquía: Usar H1, H2, H3 en orden lógico, no por tamaño estético.
+
+   3. DISEÑO DE COMPONENTES:
+      - Textos pequeños: Usar --color-primario-oscuro para asegurar contraste AA (4.5:1).
+      - Cuerpo de texto: Mantener siempre mínimo 16px.
+      - Cards: Usar --transformacion-hover-card para feedback visual premium.
+      */
+      

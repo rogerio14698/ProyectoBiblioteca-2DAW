@@ -9,7 +9,7 @@
                     <li><a href="{{ route('admin.gestionHome') }}">Gestionar Home</a></li>
                     <li><a href="{{ route('admin.gestionAgenda') }}">Gestionar Agenda</a></li>
                     <li><a href="{{ route('admin.gestionCarrusel') }}">Carrusel Home</a></li>
-                    <li><a href="{{ route('admin.gestionNoticias') }}">Noticias</a></li>
+                    <!-- <li><a href="{{ route('admin.gestionNoticias') }}">Noticias</a></li> -->
                 </ul>
                 <h3>Contenido Fijos</h3>
             <li><a href="{{ route('admin.gestionHeader') }}">Header y Footer</a></li>

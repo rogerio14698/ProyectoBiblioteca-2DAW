@@ -1,10 +1,94 @@
 @import '../main.css';
 
 .footer {
-    background-color: var(--color-secundario);
+    background-color: var(--color-blanco);
     padding: 20px;
-    color: var(--color-texto);
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    color: var(--color-fuente-principal);
     gap: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer h1 {
+    text-decoration: underline;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--color-primario-oscuro);
+}
+
+.footerInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    color: var(--color-texto-principal);
+    font-weight: 500;
+    gap: 5px;
+}
+
+.footerRedesSociales {
+    display: flex;
+    justify-content: center;
+    gap: 20px
+}
+
+.footerRedesSociales a {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    padding: 12px 12px;
+    border-radius: 100%;
+}
+.footerHorarios{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    color: var(--color-texto-principal);
+    font-weight: 500;
+    gap: 5px;
+}
+.footerContacto{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    color: var(--color-texto-principal);
+    font-weight: 500;
+    gap: 5px;
+}
+
+
+@media (min-width: 1200px) {
+    .footer {
+        padding: 20px;
+        display: grid;
+        margin: 0 auto;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .footer h1 {
+        text-decoration: underline;
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: var(--color-primario-oscuro);
+    }
+    .footerHorarios{
+        display: flex;
+        align-items: flex-start;
+        padding: 0;
+        margin: 0;
+    }
+    .footerContacto{
+        display: flex;
+        align-items: flex-start;
+        padding: 0;
+        margin: 0;
+    }
+
 }
