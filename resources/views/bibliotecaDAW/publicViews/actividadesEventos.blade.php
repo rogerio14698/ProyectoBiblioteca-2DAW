@@ -3,16 +3,25 @@
 @section('title', 'Actividades y Eventos')
 
 @section('content')
-    <h1>Actividades y Eventos</h1>
-    <p>Bienvenido a la sección de actividades y eventos de la Biblioteca DAW.</p>
-    <p>Aquí podrás encontrar información sobre las actividades y eventos que se llevarán a cabo en la Biblioteca DAW, como talleres, charlas, presentaciones de libros, exposiciones y mucho más. Mantente atento a esta sección para no perderte ninguna de nuestras emocionantes actividades y eventos.</p>
-    <p>Próximos eventos:</p>
-    <section>
+    <main class="contenedor">
+        <div class="contentHeader">
+        <h1>Actividades y Eventos</h1>
+        <p>Bienvenido a la sección de actividades y eventos de la Biblioteca DAW.</p>
+    </div>
+    <section class="actividadesEventos">
         <!-- Al apuntarse se va a poner un contador de personas que se han apuntado, deben de estar registradas -->
-        <ul>
-            <li>Club de Lectura - 15 de Octubre <a href="#">Apuntarse</a></li>
-            <li>Taller de Escritura Creativa - 22 de Octubre <a href="#">Apuntarse</a></li>
-            <li>Presentación del Libro "El Mundo de la Fantasía" - 30 de Octubre <a href="#">Apuntarse</a></li>
-        </ul>
+         @foreach($eventos as $evento)
+        <div class="actividadEventoCard">
+           <h2>{{ $evento->titulo }}</h2>
+           <p>{{ $evento->descripcion }}</p>
+            <p>Fecha: <strong>{{ date('d/m', strtotime($evento->fecha_hora)) }}</strong></p>
+            <p>Hora: <strong>{{ date('H:i', strtotime($evento->fecha_hora)) }}</strong></p>
+            <p>{{ $evento->ubicacion }}</p>
+            <p>{{ $evento->usuario->name }}</p>
+            <button class="btn-base btn-verde">Apuntarse</button>
+        </div>
+        @endforeach
+
     </section>
+    </main>
 @endsection

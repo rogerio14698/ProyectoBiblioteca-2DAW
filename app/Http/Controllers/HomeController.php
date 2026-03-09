@@ -21,8 +21,7 @@ class HomeController extends Controller
         return view('bibliotecaDAW.index', [
             'eventos' => $eventos,
             'libros' => $libros,
-            'noticias' => $noticias,
-        ]);
+            'noticias' => $noticias,]);
 
         //Aqui se pondría mas informacion para la pagina principal.
         //Los controladores como EventosController y LibroController se encargan de gestionar la lógica específica de cada sección, mientras que HomeController se encarga de la lógica de SU PROPIA sección

@@ -21,7 +21,8 @@ Route::get('/librosDestacados', [HomeController::class, 'destacados']);
 
 // Rutas comunes para todas las páginas
 Route::get('/actividades', function () {
-    return view('bibliotecaDAW.publicViews.actividadesEventos');
+    $eventos = \App\Models\Evento::orderby('created_at', 'desc')->paginate(6); // Obtener todos los eventos y paginarlos de 6 en 6. 
+    return view('bibliotecaDAW.publicViews.actividadesEventos', ['eventos' => $eventos]);
 });
 
 Route::get('/contacto', function () {

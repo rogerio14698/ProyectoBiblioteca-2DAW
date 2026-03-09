@@ -3,12 +3,15 @@
 @section('title', 'Contacto')
 
 @section('content')
-    <div class="titulo">
-        <h1>Contacto</h1>
-        <p>Información de contacto de la Biblioteca DAW.</p>
-    </div>
-    <section class="contenedor-columnas">
-
+    <main class="contenedor contacto">
+        
+        <div class="contactoHeader">
+            <div class="titulo">
+                <h1>Contacto</h1>
+                <p>Información de contacto de la Biblioteca DAW.</p>
+            </div>
+        </div>
+        <section class="contenedor-columnas">
         <div class="columna-izquierda">
             <h2>Dirección</h2>
             <p>Calle Principal, 123, Ciudad, País</p>
@@ -39,9 +42,10 @@
                 <label for="mensaje">Mensaje:</label><br>
                 <textarea id="mensaje" name="mensaje" rows="5" cols="40"></textarea><br><br>
 
-                <input type="submit" value="Enviar">
+                <button type="submit" class="btn-base btn-verde">Enviar</button>
             </form>
         </div>
         </div>
     </section>
+    </main>
 @endsection

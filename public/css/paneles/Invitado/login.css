@@ -1,0 +1,53 @@
+
+.login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.login h1{
+    font-size: 1.5rem;
+    color: var(--color-primario);
+    margin-bottom: 30px;
+}
+.login p {
+    font-size: 1rem;
+    color: var(--color-texto-principal);
+}
+.loginHeader{
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+.contenidoLogin{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 300px;
+    gap: 15px;
+}
+.contenidoLogin label{
+    font-size: 1.2rem;
+}
+.contenidoLogin input{
+    padding: 10px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}   
+.recuerdame{
+    display: flex;         /* Activa el modo flexible */
+    align-items: center;   /* Alinea verticalmente el checkbox con el texto */
+    gap: 8px;              /* Da un poco de aire entre el cuadrito y la palabra */
+    cursor: pointer;       /* Mejora la experiencia de usuario */
+    margin-bottom: 15px;   /* Separa el campo del botón de login */
+}
+.recuerdame input[type="checkbox"] {
+    margin: 0; 
+    width: auto;           /* Evita que herede anchos de otros inputs del form */
+}
+
+.loginOpciones{
+    display: flex;
+    gap: 20px;
+}

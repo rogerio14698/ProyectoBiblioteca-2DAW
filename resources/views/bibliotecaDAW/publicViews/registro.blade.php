@@ -3,9 +3,11 @@
 @section('title', 'Registro')
 
 @section('content')
-    <h1>Registro</h1>
-    <p>Bienvenido a la sección de registro de la Biblioteca DAW.</p>
-
+    <main class="contenedor registro">
+        <div class="registroHeader">
+            <h1>Registro</h1>
+            <p>Bienvenido a la sección de registro de la Biblioteca DAW.</p>
+        </div>
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -16,37 +18,48 @@
         </div>
     @endif
 
-    <div class="registro">
+    <div class="registroContenido">
         <form action="{{ route('usuario.store') }}" method="POST">
             @csrf
 
-            <label for="name">Nombre completo:</label>
+            <div class="formGroup">
+                <label for="name">Nombre completo:</label>
             <input type="text" id="name" name="name" value="{{ old('name') }}" required>
             @error('name') <span class="error">{{ $message }}</span> @enderror
+            </div>
 
-            <label for="dni">DNI:</label>
+            <div class="formGroup">
+                <label for="dni">DNI:</label>
             <input type="text" id="dni" name="dni" value="{{ old('dni') }}" required>
             @error('dni') <span class="error">{{ $message }}</span> @enderror
+            </div>
 
-            <label for="email">Correo electrónico:</label>
-            <input type="email" id="email" name="email" value="{{ old('email') }}" required>
-            @error('email') <span class="error">{{ $message }}</span> @enderror
+            <div class="formGroup">
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" value="{{ old('email') }}" required>
+                @error('email') <span class="error">{{ $message }}</span> @enderror
+            </div>
 
+            <div class="formGroup">
             <label for="movil">Número móvil</label>
             <input type="number" id="movil" name="movil" placeholder="Número de móvil" value="{{ old('movil') }}">
             @error('movil') <span class="error">{{ $message }}</span> @enderror
-
+            </div>
+        
             <hr>
 
-            <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" required>
-            @error('password') <span class="error">{{ $message }}</span> @enderror
+            <div class="formGroup">
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required>
+                @error('password') <span class="error">{{ $message }}</span> @enderror
+            </div>
 
             <label for="password_confirmation">Confirmar Contraseña:</label>
             <input type="password" id="password_confirmation" name="password_confirmation" required>
 
             <hr>
-            <button type="submit">Registrarse</button>
+            <button type="submit" class="btn-base btn-verde">Registrarse</button>
         </form>
     </div>
+    </main>
 @endsection

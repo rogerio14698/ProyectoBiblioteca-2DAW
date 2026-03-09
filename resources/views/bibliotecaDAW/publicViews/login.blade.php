@@ -3,10 +3,13 @@
 @section('title', 'Login')
 
 @section('content')
-  <h1>Login - Usuario</h1>
-  <p>Bienvenido a la sección de login de la Biblioteca DAW.</p>
-  
+  <main class="contenedor login">
+    <div class="loginHeader">
+      <h1>Login - Usuario</h1>
+      <p>Bienvenido a la sección de login de la Biblioteca DAW.</p>
+    </div>
   @if ($errors->any())
+  <!--Tengo que definir estilos para las alertas -->
     <div class="alert alert-danger">
       <ul>
         @foreach ($errors->all() as $error)
@@ -16,7 +19,7 @@
     </div>
   @endif
 
-  <div class="login">
+  <div class="contenidoLogin">
     <form action="{{ route('usuario.login.procesar') }}" method="POST">
       @csrf
       <label for="email">Email:</label>
@@ -27,15 +30,17 @@
       <input type="password" name="password" id="password" required>
       @error('password') <span class="error">{{ $message }}</span> @enderror
 
-      <label for="recordar">
+      <label for="recordar" class="recuerdame">
         <input type="checkbox" name="recordar" id="recordar">
         Recuérdame
       </label>
 
-      <button type="submit">Iniciar Sesión</button>
+      <button type="submit" class="btn-base btn-verde">Iniciar Sesión</button>
     </form>
     <hr>
-    <p>¿No tienes cuenta? <a href="{{ route('usuario.show') }}">Regístrate aquí</a></p>
-    <p><a href="{{ route('admin.login.mostrar') }}">¿Eres administrador? Inicia sesión aquí</a></p>
-  </div>
+    <div class="loginOpciones">
+      <p>¿No tienes cuenta? <a href="{{ route('usuario.show') }}">Regístrate aquí</a></p>
+      <p><a href="{{ route('admin.login.mostrar') }}">¿Eres administrador? Inicia sesión aquí</a></p>
+    </div>
+  </div> </main>
 @endsection

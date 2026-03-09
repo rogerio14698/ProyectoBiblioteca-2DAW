@@ -11,6 +11,8 @@
     --color-texto-mutado: #666666;
     --color-card-evento: #f0f7ff;    /* Descripciones y etiquetas */
     --color-borde: #e2e8f0;
+    --blanco: #FFFFFF;
+    --negro: #000000;
     
     /* Colores de Estado (Feedback) */
     --color-exito: #28a745;
