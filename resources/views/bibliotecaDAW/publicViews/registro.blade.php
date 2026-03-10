@@ -23,19 +23,19 @@
             @csrf
 
             <div class="formGroup">
-                <label for="name">Nombre completo:</label>
+                <label for="name">Nombre completo</label>
             <input type="text" id="name" name="name" value="{{ old('name') }}" required>
             @error('name') <span class="error">{{ $message }}</span> @enderror
             </div>
 
             <div class="formGroup">
-                <label for="dni">DNI:</label>
+                <label for="dni">DNI</label>
             <input type="text" id="dni" name="dni" value="{{ old('dni') }}" required>
             @error('dni') <span class="error">{{ $message }}</span> @enderror
             </div>
 
             <div class="formGroup">
-                <label for="email">Correo electrónico:</label>
+                <label for="email">Correo electrónico</label>
                 <input type="email" id="email" name="email" value="{{ old('email') }}" required>
                 @error('email') <span class="error">{{ $message }}</span> @enderror
             </div>
@@ -49,14 +49,16 @@
             <hr>
 
             <div class="formGroup">
-                <label for="password">Contraseña:</label>
+                <label for="password">Contraseña</label>
                 <input type="password" id="password" name="password" required>
                 @error('password') <span class="error">{{ $message }}</span> @enderror
             </div>
 
-            <label for="password_confirmation">Confirmar Contraseña:</label>
+            <div class="formGroup">
+            <label for="password_confirmation">Confirmar Contraseña</label>
             <input type="password" id="password_confirmation" name="password_confirmation" required>
-
+            @error('password_confirmation') <span class="error">{{ $message }}</span> @enderror
+            </div>
             <hr>
             <button type="submit" class="btn-base btn-verde">Registrarse</button>
         </form>

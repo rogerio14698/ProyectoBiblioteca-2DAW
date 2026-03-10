@@ -6,35 +6,42 @@
     height: 100vh;
 }
 .registroHeader h1{
+    display: flex;
+    justify-content: center;
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 1rem;
+    text-decoration: underline;
 }
 .registroHeader p{
     font-size: 1rem;
 }
+
 
 .registroContenido{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: var(--color-fondo);
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.registroContenido form{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    gap: 1rem;
     width: 100%;
     max-width: 400px;
 }
-.registroContenido form input{
-    padding: 10px;
-    border: 1px solid var(--color-primario);
-    border-radius: 5px;
+
+.formGroup{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:flex-end;
+    width: 100%;
+    padding: 5px;
+    
+}
+.formGroup label{
+    flex: 1;
+    justify-content: flex-start;
+    margin-right: 10px;
+}
+.formGroup label, .formGroup input{
     font-size: 1rem;
 }

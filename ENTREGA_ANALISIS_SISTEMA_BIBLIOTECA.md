@@ -463,7 +463,108 @@ Se presentan casos de uso en dos grupos:
 
 ---
 
-## 8. Conclusión
+## 8. Estructura actual del sistema web (UI + CSS responsive)
+
+Esta sección describe **cómo está organizado realmente el frontend hoy** tras los cambios de CSS, tomando como base los archivos activos del proyecto.
+
+## 8.1. Carga de estilos en ejecución
+
+En `resources/views/layouts/app.blade.php` se están cargando estas fuentes de estilo:
+
+1. `@vite(['resources/css/app.css', 'resources/js/app.js'])`
+2. Bootstrap CDN (`bootstrap.min.css`)
+3. Bootstrap Icons CDN
+4. `{{ asset('css/app.css') }}`
+5. `{{ asset('css/main.css') }}`
+
+En la práctica, el estilo visual principal de la web se concentra en **`public/css/main.css`** y sus imports modulares.
+
+## 8.2. Arquitectura CSS vigente (por capas)
+
+`public/css/main.css` organiza el sistema por capas en este orden:
+
+1. `normalize/normalize.css`
+2. `variables/variables.css`
+3. `variables/botones.css`
+4. `Globales/globales.css`
+5. `variables/paginacion.css`
+6. `variables/btnSlider.css`
+7. `secciones/header.css`
+8. `secciones/footer.css`
+9. `paneles/Invitado/paginaPrincipal.css`
+10. `paneles/Invitado/actividadesYEventos.css`
+11. `paneles/Invitado/contacto.css`
+12. `paneles/Invitado/login.css`
+13. `paneles/Invitado/registro.css`
+14. `panelAdmin/navAdmin.css`
+15. `panelAdmin/dashboard.css`
+
+Interpretación funcional:
+
+- **Base global:** reset + variables + estilos comunes.
+- **Secciones compartidas:** cabecera y pie para toda la web.
+- **Módulos por área:** invitado (público) y administración.
+
+## 8.3. Sistema de breakpoints y mediaqueries implementadas
+
+En `variables/variables.css` existen tokens de referencia:
+
+- `--MQ-movil: 576px`
+- `--MQ-Tablet: 768px`
+- `--MQ-Desktop: 1200px`
+- `--MQ-Desktop-XL: 1400px`
+
+Sin embargo, en los módulos activos las mediaqueries se aplican de forma literal (`768px`, `1200px`).
+
+### Breakpoint tablet (`min-width: 768px`)
+
+- `paneles/Invitado/paginaPrincipal.css`
+  - `.agendaContenedor` pasa a `repeat(3, 1fr)`.
+  - `.noticiasContenedor` pasa a `repeat(2, 1fr)`.
+- `paneles/Invitado/actividadesYEventos.css`
+  - `.actividadesEventos` cambia para envolver tarjetas y repartir espacio (`wrap` + `space-around`).
+- `paneles/Invitado/contacto.css`
+  - Se estructura la sección de contacto en columnas con `grid`/`flex` (`.contenedor-columnas`, `.contacto-container`).
+
+### Breakpoint desktop (`min-width: 1200px`)
+
+- `secciones/header.css`
+  - `.navContenedor` cambia de columna a fila.
+  - `.navLista` pasa a mostrarse en fila.
+  - `.btnMenu` se oculta.
+  - `.navBuscador` se muestra.
+- `secciones/footer.css`
+  - `.footer` cambia de columna a `grid` de 3 columnas.
+  - Ajustes de alineación en `.footerHorarios` y `.footerContacto`.
+- `paneles/Invitado/paginaPrincipal.css`
+  - `.bienvenida` cambia a grid de 2 columnas.
+  - Imagen principal de bienvenida aumenta de tamaño para escritorio.
+
+### Breakpoint móvil (`max-width: 768px`)
+
+- `panelAdmin/dashboard.css`
+  - `.dashboard-body` colapsa a una columna.
+  - Se reduce separación superior y se elimina margen solapado de tarjetas.
+
+## 8.4. Comportamiento responsive actual por zonas de la web
+
+1. **Header público:** móvil-first con menú colapsado; navegación completa visible en desktop.
+2. **Home (`paginaPrincipal.css`):** layout base para móvil, expansión progresiva en tablet/desktop para agenda, noticias y hero.
+3. **Contacto:** inicialmente en bloque vertical; en tablet se reorganiza a dos columnas.
+4. **Actividades/Eventos:** tarjetas con disposición básica en móvil y distribución envolvente en tablet.
+5. **Panel admin (dashboard):** diseño multicolumna en escritorio y simplificación a una sola columna en móvil.
+6. **Footer:** bloque vertical en móvil y rejilla de 3 columnas en desktop.
+
+## 8.5. Estado técnico del CSS en la versión actual
+
+- El sistema está organizado de forma modular y por áreas funcionales.
+- El enfoque responsive es **mobile-first** en la mayor parte de estilos públicos, con ampliación en `768px` y `1200px`.
+- Bootstrap convive con CSS propio, pero el aspecto principal depende de estilos personalizados en `main.css` y archivos importados.
+- Existe al menos un archivo de sobreescritura (`public/css/sobreEscribirBoostrap.css`) actualmente comentado, sin efecto visual activo.
+
+---
+
+## 9. Conclusión
 
 El sistema Biblioteca DAW presenta una base sólida de arquitectura y autenticación multi-rol, con una parte pública operativa y una estructura clara para áreas privadas de usuario y administración.
 

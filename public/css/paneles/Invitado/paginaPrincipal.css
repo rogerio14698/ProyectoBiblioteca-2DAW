@@ -43,6 +43,9 @@
     margin: 10px;
     box-shadow: var(--sombra-media);
 }
+
+/*Fin de bienvenida*/
+
 /*Novedad del catálogo*/
 .novedadCatalogo{
     background-color: var(--color-blanco);
@@ -61,14 +64,23 @@
     color: var(--color-texto-mutado);
     line-height: 1.05;
 }
-
-.contenedorNovedadCatalogo{
+.sliderContenedor{
     display: flex;
-    flex-direction: row;
-    align-items:center ;
+    align-items: center;
+    justify-content: center;
     height: fit-content;
-    justify-content:center;
-    gap: 10px;
+    overflow: visible; /* Para que los botones no queden cortados */
+}
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.swiper {
+    width: 100%;
+    height: auto;
+    overflow: hidden; /* Importante para que Swiper oculte slides fuera de vista */
+    padding: 10px 0; /* Espacio para que el scale del hover no se corte */
 }
 
 .novedadCatalogoCard{
@@ -76,8 +88,16 @@
     height: 300px;
     display: flex;
     flex-direction: column;
-    gap:10px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease;
 }
+.novedadCatalogoCard:hover {
+    transform: scale(1.05);
+    z-index: 100; 
+}
+.swiper-button-prev-custom { left: 0; }
+.swiper-button-next-custom { right: 0; }
 
 .novedadImagen{
     border: 1px solid var(--color-borde);

@@ -31,30 +31,30 @@
                     <p>Descubre las últimas incorporaciones a nuestra colección de libros y recursos digitales</p>
 
                 </div>
-
                 <div class="sliderContenedor">
-                    <button class="btn-slider volver" onclick="moveSlider(-1)">&#10094</button>
-
-                    <div class="sliderWindow">
-                        <div class="contenedorNovedadCatalogo" id="sliderContenido">
+                    <button class="btn-slider swiper-button-prev-custom" type="button">&#10094</button>
+                    <div class="swiper novedadesSwiper">
+                        <div class="swiper-wrapper">
                             @foreach ($libros as $libro)
-                                <div class="novedadCatalogoCard">
-                                    <div class="novedadImagen">
-                                        <picture>
-                                            <source media="(min-width: 1200px)" srcset="{{ asset('img/elPrincipito.jpg') }}">
-                                            <source media="(min-width: 768px)" srcset="{{ asset('img/elPrincipito.jpg') }}">
-                                            <img src="{{ asset('img/elPrincipito.jpg') }}" alt="Imagen de novedad del catálogo">
-                                        </picture>
-                                    </div>
-                                    <div class="novedadInfo">
-                                        <h3>{{ $libro->titulo }}</h3>
-                                        <button class="btn-base btn-verde">Ver Libro</button>
+                                <div class="swiper-slide">
+                                    <div class="novedadCatalogoCard">
+                                        <div class="novedadImagen">
+                                            <picture>
+                                                <source media="(min-width: 1200px)" srcset="{{ asset('img/elPrincipito.jpg') }}">
+                                                <source media="(min-width: 768px)" srcset="{{ asset('img/elPrincipito.jpg') }}">
+                                                <img src="{{ asset('img/elPrincipito.jpg') }}" alt="Imagen de novedad del catálogo">
+                                            </picture>
+                                        </div>
+                                        <div class="novedadInfo">
+                                            <h3>{{ $libro->titulo }}</h3>
+                                            <a href="#" class="btn-base btn-verde">Ver Libro</a>
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
                     </div>
-                     <button class="btn-slider avanzar" onclick="moveSlider(1)">&#10095</button>
+                     <button class="btn-slider swiper-button-next-custom" type="button">&#10095</button>
                 </div>
             </div>
 
