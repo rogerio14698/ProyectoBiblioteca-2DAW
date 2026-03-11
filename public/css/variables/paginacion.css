@@ -1,41 +1,88 @@
-/* Contenedor de la lista */
-.agendaPaginacion .pagination {
+/* Contenedor principal */
+.paginacionBase .pagination {
     display: flex;
     justify-content: center;
     list-style: none;
     padding: 0;
     gap: 8px;
+    margin: 2rem 0;
 }
 
-/* Estilo base de los botones */
-.agendaPaginacion .page-link {
+/* Botones */
+.paginacionBase .page-link {
     display: block;
     padding: 10px 16px;
-    background-color: var(--color-blanco);
-    border: 1px solid var(--color-borde);
-    color: var(--color-primario);
-    border-radius: var(--radio-pequeno);
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px; /* O tu variable var(--radio-pequeno) */
     text-decoration: none;
     transition: all 0.3s ease;
+    font-weight: 500;
 }
 
-/* Página activa (donde estás ahora) */
-.agendaPaginacion .page-item.active .page-link {
-    background-color: var(--color-primario);
-    color: white;
-    border-color: var(--color-primario);
-}
-
-/* Efecto al pasar el ratón */
-.agendaPaginacion .page-link:hover:not(.active) {
-    background-color: var(--color-secundario);
-    color: white;
-    border-color: var(--color-secundario);
-}
-
-/* Deshabilitado (ej: cuando no hay "Anterior") */
-.agendaPaginacion .page-item.disabled .page-link {
+/* Estado deshabilitado (Común para todos) */
+.paginacionBase .page-item.disabled .page-link {
     color: #ccc;
     pointer-events: none;
     background-color: #f9f9f9;
+    border-color: #eee;
+}
+
+/*Fin de la paginación modular.*/
+
+/* --- TEMA CATÁLOGO (Azul/Amazon) --- */
+.paginacionCatalogo .page-link {
+    color: #007185;
+}
+
+.paginacionCatalogo .page-item.active .page-link {
+    background-color: #007185;
+    color: white;
+    border-color: #007185;
+}
+
+.paginacionCatalogo .page-link:hover:not(.active) {
+    background-color: #f7fafa;
+    border-color: #007185;
+}
+
+/* --- TEMA AGENDA (Verde/Calendario) --- */
+.paginacionAgenda .page-link {
+    color: #2e7d32;
+}
+
+.paginacionAgenda .page-item.active .page-link {
+    background-color: #2e7d32;
+    color: white;
+    border-color: #2e7d32;
+}
+
+.paginacionAgenda .page-link:hover:not(.active) {
+    background-color: #e8f5e9;
+    border-color: #2e7d32;
+}
+
+/*Tema Noricias*/
+
+/* --- TEMA NOTICIAS (Gris Oscuro / Rojo Informativo) --- */
+
+/* Color de fuente y bordes para noticias */
+.paginacionNoticias .page-link {
+    color: #1a1a1a; /* Un gris casi negro, muy formal */
+    border-color: #333;
+    font-weight: 600;
+}
+
+/* Página activa: Usamos un rojo vibrante de "Breaking News" */
+.paginacionNoticias .page-item.active .page-link {
+    background-color: #d32f2f; 
+    color: white;
+    border-color: #d32f2f;
+}
+
+/* Efecto Hover: Cambio sutil de fondo */
+.paginacionNoticias .page-link:hover:not(.active) {
+    background-color: #1a1a1a;
+    color: white;
+    border-color: #1a1a1a;
 }

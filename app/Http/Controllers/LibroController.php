@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Libro;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class LibroController extends Controller
 {
@@ -12,9 +14,19 @@ class LibroController extends Controller
      */
     public function index()
     {
-        //Obtener todos los libros
+        //Obtener todos los libros para página principal
         $libros = Libro::all();
         return view('bibliotecaDAW.index', [
+            'libros' => $libros
+        ]);
+
+    }
+    //Obtener todos los libros para la vista de catálogo
+    public function catalogo()
+    {
+
+        $libros = Libro::paginate(10); //Paginación de 10 libros por página
+        return view('bibliotecaDAW.publicViews.catalogo', [
             'libros' => $libros
         ]);
     }

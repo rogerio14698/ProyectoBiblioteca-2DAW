@@ -37,8 +37,8 @@
 }
 
 .bienvenida-imagen img {
-    width: 350px;
-    max-width: 400px;
+    width: 100%;
+    max-width: 800px;
     height: auto;
     margin: 10px;
     box-shadow: var(--sombra-media);
@@ -71,6 +71,9 @@
     height: fit-content;
     overflow: visible; /* Para que los botones no queden cortados */
 }
+.swiper-wrapper{
+    align-items: stretch;
+}
 .swiper-slide {
     display: flex;
     justify-content: center;
@@ -84,8 +87,8 @@
 }
 
 .novedadCatalogoCard{
-    width: 150px;
-    height: 300px;
+    width: 250px;
+    height: 350px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -290,6 +293,9 @@
 
 /* Media Query: A partir de Tablet/Desktop se ponen 2 columnas */
 @media (min-width: 768px) {
+    .bienvenida {
+        height: auto;
+    }
     .agendaContenedor {
         grid-template-columns: repeat(3, 1fr);
         /* Dos columnas iguales */

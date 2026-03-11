@@ -14,6 +14,7 @@
 /*Paginas publicas*/
 @import 'paneles/Invitado/paginaPrincipal.css';
 @import 'paneles/Invitado/actividadesYEventos.css';
+@import 'paneles/Invitado/catalogo.css';
 @import 'paneles/Invitado/contacto.css';
 @import 'paneles/Invitado/login.css';
 @import 'paneles/Invitado/registro.css';

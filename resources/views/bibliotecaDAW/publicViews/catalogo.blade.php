@@ -3,36 +3,63 @@
 @section('title', 'Catálogo')
 
 @section('content')
-    <h1>Catálogo</h1>
-    <p>Bienvenido al catálogo de la Biblioteca DAW.</p>
-    <p>Esto va a estar dividio entre secciones como las filas de netflix, cada sección va a ser un genero literario y dentro
-        de cada sección van a estar los libros disponibles de ese genero, con su portada, título, autor, año de publicación,
-        editorial y un botón para ver más detalles del libro.
-        El boton se intentará abrir una ventana modal con toda la información del libro, sin necesidad de salir de la página
-        del catálogo, para que el usuario pueda seguir navegando por el catálogo sin perder su lugar.
-    </p>
-
-    <!--Aqui deberia de llamar desde la base de datos a los libros disponibles y mostrarlos segun su genero
-                                    Tambien se podría filtrar por autor, año, editorial... todos los datos necesarios que tiene el libro -->
-    <section class="carrusel-fantasia">
-        <div class="carrusel">
-            <div class="libro">
-                <img src="ruta-de-la-portada-del-libro.jpg" alt="Título del Libro">
-                <h3>Título del Libro</h3>
-                <p>Autor: Nombre del Autor</p>
-                <p>Descripción: Breve descripción del libro</p>
-                <p>Año de Publicación: 2024</p>
-                <p>Editorial: Nombre de la Editorial</p>
-                <label for="">
-                    <input type="radio" name="compra" value="Disponible"> Disponible
-                    <input type="radio" name="compra" value="No Disponible"> No Disponible
-                </label>
-                <p>Cantidad Disponible: 5</p>
-                <button>Ver Detalles</button>
+    <div class="contenedor catalogoContenedor">
+    <div class="catalogoHeader">
+        <h1>Catálogo de la Biblioteca</h1>
+    </div>
+    
+    <div class="catalogoBody">
+        @foreach($libros as $libro)
+        <div class="catalogoCard">
+            <div class="cardImagen">
+                <img src="{{ asset('img/elPrincipito.jpg') }}" alt="Portada del libro">
+            </div>
+            <div class="cardContenido">
+                <h2 class="libroTitulo">{{ $libro->titulo }}</h2>
+                
+                <div class="infoGrid">
+                    <div class="infoItem">
+                        <span class="infoLabel">Autor:</span>
+                        <span class="infoValue">{{ $libro->autor }}</span>
+                    </div>
+                    <div class="infoItem">
+                        <span class="infoLabel">Género:</span>
+                        <span class="infoValue">{{ $libro->genero }}</span>
+                    </div>
+                    <div class="infoItem">
+                        <span class="infoLabel">Editorial:</span>
+                        <span class="infoValue">{{ $libro->editorial }}</span>
+                    </div>
+                    <div class="infoItem">
+                        <span class="infoLabel">ISBN:</span>
+                        <span class="infoValue">POR AÑADIR AÚN</span>
+                    </div>
+                    <div class="infoItem">
+                        <span class="infoLabel">Año:</span>
+                        <span class="infoValue">{{ $libro->anio }}</span>
+                    </div>
+                    <div class="infoItem">
+                        <span class="infoLabel">Formatos:</span>
+                        <span class="infoValue">{{ $libro->formatos }}</span>
+                    </div>
+                    <div class="infoItem">
+                        <span class="infoLabel">Estado:</span>
+                        <span class="infoValue stock-disponible">{{ $libro->estado }}</span>
+                    </div>
+                </div>
             </div>
 
+            <div class="accionesCatalogo">
+                <a href="#" class="btn-ver">Ver detalles</a>
+                <a href="#" class="btn-carrito">Añadir al carrito</a>
+                <a href="#" class="btn-alquilar">Alquilar ahora</a>
+            </div>
+        </div>
+        @endforeach
+         <div class="paginacionBase paginacionCatalogo">
+            {{ $libros->links('vendor.pagination.bootstrap-5') }} <!-- Paginación de 10 libros por página -->
+        </div>
 
-    </section>
-
-
+    </div>
+</div>
 @endsection

@@ -53,6 +53,9 @@
 }
 
 @media (min-width: 768px) {
+    .foto-perfilNavUsuario {
+        display: block;
+    }
     .nav-usuarioAutenticado {
         justify-content: space-between;
     }

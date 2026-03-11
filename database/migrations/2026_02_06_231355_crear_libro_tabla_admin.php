@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('editorial');
             $table->enum('disponibilidad', ['disponible', 'prestado']);
             $table->enum('formato', ['fisico', 'digital']);
-            $table->enum('opcion_compra', ['compra', 'prestamo']);
+            $table->enum('opcion_compra', ['compra', 'prestamo', 'ambos']);
             $table->integer('cantidad_ejemplares');
             $table->timestamps();
         });

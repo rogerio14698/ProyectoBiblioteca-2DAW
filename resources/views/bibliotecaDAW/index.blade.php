@@ -93,7 +93,7 @@
                     </div>
                 @endforeach
             </div>
-            <div class="agendaPaginacion">
+            <div class="paginacionBase paginacionAgenda">
                 {{ $eventos->links('vendor.pagination.bootstrap-5') }}
             </div>
         </section>
@@ -131,7 +131,7 @@
                     </div>
                 @endforeach
             </div>
-            <div class="agendaPaginacion">
+            <div class="paginacionBase paginacionNoticias">
                 {{ $noticias->links('vendor.pagination.bootstrap-5') }}
             </div>
         </section>

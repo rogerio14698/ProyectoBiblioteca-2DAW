@@ -6,6 +6,8 @@ use App\Http\Controllers\Auth\LoginControllerUsuario;
 use App\Http\Controllers\Admin\Auth\LoginControllerAdmin;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventosController;
+use App\Http\Controllers\LibroController;
+use App\Http\Controllers\ContactoController;
 
 //Redirección a la página de inicio
 Route::get('/', function () {
@@ -25,13 +27,9 @@ Route::get('/actividades', function () {
     return view('bibliotecaDAW.publicViews.actividadesEventos', ['eventos' => $eventos]);
 });
 
-Route::get('/contacto', function () {
-    return view('bibliotecaDAW.publicViews.contacto');
-});
-
-Route::get('/catalogo', function () {
-    return view('bibliotecaDAW.publicViews.catalogo');
-});
+Route::get('/contacto', [ContactoController::class, 'create'])->name('contacto.create');
+Route::post('/contacto', [ContactoController::class, 'store'])->name('contacto.store');
+Route::get('/catalogo', [LibroController::class, 'catalogo']);
 
 Route::get('/buscar', function () {
     return view('bibliotecaDAW.publicViews.buscarLibros');
@@ -62,7 +60,7 @@ Route::post('/admin/login', [LoginControllerAdmin::class, 'login'])->name('admin
 // ===============================================
 
 Route::middleware(['auth:web'])->group(function () {
-    Route::get('/inicio', function () {
+    Route::get('/inicioUsuario', function () {
         return view('bibliotecaDAW.userViews.inicioLogin');
     })->name('usuario.inicio');
 
@@ -74,6 +72,9 @@ Route::middleware(['auth:web'])->group(function () {
     Route::get('/perfilEditar', function () {
         return view('bibliotecaDAW.userViews.perfilEditar');
     })->name('usuario.perfilEditar');
+
+    //Gestionar contacto con la biblioteca
+    Route::get('/mis-consultas', [ContactoController::class, 'misConsultas'])->name('usuario.consultas');
 
 
     Route::get('/alquilar', function () {
@@ -135,9 +136,9 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::put('/admin/gestionCarrusel/{id}', [EventosController::class, 'update'])->name('admin.updateCarrusel');
     //Elimar un evento
     Route::delete('/admin/gestionCarrusel/{id}', [EventosController::class, 'destroy'])->name('admin.deleteCarrusel');
-    
 
-    
+
+
     //Gestión de noticas
     Route::get('/admin/gestionNoticias', function () {
         return view('bibliotecaDAW.adminViews.GestionarContenidoWeb.gestionarNoticias');
@@ -155,9 +156,19 @@ Route::middleware(['auth:admin'])->group(function () {
         return view('bibliotecaDAW.adminViews.GestionarContenidoWeb.gestionarServicios');
     })->name('admin.gestionServicios');
     //Gestion contenido de contacto
+
+    //Gestión de los emails de contacto
+    // Gestión de mensajes de contacto para el Admin
+    Route::get('/admin/mensajes', [ContactoController::class, 'index'])->name('admin.mensajes.index');
+    Route::patch('/admin/mensajes/{id}/estado', [ContactoController::class, 'updateEstado'])->name('admin.mensajes.update');
+    Route::delete('/admin/mensajes/{id}', [ContactoController::class, 'destroy'])->name('admin.mensajes.delete');
+    /*Fin de la gestión de emails */
+
     Route::get('/admin/gestionContacto', function () {
         return view('bibliotecaDAW.adminViews.GestionarContenidoWeb.gestionarContacto');
     })->name('admin.gestionContacto');
+
+
     //Gestion varios header y footer
     Route::get('/admin/gestionHeader', function () {
         return view('bibliotecaDAW.adminViews.GestionarContenidoWeb.gestionarHeader');

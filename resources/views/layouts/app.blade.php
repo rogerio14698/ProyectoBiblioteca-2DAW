@@ -52,38 +52,7 @@
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
     <!-- Inicializar Swiper -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const swiperElement = document.querySelector('.novedadesSwiper');
-
-            if (!swiperElement) {
-                return;
-            }
-
-            const totalSlides = swiperElement.querySelectorAll('.swiper-slide').length;
-
-            if (totalSlides === 0) {
-                return;
-            }
-
-            new Swiper('.novedadesSwiper', {
-                direction: 'horizontal',
-                loop: totalSlides > 5,
-                watchOverflow: true,
-                slidesPerView: 1,
-                spaceBetween: 10,
-                navigation: {
-                    nextEl: '.swiper-button-next-custom',
-                    prevEl: '.swiper-button-prev-custom',
-                },
-                breakpoints: {
-                    640: { slidesPerView: Math.min(2, totalSlides) },
-                    768: { slidesPerView: Math.min(3, totalSlides) },
-                    1024: { slidesPerView: Math.min(5, totalSlides) },
-                }
-            });
-        });
-    </script>
+    <script src="{{ asset('js/iniciarSwiper.js') }}"></script>
     @stack('scripts')
 </body>
 

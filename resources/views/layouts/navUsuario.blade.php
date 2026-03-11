@@ -1,7 +1,8 @@
 <nav class="nav-usuarioAutenticado">
     <div class="logoYperfil">
-        <img src="{{'img/logoDAW-conTransparencia.png'}}" alt="Logo_Biblioteca DAW" class="foto-logoDAW">
-        <img src="{{ Auth::user()->profile_photo_url ?? 'img/default.png' }}" alt="Foto_perfil_usuario {{ Auth::user()->name }}" class="foto-perfilNavUsuario">
+        <a href="{{ route('usuario.inicio') }}"><img src="{{'img/logoDAW-conTransparencia.png'}}" alt="Logo_Biblioteca DAW" class="foto-logoDAW"></a>
+        <a href="{{ route('usuario.perfil') }}"><img src="{{ Auth::user()->profile_photo_url ?? 'img/default.png' }}" alt="Foto_perfil_usuario {{ Auth::user()->name }}" class="foto-perfilNavUsuario"></a>
+
     </div>
     <div class="nav-perfil">
         <ul class="nav-links">
