@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contacto;
+use App\Mail\ContactoRecibido;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 
 class ContactoController extends Controller
 {
@@ -41,22 +44,52 @@ class ContactoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    /**
+     * Validar los datos del formulario, guardarlos en BD y enviar correo al admin.
+     * @param Request $request Datos del formulario de contacto.
+     * @return \Illuminate\Http\RedirectResponse Redirección con mensaje de éxito o error.
+     * @effect Crea un registro en la tabla 'contactos' y envía un email SMTP.
+     */
     public function store(Request $request)
     {
-        //Guardar en la base de datos: 
-        //Validamos antes de crear el email de contacto.
+        //Validamos los datos del formulario antes de procesarlos.
         $request->validate([
             'nombre' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'asunto' => 'required|string|max:255',
             'mensaje' => 'required|string',
         ]);
+
+        //Limpiamos el mensaje de etiquetas HTML por seguridad.
+        $mensajeLimpio = strip_tags($request->input('mensaje'));
+
+        //Guardamos el mensaje de contacto en la base de datos.
         $contacto = new Contacto();
         $contacto->nombre = $request->input('nombre');
         $contacto->email = $request->input('email');
         $contacto->asunto = $request->input('asunto');
-        $contacto->mensaje = strip_tags($request->input('mensaje')); // Eliminar etiquetas HTML para mayor seguridad
+        $contacto->mensaje = $mensajeLimpio;
         $contacto->save();
+
+        //Enviamos el correo electrónico al admin de la biblioteca.
+        //Usamos try-catch para que, si el envío falla, el usuario no pierda su mensaje.
+        try {
+            Mail::to('rogeriolucas14698@gmail.com')->send(
+                new ContactoRecibido(
+                    nombre: $request->input('nombre'),
+                    email: $request->input('email'),
+                    asunto: $request->input('asunto'),
+                    mensaje: $mensajeLimpio,
+                )
+            );
+        } catch (\Exception $e) {
+            //Si el correo falla, lo registramos en el log pero no bloqueamos al usuario.
+            Log::error('Error al enviar correo de contacto: ' . $e->getMessage());
+
+            //Le indicamos al usuario que su mensaje se guardó aunque el correo fallara.
+            return redirect()->back()->with('success', 'Tu mensaje ha sido guardado. Te responderemos pronto.');
+        }
+
         return redirect()->back()->with('success', 'Tu mensaje ha sido enviado exitosamente.');
     }
 
