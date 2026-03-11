@@ -20,6 +20,7 @@
 
 /*Paginas usuarios autentificados*/
 @import 'paneles/usuarioAutenticado/navUsuario.css';
+@import 'paneles/usuarioAutenticado/perfilUsuario.css';
 
 /*Panel de administrador*/
 @import 'panelAdmin/navAdmin.css';

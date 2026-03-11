@@ -70,6 +70,12 @@ Route::middleware(['auth:web'])->group(function () {
         return view('bibliotecaDAW.userViews.perfil');
     })->name('usuario.perfil');
 
+    // Editar perfil
+    Route::get('/perfilEditar', function () {
+        return view('bibliotecaDAW.userViews.perfilEditar');
+    })->name('usuario.perfilEditar');
+
+
     Route::get('/alquilar', function () {
         return view('bibliotecaDAW.userViews.alquilar');
     })->name('usuario.alquilar');

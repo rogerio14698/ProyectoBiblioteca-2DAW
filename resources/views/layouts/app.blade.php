@@ -8,6 +8,8 @@
 
     <title>@yield('title', 'Biblioteca DAW')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <!-- Favicon -->
+    <link rel="icon" href="{{ asset('img/logoDAW-conTransparencia.png') }}" type="image/png">
     <!-- Bootstrap CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
