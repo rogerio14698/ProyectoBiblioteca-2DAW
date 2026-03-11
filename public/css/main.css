@@ -19,7 +19,9 @@
 @import 'paneles/Invitado/registro.css';
 
 /*Paginas usuarios autentificados*/
+@import 'paneles/usuarioAutenticado/navUsuario.css';
 
 /*Panel de administrador*/
 @import 'panelAdmin/navAdmin.css';
 @import 'panelAdmin/dashboard.css';
+

@@ -3,7 +3,8 @@
 @section('title', 'Publicar')
 
 @section('content')
-    <h1>Publicar Libros</h1>
+   <div class="contenedor">
+     <h1>Publicar Libros</h1>
     <p>En esta sección puedes publicar libros nuevos o existentes en la biblioteca.</p>
 
     <form action="">
@@ -50,5 +51,6 @@
     <h2>Recursos para publicar</h2>
     <p>Aquí encontrarás
         </form>
+   </div>
 
 @endsection

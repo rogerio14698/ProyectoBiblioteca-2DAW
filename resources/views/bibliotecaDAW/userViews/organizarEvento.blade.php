@@ -3,7 +3,8 @@
 @section('title', 'Organizar Evento')
 
 @section('content')
-    <h1>Organizar Evento</h1>
+    <div class="contene">
+        <h1>Organizar Evento</h1>
     <p>Bienvenido @user a la sección de organizar eventos de la Biblioteca DAW.</p>
     <!-- Aqui los usuarios podran organizar eventos que se mostrará en la pagina de actividadesEventos
 , entonces se necesita de un lugar, fecha, hora y descripción del evento y capacidad máxima de asistentes -->
@@ -15,6 +16,7 @@
     <textarea id="descripcion" placeholder="Descripción del evento"></textarea>
     <input type="number" id="capacidad" placeholder="Capacidad máxima de asistentes">
     <button type="submit">Crear Evento</button> 
+    </div>
 
     
 @endsection

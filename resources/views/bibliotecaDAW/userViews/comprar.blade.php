@@ -3,7 +3,8 @@
 @section('title', 'Comprar')
 
 @section('content')
-    <h1>Comprar</h1>
+    <div class="contenedor">
+        <h1>Comprar</h1>
     <p>Bienvenido @user a la sección de tienda de la Biblioteca DAW.</p>
 
     <!-- Aquí se mostrarán los libros disponibles para comprar, con su portada, título, autor, año de publicación, editorial y un botón para comprar el libro. -->
@@ -51,5 +52,6 @@
         <p>Basado en tus compras anteriores, aquí te recomendamos algunos libros que podrían interesarte.</p>
         <form action=""> <input type="text" placeholder="Libro"> <input type="text" placeholder="Autor"> <textarea name=""
                 id="" aria-placeholder="Comentario a cerca del libro"></textarea> </form>
+    </div>
     </div>
 @endsection

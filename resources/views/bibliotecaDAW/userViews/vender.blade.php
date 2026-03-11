@@ -3,7 +3,8 @@
 @section('title', 'Vender')
 
 @section('content')
-    <h1>Vender</h1>
+   <div class="contenedor">
+     <h1>Vender</h1>
     <p>Bienvenido @user a la sección de vender de la Biblioteca DAW.</p>
 
     <p>-El usuario podrá vender libros de segunda mano a un precio determinado por la biblioteca en funcion del libro, su
@@ -24,4 +25,5 @@
         <textarea placeholder="Descripción del Libro"></textarea>
         <button type="submit">Vender</button>
     </form>
+   </div>
 @endsection

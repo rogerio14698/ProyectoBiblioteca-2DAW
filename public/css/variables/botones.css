@@ -85,3 +85,18 @@
     align-items: center;
     justify-content: center;
 }
+
+.btn-logout {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    border: none;
+    padding: 5px 10px;
+    border-radius: var(--radio-medio);
+    cursor: pointer;
+}
+
+.btn-logout:hover {
+    background-color: var(--color-primario-oscuro);
+    transform: translateY(-1px);
+    box-shadow: var(--sombra-media);
+}

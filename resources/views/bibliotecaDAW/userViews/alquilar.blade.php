@@ -3,7 +3,8 @@
 @section('title', 'Aquilar')
 
 @section('content')
-    <h1>Aquilar</h1>
+   <div class="contenedor">
+     <h1>Aquilar</h1>
     <p>Bienvenido <span>{{ Auth::user()->name }}</span> a la sección de aquilar de la Biblioteca DAW.</p>
     <p>En esta sección podrás alquilar los libros disponibles en la Biblioteca DAW. Para alquilar un libro, simplemente haz
         clic en el botón "Alquilar" junto al libro que deseas alquilar. Asegúrate de tener una cuenta activa y haber
@@ -57,6 +58,7 @@
             nuestro soporte via mail.</p>
     </div>
     </div>
+   </div>
 
 
 
