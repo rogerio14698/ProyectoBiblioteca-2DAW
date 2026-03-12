@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventosController;
 use App\Http\Controllers\LibroController;
 use App\Http\Controllers\ContactoController;
+use App\Models\Contacto;
 
 //Redirección a la página de inicio
 Route::get('/', function () {
@@ -108,7 +109,8 @@ Route::middleware(['auth:web'])->group(function () {
 Route::middleware(['auth:admin'])->group(function () {
     // Dashboard admin
     Route::get('/admin', function () {
-        return view('bibliotecaDAW.adminViews.administrador');
+        $mensajes = Contacto::orderBy('created_at', 'desc')->paginate(10);
+        return view('bibliotecaDAW.adminViews.administrador', compact('mensajes'));
     })->name('admin.dashboard');
     //Gestion de roles y permisos
     Route::get('/admin/gestionRoles', function () {

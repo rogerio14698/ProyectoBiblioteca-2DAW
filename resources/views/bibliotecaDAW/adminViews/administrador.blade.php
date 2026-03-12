@@ -32,16 +32,39 @@
                 <button>Más info</button>
             </div>
         </div>
-        <div class="dashboard-body">
-            <div class="dashboard-nuevoCatalogo">
-                <div class="card-head">
-                    <h5>Nuevo Catálogo</h5>
-                    <button>Crear</button>
+        <div class="bodyDashboard">
+            <div class="dashboardListadoMail ">
+                <div class="cardHeaderMail">
+                    <h5>Listado Mails</h5>
                 </div>
-                <div class="body-nuevoCatalogo">
-                    <h3>No hay catálogos disponibles</h3>
-                    <p>Crea tu primer catálogo para empezar</p>
-                    <button>Crear Catálogo</button>
+                <div class="bodyListadoMail">
+                    <div class="tablaListadoMail">
+                        <div class="titulosListados">
+                            <span class="tituloNombre">Nombre</span>
+                            <span class="tituloEmail">Email</span>
+                            <span class="tituloAsunto">Asunto</span>
+                            <span class="tituloMensaje">Mensaje</span>
+                            <span class="tituloFecha">Fecha</span>
+                            <span class="tituloEstado">Estado</span>
+                            <span class="tituloAcciones">Acciones</span>
+                        </div>
+                        @foreach ($mensajes as $mail)
+                        <div class="dataListadoMail">
+                            <span class="dataNombre">{{ $mail->nombre }}</span>
+                            <span class="dataEmail">{{ $mail->email }}</span>
+                            <span class="dataAsunto">{{ $mail->asunto }}</span>
+                            <span class="dataMensaje">{{ $mail->mensaje }}</span>
+                            <span class="dataFecha">{{ $mail->fecha }}</span>
+                            <span class="dataEstado"><span class="estadoMail estadoPendiente">{{ $mail->estado }}</span></span>
+                            <span>
+                                <button class="btn-base">Ver</button>
+                                <button class="btn-base">Eliminar</button>
+                                <button class="btn-base">Marcar como leído</button>
+                                <button class="btn-base">Responder</button>
+                            </span>
+                        </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
             <div class="dashboard-informacionSistema">

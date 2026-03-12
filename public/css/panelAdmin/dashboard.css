@@ -51,7 +51,7 @@
 }
 
 /*parte principal del dashboard*/
-.dashboard-body {
+.bodyDashboard {
     display: grid;
     grid-template-columns: 4fr 1fr;
     gap: 20px;
@@ -60,7 +60,7 @@
     padding-top: 40px;
 }
 
-.dashboard-nuevoCatalogo {
+.dashboardListadoMail {
     margin-top: 20px;
     padding: 5px;
     gap: 5px;
@@ -69,7 +69,7 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.card-head {
+.cardHeaderMail {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -77,9 +77,10 @@
     background-color: var(--color-primario);
     color: var(--color-blanco);
     border-radius: 5px 5px 0 0;
+    text-decoration: underline;
 }
 
-.body-nuevoCatalogo {
+.bodyListadoMail {
     padding: 10px;
     background-color: var(--color-secundario);
     border-radius: 0 0 5px 5px;
@@ -88,6 +89,7 @@
     align-items: center;
     justify-content: flex-end;
     gap: 10px;
+    width: 100%;
 }
 
 .dashboard-informacionSistema {
