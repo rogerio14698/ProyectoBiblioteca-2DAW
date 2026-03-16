@@ -63,33 +63,104 @@
 .dashboardListadoMail {
     margin-top: 20px;
     padding: 5px;
-    gap: 5px;
-    background-color: var(--color-secundario);
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: burlywood;
+    box-shadow: var(--sombra-suave);
 }
 
 .cardHeaderMail {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 10px;
     padding: 10px;
     background-color: var(--color-primario);
     color: var(--color-blanco);
-    border-radius: 5px 5px 0 0;
     text-decoration: underline;
 }
 
+/* Contenedor principal para permitir scroll horizontal si la pantalla es muy pequeña */
 .bodyListadoMail {
-    padding: 10px;
-    background-color: var(--color-secundario);
-    border-radius: 0 0 5px 5px;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.tablaListadoMail {
+    min-width: 1000px; /* Evita que la tabla se colapse demasiado */
     display: flex;
     flex-direction: column;
+}
+
+/* Fila de Títulos y Fila de Datos */
+.titulosListados, .dataListadoMail {
+    display: grid;
+    /* Definición de columnas: Nombre, Email, Asunto, MENSAJE (más grande), Fecha, Estado, Acciones */
+    grid-template-columns: 120px 180px 150px 1fr 100px 100px 220px;
     align-items: center;
-    justify-content: flex-end;
-    gap: 10px;
-    width: 100%;
+    padding: 12px;
+    gap: 15px;
+    box-shadow: var(--sombra-fuerte);
+}
+
+/* Estilo de la cabecera */
+.titulosListados {
+    background-color: var(--color-primario);
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+/* Estilo de las filas de datos */
+.dataListadoMail {
+    color: var(--negro);
+    background-color: white;
+    border-bottom: 1px solid #eee;
+    transition: background 0.2s;
+}
+
+.dataListadoMail:hover {
+    background-color: #f1f5f9;
+}
+
+/* --- EL MENSAJE CON SCROLL --- */
+.dataMensaje {
+    max-height: 60px; /* Altura máxima antes de hacer scroll */
+    overflow-y: auto; /* Scroll vertical si el texto es largo */
+    padding-right: 5px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #444;
+    /* Estilo barra de scroll fina */
+    scrollbar-width: thin;
+}
+
+/* Estilo de los botones de acciones */
+.dataListadoMail span:last-child {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.btn-base {
+    padding: 5px 8px;
+    font-size: 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background: white;
+}
+
+/* Estados */
+.estadoMail {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.estadoPendiente {
+    background-color: #ffeaa7;
+    color: #d35400;
 }
 
 .dashboard-informacionSistema {

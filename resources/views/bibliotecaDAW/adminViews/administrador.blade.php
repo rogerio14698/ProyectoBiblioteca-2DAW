@@ -14,22 +14,22 @@
             <div class="card-contenidoTotal">
                 <h5>Contenido Total: <span>12</span></h5>
                 <p>Contenidos Totales</p>
-                <button>Más info</button>
+                <button class="btn-base">Más info</button>
             </div>
             <div class="card-noticias">
                 <h5>Noticias o Destacados: <span>5</span></h5>
                 <p>Contenidos de Noticias o Destacados</p>
-                <button>Más info</button>
+                <button class="btn-base">Más info</button>
             </div>
             <div class="card-paginas">
                 <h5>Páginas: <span>8</span></h5>
                 <p>Gestión de Páginas</p>
-                <button>Más info</button>
+                <button class="btn-base">Más info</button>
             </div>
             <div class="card-elementosMenu">
                 <h5>Elementos del Menú: <span>10</span></h5>
                 <p>Gestión de Elementos del Menú</p>
-                <button>Más info</button>
+                <button class="btn-base">Más info</button>
             </div>
         </div>
         <div class="bodyDashboard">
@@ -54,8 +54,10 @@
                             <span class="dataEmail">{{ $mail->email }}</span>
                             <span class="dataAsunto">{{ $mail->asunto }}</span>
                             <span class="dataMensaje">{{ $mail->mensaje }}</span>
-                            <span class="dataFecha">{{ $mail->fecha }}</span>
-                            <span class="dataEstado"><span class="estadoMail estadoPendiente">{{ $mail->estado }}</span></span>
+                            <!--Poner solo el dia en la fecha -->
+                            <span class="dataFecha">{{ $mail->created_at->format('d/m/Y') }}</span>
+                            <!--Aqui tengo que poner una tabla pibote de los estados disponibles o ver si modifico la migración -->
+                            <span class="dataEstado"><span class="estadoMail estadoPendiente">Pendiente</span></span>
                             <span>
                                 <button class="btn-base">Ver</button>
                                 <button class="btn-base">Eliminar</button>

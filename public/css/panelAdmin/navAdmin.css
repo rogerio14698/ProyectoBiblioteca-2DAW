@@ -1,37 +1,55 @@
 .navAdmin {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
     background-color: var(--color-primario);
-    position: relative;
-    z-index: 20;
+    gap: 10px;
     overflow: visible;
+    padding: 10px;
+    box-shadow: var(--sombra-media);
+    border-radius: 8px;
+}
+
+.navAdmin.navAdminVisible {
+    display: flex;
 }
 
 .navContenidoWeb {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
     color: var(--color-blanco);
     position: relative;
+    width: 100%;
 }
 
 .navContenidoUsuario {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     color: var(--color-blanco);
     position: relative;
+    width: 100%;
 }
 
 .navContenidoLibro {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     color: var(--color-blanco);
     position: relative;
+    width: 100%;
+}
+.navContenidoWeb, 
+.navContenidoUsuario, 
+.navContenidoLibro,
+.navContenidoSesion{
+    position: relative; /* IMPORTANTE: Crea el punto de anclaje para su propio menú */
+    display: flex;
+    flex-direction: column;
 }
 
 .navContenidoSesion {
@@ -39,33 +57,50 @@
     justify-content: center;
     align-items: center;
 }
-
-/*menu desplegable*/
-
-.menu-checkbox {
-    display: none;
+.btnDesplegableAdmin{
+    width: 100%;
+    text-align: left;
+    border: none;
 }
 
-/*Estilo básico para test; oculto por defecto*/
+.btnDesplegableAdmin button {
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: var(--color-secundario);
+    color: var(--color-blanco);
+    border: 1px solid var(--color-secundario);
+    border-radius: 5px;
+    width: 100%;
+    text-align: left;
+}
+
 .menu-items {
     display: none;
     list-style: none;
-    background-color: var(--color-primario);
     padding: 10px;
-    border: 1px solid var(--color-secundario);
-    border-radius: 5px;
     position: absolute;
-    top: calc(100% + 8px);
-    left: 50%;
-    transform: translateX(-50%);
-    min-width: 240px;
-    z-index: 1000;
+    z-index: 110;
+    top: 100%;
+    left: 0;
+    width: max-content;
+    min-width: 250px;
+    background-color: var(--color-primario);
+    box-shadow: var(--sombra-media);
 }
 
-/* Cuando el checkbox está marcado, muestra el menú*/
-.menu-checkbox:checked~.menu-items {
+.menu-items.is-active {
     display: block;
 }
+.btnNavAdminPrincipal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    position: relative;
+    z-index: 100;
+}
+
 
 /*Estilos extra para que se vea bien*/
 
@@ -100,4 +135,37 @@
     list-style: none;
     margin-top: 8px;
     padding-left: 16px;
+}
+
+@media (min-width: 768px) {
+    .navAdmin {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 2fr;
+        align-items: center;
+        justify-items:flex-end;
+        padding: 10px;
+        width: 100%;
+        position: static;
+        top: auto;
+        left: auto;
+        z-index: 20;
+        box-shadow: none;
+        border-radius: 0;
+    }
+
+    .menu-items {
+        box-shadow: var(--sombra-media);
+        position: absolute; 
+        top: 100%;
+        left: 0;
+        width: auto;
+    }
+
+    #btnMenuPrincipal {
+        display: none;
+    }
+    .navContenidoSesion{
+        width: 200px;
+    }
+
 }
