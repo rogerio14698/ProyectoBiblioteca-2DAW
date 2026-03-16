@@ -52,6 +52,7 @@
                             <option value="sugerencia">Sugerencia</option>
                             <option value="reclamo">Reclamo</option>
                         </select>
+                        
                     </div>
                     <div class="labelContacto">
                         <label for="mensaje">Mensaje:</label>
