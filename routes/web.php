@@ -125,10 +125,7 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin/gestionHome', function () {
         return view('bibliotecaDAW.adminViews.GestionarContenidoWeb.gestionarHome');
     })->name('admin.gestionHome');
-    //Gestion ve la agenda
-    Route::get('/admin/gestionAgenda', function () {
-        return view('bibliotecaDAW.adminViews.GestionarContenidoWeb.gestionarAgenda');
-    })->name('admin.gestionAgenda');
+
     //Gestion del carrusel-home
     // Vista principal del carrusel (lista + formulario reutilizable crear/editar)
     Route::get('/admin/gestionCarrusel', [EventosController::class, 'adminCarrusel'])->name('admin.gestionCarrusel');
@@ -163,7 +160,7 @@ Route::middleware(['auth:admin'])->group(function () {
     // Gestión de mensajes de contacto para el Admin
     Route::get('/admin/mensajes', [ContactoController::class, 'index'])->name('admin.mensajes.index');
     Route::patch('/admin/mensajes/{id}/estado', [ContactoController::class, 'updateEstado'])->name('admin.mensajes.update');
-    Route::delete('/admin/mensajes/{id}', [ContactoController::class, 'destroy'])->name('admin.mensajes.delete');
+    Route::delete('/admin/mensajes/{contacto}', [ContactoController::class, 'destroy'])->name('admin.mensajes.delete');
     /*Fin de la gestión de emails */
 
     Route::get('/admin/gestionContacto', function () {

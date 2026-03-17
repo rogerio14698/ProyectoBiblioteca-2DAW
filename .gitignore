@@ -29,3 +29,6 @@ nbproject/
 composer.phar
 .history
 /.vscode
+/public/hot
+/public/storage
+/public/build

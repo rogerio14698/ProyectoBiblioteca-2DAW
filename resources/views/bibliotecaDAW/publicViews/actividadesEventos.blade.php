@@ -5,8 +5,8 @@
 @section('content')
     <main class="contenedor">
         <div class="contentHeader">
-        <h1>Actividades y Eventos</h1>
-        <p>Bienvenido a la sección de actividades y eventos de la Biblioteca DAW.</p>
+        <h1 id="actividadesEventosTitulo"></h1>
+        <p id="actividadesEventosDescripcion">Bienvenido a la sección de actividades y eventos de la Biblioteca DAW.</p>
     </div>
     <section class="actividadesEventos">
         <!-- Al apuntarse se va a poner un contador de personas que se han apuntado, deben de estar registradas -->
@@ -21,7 +21,12 @@
             <button class="btn-base btn-verde">Apuntarse</button>
         </div>
         @endforeach
-
     </section>
+
+    
+
+
+
+
     </main>
 @endsection

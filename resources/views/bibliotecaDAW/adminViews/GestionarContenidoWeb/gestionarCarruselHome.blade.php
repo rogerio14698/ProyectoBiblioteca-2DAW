@@ -3,11 +3,12 @@
 @section('title', 'Carrusel Home')
 
 @section('content')
-    <h2>Hola de desde Carrusel Home</h2>
-    <p>Rellena el formulario del carrusel de la ventana principal</p>
+
 
 
     <div class="contenedor">
+        <h2>Editar Carrusel de Eventos y añadir eventos en general</h2>
+        <p>Rellena el formulario del carrusel de la ventana principal</p>
         {{-- Cambio aplicado: enviar el formulario a la ruta POST que guarda el evento --}}
         {{-- La Gracia de estos forms que son reutilizables para crear y editar --}}
         {{-- {{ route('admin.agregarCarrusel') }} --}}
@@ -27,8 +28,7 @@
             </div>
             <div class="form-group">
                 <label for="descripcion">Descripción del Evento:</label>
-                <textarea id="descripcion" name="descripcion"
-                    required>{{ old('descripcion', $eventoEditar->descripcion ?? '') }}</textarea>
+                <textarea id="descripcion" name="descripcion" required>{{ old('descripcion', $eventoEditar->descripcion ?? '') }}</textarea>
             </div>
             <div class="form-group">
                 <label for="imagen">Imagen del Evento:</label>
@@ -80,7 +80,8 @@
                     <tr>
                         <td>{{ $evento->titulo }}</td>
                         <td>{{ $evento->descripcion }}</td>
-                        <td><img src="{{ asset('storage/' . $evento->imagen) }}" alt="Imagen del Evento" width="100"></td>
+                        <td><img src="{{ asset('storage/' . $evento->imagen) }}" alt="Imagen del Evento" width="100">
+                        </td>
                         <td>{{ $evento->usuario->name ?? 'Sin autor' }}</td>
                         <td>{{ $evento->fecha_hora }}</td>
                         <td>{{ $evento->ubicacion }}</td>

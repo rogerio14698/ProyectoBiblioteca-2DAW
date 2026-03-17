@@ -6,6 +6,7 @@ use App\Models\Evento;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Schema;
 
 class EventosController extends Controller
 {
@@ -33,20 +34,12 @@ class EventosController extends Controller
         return view('bibliotecaDAW.adminViews.GestionarContenidoWeb.gestionarCarruselHome', [
             'eventos' => $eventos,
             'eventoEditar' => $eventoEditar,
-        ]);
+        ]);  
     }
 
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //Obtener todos los eventos
-        $eventos = Evento::all();
-        return view('eventos.index', [
-            'eventos' => $eventos
-        ]);
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -63,22 +56,33 @@ class EventosController extends Controller
 
     public function store(Request $request)
     {
+        // Detectamos en tiempo real si la columna existe para no romper en BD antiguas.
+        $hasPrioridadColumn = Schema::hasColumn('eventos', 'prioridad');
 
-        $request->validate([
+        $rules = [
             'titulo' => 'required|string|max:255',
             'descripcion' => 'required|string',
             'fecha_hora' => 'required|date',
             'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'ubicacion' => 'required|string|max:255',
-            'prioridad' => 'nullable|integer|min:1|max:3',
-        ]);
+        ];
+
+        if ($hasPrioridadColumn) {
+            $rules['prioridad'] = 'nullable|integer|min:1|max:3';
+        }
+
+        $request->validate($rules);
         //Generamos el evento
         $nuevoEvento = new Evento();
         $nuevoEvento->titulo = $request->titulo;
         $nuevoEvento->descripcion = $request->descripcion;
         $nuevoEvento->fecha_hora = $request->fecha_hora;
         $nuevoEvento->ubicacion = $request->ubicacion;
-        $nuevoEvento->prioridad = $request->prioridad ?? 1;
+
+        // Solo guardamos prioridad cuando la columna existe realmente en la tabla.
+        if ($hasPrioridadColumn) {
+            $nuevoEvento->prioridad = $request->prioridad ?? 1;
+        }
         //Vamos a dejar un espacio para la imagen, eso luego la gestionamos
 
         // Cambio aplicado: usuario_id se toma de tabla usuarios (no del guard admin) para respetar la FK
@@ -114,15 +118,23 @@ class EventosController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        // Detectamos en tiempo real si la columna existe para no romper en BD antiguas.
+        $hasPrioridadColumn = Schema::hasColumn('eventos', 'prioridad');
+
         // Validamos exactamente los mismos campos que en creación para mantener coherencia.
-        $request->validate([
+        $rules = [
             'titulo' => 'required|string|max:255',
             'descripcion' => 'required|string',
             'fecha_hora' => 'required|date',
             'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'ubicacion' => 'required|string|max:255',
-            'prioridad' => 'nullable|integer|min:1|max:3',
-        ]);
+        ];
+
+        if ($hasPrioridadColumn) {
+            $rules['prioridad'] = 'nullable|integer|min:1|max:3';
+        }
+
+        $request->validate($rules);
 
         // Buscamos el evento por ID; si no existe Laravel lanza 404 automáticamente.
         $evento = Evento::findOrFail($id);
@@ -132,7 +144,11 @@ class EventosController extends Controller
         $evento->descripcion = $request->descripcion;
         $evento->fecha_hora = $request->fecha_hora;
         $evento->ubicacion = $request->ubicacion;
-        $evento->prioridad = $request->prioridad ?? 1;
+
+        // Solo guardamos prioridad cuando la columna existe realmente en la tabla.
+        if ($hasPrioridadColumn) {
+            $evento->prioridad = $request->prioridad ?? 1;
+        }
 
         // Guardamos los cambios en base de datos.
         $evento->save();

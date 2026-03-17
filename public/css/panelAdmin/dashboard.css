@@ -1,6 +1,4 @@
-@import 'normalize/normalize.css';
-@import 'variables/variables.css';
-@import 'Globales/globales.css';
+
 
 .dashboard {
     padding: 20px;
@@ -94,7 +92,7 @@
 .titulosListados, .dataListadoMail {
     display: grid;
     /* Definición de columnas: Nombre, Email, Asunto, MENSAJE (más grande), Fecha, Estado, Acciones */
-    grid-template-columns: 120px 180px 150px 1fr 100px 100px 220px;
+    grid-template-columns: 120px 1fr 150px 1fr 100px 100px 220px;
     align-items: center;
     padding: 12px;
     gap: 15px;
@@ -123,7 +121,7 @@
 }
 
 /* --- EL MENSAJE CON SCROLL --- */
-.dataMensaje {
+.dataMensaje, .dataNombre, .dataAsunto, .dataEmail {
     max-height: 60px; /* Altura máxima antes de hacer scroll */
     overflow-y: auto; /* Scroll vertical si el texto es largo */
     padding-right: 5px;

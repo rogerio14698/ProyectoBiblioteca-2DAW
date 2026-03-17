@@ -56,13 +56,32 @@
                             <span class="dataMensaje">{{ $mail->mensaje }}</span>
                             <!--Poner solo el dia en la fecha -->
                             <span class="dataFecha">{{ $mail->created_at->format('d/m/Y') }}</span>
-                            <!--Aqui tengo que poner una tabla pibote de los estados disponibles o ver si modifico la migración -->
-                            <span class="dataEstado"><span class="estadoMail estadoPendiente">Pendiente</span></span>
+                            <!--Mostramos el estado real guardado en base de datos para evitar inconsistencias visuales. -->
+                            <span class="dataEstado">
+                                <span class="estadoMail {{ $mail->estado === 'pendiente' ? 'estadoPendiente' : ($mail->estado === 'en_proceso' ? 'estadoProceso' : 'estadoLeido') }}">
+                                    {{ $mail->estado === 'pendiente' ? 'Pendiente' : ($mail->estado === 'en_proceso' ? 'En proceso' : 'Leido') }}
+                                </span>
+                            </span>
                             <span>
-                                <button class="btn-base">Ver</button>
-                                <button class="btn-base">Eliminar</button>
-                                <button class="btn-base">Marcar como leído</button>
-                                <button class="btn-base">Responder</button>
+                                <!--Elimina el mensaje de la base de datos pero no del email-->
+                                <form action="{{ route('admin.mensajes.delete', $mail->id) }}" method="POST" style="display: inline;" onsubmit="return confirm('¿Estas seguro que quieres eliminar este mensaje?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn-base">Eliminar</button>
+                                </form>
+                                <!--Cambia las etiquetas de estado-->
+                                <form action="{{ route('admin.mensajes.update', $mail->id) }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    @method('PATCH')
+                                    <select class="btn-base selectEstado" name="estado" id="estado_{{ $mail->id }}">
+                                        <option value="pendiente" {{ $mail->estado === 'pendiente' ? 'selected' : '' }}>Pendiente</option>
+                                        <option value="en_proceso" {{ $mail->estado === 'en_proceso' ? 'selected' : '' }}>En proceso</option>
+                                        <option value="leido" {{ $mail->estado === 'leido' ? 'selected' : '' }}>Leido</option>
+                                    </select>
+                                    <button type="submit" class="btn-base">Cambiar Estado</button>
+                                </form>
+                                <!--Este btn responde al email que se ha recibido -->
+                                <button  class="btn-base">Responder</button>
                             </span>
                         </div>
                         @endforeach

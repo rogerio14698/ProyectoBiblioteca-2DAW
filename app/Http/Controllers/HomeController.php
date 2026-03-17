@@ -27,6 +27,7 @@ class HomeController extends Controller
         //Los controladores como EventosController y LibroController se encargan de gestionar la lógica específica de cada sección, mientras que HomeController se encarga de la lógica de SU PROPIA sección
         //Es decir. url/eventos; url/libros
     }
+    
 
     /**
      * Show the form for creating a new resource.

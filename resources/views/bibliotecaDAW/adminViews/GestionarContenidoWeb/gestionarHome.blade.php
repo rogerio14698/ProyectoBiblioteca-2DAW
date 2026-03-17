@@ -3,26 +3,24 @@
 @section('title', 'Gestionar Home')
 
 @section('content')
-<h1>Gestionar Home</h1>
-<p>Desde aquí puedes gestionar el contenido de la página de inicio de la Biblioteca DAW.</p>
-<!-- Aquí puedes agregar un formulario para editar el contenido principal, una sección para gestionar noticias o destacados, avisos importantes, horarios, etc. -->
 
-<div class="tabla-agenda">
-    <h4>Contenido de agenda</h4>
-    <table>
-    <thead>
-        <th>id</th>
-        <th>Nombre Contenido</th>
-        <th>Descripción</th>
-        <th>Acciones</th>
-    </thead>
-    <tbody>
-        <td>Noticias Destacadas</td>
-        <td>Últimas noticias y eventos destacados de la biblioteca.</td>
+
+<main class="contenedor">
+    <section>
+        <h1>Editar pagina principal</h1>
+
+        <p>Cambiar el slide de Bienvenida</p>
+
         <form action="#">
-            <td><button type="submit">Editar</button></td>
-            <td><button type="submit">Eliminar</button></td>
+            @csrf
+            @method('PUT')
+            
+
         </form>
-    </tbody>
-</table>
-</div>
+        
+
+
+    </section>
+</main>
+
+@endsection

@@ -11,7 +11,7 @@
                     <h3>Gestionar Home</h3>
                     <ul class="sub-menu-items">
                         <li><a href="{{ route('admin.gestionHome') }}">Gestionar Home</a></li>
-                        <li><a href="{{ route('admin.gestionAgenda') }}">Gestionar Agenda</a></li>
+                        <li><a href="{{ route('admin.gestionCarrusel') }}">Gestionar Carusel de Eventos</a></li>
                         <li><a href="{{ route('admin.gestionCarrusel') }}">Carrusel Home</a></li>
                         <!-- <li><a href="{{ route('admin.gestionNoticias') }}">Noticias</a></li> -->
                     </ul>
