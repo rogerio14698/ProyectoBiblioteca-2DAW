@@ -493,3 +493,36 @@
         height: 270px;
     }
 }
+
+@media (max-width: 480px) {
+    .sliderContenedor {
+        grid-template-columns: 32px minmax(0, 1fr) 32px;
+        gap: 4px;
+    }
+
+    .sliderContenedor .btn-slider {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+    }
+
+    .novedadCatalogo .swiper-wrapper {
+        gap: 16px;
+    }
+
+    .novedadCatalogoCard {
+        min-width: min(160px, calc(100vw - 88px));
+        max-width: min(160px, calc(100vw - 88px));
+        min-height: 320px;
+    }
+
+    .novedadImagen {
+        width: min(160px, calc(100vw - 88px));
+        height: 240px;
+    }
+
+    .novedadInfo h3 {
+        font-size: 0.95rem;
+        text-align: center;
+    }
+}
