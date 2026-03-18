@@ -1,33 +1,75 @@
-.catalogoContenedor,
-.catalogoContenedor * {
-    box-sizing: border-box;
+/*Contenedor header del catalogo*/
+
+.catalogoHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 32px;
+    padding: 4px;
+    background-color: var(--color-blanco);
+}
+
+.catalogoHeader h1 {
+    font-size: 1.5rem;
+    color: var(--color-primario-oscuro);
+    text-decoration: underline;
 }
 
 .catalogoBody {
-    display: flex;
-    flex-direction: column;
-    gap: calc(var(--unidad-espaciado) * 2);
+    display: grid;
+    grid-template-columns: 1fr;
+    background-color: var(--color-blanco);
+    padding: 10px;
+    gap: 10px;
 }
 
 .catalogoCard {
-    width: 100%;
-    min-width: 0;
+    padding: 10px;
     display: flex;
-    gap: 20px;
-    gap: calc(var(--unidad-espaciado) * 3);
-    padding: calc(var(--unidad-espaciado) * 3);
-    border: 1px solid var(--color-borde);
-    border-radius: var(--radio-grande);
-    background-color: var(--color-blanco);
-    margin: 0;
+    flex-direction: row;
     align-items: flex-start;
-    box-shadow: var(--sombra-suave);
+    gap: 10px;
+    background-color: var(--bgCardCatalogo);
+    box-shadow: var(--sombra-fuerte);
+}
+.catalogoCard:last-child {
+    margin-bottom: 0;
 }
 
+.cardContenido {
+    /*Esto es como el grid-template-columns pero para flexbox
+    el max content hace que tome todo el espacio disponible*/
+
+    /*Esto resumen 3 lineas de codigo en 1, por ejemplo:
+    flex-grow: 2; flex-shrink: 0; flex-basis: max-content;*/
+    flex: 2 1 max-content;
+    justify-content: flex-start;
+}
+
+.libroTitulo {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--color-primario-oscuro);
+    margin-bottom: 4px;
+    text-decoration: underline;
+}
+
+.accionesCatalogo {
+    flex: .2 1 200px;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    gap: 8px;
+    margin-left: auto;
+}
+
+
+
 .cardImagen {
-    flex: 0 0 160px;
-    min-width: 160px;
-    margin: 0;
+    flex: .1 0 max-content;
+    overflow: hidden;
+    justify-content: center;
+    display: flex;
 }
 
 .cardImagen img {
@@ -40,130 +82,29 @@
     object-fit: cover;
     object-position: center;
 }
-
-.cardContenido {
-    flex: 1 1 auto;
-    min-width: 0;
-}
-
-.libroTitulo {
-    font-size: 1.5rem;
-    color: var(--color-primario);
-    margin: 0 0 calc(var(--unidad-espaciado) * 2) 0;
-    font-weight: 700;
-}
-
-.infoGrid {
+.infoGrid{
     display: flex;
     flex-direction: column;
-    gap: var(--unidad-espaciado);
-    margin: 0;
-    padding: 0;
+    gap: 4px;
+    font-size: 0.8rem;
 }
-
-.infoItem {
-    display: grid;
-    grid-template-columns: 120px minmax(0, 1fr);
-    align-items: baseline;
-    gap: var(--unidad-espaciado);
-    font-size: 0.95rem;
-    margin: 0;
-}
-
-.infoLabel {
-    font-weight: 600;
-    color: var(--color-texto-mutado);
-    text-transform: uppercase;
-    font-size: 0.75rem;
-    letter-spacing: 0.5px;
-}
-
-.infoValue {
-    color: var(--color-texto-principal);
-    overflow-wrap: anywhere;
-}
-
-.stock-disponible {
-    color: var(--color-exito);
-    font-weight: 600;
-}
-
-.accionesCatalogo {
-    flex: 0 0 180px;
-    min-width: 180px;
+.infoItem{
     display: flex;
-    flex-direction: column;
-    gap: calc(var(--unidad-espaciado) * 1.5);
-    margin: 0;
+    flex-direction: row;
+    gap: 2px;
 }
-
-.accionesCatalogo a {
-    display: block;
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-    border-radius: var(--radio-medio);
-    text-decoration: none;
+.infoLabel{
     font-weight: 600;
-    font-size: 0.9rem;
-    transition: all var(--transicion-rapida);
+    color: var(--color-primario-oscuro);
+}
+.infoValue{
+    flex-direction: row;
+    color: var(--color-primario-claro);
 }
 
-.btn-ver {
-    color: var(--color-primario);
-    border: 1px solid var(--color-borde);
-}
 
-.btn-ver:hover {
-    background-color: var(--color-fondo-global);
-}
-
-.btn-carrito {
-    background-color: var(--color-alerta);
-    color: var(--color-texto-principal);
-    border: 1px solid var(--color-alerta);
-}
-
-.btn-carrito:hover {
-    filter: brightness(0.96);
-}
-
-.btn-alquilar {
-    background-color: var(--color-primario);
-    color: var(--color-blanco);
-}
-
-.btn-alquilar:hover {
-    background-color: var(--color-primario-oscuro);
-}
-
-@media (max-width: 900px) {
-    .catalogoCard {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .cardImagen {
-        flex-basis: auto;
-        min-width: 0;
-        text-align: center;
-    }
-
-    .cardImagen img {
-        width: min(220px, 100%);
-        height: 300px;
-        margin: 0 auto;
-    }
-
-    .infoItem {
-        grid-template-columns: 1fr;
-        gap: 4px;
-    }
-
-    .accionesCatalogo {
-        flex-basis: auto;
-        min-width: 0;
-        border-top: 1px solid var(--color-borde);
-        padding-top: calc(var(--unidad-espaciado) * 2);
+@media (min-width: 768px) {
+    .catalogoBody {
+        grid-template-columns: repeat(3, 1fr);
     }
 }

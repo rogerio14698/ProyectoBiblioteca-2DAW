@@ -99,3 +99,34 @@
     transform: translateY(-1px);
     box-shadow: var(--sombra-media);
 }
+
+.btn-ver{
+    background-color: var(--color-primario-oscuro);
+    color: var(--color-blanco);
+    width: 100%;
+}
+.btn-ver:hover{
+    background-color: var(--color-primario);
+    box-shadow: var(--sombra-media);
+    transform: translateY(-1px);
+}
+.btn-carrito{
+    background-color: var(--color-carrito-anadir);
+    color: var(--color-blanco);
+    width: 100%;
+}
+.btn-carrito:hover{
+    background-color: var(--color-carrito-anadir);
+    box-shadow: var(--sombra-media);
+    transform: translateY(-1px);
+}
+.btn-alquilar{
+    background-color: var(--color-alquilar);
+    color: var(--color-blanco);
+    width: 100%;
+}
+.btn-alquilar:hover{
+    background-color: var(--color-alquilar);
+    box-shadow: var(--sombra-media);
+    transform: translateY(-1px);
+}

@@ -13,10 +13,14 @@
     --color-borde: #e2e8f0;
     --blanco: #FFFFFF;
     --negro: #000000;
+    --grisClaro: #D1D5DB;
     --color-fondo-usuario: #8261fc;
+    --color-carrito-anadir: #ff9900;
+    --color-alquilar: #4c00ff;
+    --bgCardCatalogo: #cecece;
     
     /* Colores de Estado (Feedback) */
-    --color-exito: #28a745;
+    --color-exito: #00e235;
     --color-error: #dc3545;
     --color-alerta: #ffc107;
     --color-info: #17a2b8;

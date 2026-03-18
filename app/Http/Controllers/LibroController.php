@@ -25,7 +25,7 @@ class LibroController extends Controller
     public function catalogo()
     {
 
-        $libros = Libro::paginate(10); //Paginación de 10 libros por página
+        $libros = Libro::paginate(12); //Paginación de 10 libros por página
         return view('bibliotecaDAW.publicViews.catalogo', [
             'libros' => $libros
         ]);

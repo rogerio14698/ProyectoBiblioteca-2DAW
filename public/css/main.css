@@ -1,5 +1,6 @@
 @import 'normalize/normalize.css';
 @import 'variables/variables.css';
+@import 'variables/utilidades.css';
 @import 'variables/botones.css';
 @import 'Globales/globales.css';
 @import 'variables/paginacion.css';
