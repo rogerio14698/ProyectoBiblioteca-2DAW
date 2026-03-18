@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 direction: 'horizontal',
                 loop: totalSlides > 5,
                 watchOverflow: true,
-                slidesPerView: 3,
+                slidesPerView: 2,
                 spaceBetween: 8,
                 navigation: {
                     nextEl: '.swiper-button-next-custom',
@@ -23,11 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 breakpoints: {
                     768: {
-                        slidesPerView: 3,
+                        slidesPerView: 2,
                         spaceBetween: 10,
                     },
                     800: {
-                        slidesPerView: 4,
+                        slidesPerView: 3,
                         spaceBetween: 10,
                     },
                     1000: {
