@@ -16,8 +16,8 @@
                 <li class="navItem"><a href="{{ url('/registro') }}" class="navEnlace">Registro</a></li>
             </ul>
 
-            <form class="navBuscador" role="search" method="GET" action="{{ url('/buscar') }}">
-                <input class="inputBuscador" type="search" placeholder="Buscar libro..." aria-label="Buscar libro" name="query">
+            <form class="navBuscador" role="search" method="GET" action="{{ url('/catalogo') }}">
+                <input class="inputBuscador" type="search" placeholder="Buscar libro..." aria-label="Buscar libro" name="query" value="{{ request('query', '') }}">
                 <button class="btn-base btn-primario" type="submit">Buscar</button>
             </form>
         </div>

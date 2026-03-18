@@ -15,6 +15,50 @@
     text-decoration: underline;
 }
 
+.catalogoBuscador {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--unidad-espaciado);
+    width: 100%;
+    margin-top: var(--unidad-espaciado);
+}
+
+.buscadorInput {
+    min-height: var(--altura-boton-movil);
+    padding: 0 var(--unidad-espaciado);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-medio);
+    color: var(--color-texto-principal);
+}
+
+.btn-buscar,
+.btn-limpiar {
+    min-height: var(--altura-boton-movil);
+    padding: 0 calc(var(--unidad-espaciado) * 2);
+}
+
+.btn-buscar {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+}
+
+.btn-buscar:hover {
+    background-color: var(--color-primario-oscuro);
+}
+
+.btn-limpiar {
+    background-color: var(--color-blanco);
+    color: var(--color-primario-oscuro);
+    border: 1px solid var(--color-primario-oscuro);
+    text-decoration: none;
+}
+
+.btn-limpiar:hover {
+    background-color: var(--color-fondo-global);
+}
+
 /* =========================================
    CUERPO DEL CATÁLOGO (Contenedor de tarjetas)
    =========================================
@@ -142,7 +186,8 @@
    [Etiqueta 70px] | [Valor fluido]                                        */
 .infoItem {
     display: grid;
-    grid-template-columns: 70px 1fr;
+    grid-template-columns: 900px 1fr;
+    gap: 20px; /* 20px entre etiqueta y valor */
     gap: calc(var(--unidad-espaciado) / 4); /* 2px */
     align-items: baseline;
 }
@@ -157,6 +202,25 @@
     font-weight: bold;
     color: var(--color-primario-claro);
 }
+.stock-disponible {
+    color: var(--blanco);
+    border-radius: var(--radio-medio);
+    font-weight: bold;
+    padding: 5px;
+    text-transform: uppercase;
+    max-width: fit-content;
+    background-color: var(--bgDisponible);
+}
+.stock-no-disponible{
+    color: var(--blanco);
+    border-radius: var(--radio-medio);
+    font-weight: bold;
+    padding: 5px;
+    text-transform: uppercase;
+    max-width: fit-content;
+    background-color: var(--bgNoDisponible);
+}
+
 
 /* =========================================
    DESKTOP (≥768px) — Tarjeta en modo FILA
@@ -224,6 +288,7 @@
 
     /* Columna de etiqueta un poco más ancha en desktop */
     .infoItem {
+        gap: 50px; /* 50px entre etiqueta y valor en desktop */
         grid-template-columns: 80px 1fr;
     }
 }

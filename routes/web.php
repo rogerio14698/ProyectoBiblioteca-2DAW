@@ -32,10 +32,6 @@ Route::get('/contacto', [ContactoController::class, 'create'])->name('contacto.c
 Route::post('/contacto', [ContactoController::class, 'store'])->name('contacto.store');
 Route::get('/catalogo', [LibroController::class, 'catalogo']);
 
-Route::get('/buscar', function () {
-    return view('bibliotecaDAW.publicViews.buscarLibros');
-});
-
 Route::get('/serviciosDigitales', function () {
     return view('bibliotecaDAW.publicViews.serviciosDigitales');
 });

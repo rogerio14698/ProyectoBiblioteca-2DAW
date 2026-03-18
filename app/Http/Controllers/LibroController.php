@@ -21,13 +21,40 @@ class LibroController extends Controller
         ]);
 
     }
-    //Obtener todos los libros para la vista de catálogo
-    public function catalogo()
+    //Obtener libros para la vista de catálogo (con búsqueda opcional)
+    public function catalogo(Request $request)
     {
+        $validatedData = $request->validate([
+            'query' => ['nullable', 'string', 'max:120'],
+            'titulo' => ['nullable', 'string', 'max:120'],
+            'autor' => ['nullable', 'string', 'max:120'],
+            'genero' => ['nullable', 'string', 'max:120'],
+        ]);
 
-        $libros = Libro::paginate(12); //Paginación de 10 libros por página
+        $searchQuery = trim((string) ($validatedData['query'] ?? ''));
+        $searchTitulo = trim((string) ($validatedData['titulo'] ?? ''));
+        $searchAutor = trim((string) ($validatedData['autor'] ?? ''));
+        $searchGenero = trim((string) ($validatedData['genero'] ?? ''));
+
+        $libros = Libro::query()
+            ->when($searchQuery !== '', fn($query) => $query->where(function ($subQuery) use ($searchQuery) {
+                $subQuery->where('titulo', 'like', "%{$searchQuery}%")
+                    ->orWhere('autor', 'like', "%{$searchQuery}%")
+                    ->orWhere('genero', 'like', "%{$searchQuery}%");
+            }))
+            ->when($searchTitulo !== '', fn($query) => $query->where('titulo', 'like', "%{$searchTitulo}%"))
+            ->when($searchAutor !== '', fn($query) => $query->where('autor', 'like', "%{$searchAutor}%"))
+            ->when($searchGenero !== '', fn($query) => $query->where('genero', 'like', "%{$searchGenero}%"))
+            ->orderBy('created_at', 'desc')
+            ->paginate(12)
+            ->withQueryString();
+
         return view('bibliotecaDAW.publicViews.catalogo', [
-            'libros' => $libros
+            'libros' => $libros,
+            'searchQuery' => $searchQuery,
+            'searchTitulo' => $searchTitulo,
+            'searchAutor' => $searchAutor,
+            'searchGenero' => $searchGenero,
         ]);
     }
 

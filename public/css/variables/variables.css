@@ -18,7 +18,21 @@
     --color-carrito-anadir: #ff9900;
     --color-alquilar: #4c00ff;
     --bgCardCatalogo: #cecece;
+    --bgDisponible: rgb(42, 103, 42);
+    --bgNoDisponible: rgb(116, 43, 43);
+    /*Colores de botones */
+    --bgBtnVerde: #307941;
+    --bgBtnVerdeHover: #286736;
+
+    --bgBtnRojo: #dc3545;
+    --bgBtnRojoHover: #c82333;
+
+    --bgBtnAmarillo: #ffc107;
+    --bgBtnAmarilloHover: #e0a800;
     
+    --bgBtnAzul: #17a2b8;
+    --bgBtnAzulHover: #138496;
+
     /* Colores de Estado (Feedback) */
     --color-exito: #00e235;
     --color-error: #dc3545;

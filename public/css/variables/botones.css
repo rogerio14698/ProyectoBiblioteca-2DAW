@@ -20,12 +20,12 @@
 }
 .btn-verde{
     width: 100%;
-    background-color: var(--color-exito);
+    background-color: var(--bgBtnVerde);
     color: var(--color-blanco);
 }
 .btn-verde:hover{
     cursor: pointer;
-    background-color: var(--color-info);
+    background-color: var(--bgBtnVerdeHover);
     box-shadow: var(--sombra-media);
 }
 .btn-verde:active{
