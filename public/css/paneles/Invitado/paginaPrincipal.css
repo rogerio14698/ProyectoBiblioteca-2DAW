@@ -1,6 +1,3 @@
-/*Tengo que importar las variables*/
-@import '../variables/variables.css';
-
 /*********ESTILOS DE LA PAGINA PRINCIPAL DEL PANEL DE INVITADO**********/
 .bienvenida {
     display: flex;
@@ -226,10 +223,13 @@
     padding: 0;
     border-radius: 50%;
 }
-.swiper-wrapper{
+.novedadCatalogo .swiper-wrapper{
+    display: flex;
+    gap: 80px;
     align-items: stretch;
 }
-.swiper-slide {
+
+.novedadCatalogo .swiper-slide {
     display: flex;
     justify-content: center;
     align-items: center;

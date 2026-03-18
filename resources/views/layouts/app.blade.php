@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     <!-- Dar estilos personalizados-->
-    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}?v={{ filemtime(public_path('css/main.css')) }}">
     @stack('head')
 </head>
 

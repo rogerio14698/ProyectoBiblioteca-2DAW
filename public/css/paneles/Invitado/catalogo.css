@@ -13,6 +13,7 @@
     width: 100%;
     min-width: 0;
     display: flex;
+    gap: 20px;
     gap: calc(var(--unidad-espaciado) * 3);
     padding: calc(var(--unidad-espaciado) * 3);
     border: 1px solid var(--color-borde);
