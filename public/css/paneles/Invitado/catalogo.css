@@ -15,96 +15,215 @@
     text-decoration: underline;
 }
 
+/* =========================================
+   CUERPO DEL CATÁLOGO (Contenedor de tarjetas)
+   =========================================
+   En móvil: columna única. En desktop: rejilla de 3 columnas.
+   ========================================= */
 .catalogoBody {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     background-color: var(--color-blanco);
-    padding: 10px;
-    gap: 10px;
+    padding: var(--relleno-movil);
+    gap: calc(var(--unidad-espaciado) * 2); /* 16px entre tarjetas */
 }
 
+/* =========================================
+   TARJETA DEL CATÁLOGO — Mobile First (columna)
+   =========================================
+   Diseño mobile-first: en móvil es columna vertical centrada.
+   En desktop (≥768px) se transforma en fila con tres zonas:
+   [Imagen fija 160px] | [Contenido fluido] | [Acciones fija 160px]
+   ========================================= */
 .catalogoCard {
-    padding: 10px;
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 10px;
+    flex-direction: column;               /* Móvil: apilado vertical           */
+    align-items: center;                  /* Centra hijos horizontalmente      */
+    padding: calc(var(--unidad-espaciado) * 3); /* 24px — espacio generoso     */
+    gap: calc(var(--unidad-espaciado) * 2);     /* 16px entre secciones        */
     background-color: var(--bgCardCatalogo);
     box-shadow: var(--sombra-fuerte);
-}
-.catalogoCard:last-child {
-    margin-bottom: 0;
+    border-radius: var(--radio-medio);
 }
 
+/* =========================================
+   IMAGEN DE PORTADA — Contenedor
+   =========================================
+   flex: 0 0 auto → en móvil, no crece ni encoge; toma el
+   tamaño natural del contenido (la img hija).
+   En desktop se sobreescribe a flex: 0 0 160px (ancho sagrado).
+   ========================================= */
+.cardImagen {
+    flex: 0 0 auto;                       /* No crece, no encoge              */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Imagen hija — ancho fijo, proporciones intactas, SIN recortes.
+   object-fit: contain garantiza que la portada se muestra
+   completa dentro del espacio sin recortarla (cover prohibido). */
+.cardImagen img {
+    display: block;
+    width: 160px;                         /* Ancho fijo absoluto              */
+    height: auto;                         /* Altura proporcional automática   */
+    border-radius: var(--radio-medio);
+    box-shadow: var(--sombra-media);
+    object-fit: contain;                  /* Imagen completa, sin cortes      */
+}
+
+/* =========================================
+   CONTENIDO CENTRAL (Título, autor, info)
+   =========================================
+   flex: 1 1 0% → ocupa TODO el espacio sobrante entre imagen
+   y botones, creciendo y encogiéndose de forma fluida.
+   min-width: 0 → truco clave de Flexbox para que el texto
+   largo haga wrap en vez de empujar a los hermanos flex.
+   ========================================= */
 .cardContenido {
-    /*Esto es como el grid-template-columns pero para flexbox
-    el max content hace que tome todo el espacio disponible*/
-
-    /*Esto resumen 3 lineas de codigo en 1, por ejemplo:
-    flex-grow: 2; flex-shrink: 0; flex-basis: max-content;*/
-    flex: 2 1 max-content;
+    flex: 1 1 0%;                         /* Fluido: absorbe el espacio libre */
+    min-width: 0;                         /* Permite word-wrap dentro de flex */
+    display: flex;
+    flex-direction: column;
     justify-content: flex-start;
+    padding: 0 var(--unidad-espaciado);   /* 8px lateral en móvil            */
 }
 
+/* Título del libro — aseguramos que títulos largos bajen de línea
+   de forma ordenada sin empujar ni romper el layout.              */
 .libroTitulo {
     font-size: 1.3rem;
     font-weight: bold;
     color: var(--color-primario-oscuro);
-    margin-bottom: 4px;
+    margin-bottom: calc(var(--unidad-espaciado) / 2); /* 4px */
     text-decoration: underline;
+    word-wrap: break-word;                /* Seguridad para títulos largos    */
+    overflow-wrap: break-word;
 }
 
+/* =========================================
+   ACCIONES (Botones laterales)
+   =========================================
+   En móvil: columna de ancho completo, centrada.
+   En desktop: columna fija de 160px, centrada verticalmente
+   con respecto a la tarjeta.
+   ========================================= */
 .accionesCatalogo {
-    flex: .2 1 200px;
     display: flex;
     flex-direction: column;
-    align-self: center;
-    gap: 8px;
-    margin-left: auto;
+    align-items: center;
+    justify-content: center;              /* Centrado vertical en fila        */
+    width: 100%;                          /* Ocupa todo el ancho en móvil     */
+    gap: var(--unidad-espaciado);         /* 8px entre botones                */
 }
 
-
-
-.cardImagen {
-    flex: .1 0 max-content;
-    overflow: hidden;
-    justify-content: center;
-    display: flex;
+/* Botones más pequeños e integrados dentro del catálogo.
+   Se sobreescriben aquí (scoped) para no afectar a .btn-base global. */
+.accionesCatalogo .btn-base {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    width: 100%;
+    max-width: 200px;                     /* Ancho contenido en móvil         */
+    text-align: center;
 }
 
-.cardImagen img {
-    display: block;
-    width: 160px;
-    height: 240px;
-    max-width: 100%;
-    border-radius: var(--radio-medio);
-    box-shadow: var(--sombra-media);
-    object-fit: cover;
-    object-position: center;
-}
-.infoGrid{
+/* =========================================
+   GRID DE INFORMACIÓN (Autor, género, etc.)
+   ========================================= */
+.infoGrid {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: calc(var(--unidad-espaciado) / 2); /* 4px entre filas de info       */
     font-size: 0.8rem;
 }
-.infoItem{
-    display: flex;
-    flex-direction: row;
-    gap: 2px;
+
+/* Cada fila de info es un mini-grid de 2 columnas:
+   [Etiqueta 70px] | [Valor fluido]                                        */
+.infoItem {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: calc(var(--unidad-espaciado) / 4); /* 2px */
+    align-items: baseline;
 }
-.infoLabel{
+
+.infoLabel {
     font-weight: 600;
+    white-space: nowrap;
     color: var(--color-primario-oscuro);
 }
-.infoValue{
-    flex-direction: row;
+
+.infoValue {
+    font-weight: bold;
     color: var(--color-primario-claro);
 }
 
+/* =========================================
+   DESKTOP (≥768px) — Tarjeta en modo FILA
+   =========================================
+   La tarjeta pasa a flex-direction: row con tres zonas rígidas:
 
+   ┌──────────┬───────────────────────┬──────────┐
+   │ Imagen   │     Contenido         │ Acciones │
+   │ 160px    │     (fluido)          │  160px   │
+   │ SAGRADO  │     flex: 1 1 0%      │ SAGRADO  │
+   └──────────┴───────────────────────┴──────────┘
+
+   Las zonas laterales (imagen y acciones) usan flex: 0 0 Xpx,
+   lo que BLOQUEA a Flexbox de modificar su tamaño.
+   ========================================= */
 @media (min-width: 768px) {
+
+    /* Rejilla de 3 columnas para las tarjetas */
     .catalogoBody {
-        grid-template-columns: repeat(3, 1fr);
+        display: grid;
+        gap: calc(var(--unidad-espaciado) * 2); /* 16px */
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Tarjeta en modo fila horizontal con aire generoso */
+    .catalogoCard {
+        flex-direction: row;              /* Cambia a fila horizontal         */
+        align-items: center;              /* Centra hijos verticalmente       */
+        padding: calc(var(--unidad-espaciado) * 3); /* 24px internos         */
+        gap: calc(var(--unidad-espaciado) * 4);     /* 32px — aire entre zonas */
+    }
+
+    /* ===== CLAVE DE LA SOLUCIÓN =====
+       flex: 0 0 160px significa:
+         - flex-grow:   0 → NO crece si sobra espacio
+         - flex-shrink: 0 → NO encoge si falta espacio
+         - flex-basis:  160px → ancho inicial fijo
+       Esto hace que Flexbox trate el ancho como SAGRADO e
+       INTOCABLE, sin importar cuánto texto haya al lado.     */
+    .cardImagen {
+        flex: 0 0 160px;
+    }
+
+    /* Contenido central: absorbe todo el espacio sobrante.
+       El padding lateral más generoso crea "aire" visual.     */
+    .cardContenido {
+        flex: 1 1 0%;
+        padding: 0 calc(var(--unidad-espaciado) * 2); /* 16px lateral */
+    }
+
+    /* Botones: anclados a 160px, centrados verticalmente */
+    .accionesCatalogo {
+        flex: 0 0 160px;                 /* Ancho fijo, no negociable        */
+        width: auto;                     /* Sobreescribe el 100% de móvil    */
+        gap: calc(var(--unidad-espaciado) * 1.5); /* 12px entre botones      */
+        align-self: center;              /* Centrado vertical en la tarjeta  */
+    }
+
+    /* Botones desktop: más compactos y limpios */
+    .accionesCatalogo .btn-base {
+        font-size: 0.75rem;
+        padding: 5px 10px;
+        max-width: 160px;
+    }
+
+    /* Columna de etiqueta un poco más ancha en desktop */
+    .infoItem {
+        grid-template-columns: 80px 1fr;
     }
 }

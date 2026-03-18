@@ -51,7 +51,7 @@
                         @foreach ($mensajes as $mail)
                         <div class="dataListadoMail">
                             <span class="dataNombre">{{ $mail->nombre }}</span>
-                            <span class="dataEmail">{{ $mail->email }}</span>
+                            <span class="dataEmail">{{ $mail->email }}</span>3
                             <span class="dataAsunto">{{ $mail->asunto }}</span>
                             <span class="dataMensaje">{{ $mail->mensaje }}</span>
                             <!--Poner solo el dia en la fecha -->
