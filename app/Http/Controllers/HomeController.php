@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\Evento;
 use App\Models\Libro;
 use App\Models\Noticias;
+use App\Models\SlideBienvenida;
 
 class HomeController extends Controller
 {
@@ -14,11 +16,13 @@ class HomeController extends Controller
     public function index()
     {
         //Obtener eventos ordenados por fecha
+        $slideBienvenidas = SlideBienvenida::orderBy('created_at', 'desc')->get();
         $eventos = Evento::with('usuario:id,name')->orderBy('fecha_hora')->paginate(6);
         $libros = Libro::all();
         $noticias = Noticias::orderBy('created_at', 'desc')->paginate(4);
 
         return view('bibliotecaDAW.index', [
+            'slideBienvenidas' => $slideBienvenidas,
             'eventos' => $eventos,
             'libros' => $libros,
             'noticias' => $noticias,]);

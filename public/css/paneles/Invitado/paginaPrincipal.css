@@ -7,12 +7,65 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 80vh;
+    min-height: 40vh;
     text-align: center;
     background-color: var(--color-blanco);
+    margin: 0 auto;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
-.bienvenida-texto {
+.bienvenida .carousel {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr) 56px;
+    grid-template-areas:
+    /*Esto da columnas independientes a los botones para avanzar en los slides del carrusel*/
+        "prev contenido next"
+        "prev indicadores next";
+    align-items: center;
+    column-gap: 0;
+    margin: 0 auto;
+}
+
+.bienvenida .carousel-inner {
+    grid-area: contenido;
+    width: 100%;
+}
+
+.bienvenida .carousel-item {
+    padding: calc(var(--unidad-espaciado) * 2) 0;
+}
+
+
+.bienvenidaSlideContenido {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: calc(var(--unidad-espaciado) * 3);
+    justify-content: center;
+}
+
+.bienvenidaSlideContenido > .bienvenidaTitulo,
+.bienvenidaSlideContenido > .bienvenidaParrafo,
+.bienvenidaSlideContenido > .btn-base {
+    grid-column: 1;
+    text-align: left;
+}
+
+.bienvenidaSlideContenido > .bienvenida-imagen {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    width: 100%;
+}
+
+.bienvenidaSlideContenido > .btn-base {
+    width: 100%;
+    justify-content: center;
+}
+
+.bienvenida-slides {
     font-size: 1.05rem;
     color: var(--color-primario);
     margin-bottom: 20px;
@@ -21,7 +74,7 @@
     hyphens: auto;
 }
 
-.bienvenida-texto h1 {
+.bienvenida-slides h1 {
     display: flex;
     justify-content: center;
     font-size: 2rem;
@@ -31,17 +84,110 @@
     text-shadow: var(--sombra-media);
 }
 
-.bienvenida-texto p {
+.bienvenida-slides p {
     font-size: .95rem;
     color: var(--color-texto-principal);
 }
 
 .bienvenida-imagen img {
     width: 100%;
-    max-width: 800px;
+    max-width: 680px;
     height: auto;
-    margin: 10px;
+    margin: 0 0 0 auto;
     box-shadow: var(--sombra-media);
+}
+
+.bienvenida .carousel-indicators [data-bs-target] {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin: 0 6px;
+    opacity: 1;
+    border: 0;
+    background-color: var(--color-secundario);
+}
+
+.bienvenida .carousel-indicators .active {
+    background-color: var(--color-primario);
+}
+
+.bienvenida .carousel-indicators {
+    grid-area: indicadores;
+    position: static;
+    margin: calc(var(--unidad-espaciado) * 1.5) 0 0 0;
+}
+
+.bienvenida .carousel-control-prev,
+.bienvenida .carousel-control-next {
+    position: static;
+    left: auto;
+    right: auto;
+    transform: none;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+}
+
+.bienvenida .carousel-control-prev {
+    grid-area: prev;
+    justify-content: center;
+}
+
+.bienvenida .carousel-control-next {
+    grid-area: next;
+    justify-content: center;
+}
+
+.bienvenida .carousel-control-prev-icon,
+.bienvenida .carousel-control-next-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: var(--color-primario);
+    box-shadow: var(--sombra-suave);
+    background-size: 55% 55%;
+}
+
+@media (max-width: 991.98px) {
+    .bienvenida {
+        padding: var(--relleno-movil);
+    }
+
+    .bienvenida .carousel {
+        grid-template-columns: 44px minmax(0, 1fr) 44px;
+        column-gap: 0;
+    }
+
+    .bienvenida .carousel-item {
+        min-height: auto;
+        padding: var(--relleno-movil);
+    }
+
+    .bienvenidaSlideContenido {
+        grid-template-columns: 1fr;
+        gap: calc(var(--unidad-espaciado) * 2);
+    }
+
+    .bienvenidaSlideContenido > .bienvenida-imagen {
+        grid-column: 1;
+        grid-row: auto;
+    }
+
+    .bienvenidaSlideContenido > .bienvenidaTitulo,
+    .bienvenidaSlideContenido > .bienvenidaParrafo,
+    .bienvenidaSlideContenido > .btn-base {
+        text-align: center;
+    }
+
+    .bienvenidaSlideContenido > .btn-base {
+        min-height: var(--altura-boton-movil);
+    }
+
+    .bienvenida-imagen img {
+        margin: 0 auto;
+    }
 }
 
 /*Fin de bienvenida*/
@@ -279,15 +425,8 @@
 
 
 @media (min-width: 1200px) {
-    .bienvenida {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-    }
-
     .bienvenida-imagen img {
-        width: 750px;
-        max-width: 800px;
-        height: auto;
+        max-width: 760px;
     }
 }
 
