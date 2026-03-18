@@ -69,7 +69,7 @@
             </div>
 
         </section>
-        <!--Prueba carrusel -->
+        <!-- Fin de la seccion de bienvenida -->
         <section>
             <div class="contenedor novedadCatalogo">
                 <div class="textoNovedadCat">
