@@ -107,9 +107,8 @@
                 </div>
             </div>
 
-
         </section>
-        <hr>
+
         <section class="contenedor agenda">
             <div class="agendaTexto">
                 <h2>Agenda de Eventos</h2>
@@ -146,7 +145,6 @@
                 {{ $eventos->links('vendor.pagination.bootstrap-5') }}
             </div>
         </section>
-        <hr>
         <section class="contenedor noticias">
             <div class="noticiaTexto">
                 <h1>Noticias</h1>
@@ -157,8 +155,8 @@
                     <div class="noticiasCard">
                         <div class="noticiasImg">
                             <picture>
-                                <source media="(min-width: 1200px)" srcset="{{ asset('img/img-landingPage.png') }}">
-                                <source media="(min-width: 768px)" srcset="{{ asset('img/img-landingPage.png') }}">
+                                <source media="(min-width: 1200px)" srcset="{{ asset($noticia->imagen_url) }}">
+                                <source media="(min-width: 768px)" srcset="{{ asset($noticia->imagen_url) }}">
                                 <img src="{{ $noticia->imagen_url }}" alt="Imagen de {{ $noticia->titulo }}">
                             </picture>
                         </div>
@@ -184,6 +182,5 @@
                 {{ $noticias->links('vendor.pagination.bootstrap-5') }}
             </div>
         </section>
-        <hr>
     </main>
 @endsection

@@ -233,7 +233,7 @@
 }
 
 .novedadCatalogoCard{
-    width: 250px;
+    width:min-content;
     height: 350px;
     display: flex;
     flex-direction: column;
@@ -365,7 +365,6 @@
 /*Noticias*/
 .noticias {
     background-color: var(--color-blanco);
-    margin-top: 40px;
 }
 
 .noticiasContenedor {

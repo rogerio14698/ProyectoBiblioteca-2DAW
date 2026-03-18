@@ -21,8 +21,8 @@ return new class extends Migration
             $table->boolean('destacado')->default(false);
             $table->string('categoria')->nullable();
             $table->string('enlace_externo')->nullable();
-            $table->unsignedBigInteger('usuario_id')->nullable();
-            $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('set null');
+            $table->unsignedBigInteger('admin_id')->nullable();
+            $table->foreign('admin_id')->references('id')->on('admin')->onDelete('set null');
             $table->timestamps();
         });
     }
