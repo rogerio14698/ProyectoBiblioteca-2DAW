@@ -183,12 +183,11 @@
 }
 
 /* Cada fila de info es un mini-grid de 2 columnas:
-   [Etiqueta 70px] | [Valor fluido]                                        */
+   [Etiqueta 100px] | [Valor fluido]                                       */
 .infoItem {
     display: grid;
-    grid-template-columns: 900px 1fr;
-    gap: 20px; /* 20px entre etiqueta y valor */
-    gap: calc(var(--unidad-espaciado) / 4); /* 2px */
+    grid-template-columns: 100px 1fr;
+    gap: calc(var(--unidad-espaciado) / 2); /* 4px */
     align-items: baseline;
 }
 
