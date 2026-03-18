@@ -51,8 +51,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
-    <!-- Inicializar Swiper -->
-    <script src="{{ asset('js/iniciarSwiper.js') }}"></script>
     @stack('scripts')
 </body>
 

@@ -225,7 +225,7 @@
 }
 .novedadCatalogo .swiper-wrapper{
     display: flex;
-    gap: 80px;
+        gap: 0;
     align-items: stretch;
 }
 

@@ -15,28 +15,36 @@ document.addEventListener('DOMContentLoaded', () => {
                 direction: 'horizontal',
                 loop: totalSlides > 5,
                 watchOverflow: true,
-                slidesPerView: 2,
-                spaceBetween: 8,
+                slidesPerView: 1,
+                spaceBetween: 16,
                 navigation: {
                     nextEl: '.swiper-button-next-custom',
                     prevEl: '.swiper-button-prev-custom',
                 },
                 breakpoints: {
+                    360: {
+                        slidesPerView: 1,
+                        spaceBetween: 16,
+                    },
+                    480: {
+                        slidesPerView: 1,
+                        spaceBetween: 20,
+                    },
                     768: {
                         slidesPerView: 2,
-                        spaceBetween: 10,
+                        spaceBetween: 24,
                     },
                     800: {
                         slidesPerView: 3,
-                        spaceBetween: 10,
+                        spaceBetween: 24,
                     },
                     1000: {
-                        slidesPerView: 5,
-                        spaceBetween: 8,
+                        slidesPerView: 4,
+                        spaceBetween: 20,
                     },
                     1200: {
-                        slidesPerView: 9,
-                        spaceBetween: 8,
+                        slidesPerView: 5,
+                        spaceBetween: 20,
                     },
                 }
             });
