@@ -506,10 +506,6 @@
         font-size: 0.9rem;
     }
 
-    .novedadCatalogo .swiper-wrapper {
-        gap: 16px;
-    }
-
     .novedadCatalogoCard {
         min-width: min(160px, calc(100vw - 88px));
         max-width: min(160px, calc(100vw - 88px));
