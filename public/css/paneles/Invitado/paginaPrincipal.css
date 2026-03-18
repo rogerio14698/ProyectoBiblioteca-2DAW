@@ -211,11 +211,20 @@
     line-height: 1.05;
 }
 .sliderContenedor{
-    display: flex;
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr) 48px;
     align-items: center;
     justify-content: center;
     height: fit-content;
     overflow: visible; /* Para que los botones no queden cortados */
+    gap: calc(var(--unidad-espaciado) * 2);
+}
+.sliderContenedor .btn-slider {
+    position: static;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 50%;
 }
 .swiper-wrapper{
     align-items: stretch;
@@ -224,12 +233,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    height: auto;
 }
 .swiper {
     width: 100%;
     height: auto;
     overflow: hidden; /* Importante para que Swiper oculte slides fuera de vista */
     padding: 10px 0; /* Espacio para que el scale del hover no se corte */
+    min-width: 0;
 }
 
 .novedadCatalogoCard{
@@ -237,8 +248,11 @@
     imagen o si no se rompe el codigo
     de la clase .novedadImagen
     */
-    width: 200px;
-    height: auto;
+    width: 100%;
+    max-width: 200px;
+    min-width: 200px;
+    height: 100%;
+    min-height: 360px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -274,6 +288,7 @@
     flex-direction: column;
     align-items: center;
     flex-grow: 1; /*Esto hace que el div ocupe el resto del espacio disponible*/
+    width: 100%;
 
 }
 .novedadInfo h3{
@@ -445,6 +460,11 @@
     .bienvenida {
         height: auto;
     }
+
+    .sliderContenedor {
+        grid-template-columns: 48px minmax(0, 1fr) 48px;
+    }
+
     .agendaContenedor {
         grid-template-columns: repeat(3, 1fr);
         /* Dos columnas iguales */
@@ -454,5 +474,22 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         /* Dos columnas iguales */
+    }
+}
+
+@media (max-width: 767.98px) {
+    .sliderContenedor {
+        grid-template-columns: 40px minmax(0, 1fr) 40px;
+        gap: var(--unidad-espaciado);
+    }
+
+    .novedadCatalogoCard {
+        min-width: 180px;
+        max-width: 180px;
+    }
+
+    .novedadImagen {
+        width: 180px;
+        height: 270px;
     }
 }

@@ -1,100 +1,168 @@
-/* Contenedor del Card */
-.catalogoCard {
+.catalogoContenedor,
+.catalogoContenedor * {
+    box-sizing: border-box;
+}
+
+.catalogoBody {
     display: flex;
-    gap: 30px;
-    padding: 25px;
-    border: 1px solid #e0e0e0;
-    border-radius: 12px;
-    background: #fff;
-    margin-bottom: 20px;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 2);
+}
+
+.catalogoCard {
+    width: 100%;
+    min-width: 0;
+    display: flex;
+    gap: calc(var(--unidad-espaciado) * 3);
+    padding: calc(var(--unidad-espaciado) * 3);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-grande);
+    background-color: var(--color-blanco);
+    margin: 0;
     align-items: flex-start;
+    box-shadow: var(--sombra-suave);
 }
 
-/* Imagen con tamaño consistente */
+.cardImagen {
+    flex: 0 0 160px;
+    min-width: 160px;
+    margin: 0;
+}
+
 .cardImagen img {
+    display: block;
     width: 160px;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    height: 240px;
+    max-width: 100%;
+    border-radius: var(--radio-medio);
+    box-shadow: var(--sombra-media);
+    object-fit: cover;
+    object-position: center;
 }
 
-/* Sección de texto */
 .cardContenido {
-    flex: 2; /* Toma más espacio que la imagen y botones */
+    flex: 1 1 auto;
+    min-width: 0;
 }
 
 .libroTitulo {
     font-size: 1.5rem;
-    color: #007185;
-    margin: 0 0 15px 0;
+    color: var(--color-primario);
+    margin: 0 0 calc(var(--unidad-espaciado) * 2) 0;
     font-weight: 700;
 }
 
-/* EL TRUCO DE ALINEACIÓN HORIZONTAL */
 .infoGrid {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: var(--unidad-espaciado);
+    margin: 0;
+    padding: 0;
 }
 
 .infoItem {
     display: grid;
-    grid-template-columns: 120px 1fr; /* El título siempre medirá 120px */
+    grid-template-columns: 120px minmax(0, 1fr);
     align-items: baseline;
+    gap: var(--unidad-espaciado);
     font-size: 0.95rem;
+    margin: 0;
 }
 
 .infoLabel {
     font-weight: 600;
-    color: #555;
+    color: var(--color-texto-mutado);
     text-transform: uppercase;
-    font-size: 0.75rem; /* Estilo etiqueta */
+    font-size: 0.75rem;
     letter-spacing: 0.5px;
 }
 
 .infoValue {
-    color: #333;
+    color: var(--color-texto-principal);
+    overflow-wrap: anywhere;
 }
 
-/* Detalles extras */
 .stock-disponible {
-    color: #2e7d32;
+    color: var(--color-exito);
     font-weight: 600;
 }
 
-/* Columna de Botones */
 .accionesCatalogo {
-    flex: 1;
+    flex: 0 0 180px;
+    min-width: 180px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    width: 80px;
+    gap: calc(var(--unidad-espaciado) * 1.5);
+    margin: 0;
 }
 
 .accionesCatalogo a {
     display: block;
+    width: 100%;
     text-align: center;
     padding: 10px;
-    border-radius: 8px;
+    border-radius: var(--radio-medio);
     text-decoration: none;
     font-weight: 600;
     font-size: 0.9rem;
-    transition: all 0.2s ease;
+    transition: all var(--transicion-rapida);
 }
 
-.btn-ver { color: #007185; border: 1px solid #d5d9d9; }
-.btn-ver:hover { background: #f7fafa; }
+.btn-ver {
+    color: var(--color-primario);
+    border: 1px solid var(--color-borde);
+}
 
-.btn-carrito { background: #ffd814; color: #0f1111; border: 1px solid #fcd200; }
-.btn-carrito:hover { background: #f7ca00; }
+.btn-ver:hover {
+    background-color: var(--color-fondo-global);
+}
 
-.btn-alquilar { background: #ffa41c; color: #fff; }
-.btn-alquilar:hover { background: #ff8f00; }
+.btn-carrito {
+    background-color: var(--color-alerta);
+    color: var(--color-texto-principal);
+    border: 1px solid var(--color-alerta);
+}
 
-/* Responsive */
+.btn-carrito:hover {
+    filter: brightness(0.96);
+}
+
+.btn-alquilar {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+}
+
+.btn-alquilar:hover {
+    background-color: var(--color-primario-oscuro);
+}
+
 @media (max-width: 900px) {
-    .catalogoCard { flex-direction: column; align-items: stretch; }
-    .cardImagen { text-align: center; }
-    .cardImagen img { width: 140px; }
-    .accionesCatalogo { border-top: 1px solid #eee; padding-top: 15px; }
+    .catalogoCard {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cardImagen {
+        flex-basis: auto;
+        min-width: 0;
+        text-align: center;
+    }
+
+    .cardImagen img {
+        width: min(220px, 100%);
+        height: 300px;
+        margin: 0 auto;
+    }
+
+    .infoItem {
+        grid-template-columns: 1fr;
+        gap: 4px;
+    }
+
+    .accionesCatalogo {
+        flex-basis: auto;
+        min-width: 0;
+        border-top: 1px solid var(--color-borde);
+        padding-top: calc(var(--unidad-espaciado) * 2);
+    }
 }
