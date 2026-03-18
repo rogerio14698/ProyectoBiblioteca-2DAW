@@ -270,9 +270,10 @@
         padding: 0 calc(var(--unidad-espaciado) * 2); /* 16px lateral */
     }
 
-    /* Botones: anclados a 160px, centrados verticalmente */
+    /* Botones: anclados a 100px, centrados verticalmente.
+       Reducidos para dejar más espacio al contenido central. */
     .accionesCatalogo {
-        flex: 0 0 160px;                 /* Ancho fijo, no negociable        */
+        flex: 0 0 100px;                 /* Ancho fijo compacto              */
         width: auto;                     /* Sobreescribe el 100% de móvil    */
         gap: calc(var(--unidad-espaciado) * 1.5); /* 12px entre botones      */
         align-self: center;              /* Centrado vertical en la tarjeta  */
@@ -280,14 +281,15 @@
 
     /* Botones desktop: más compactos y limpios */
     .accionesCatalogo .btn-base {
-        font-size: 0.75rem;
-        padding: 5px 10px;
-        max-width: 160px;
+        font-size: 0.7rem;
+        padding: 4px 6px;
+        max-width: 100px;
+        white-space: nowrap;             /* Evita salto de línea en texto    */
     }
 
     /* Columna de etiqueta un poco más ancha en desktop */
     .infoItem {
-        gap: 50px; /* 50px entre etiqueta y valor en desktop */
+        gap: 10px; /* 50px entre etiqueta y valor en desktop */
         grid-template-columns: 80px 1fr;
     }
 }
