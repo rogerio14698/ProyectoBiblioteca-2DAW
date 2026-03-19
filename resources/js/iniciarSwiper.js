@@ -1,3 +1,4 @@
+
 /**
  * Inicialización del carrusel Swiper para la sección "Novedades del Catálogo".
  * Se usa la librería Swiper cargada desde CDN (global window.Swiper).

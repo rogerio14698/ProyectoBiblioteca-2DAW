@@ -13,8 +13,8 @@
     <!-- Bootstrap CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!--Swiper Layout -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+    <!--Swiper Layout (carga local para evitar bloqueos de CDN en iOS) -->
+    <link rel="stylesheet" href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}" />
 
 
     <!-- Dar estilos personalizados-->
@@ -45,8 +45,8 @@
 
     <!-- Bootstrap Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+    <!-- Swiper JS (carga local para evitar bloqueos de CDN en iOS) -->
+    <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}"></script>
     @stack('scripts')
 </body>
 
