@@ -43,25 +43,10 @@
 
     @include('layouts.footer')
 
-    <!-- DEBUG TEMPORAL iOS: muestra info de diagnóstico en pantalla (ELIMINAR después) -->
-    <script>
-        (function() {
-            var d = document.createElement('div');
-            d.id = 'iosDebug';
-            d.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:rgba(0,0,0,0.85);color:#0f0;font:12px monospace;padding:8px;z-index:99999;max-height:40vh;overflow:auto;';
-            d.innerHTML = '<b>DEBUG iOS</b><br>';
-            document.body.appendChild(d);
-            window._dbg = function(msg) { d.innerHTML += msg + '<br>'; };
-            window.onerror = function(m, u, l) { window._dbg('ERR: ' + m + ' L:' + l); };
-            window._dbg('1. Scripts cargando...');
-        })();
-    </script>
     <!-- Bootstrap Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>window._dbg && window._dbg('2. Bootstrap OK');</script>
     <!-- Swiper JS (carga local para evitar bloqueos de CDN en iOS) -->
     <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}"></script>
-    <script>window._dbg && window._dbg('3. Swiper: ' + (typeof Swiper !== 'undefined' ? 'OK' : 'NO CARGADO'));</script>
     @stack('scripts')
 </body>
 

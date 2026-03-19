@@ -207,21 +207,31 @@
     color: var(--color-texto-mutado);
     line-height: 1.05;
 }
+/* Contenedor del slider: simple contenedor con padding lateral para los botones */
 .sliderContenedor{
-    display: grid;
-    grid-template-columns: 48px minmax(0, 1fr) 48px;
-    align-items: center;
-    justify-content: center;
-    height: fit-content;
-    overflow: visible; /* Para que los botones no queden cortados */
-    gap: calc(var(--unidad-espaciado) * 2);
+    position: relative;
+    width: 100%;
+    padding: 0 calc(var(--unidad-espaciado) * 6);
+    box-sizing: border-box;
 }
+/* Botones de navegación posicionados dentro del .swiper (absolute) */
 .sliderContenedor .btn-slider {
-    position: static;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
     width: 40px;
     height: 40px;
     padding: 0;
     border-radius: 50%;
+}
+/* Botón anterior a la izquierda */
+.swiper-button-prev-custom {
+    left: calc(var(--unidad-espaciado) * -5);
+}
+/* Botón siguiente a la derecha */
+.swiper-button-next-custom {
+    right: calc(var(--unidad-espaciado) * -5);
 }
 .novedadCatalogo .swiper-wrapper{
     display: flex;
@@ -241,6 +251,7 @@
     overflow: hidden; /* Importante para que Swiper oculte slides fuera de vista */
     padding: 10px 0; /* Espacio para que el scale del hover no se corte */
     min-width: 0;
+    position: relative; /* Para que los botones absolute se posicionen dentro */
 }
 
 .novedadCatalogoCard{
@@ -499,7 +510,7 @@
     }
 
     .sliderContenedor {
-        grid-template-columns: 48px minmax(0, 1fr) 48px;
+        padding: 0 calc(var(--unidad-espaciado) * 6);
     }
 
     .agendaContenedor {
@@ -516,8 +527,7 @@
 
 @media (max-width: 767.98px) {
     .sliderContenedor {
-        grid-template-columns: 40px minmax(0, 1fr) 40px;
-        gap: var(--unidad-espaciado);
+        padding: 0 calc(var(--unidad-espaciado) * 5);
     }
 
     .novedadCatalogoCard {
@@ -533,14 +543,20 @@
 
 @media (max-width: 480px) {
     .sliderContenedor {
-        grid-template-columns: 32px minmax(0, 1fr) 32px;
-        gap: 4px;
+        padding: 0 calc(var(--unidad-espaciado) * 4);
     }
 
     .sliderContenedor .btn-slider {
         width: 32px;
         height: 32px;
         font-size: 0.9rem;
+    }
+
+    .swiper-button-prev-custom {
+        left: calc(var(--unidad-espaciado) * -4);
+    }
+    .swiper-button-next-custom {
+        right: calc(var(--unidad-espaciado) * -4);
     }
 
     .novedadCatalogoCard {
