@@ -17,9 +17,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
 
 
-    <!-- Css para sobrescribir el boostrap -->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
     <!-- Dar estilos personalizados-->
     <link rel="stylesheet" href="{{ asset('css/main.css') }}?v={{ filemtime(public_path('css/main.css')) }}">
     @stack('head')

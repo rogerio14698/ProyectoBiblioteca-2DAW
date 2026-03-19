@@ -1,4 +1,4 @@
-@import "./variables.css";
+/* Las variables se cargan desde main.css → variables/variables.css */
 
 .nav-usuarioAutenticado {
     display: flex;

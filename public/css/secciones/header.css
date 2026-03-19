@@ -1,5 +1,4 @@
-/* Importación obligatoria (Regla 4) */
-@import "./variables.css";
+/* Las variables se cargan desde main.css → variables/variables.css */
 
 .headerPrincipal {
     background-color: var(--color-blanco);
