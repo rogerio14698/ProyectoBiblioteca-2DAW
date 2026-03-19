@@ -4,39 +4,62 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 80vh;
+    background: var(--bgLogin);
 
 }
-.login h1{
-    font-size: 1.5rem;
-    color: var(--color-primario);
-    margin-bottom: 30px;
-}
-.login p {
-    font-size: 1rem;
-    color: var(--color-texto-principal);
-}
 .loginHeader{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.login h1{
     font-size: 2rem;
-    margin-bottom: 20px;
+    text-decoration: underline;
+    color: var(--color-primario);
+}
+/*Estilos para alertas login*/
+.alertLogin{
+    background-color: var(--color-alerta);
+    color: var(--color-alertaTexto);
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: var(--formulario-ancho-maximo);
+}
+.alert-dangerLogin {
+    background-color: var(--color-error);
+    color: var(--color-blanco);
+}
+/*Fin de estilos de alerta del login*/
+.formLogin{
+    width: 100%;
 }
 .contenidoLogin{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 300px;
+    width: 500px;
     gap: 15px;
     border-radius: 5px;
     border: 1px solid #ccc;
     padding: 20px;
     box-shadow: var(--sombra-fuerte);
+    
+}
+.labelLogin{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
 }
 .contenidoLogin label{
     font-size: 1.2rem;
 }
 .contenidoLogin input{
     padding: 10px;
-    width: 100%;
+    width: 70%;
     border: 1px solid #ccc;
     border-radius: 5px;
 }   

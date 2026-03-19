@@ -27,6 +27,8 @@
    --bgCardCatalogo: #cecece;
    --bgContacto: #ffffff;
    --bgContactoCard: #cecece;
+   --bgLogin: #ffffff;
+
    --bgDisponible: rgb(255, 255, 255);
    --bgNoDisponible: rgb(116, 43, 43);
    --bgFormatoDigital: #7e1dfd;
@@ -50,6 +52,7 @@
    /* Colores de Estado (Feedback) */
    --color-exito: #00e235;
    --color-error: #dc3545;
+   --color-alertaTexto: #721c24;
    --color-alerta: #ffc107;
    --color-info: #17a2b8;
 
