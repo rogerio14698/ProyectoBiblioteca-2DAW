@@ -6,21 +6,25 @@
     <main class="contenedor contacto">
 
         <div class="contactoHeader">
-            <div class="titulo">
-                <h1>Contacto</h1>
-                <p>Información de contacto de la Biblioteca DAW.</p>
-            </div>
+            <h1 class="tituloContacto">Contacto</h1>
+            <p class="descripcionContacto">Información de contacto de la Biblioteca DAW.</p>
         </div>
         <section class="contenedor-columnas">
             <div class="columna-izquierda">
-                <h2>Dirección</h2>
-                <p>Calle Principal, 123, Ciudad, País</p>
+                <div class="contactoDirecion">
+                    <h2>Dirección: </h2>
+                    <p>Calle Principal, 123, Ciudad, País</p>
+                </div>
 
-                <h2>Teléfono</h2>
-                <p>+1 234 567 890</p>
+                <div class="contactoTelefono">
+                    <h2>Teléfono: </h2>
+                    <p>+1 234 567 890</p>
+                </div>
 
-                <h2>Email</h2>
-                <p>contacto@bibliotecadaw.com</p>
+                <div class="contactoEmail">
+                    <h2>Email: </h2>
+                    <p>contacto@bibliotecadaw.com</p>
+                </div>
 
 
                 <iframe
@@ -33,7 +37,7 @@
             <div class="columna-derecha">
                 <form action="{{ route('contacto.store') }}" method="post">
                     @csrf
-                    <h2>Ponte en contacdo con nosotros</h2>
+                    <h2 class="tituloContactoForm">Ponte en contacto con nosotros</h2>
                     <div class="labelContacto">
                         <label for="nombre">Nombre:</label>
                         <input type="text" id="nombre" name="nombre" required>
@@ -48,11 +52,13 @@
                         <label for="asunto">Asunto</label>
                         <select id="asunto" name="asunto" required>
                             <option value="">Selecciona un asunto</option>
+                            <option value="informacion">Solicitud de información</option>
+                            <option value="evento">Crear o información de evento</option>
                             <option value="consulta">Consulta general</option>
                             <option value="sugerencia">Sugerencia</option>
                             <option value="reclamo">Reclamo</option>
                         </select>
-                        
+
                     </div>
                     <div class="labelContacto">
                         <label for="mensaje">Mensaje:</label>

@@ -6,6 +6,7 @@
    /* Azul Principal DAW */
    --color-primario-oscuro: #357ABD;
    /* Azul para enlaces/contraste AA */
+   --color-primario-claro: #004285;
    --color-secundario: #50E3C2;
    /* Turquesa de acento */
    --color-fondo-global: #e9e9e9;
@@ -28,6 +29,7 @@
    --bgNoDisponible: rgb(116, 43, 43);
    --bgFormatoDigital: #7e1dfd;
    --bgFormatoFisico: #fc9712;
+   --bgContactoCard: #f0f0f0;
    --colorBordeSeparacionCards: #8a8a8a;
 
 
