@@ -28,6 +28,8 @@
    --bgContacto: #ffffff;
    --bgContactoCard: #cecece;
    --bgLogin: #ffffff;
+   --bgRegistro: #fff;
+   --bgRegistroCard: #cecece;
 
    --bgDisponible: rgb(255, 255, 255);
    --bgNoDisponible: rgb(116, 43, 43);
@@ -35,7 +37,7 @@
    --bgFormatoFisico: #fc9712;
    --colorBordeSeparacionCards: #8a8a8a;
 
-
+   --colorBorde: #9b9b9b5a;
    /*Colores de botones */
    --bgBtnVerde: #307941;
    --bgBtnVerdeHover: #286736;

@@ -196,7 +196,7 @@
 
 .textoNovedadCat{
     font-size: 1.05rem;
-    color: var(--color-texto-principa);
+    color: var(--color-primario);
     margin: 0 0 5px 0;
 }
 .textoNovedadCat h2{
@@ -317,6 +317,19 @@
     gap: 20px;
     margin-top: 20px;
 }
+.agendaTexto{
+    font-size: 1.05rem;
+    color: var(--color-primario);
+    margin: 0 0 5px 0;
+}
+.agendaTexto h2{
+    text-decoration: underline;
+}
+.agendaTexto p{
+    font-size: 1rem;
+    color: var(--color-texto-mutado);
+    line-height: 1.05;
+}
 
 .eventoCard {
     display: grid;
@@ -398,6 +411,19 @@
     /* Por defecto en móvil: 1 columna */
     grid-template-columns: 1fr;
     gap: 20px;
+}
+.noticiaTexto{
+    font-size: 1.05rem;
+    color: var(--color-primario);
+    margin: 0 0 5px 0;
+}
+.noticiaTexto h2{
+    text-decoration: underline;
+}
+.noticiaTexto p{
+    font-size: 1rem;
+    color: var(--color-texto-mutado);
+    line-height: 1.05;
 }
 
 .noticiasCard {

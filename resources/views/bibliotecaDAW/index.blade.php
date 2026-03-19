@@ -147,7 +147,7 @@
         </section>
         <section class="contenedor noticias">
             <div class="noticiaTexto">
-                <h1>Noticias</h1>
+                <h2>Noticias</h2>
                 <p>Noticias relacionadas con la biblioteca y el mundo académico</p>
             </div>
             <div class="noticiasContenedor">

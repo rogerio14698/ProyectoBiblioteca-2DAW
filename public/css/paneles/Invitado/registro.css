@@ -2,10 +2,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
+    background-color: var(--bgRegistro);
 }
 .registroHeader h1{
+    color: var(--color-primario);
     display: flex;
     justify-content: center;
     font-size: 1.5rem;
@@ -15,6 +15,7 @@
 }
 .registroHeader p{
     font-size: 1rem;
+    margin-bottom: 20px;
 }
 
 
@@ -23,9 +24,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: 10px;
+    padding: 15px;
     width: 100%;
     max-width: 400px;
+    border: 1px solid var(--colorBorde);
+    box-shadow: var(--sombra-media);
+    background: var(--bgRegistroCard);
 }
 
 .formGroup{
@@ -35,13 +40,13 @@
     justify-content:flex-end;
     width: 100%;
     padding: 5px;
-    
 }
 .formGroup label{
-    flex: 1;
+    flex: 1 1 max-content;
     justify-content: flex-start;
     margin-right: 10px;
 }
 .formGroup label, .formGroup input{
     font-size: 1rem;
+
 }
