@@ -37,7 +37,7 @@
     justify-content: space-around;
     background-color: #e7e7e7;
     width: 300px;
-    height: 280px;
+    height: 400px;
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 15px;
@@ -71,8 +71,29 @@
     font-size: .9rem;
     align-self: flex-start;
 }
+.eventoImagen {
+    width: 200px;
+    height: 150px;
+    overflow: visible;
+    position: relative;
+    transition: all 0.3s ease;
+}
+.eventoImagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+.eventoImagen:hover  {
+    z-index: 10;
+}
+.eventoImagen:hover img {
+    transform: scale(1.5);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
 
-.eventosFecha {
+.eventosFecha, .eventosPlazas {
     display: flex;
     width: 100%;
     justify-content: space-between;
@@ -80,7 +101,7 @@
 }
 
 .fechaEvento,
-.horaEvento {
+.horaEvento, .aforoEvento, .plazasLibres {
     display: flex;
     gap: 10px;
     align-items: center;
@@ -90,6 +111,7 @@
 }
 
 .eventosUbicacion {
+    border-top: 1px solid var(--colorBordeSeparacionCards);
     display: flex;
     width: 100%;
     justify-content: space-between;

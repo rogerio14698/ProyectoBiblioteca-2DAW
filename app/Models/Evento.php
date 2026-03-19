@@ -21,6 +21,9 @@ class Evento extends Model
         'descripcion',
         'fecha_hora',
         'ubicacion',
+        'aforo',
+        'asistentes',
+        'imagen_url',
         'usuario_id',
         'prioridad',
     ];
