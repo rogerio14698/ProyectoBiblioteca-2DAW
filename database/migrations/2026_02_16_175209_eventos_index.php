@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('descripcion');
             $table->dateTime('fecha_hora');
             $table->string('ubicacion')->nullable();
+            $table->integer('aforo')->nullable();
             $table->foreignId('usuario_id')->constrained('usuarios')->onDelete('cascade');
             $table->integer('prioridad')->default(0); //cuanto mayor sea el numero mayor prioridad
             $table->timestamps();

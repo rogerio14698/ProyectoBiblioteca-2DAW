@@ -186,7 +186,7 @@
    [Etiqueta 100px] | [Valor fluido]                                       */
 .infoItem {
     display: grid;
-    grid-template-columns: 100px 1fr;
+    grid-template-columns: 100px 1fr ;
     gap: calc(var(--unidad-espaciado) / 2); /* 4px */
     align-items: baseline;
 }
@@ -219,7 +219,22 @@
     max-width: fit-content;
     background-color: var(--bgNoDisponible);
 }
-
+.formato-digital {
+    background-color: var(--bgFormatoDigital);
+    color: var(--color-blanco);
+    border-radius: var(--radio-medio);
+    padding: 2px 6px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+.formato-fisico {
+    background-color: var(--bgFormatoFisico);
+    color: var(--color-blanco);
+    border-radius: var(--radio-medio);
+    padding: 2px 6px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
 
 /* =========================================
    DESKTOP (≥768px) — Tarjeta en modo FILA
@@ -290,6 +305,7 @@
     /* Columna de etiqueta un poco más ancha en desktop */
     .infoItem {
         gap: 10px; /* 50px entre etiqueta y valor en desktop */
-        grid-template-columns: 80px 1fr;
+        grid-template-columns: 80px 1fr 1fr;
+        max-width: fit-content;
     }
 }

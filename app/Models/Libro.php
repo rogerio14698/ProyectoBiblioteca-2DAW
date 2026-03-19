@@ -19,5 +19,7 @@ class Libro extends Model
         'formato',
         'opcion_compra',
         'cantidad_ejemplares',
+        'isbn',
+        'portada_img',
     ];
 }

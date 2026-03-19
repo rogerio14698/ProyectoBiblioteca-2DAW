@@ -15,12 +15,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Ejecutar los seeders personalizados
+        // Ejecutar los seeders personalizados en orden lógico.
+        // Primero usuarios y admins (dependencias), luego el resto de tablas.
         $this->call([
             UsuarioSeeder::class,
             AdminSeeder::class,
             EventosSeeder::class,
-
+            LibroSeeder::class,
+            NoticiasSeeder::class,
+            ContactoSeeder::class,
+            SlideBienvenidaSeeder::class,
         ]);
     }
 }

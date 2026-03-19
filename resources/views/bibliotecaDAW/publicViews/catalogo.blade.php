@@ -43,7 +43,7 @@
                             </div>
                             <div class="infoItem">
                                 <span class="infoLabel">ISBN:</span>
-                                <span class="infoValue">POR AÑADIR AÚN</span>
+                                <span class="infoValue">{{ $libro->isbn }}</span>
                             </div>
                             <div class="infoItem">
                                 <span class="infoLabel">Año:</span>
@@ -51,7 +51,14 @@
                             </div>
                             <div class="infoItem">
                                 <span class="infoLabel">Formatos:</span>
-                                <span class="infoValue">{{ $libro->formato }}</span>
+                                @if ($libro->formato === 'digital')
+                                    <span class="infoValue formato-digital">{{ $libro->formato }}</span>
+                                @elseif ($libro->formato === 'fisico')
+                                    <span class="infoValue formato-fisico">{{ $libro->formato }}</span>
+                                @elseif ($libro->formato === 'ambos')
+                                    <span class="infoValue formato-digital">{{ 'digital' }}</span>
+                                    <span class="infoValue formato-fisico">{{ 'físico' }}</span>
+                                @endif
                             </div>
                             <div class="infoItem">
                                 <span class="infoLabel">Disponibilidad:</span>

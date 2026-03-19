@@ -19,8 +19,8 @@ return new class extends Migration
             $table->integer('anio');
             $table->string('editorial');
             $table->enum('disponibilidad', ['disponible', 'prestado']);
-            $table->enum('formato', ['fisico', 'digital']);
-            $table->enum('opcion_compra', ['compra', 'prestamo']);
+            $table->enum('formato', ['fisico', 'digital', 'ambos'])->default('ambos');
+            $table->enum('opcion_compra', ['compra', 'prestamo']);;
             $table->integer('cantidad_ejemplares');
             $table->string('isbn')->unique();
             $table->string('portada_img')->nullable();
