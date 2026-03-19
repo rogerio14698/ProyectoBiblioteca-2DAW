@@ -25,11 +25,12 @@
    --color-carrito-anadir: #ff9900;
    --color-alquilar: #4c00ff;
    --bgCardCatalogo: #cecece;
-   --bgDisponible: rgb(42, 103, 42);
+   --bgContacto: #ffffff;
+   --bgContactoCard: #cecece;
+   --bgDisponible: rgb(255, 255, 255);
    --bgNoDisponible: rgb(116, 43, 43);
    --bgFormatoDigital: #7e1dfd;
    --bgFormatoFisico: #fc9712;
-   --bgContactoCard: #f0f0f0;
    --colorBordeSeparacionCards: #8a8a8a;
 
 

@@ -1,3 +1,8 @@
+
+
+.contacto{
+    background-color: var(--bgContacto);
+}
 .contactoHeader {
     display: flex;
     flex-direction: column;
@@ -26,7 +31,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: var(--bgContactoCard);
+    background-color: var(--bgCardCatalogo);
     border-radius: 8px;
     gap: 20px;
 }
