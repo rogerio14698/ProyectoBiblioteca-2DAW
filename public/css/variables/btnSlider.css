@@ -5,7 +5,7 @@
     margin: 0 auto;
 }
 
-/* Tu clase original con ajustes */
+/* Clase original para la sección de novedades */
 .contenedorNovedadCatalogo {
     display: flex;
     flex-wrap: nowrap; /* IMPORTANTE: No permite que bajen */
@@ -14,24 +14,34 @@
     padding: 20px 0;
 }
 
-/* Botones de navegación */
+/* Contenedor del slider: position relative para que los botones absolute se posicionen dentro */
 .sliderContenedor {
     position: relative;
     display: flex;
     align-items: center;
 }
 
+/* Estilos base unificados para los botones del slider (fuente única de verdad) */
 .btn-slider {
     background: var(--color-primario);
     color: white;
     border: none;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
     cursor: pointer;
     z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: opacity 0.3s;
+    /* Tamaño mínimo táctil para accesibilidad en móvil (44x44px) */
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    flex-shrink: 0;
 }
 
-
-.slider-btn:hover { opacity: 0.8; }
+.btn-slider:hover { opacity: 0.8; }
+.btn-slider:active { opacity: 0.6; }

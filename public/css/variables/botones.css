@@ -71,19 +71,7 @@
     padding: 5px;
 }
 
-/*botones del slider*/
-.btn-slider {
-    background: rgba(0,0,0,0.5);
-    color: white;
-    border: none;
-    z-index: 10;
-    cursor: pointer;
-    padding: 20px 10px;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+/* Los estilos de .btn-slider están centralizados en btnSlider.css */
 
 .btn-logout {
     background-color: var(--color-primario);

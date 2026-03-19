@@ -43,12 +43,6 @@
 
     @include('layouts.footer')
 
-    <!-- Debug temporal: muestra errores JS como alertas en móvil (ELIMINAR después de depurar) -->
-    <script>
-        window.onerror = function(msg, url, line) {
-            alert('Error JS: ' + msg + '\nArchivo: ' + url + '\nLínea: ' + line);
-        };
-    </script>
     <!-- Bootstrap Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Swiper JS -->
