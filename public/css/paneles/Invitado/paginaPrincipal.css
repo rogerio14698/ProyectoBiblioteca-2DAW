@@ -227,22 +227,13 @@
 }
 
 /* Botones de navegación: SIN position absolute */
-/* Cada botón ocupa su propia celda del grid, sin solaparse con nada */
+/* Estilos de posicionamiento del botón dentro del grid (3 columnas) */
+/* Los estilos visuales (color, border, tamaño) están en btnSlider.css */
 .sliderContenedor .btn-slider {
-    width: 40px;
-    height: 40px;
     padding: 0;
-    border-radius: 50%;
-    cursor: pointer;
-    /* Centrar el botón en su celda */
+    /* Centrar el botón en su celda del grid */
     justify-self: center;
     align-self: center;
-    /* Zona táctil mínima de 44px para accesibilidad iOS */
-    min-width: 44px;
-    min-height: 44px;
-    /* Asegurar que el botón siempre sea clickeable */
-    z-index: 2;
-    position: relative;
 }
 .novedadCatalogo .swiper-wrapper{
     display: flex;
@@ -261,8 +252,7 @@
     height: auto;
     overflow: hidden; /* Importante para que Swiper oculte slides fuera de vista */
     padding: 10px 0; /* Espacio para que el scale del hover no se corte */
-    min-width: 0;
-    position: relative; /* Para que los botones absolute se posicionen dentro */
+    min-width: 0; /* Evita que el grid se desborde por el contenido flex de Swiper */
 }
 
 .novedadCatalogoCard{

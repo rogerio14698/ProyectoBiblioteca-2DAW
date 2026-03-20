@@ -1,26 +1,28 @@
-/* Contenedor que limita la vista */
+/* Contenedor que limita la vista (LEGACY - ya NO se usa, se mantiene por compatibilidad) */
 .sliderWindow {
-    overflow: hidden; /* Oculta los libros que sobran */
+    overflow: hidden;
     width: 100%;
     margin: 0 auto;
 }
 
-/* Clase original para la sección de novedades */
+/* Clase original para la sección de novedades (LEGACY - ya NO se usa) */
 .contenedorNovedadCatalogo {
     display: flex;
-    flex-wrap: nowrap; /* IMPORTANTE: No permite que bajen */
+    flex-wrap: nowrap;
     gap: 20px;
-    transition: transform 0.5s ease-in-out; /* Movimiento suave */
+    transition: transform 0.5s ease-in-out;
     padding: 20px 0;
 }
 
-/* Contenedor del slider: position relative para que los botones absolute se posicionen dentro */
-.sliderContenedor {
-    display: flex;
-    align-items: center;
-}
+/*
+ * IMPORTANTE: El layout de .sliderContenedor (grid de 3 columnas)
+ * se define en paginaPrincipal.css.
+ * Aquí NO se debe poner display:flex ni display:grid para .sliderContenedor
+ * porque entra en conflicto con el grid de 3 columnas definido allí.
+ */
 
 /* Estilos base unificados para los botones del slider (fuente única de verdad) */
+/* Estos estilos visuales (color, borde, tamaño) se aplican a todos los .btn-slider */
 .btn-slider {
     background: var(--color-primario);
     color: white;
@@ -31,12 +33,11 @@
     min-width: 44px;
     min-height: 44px;
     cursor: pointer;
-    z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: opacity 0.3s;
-    /* Tamaño mínimo táctil para accesibilidad en móvil (44x44px) */
+    /* Tamaño mínimo táctil para accesibilidad en móvil (44x44px recomendado por Apple) */
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
     flex-shrink: 0;
