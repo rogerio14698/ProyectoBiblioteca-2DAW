@@ -31,10 +31,18 @@
    --bgRegistro: #fff;
    --bgRegistroCard: #cecece;
 
+   --bgPerfilUsuario: #fff;
+
+
+
    --bgDisponible: rgb(16, 88, 0);
    --bgNoDisponible: rgb(116, 43, 43);
    --bgFormatoDigital: #7e1dfd;
    --bgFormatoFisico: #fc9712;
+
+
+
+
    --colorBordeSeparacionCards: #8a8a8a;
 
    --colorBorde: #9b9b9b5a;

@@ -1,86 +1,217 @@
+.perfilUsuario {
+    background-color: var(--bgPerfilUsuario);
+}
 
-
-.contenidoHeader{
+.contenidoHeader {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    background-color: var(--color-fondo-usuario);
+    justify-content: space-evenly;
+    border-bottom: 1px solid var(--colorBorde);
 }
 
-.texto-bienvenidaUsuario{
-    color: var(--color-primario);
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-.texto-bienvenidaUsuario h1{
-    margin: 0;
-}
-.texto-bienvenidaUsuario p{
-    margin: 5px 0 0 0;
-    font-size: 1rem;
-    color: var(--color-secundario);
-}
-
-.info-personalUsuario{
-    background-color: var(--color-fondo-capa);
-    padding: var(--relleno-movil);
-    border-radius: var(--radio-medio);
-    margin-bottom: 20px;
-}
-.info-personalFoto img{
+.info-personalFoto img {
+    border: 2px solid black;
     width: 150px;
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
-    margin-right: 20px;
 }
-.info-personalDatos{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+
+.texto-bienvenidaUsuario {
+    justify-items: center;
+    padding: 10px;
 }
-.configCuentaUsuario{
-    background-color: var(--color-fondo-capa);
-    padding: var(--relleno-movil);
-    border-radius: var(--radio-medio);
-    margin-bottom: 20px;
-    color: aliceblue;
-}
-.configCuentaUsuario li{
+
+.texto-bienvenidaUsuario h1 {
+    font-size: 1.7rem;
     margin-bottom: 10px;
+    text-decoration: underline;
+    color: var(--color-primario-oscuro);
+}
+
+.texto-bienvenidaUsuario p {
+    font-size: 1rem;
     color: var(--color-primario);
 }
 
-/*Fin del contenido Header Perfil*/
-
-/*Contenido Metodos de Pago*/
-
-.contenidoMetodosPago{
-    background-color: var(--color-fondo-capa);
-    padding: var(--relleno-movil);
-    border-radius: var(--radio-medio);
-    margin-bottom: 20px;
-}
-.metodosPago{
-
-}
-.tarjetaCredito{
-
-}
-.paypal{
-
+.info-personalUsuario {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+    gap: 5px;
 }
 
-/*Contenido Historial*/
-.contenidoHistorial{
+.info-personalUsuario h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-decoration: underline;
+    color: var(--color-primario-oscuro);
+}
+
+.info-personalUsuario p {
+    font-size: 1rem;
+}
+
+.configCuentaUsuario {
+    display: none;
+    flex-direction: column;
+    padding: 5px;
+    gap: 5px;
+}
+
+.configCuentaUsuario h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-decoration: underline;
+    color: var(--color-primario-oscuro);
+}
+
+.configCuentaUsuario ul {
+    list-style: none;
+    padding: 0;
+}
+
+.configCuentaUsuario.configVisible {
+    display: flex;
+}
+
+/*Contenido metodos de pago en version movil es despegable*/
+
+.contenidoMetodosPago {
+    display: none;
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+    border-bottom: 1px solid var(--colorBorde);
+}
+
+.contenidoMetodosPago h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-decoration: underline;
+    color: var(--color-primario-oscuro);
+}
+
+.metodosPagoVisible {
+    display: flex;
+}
+
+
+.metodosPago {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/*Estilos de los inputs*/
+.metodosPago input[type="text"],
+.metodosPago input[type="email"] {
+    padding: 8px;
+    border: 1px solid var(--colorBorde);
+    border-radius: var(--radio-pequeno);
+    width: 100%;
+    max-width: 300px;
+}
+
+.labelTarjetaCredito label,
+.labelPaypal label {
+    font-size: 0.9rem;
+    flex: 1;
 
 }
-.historialPrestamos{
+/*Fin de los estilos de los inputs*/
 
+.labelTarjetaCredito,
+.labelPaypal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
 }
-.historialReservas{
 
+.tarjetaCredito h4,
+.paypal h4 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    text-decoration: underline;
+    color: var(--color-primario);
 }
-.historialCompras{
+
+
+
+@media (min-width: 768px) {
+    .contenidoHeader {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        border-bottom: 1px solid var(--colorBorde);
+    }
+
+    .info-personalFoto {
+        padding-top: 10px;
+        padding-bottom: 10px;
+
+    }
+
+    .texto-bienvenidaUsuario {
+        border: 1px solid var(--colorBorde);
+        justify-items: center;
+    }
+
+    .info-personalUsuario {
+        flex-direction: column;
+    }
+
+    .configCuentaUsuario {
+        display: flex;
+    }
+
+    #btnConfigUsuario {
+        display: none;
+    }
+
+    .metodosPago {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: flex-end;
+    }
+    .metodosPago h3{
+        align-self: center;
+        min-width: 250px;
+    }
+
+    /*Metodos de pago*/
+    .contenidoMetodosPago {
+        display: flex;
+        flex-direction: row;
+        align-items: end;
+        gap: 15px;
+        width: 100%;
+    }
+
+    #btnMetodosPago {
+        display: none;
+    }
+
+    .tarjetaCredito,
+    .paypal {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        justify-content: flex-end;
+        max-width: 450px;
+    }
+#contenidosHistorial {
+    display: none;
+}
+
 
 }

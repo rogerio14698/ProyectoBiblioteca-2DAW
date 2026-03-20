@@ -32,6 +32,34 @@
     transform: translateY(-2px);
     transition: all 0.3s ease;
 }
+.btn-azul{
+    width: 100%;
+    background-color: var(--bgBtnAzul);
+    color: var(--color-blanco);
+}
+.btn-azul:hover{
+    cursor: pointer;
+    background-color: var(--bgBtnAzulHover);
+    box-shadow: var(--sombra-media);
+}
+.btn-azul:active{
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+.btn-rojo{
+    width: 100%;
+    background-color: var(--bgBtnRojo);
+    color: var(--color-blanco);
+}
+.btn-rojo:hover{
+    cursor: pointer;
+    background-color: var(--bgBtnRojoHover);
+    box-shadow: var(--sombra-media);
+}
+.btn-rojo:active{
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
 
 .btn-primario:hover {
     background-color: var(--color-primario-oscuro);

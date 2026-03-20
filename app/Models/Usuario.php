@@ -21,10 +21,22 @@ class Usuario extends Authenticatable
         'nSocio'
     ];
 
+    /**
+     * Casts: 'hashed' hashea automáticamente el password con bcrypt
+     * cada vez que se asigna (tanto en create como en update).
+     * Esto reemplaza el Hash::make manual del evento booted().
+     */
+    protected function casts(): array
+    {
+        return [
+            'password' => 'hashed',
+        ];
+    }
+
     protected static function booted()
     {
+        // Genera nSocio automáticamente al crear un nuevo usuario
         static::creating(function ($usuario) {
-            $usuario->password = Hash::make($usuario->password);
             $usuario->nSocio = self::generarNSocio();
         });
     }

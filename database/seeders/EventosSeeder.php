@@ -21,7 +21,7 @@ class EventosSeeder extends Seeder
         if (!DB::table('usuarios')->where('id', 4)->exists()) {
             DB::table('usuarios')->insert([
                 'id' => 4,
-                'name' => 'Usuario ID 4',
+                'name' => 'Roger Developer',
                 'email' => 'usuario4@test.com',
                 'dni' => '40000004A',
                 'movil' => '600000004',
