@@ -509,9 +509,6 @@
         height: auto;
     }
 
-    .sliderContenedor {
-        padding: 0 calc(var(--unidad-espaciado) * 6);
-    }
 
     .agendaContenedor {
         grid-template-columns: repeat(3, 1fr);
@@ -525,53 +522,3 @@
     }
 }
 
-@media (max-width: 767.98px) {
-    .sliderContenedor {
-        padding: 0 calc(var(--unidad-espaciado) * 5);
-    }
-
-    .novedadCatalogoCard {
-        min-width: 180px;
-        max-width: 180px;
-    }
-
-    .novedadImagen {
-        width: 180px;
-        height: 270px;
-    }
-}
-
-@media (max-width: 480px) {
-    .sliderContenedor {
-        padding: 0 calc(var(--unidad-espaciado) * 4);
-    }
-
-    .sliderContenedor .btn-slider {
-        width: 32px;
-        height: 32px;
-        font-size: 0.9rem;
-    }
-
-    .swiper-button-prev-custom {
-        left: calc(var(--unidad-espaciado) * -4);
-    }
-    .swiper-button-next-custom {
-        right: calc(var(--unidad-espaciado) * -4);
-    }
-
-    .novedadCatalogoCard {
-        min-width: min(160px, calc(100vw - 88px));
-        max-width: min(160px, calc(100vw - 88px));
-        min-height: 320px;
-    }
-
-    .novedadImagen {
-        width: min(160px, calc(100vw - 88px));
-        height: 240px;
-    }
-
-    .novedadInfo h3 {
-        font-size: 0.95rem;
-        text-align: center;
-    }
-}

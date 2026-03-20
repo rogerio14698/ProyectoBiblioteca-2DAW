@@ -16,7 +16,6 @@
 
 /* Contenedor del slider: position relative para que los botones absolute se posicionen dentro */
 .sliderContenedor {
-    position: relative;
     display: flex;
     align-items: center;
 }
