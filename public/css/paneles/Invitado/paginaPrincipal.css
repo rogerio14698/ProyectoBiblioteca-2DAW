@@ -210,15 +210,12 @@
 /*
  * CONTENEDOR DEL SLIDER: Layout de 3 columnas con CSS Grid
  * Columna 1 (48px): Botón "Anterior" centrado
- * Columna 2 (1fr):  Carrusel Swiper (ocupa todo el espacio disponible)
+ * Columna 2 (1fr):  Ventana visible del slider
  * Columna 3 (48px): Botón "Siguiente" centrado
- *
- * Se usa Grid en vez de position:absolute para evitar solapamiento
- * que causa problemas táctiles en iOS Safari.
+ * NO usa librerías externas — todo es CSS Grid + translateX en JS
  */
 .sliderContenedor {
     display: grid;
-    /* 3 columnas: botón | carrusel | botón */
     grid-template-columns: 48px 1fr 48px;
     align-items: center;
     width: 100%;
@@ -226,33 +223,43 @@
     gap: calc(var(--unidad-espaciado) * 1);
 }
 
-/* Botones de navegación: SIN position absolute */
-/* Estilos de posicionamiento del botón dentro del grid (3 columnas) */
-/* Los estilos visuales (color, border, tamaño) están en btnSlider.css */
+/* Posicionamiento del botón en su celda del grid */
+/* Los estilos visuales (color, forma, tamaño) están en btnSlider.css */
 .sliderContenedor .btn-slider {
     padding: 0;
-    /* Centrar el botón en su celda del grid */
     justify-self: center;
     align-self: center;
 }
-.novedadCatalogo .swiper-wrapper{
-    display: flex;
-        gap: 0;
-    align-items: stretch;
+
+/*
+ * VENTANA DEL SLIDER: zona visible que recorta el contenido
+ * overflow:hidden oculta los items que están fuera de vista
+ * min-width:0 evita que el grid se desborde por el contenido flex
+ */
+.sliderVentana {
+    overflow: hidden;
+    width: 100%;
+    min-width: 0;
+    padding: 10px 0;
 }
 
-.novedadCatalogo .swiper-slide {
+/*
+ * PISTA DEL SLIDER: fila horizontal de items
+ * Se desplaza con transform:translateX() desde JavaScript
+ * transition da la animación suave al moverse
+ */
+.sliderPista {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.4s ease;
+}
+
+/* Cada item del slider: ancho fijo para que quepan N por fila */
+.sliderItem {
+    flex-shrink: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: auto;
-}
-.swiper {
-    width: 100%;
-    height: auto;
-    overflow: hidden; /* Importante para que Swiper oculte slides fuera de vista */
-    padding: 10px 0; /* Espacio para que el scale del hover no se corte */
-    min-width: 0; /* Evita que el grid se desborde por el contenido flex de Swiper */
+    align-items: flex-start;
 }
 
 .novedadCatalogoCard{

@@ -1,28 +1,10 @@
-/* Contenedor que limita la vista (LEGACY - ya NO se usa, se mantiene por compatibilidad) */
-.sliderWindow {
-    overflow: hidden;
-    width: 100%;
-    margin: 0 auto;
-}
+/* ===================================================
+ * Estilos base para los botones del slider
+ * Fuente única de verdad para .btn-slider
+ * El layout (.sliderContenedor grid) está en paginaPrincipal.css
+ * =================================================== */
 
-/* Clase original para la sección de novedades (LEGACY - ya NO se usa) */
-.contenedorNovedadCatalogo {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 20px;
-    transition: transform 0.5s ease-in-out;
-    padding: 20px 0;
-}
-
-/*
- * IMPORTANTE: El layout de .sliderContenedor (grid de 3 columnas)
- * se define en paginaPrincipal.css.
- * Aquí NO se debe poner display:flex ni display:grid para .sliderContenedor
- * porque entra en conflicto con el grid de 3 columnas definido allí.
- */
-
-/* Estilos base unificados para los botones del slider (fuente única de verdad) */
-/* Estos estilos visuales (color, borde, tamaño) se aplican a todos los .btn-slider */
+/* Estilos visuales del botón: color, forma, tamaño táctil */
 .btn-slider {
     background: var(--color-primario);
     color: white;
@@ -37,7 +19,7 @@
     align-items: center;
     justify-content: center;
     transition: opacity 0.3s;
-    /* Tamaño mínimo táctil para accesibilidad en móvil (44x44px recomendado por Apple) */
+    /* Tamaño mínimo táctil 44x44px (recomendación Apple para accesibilidad) */
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
     flex-shrink: 0;
@@ -45,3 +27,9 @@
 
 .btn-slider:hover { opacity: 0.8; }
 .btn-slider:active { opacity: 0.6; }
+
+/* Botón desactivado: cuando estamos en el primer/último item */
+.btn-slider:disabled {
+    opacity: 0.3;
+    cursor: default;
+}

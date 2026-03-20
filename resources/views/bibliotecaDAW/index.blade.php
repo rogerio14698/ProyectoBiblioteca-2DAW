@@ -72,9 +72,12 @@
 
         </section>
         <!-- Fin de la seccion de bienvenida -->
-        <!-- Sección: Novedades del Catálogo -->
-        <!-- Layout de 3 columnas con CSS Grid: [Botón Prev] [Swiper] [Botón Next] -->
-        <!-- Esto evita position:absolute que causaba problemas táctiles en iOS Safari -->
+
+        <!-- ============================================== -->
+        <!-- SECCIÓN: Novedades del Catálogo                -->
+        <!-- Slider Vanilla JS — sin librerías externas     -->
+        <!-- Grid de 3 columnas: [Prev] [Slider] [Next]     -->
+        <!-- ============================================== -->
         <section>
             <div class="contenedor novedadCatalogo">
                 <!-- Título y descripción de la sección -->
@@ -83,18 +86,18 @@
                     <p>Descubre las últimas incorporaciones a nuestra colección de libros y recursos digitales</p>
                 </div>
 
-                <!-- Contenedor del slider: grid de 3 columnas -->
-                <!-- Columna 1: botón anterior | Columna 2: carrusel | Columna 3: botón siguiente -->
+                <!-- Contenedor grid: columna 1 = btn prev, columna 2 = slider, columna 3 = btn next -->
                 <div class="sliderContenedor">
-                    <!-- Columna 1: Botón para retroceder en el carrusel -->
-                    <button class="btn-slider swiper-button-prev-custom" type="button"
+                    <!-- Columna 1: Botón retroceder -->
+                    <button class="btn-slider sliderBtnPrev" type="button"
                         aria-label="Anterior">&#10094;</button>
 
-                    <!-- Columna 2: Carrusel Swiper con los libros -->
-                    <div class="swiper novedadesSwiper">
-                        <div class="swiper-wrapper">
+                    <!-- Columna 2: Ventana visible del slider (overflow hidden) -->
+                    <div class="sliderVentana">
+                        <!-- Pista que se desplaza con translateX -->
+                        <div class="sliderPista">
                             @foreach ($libros as $libro)
-                                <div class="swiper-slide">
+                                <div class="sliderItem">
                                     <div class="novedadCatalogoCard">
                                         <!-- Imagen del libro -->
                                         <div class="novedadImagen">
@@ -107,7 +110,7 @@
                                                     alt="Portada de {{ $libro->titulo }}">
                                             </picture>
                                         </div>
-                                        <!-- Título y enlace al libro -->
+                                        <!-- Título y enlace -->
                                         <div class="novedadInfo">
                                             <h3>{{ $libro->titulo }}</h3>
                                             <a href="#" class="btn-base btn-verde">Ver Libro</a>
@@ -118,8 +121,8 @@
                         </div>
                     </div>
 
-                    <!-- Columna 3: Botón para avanzar en el carrusel -->
-                    <button class="btn-slider swiper-button-next-custom" type="button"
+                    <!-- Columna 3: Botón avanzar -->
+                    <button class="btn-slider sliderBtnNext" type="button"
                         aria-label="Siguiente">&#10095;</button>
                 </div>
             </div>
