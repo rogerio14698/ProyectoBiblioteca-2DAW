@@ -207,31 +207,42 @@
     color: var(--color-texto-mutado);
     line-height: 1.05;
 }
-/* Contenedor del slider: simple contenedor con padding lateral para los botones */
-.sliderContenedor{
-    position: relative;
+/*
+ * CONTENEDOR DEL SLIDER: Layout de 3 columnas con CSS Grid
+ * Columna 1 (48px): Botón "Anterior" centrado
+ * Columna 2 (1fr):  Carrusel Swiper (ocupa todo el espacio disponible)
+ * Columna 3 (48px): Botón "Siguiente" centrado
+ *
+ * Se usa Grid en vez de position:absolute para evitar solapamiento
+ * que causa problemas táctiles en iOS Safari.
+ */
+.sliderContenedor {
+    display: grid;
+    /* 3 columnas: botón | carrusel | botón */
+    grid-template-columns: 48px 1fr 48px;
+    align-items: center;
     width: 100%;
-    padding: 0 calc(var(--unidad-espaciado) * 6);
     box-sizing: border-box;
+    gap: calc(var(--unidad-espaciado) * 1);
 }
-/* Botones de navegación posicionados dentro del .swiper (absolute) */
+
+/* Botones de navegación: SIN position absolute */
+/* Cada botón ocupa su propia celda del grid, sin solaparse con nada */
 .sliderContenedor .btn-slider {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
     width: 40px;
     height: 40px;
     padding: 0;
     border-radius: 50%;
-}
-/* Botón anterior a la izquierda */
-.swiper-button-prev-custom {
-    left: calc(var(--unidad-espaciado) * -5);
-}
-/* Botón siguiente a la derecha */
-.swiper-button-next-custom {
-    right: calc(var(--unidad-espaciado) * -5);
+    cursor: pointer;
+    /* Centrar el botón en su celda */
+    justify-self: center;
+    align-self: center;
+    /* Zona táctil mínima de 44px para accesibilidad iOS */
+    min-width: 44px;
+    min-height: 44px;
+    /* Asegurar que el botón siempre sea clickeable */
+    z-index: 2;
+    position: relative;
 }
 .novedadCatalogo .swiper-wrapper{
     display: flex;
@@ -279,8 +290,6 @@
         z-index: 100; 
     }
 }
-.swiper-button-prev-custom { left: 0; }
-.swiper-button-next-custom { right: 0; }
 
 .novedadImagen{
     border: 1px solid var(--color-borde);

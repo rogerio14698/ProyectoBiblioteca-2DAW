@@ -25,9 +25,11 @@
                                 <h1 class="bienvenidaTitulo">{{ $slideBienvenida->titulo }}</h1>
                                 <p class="bienvenidaParrafo">{!! nl2br(e($slideBienvenida->descripcion)) !!}</p>
                                 @if ($slideBienvenida->url)
-                                    <a href="{{ $slideBienvenida->url }}" class="btn-base btn-primario">Explorar Biblioteca</a>
+                                    <a href="{{ $slideBienvenida->url }}" class="btn-base btn-primario">Explorar
+                                        Biblioteca</a>
                                 @else
-                                    <button class="btn-base btn-primario" type="button" disabled>Explorar Biblioteca</button>
+                                    <button class="btn-base btn-primario" type="button" disabled>Explorar
+                                        Biblioteca</button>
                                 @endif
                                 <picture class="bienvenida-imagen">
                                     <source media="(min-width: 1200px)"
@@ -49,8 +51,8 @@
                                 <picture class="bienvenida-imagen">
                                     <source media="(min-width: 1200px)" srcset="{{ asset('img/img-landingPage.png') }}">
                                     <source media="(min-width: 768px)" srcset="{{ asset('img/img-landingPage.png') }}">
-                                    <img src="{{ asset('img/img-landingPage.png') }}" class="imgPaginaBienvenida" loading="lazy"
-                                        alt="Imagen de bienvenida">
+                                    <img src="{{ asset('img/img-landingPage.png') }}" class="imgPaginaBienvenida"
+                                        loading="lazy" alt="Imagen de bienvenida">
                                 </picture>
                             </div>
                         </div>
@@ -70,21 +72,31 @@
 
         </section>
         <!-- Fin de la seccion de bienvenida -->
+        <!-- Sección: Novedades del Catálogo -->
+        <!-- Layout de 3 columnas con CSS Grid: [Botón Prev] [Swiper] [Botón Next] -->
+        <!-- Esto evita position:absolute que causaba problemas táctiles en iOS Safari -->
         <section>
             <div class="contenedor novedadCatalogo">
+                <!-- Título y descripción de la sección -->
                 <div class="textoNovedadCat">
                     <h2>Novedades del Catálogo</h2>
                     <p>Descubre las últimas incorporaciones a nuestra colección de libros y recursos digitales</p>
-
                 </div>
+
+                <!-- Contenedor del slider: grid de 3 columnas -->
+                <!-- Columna 1: botón anterior | Columna 2: carrusel | Columna 3: botón siguiente -->
                 <div class="sliderContenedor">
-                    <button class="btn-slider swiper-button-prev-custom" type="button" aria-label="Anterior">&#10094;</button>
-                        <button class="btn-slider swiper-button-next-custom" type="button" aria-label="Siguiente">&#10095;</button>
+                    <!-- Columna 1: Botón para retroceder en el carrusel -->
+                    <button class="btn-slider swiper-button-prev-custom" type="button"
+                        aria-label="Anterior">&#10094;</button>
+
+                    <!-- Columna 2: Carrusel Swiper con los libros -->
                     <div class="swiper novedadesSwiper">
                         <div class="swiper-wrapper">
                             @foreach ($libros as $libro)
                                 <div class="swiper-slide">
                                     <div class="novedadCatalogoCard">
+                                        <!-- Imagen del libro -->
                                         <div class="novedadImagen">
                                             <picture>
                                                 <source media="(min-width: 1200px)"
@@ -92,9 +104,10 @@
                                                 <source media="(min-width: 768px)"
                                                     srcset="{{ asset('img/elPrincipito.jpg') }}">
                                                 <img src="{{ asset('img/elPrincipito.jpg') }}"
-                                                    alt="Imagen de novedad del catálogo">
+                                                    alt="Portada de {{ $libro->titulo }}">
                                             </picture>
                                         </div>
+                                        <!-- Título y enlace al libro -->
                                         <div class="novedadInfo">
                                             <h3>{{ $libro->titulo }}</h3>
                                             <a href="#" class="btn-base btn-verde">Ver Libro</a>
@@ -104,9 +117,12 @@
                             @endforeach
                         </div>
                     </div>
+
+                    <!-- Columna 3: Botón para avanzar en el carrusel -->
+                    <button class="btn-slider swiper-button-next-custom" type="button"
+                        aria-label="Siguiente">&#10095;</button>
                 </div>
             </div>
-
         </section>
 
         <section class="contenedor agenda">
@@ -170,8 +186,8 @@
                                 </strong>
                             </div>
                             <!--Aqui me va a generar un modal con la noticia completa
-                                                                                                                Hay que modificar la base de datos y poner un text-area
-                                                                                                                o ver la mejor forma de hacer esto-->
+                                                                                                                    Hay que modificar la base de datos y poner un text-area
+                                                                                                                    o ver la mejor forma de hacer esto-->
                             <button class="btn-base btn-verde">Leer más</button>
                         </div>
 
