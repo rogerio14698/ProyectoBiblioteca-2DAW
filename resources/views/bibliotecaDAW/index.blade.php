@@ -78,6 +78,8 @@
 
                 </div>
                 <div class="sliderContenedor">
+                    <button class="btn-slider swiper-button-prev-custom" type="button" aria-label="Anterior">&#10094;</button>
+                        <button class="btn-slider swiper-button-next-custom" type="button" aria-label="Siguiente">&#10095;</button>
                     <div class="swiper novedadesSwiper">
                         <div class="swiper-wrapper">
                             @foreach ($libros as $libro)
@@ -101,9 +103,6 @@
                                 </div>
                             @endforeach
                         </div>
-                        <!-- Botones DENTRO del swiper para que iOS registre los toques -->
-                        <button class="btn-slider swiper-button-prev-custom" type="button" aria-label="Anterior">&#10094;</button>
-                        <button class="btn-slider swiper-button-next-custom" type="button" aria-label="Siguiente">&#10095;</button>
                     </div>
                 </div>
             </div>
