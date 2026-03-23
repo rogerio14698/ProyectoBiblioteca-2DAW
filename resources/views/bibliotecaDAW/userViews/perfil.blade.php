@@ -3,7 +3,7 @@
 @section('title', 'Perfil')
 
 @section('content')
-    <div class="contenedor perfilUsuario">
+    <main class="contenedor perfilUsuario">
         <section class="contenidoHeader">
             <div class="texto-bienvenidaUsuario">
                 <h1>Perfil</h1>
@@ -35,6 +35,8 @@
                 <button type="button" class="btn-base btn-azul">Cambiar Contraseña</button>
             </div>
         </section>
+
+        <!-- Métodos de pago -->
         <button class="btn-base btn-azul" id="btnMetodosPago" aria-expanded="false">MetodosPago</button>
         <section class="contenidoMetodosPago">
             <div class="metodosPago">
@@ -61,125 +63,16 @@
                     <button type="button" class="btn-base btn-verde">Añadir PayPal</button>
                 </div>
         </section>
-        <hr>
+
+        <!-- Historial de actividad -->
         <button id="contenidosHistorial" class="btn-base btn-verde">Ver historial</button>
-        <section class="contenidoHistorial">
-            <div class="historialPrestamos">
-                <h4>Historial de prestamos</h4>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Libro</th>
-                            <th>Fecha de préstamo</th>
-                            <th>Fecha de devolución</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Libro 1</td>
-                            <td>01/01/2024</td>
-                            <td>15/01/2024</td>
-                            <td>Devuelto</td>
-                            <td>
-                                <button class="btn-base btn-verde">Ver</button>
-                                <button class="btn-base btn-rojo">Eliminar</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="historialReservas">
-                <h4>Historial de reservas Eventos</h4>
-                <table>
-                    <thead>
-                        <th>Nombre Evento</th>
-                        <th>Fecha</th>
-                        <th>Ubicación</th>
-                        <th>Hora</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Lectura 2</td>
-                            <td>01/02/2024</td>
-                            <td>Biblioteca Central</td>
-                            <td>18:00</td>
-                            <td>Asistido</td>
-                            <td>
-                                <button class="btn-base btn-verde">Ver</button>
-                                <button class="btn-base btn-rojo">Eliminar</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="historialCompras">
-                <h4>Historial de compras</h4>
-                <table>
-                    <thead>
-                        <th>Libro</th>
-                        <th>Isbn</th>
-                        <th>Fecha de compra</th>
-                        <th>Precio</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Libro 1</td>
-                            <td>1234567890</td>
-                            <td>01/01/2024</td>
-                            <td>15,00 €</td>
-                            <td>Completado</td>
-                            <td>
-                                <button class="btn-base btn-verde">Ver</button>
-                                <button class="btn-base btn-rojo">Eliminar</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="historialPublicaciones">
-                <h4>Historial de publicaciones</h4>
-                <table>
-                    <thead>
-                        <th>Titulo</th>
-                        <th>Resumen</th>
-                        <th>Genero</th>
-                        <th>Autor</th>
-                        <th>Contenido</th>
-                        <th>Formato</th>
-                        <th>Estado</th>
-                        <th>Fecha de publicación</th>
-                        <th>Evento Promocional</th>
-                        <th>Acciones</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Publicacion 1</td>
-                            <td>Resumen de la publicación 1</td>
-                            <td>Ficción</td>
-                            <td>Autor 1</td>
-                            <td>Contenido de la publicación 1</td>
-                            <td>PDF</td>
-                            <td>Publicado</td>
-                            <td>01/03/2024</td>
-                            <td>Evento 1</td>
-                            <td>
-                                <button class="btn-base btn-verde">Ver</button>
-                                <button class="btn-base btn-rojo">Eliminar</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-        </section>
-
-
-    </div>
+        <div class="historialVersionDesktop">
+            @include('layouts.historialVersionDesktop')
+        </div>
+        <div class="historialVersionMovil">
+            @include('layouts.historialVersionMovil')
+        </div>
+    </main>
+    <div class="contenedor separador"></div>
 
 @endsection

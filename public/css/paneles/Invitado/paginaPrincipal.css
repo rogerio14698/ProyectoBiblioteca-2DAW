@@ -7,6 +7,7 @@
     min-height: 40vh;
     text-align: center;
     background-color: var(--color-blanco);
+    box-shadow: var(--sombra-media);
     margin: 0 auto;
     padding: 10px;
     box-sizing: border-box;
@@ -192,15 +193,17 @@
 /*Novedad del catálogo*/
 .novedadCatalogo{
     background-color: var(--color-blanco);
+    box-shadow: var(--sombra-media);
+    margin: 0 auto;
 }
 
 .textoNovedadCat{
     font-size: 1.05rem;
-    color: var(--color-primario);
     margin: 0 0 5px 0;
 }
 .textoNovedadCat h2{
     text-decoration: underline;
+    color: var(--color-primario);
 }
 .textoNovedadCat p{
     font-size: 1rem;
@@ -329,6 +332,7 @@
 /*Agenda de Eventos*/
 .agenda {
     background-color: var(--color-blanco);
+    box-shadow: var(--sombra-media);
 }
 
 /* Contenedor principal de los cards */
@@ -429,6 +433,7 @@
 /*Noticias*/
 .noticias {
     background-color: var(--color-blanco);
+    box-shadow: var(--sombra-media);
 }
 
 .noticiasContenedor {

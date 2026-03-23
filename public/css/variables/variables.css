@@ -40,6 +40,10 @@
    --bgFormatoDigital: #7e1dfd;
    --bgFormatoFisico: #fc9712;
 
+   /*BG Gradiente generado cssgradient*/
+   --bgFondoGradiente: #00c767;
+   --gradienteLinear: linear-gradient(194deg,rgba(0, 199, 103, 1) 1%, rgba(0, 130, 121, 1) 56%, rgba(0, 66, 133, 1) 82%);
+
 
 
 

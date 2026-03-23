@@ -2,7 +2,8 @@ body {
     /* 1 */
     -webkit-text-size-adjust: 100%;
     /* 2 */
-    background-color: var(--color-fondo-global);
+    background: var(--bgFondoGradiente);
+    background: var(--gradienteLinear);
     max-width: 100%;
     overflow-x: hidden;
     font-family: var(--fuente-familia);
@@ -16,6 +17,11 @@ body {
     display: block;
     margin: 0 auto;
     padding: 10px;
+}
+.separador {
+    border: none;
+    border-top: 1px solid var(--color-fondo-global);
+    margin: 20px 0 0;
 }
 
 a {

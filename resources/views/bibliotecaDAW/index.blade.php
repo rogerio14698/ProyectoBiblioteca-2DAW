@@ -4,7 +4,7 @@
 
 @section('content')
     <main>
-        <!--Prueba carrusel -->
+        <!--Slides de carrusel bienvenida -->
         <section class="contenedor bienvenida">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
@@ -43,6 +43,7 @@
                             </div>
                         </div>
                     @empty
+                        <!--Slide por defecto de inicio-->
                         <div class="carousel-item active">
                             <div class="bienvenidaSlideContenido">
                                 <h1 class="bienvenidaTitulo">Bienvenido a la Biblioteca DAW</h1>
@@ -72,69 +73,65 @@
 
         </section>
         <!-- Fin de la seccion de bienvenida -->
+        <hr class="separador contenedor">
+        <!-- Novedades del Catálogo  -->
 
-        <!-- ============================================== -->
-        <!-- SECCIÓN: Novedades del Catálogo                -->
-        <!-- Slider Vanilla JS — sin librerías externas     -->
-        <!-- Grid de 3 columnas: [Prev] [Slider] [Next]     -->
-        <!-- ============================================== -->
-        <section>
-            <div class="contenedor novedadCatalogo">
-                <!-- Título y descripción de la sección -->
-                <div class="textoNovedadCat">
-                    <h2>Novedades del Catálogo</h2>
-                    <p>Descubre las últimas incorporaciones a nuestra colección de libros y recursos digitales</p>
-                </div>
+        <section class="contenedor novedadCatalogo">
 
-                <!-- Contenedor grid: columna 1 = btn prev, columna 2 = slider, columna 3 = btn next -->
-                <div class="sliderContenedor">
-                    <!-- Columna 1: Botón retroceder -->
-                    <button class="btn-slider sliderBtnPrev" type="button"
-                        aria-label="Anterior">&#10094;</button>
+            <!-- Título y descripción de la sección -->
+            <div class="textoNovedadCat">
+                <h2>Novedades del Catálogo</h2>
+                <p>Descubre las últimas incorporaciones a nuestra colección de libros y recursos digitales</p>
+            </div>
 
-                    <!-- Columna 2: Ventana visible del slider (overflow hidden) -->
-                    <div class="sliderVentana">
-                        <!-- Pista que se desplaza con translateX -->
-                        <div class="sliderPista">
-                            @foreach ($libros as $libro)
-                                <div class="sliderItem">
-                                    <div class="novedadCatalogoCard">
-                                        <!-- Imagen del libro -->
-                                        <div class="novedadImagen">
-                                            <picture>
-                                                <source media="(min-width: 1200px)"
-                                                    srcset="{{ asset('img/elPrincipito.jpg') }}">
-                                                <source media="(min-width: 768px)"
-                                                    srcset="{{ asset('img/elPrincipito.jpg') }}">
-                                                <img src="{{ asset('img/elPrincipito.jpg') }}"
-                                                    alt="Portada de {{ $libro->titulo }}">
-                                            </picture>
-                                        </div>
-                                        <!-- Título y enlace -->
-                                        <div class="novedadInfo">
-                                            <h3>{{ $libro->titulo }}</h3>
-                                            <a href="#" class="btn-base btn-verde">Ver Libro</a>
-                                        </div>
+            <!-- Contenedor grid: columna 1 = btn prev, columna 2 = slider, columna 3 = btn next -->
+            <div class="sliderContenedor">
+                <!-- Columna 1: Botón retroceder -->
+                <button class="btn-slider sliderBtnPrev" type="button" aria-label="Anterior">&#10094;</button>
+
+                <!-- Columna 2: Ventana visible del slider (overflow hidden) -->
+                <div class="sliderVentana">
+                    <!-- Pista que se desplaza con translateX -->
+                    <div class="sliderPista">
+                        @foreach ($libros as $libro)
+                            <div class="sliderItem">
+                                <div class="novedadCatalogoCard">
+                                    <!-- Imagen del libro -->
+                                    <div class="novedadImagen">
+                                        <picture>
+                                            <source media="(min-width: 1200px)"
+                                                srcset="{{ asset('img/elPrincipito.jpg') }}">
+                                            <source media="(min-width: 768px)"
+                                                srcset="{{ asset('img/elPrincipito.jpg') }}">
+                                            <img src="{{ asset('img/elPrincipito.jpg') }}"
+                                                alt="Portada de {{ $libro->titulo }}">
+                                        </picture>
+                                    </div>
+                                    <!-- Título y enlace -->
+                                    <div class="novedadInfo">
+                                        <h3>{{ $libro->titulo }}</h3>
+                                        <a href="#" class="btn-base btn-verde">Ver Libro</a>
                                     </div>
                                 </div>
-                            @endforeach
-                        </div>
+                            </div>
+                        @endforeach
                     </div>
-
-                    <!-- Columna 3: Botón avanzar -->
-                    <button class="btn-slider sliderBtnNext" type="button"
-                        aria-label="Siguiente">&#10095;</button>
                 </div>
+
+                <!-- Columna 3: Botón avanzar -->
+                <button class="btn-slider sliderBtnNext" type="button" aria-label="Siguiente">&#10095;</button>
             </div>
         </section>
+        <!-- Fin de la sección de novedades del catálogo -->
 
+        <hr class="contenedor separador">
+        <!-- Agenda de eventos -->
         <section class="contenedor agenda">
             <div class="agendaTexto">
                 <h2>Agenda de Eventos</h2>
                 <p>Agenda de eventos programados</p>
                 <!--Ver como poner un carrusel dentro de los cards de eventos. -->
             </div>
-
             <div class="agendaContenedor">
                 @foreach ($eventos as $evento)
                     <div class="eventoCard">
@@ -164,6 +161,8 @@
                 {{ $eventos->links('vendor.pagination.bootstrap-5') }}
             </div>
         </section>
+
+        <hr class="contenedor separador">
         <section class="contenedor noticias">
             <div class="noticiaTexto">
                 <h2>Noticias</h2>
@@ -189,8 +188,8 @@
                                 </strong>
                             </div>
                             <!--Aqui me va a generar un modal con la noticia completa
-                                                                                                                    Hay que modificar la base de datos y poner un text-area
-                                                                                                                    o ver la mejor forma de hacer esto-->
+                                                                                                                        Hay que modificar la base de datos y poner un text-area
+                                                                                                                        o ver la mejor forma de hacer esto-->
                             <button class="btn-base btn-verde">Leer más</button>
                         </div>
 
@@ -201,5 +200,6 @@
                 {{ $noticias->links('vendor.pagination.bootstrap-5') }}
             </div>
         </section>
+        <hr class="contenedor separador">
     </main>
 @endsection

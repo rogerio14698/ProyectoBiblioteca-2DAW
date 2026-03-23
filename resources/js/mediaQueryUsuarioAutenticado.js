@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!e.target.closest('.configCuentaUsuario') && !e.target.closest('#btnConfigUsuario')) {
             const menuConfigUsuario = document.querySelector('.configCuentaUsuario');
 
-            if (menuConfigUsuario) {
+            if (menuConfigUsuario ) {
                 menuConfigUsuario.classList.remove('configVisible');
                 const btnConfigUsuario = document.getElementById('btnConfigUsuario');
                 if (btnConfigUsuario) {
