@@ -70,6 +70,10 @@ Route::middleware(['auth:web'])->group(function () {
         return view('bibliotecaDAW.userViews.perfilEditar');
     })->name('usuario.perfilEditar');
 
+    Route::put('/perfilEditar', function () {
+        return redirect()->route('usuario.perfilEditar');
+    })->name('usuario.perfilActualizar');
+
     //Gestionar contacto con la biblioteca
     Route::get('/mis-consultas', [ContactoController::class, 'misConsultas'])->name('usuario.consultas');
 
@@ -77,6 +81,10 @@ Route::middleware(['auth:web'])->group(function () {
     Route::get('/alquilar', function () {
         return view('bibliotecaDAW.userViews.alquilar');
     })->name('usuario.alquilar');
+
+    Route::get('/prestamos', function () {
+        return view('bibliotecaDAW.userViews.prestamos');
+    })->name('usuario.prestamos');
 
     Route::get('/comprar', function () {
         return view('bibliotecaDAW.userViews.comprar');

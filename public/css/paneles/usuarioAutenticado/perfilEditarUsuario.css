@@ -1,0 +1,97 @@
+.perfilEditarUsuario {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 3);
+    background-color: var(--bgPerfilUsuario);
+    padding: calc(var(--unidad-espaciado) * 2);
+}
+
+.perfilEditarHeader,
+.perfilEditarBloque {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 2);
+    padding: calc(var(--unidad-espaciado) * 2);
+    border: 1px solid var(--colorBorde);
+    border-radius: var(--radio-medio);
+    background-color: var(--color-blanco);
+    box-shadow: var(--sombra-media);
+}
+
+.perfilEditarHeader h1,
+.perfilEditarIntro h2 {
+    margin: 0;
+    color: var(--color-primario-oscuro);
+    text-decoration: underline;
+}
+
+.perfilEditarHeader p,
+.perfilEditarIntro p {
+    margin: 0;
+    color: var(--color-texto-principal);
+    line-height: var(--fuente-altura-linea);
+}
+
+.perfilEditarForm {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 1.5);
+}
+
+.campoPerfilEditar {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.campoPerfilEditar label {
+    color: var(--color-primario-claro);
+    font-weight: 600;
+}
+
+.campoPerfilEditar input {
+    width: 100%;
+    padding: var(--input-relleno);
+    border: 1px solid var(--input-borde);
+    border-radius: var(--radio-pequeno);
+}
+
+.campoPerfilEditar input:focus {
+    outline: none;
+    border-color: var(--color-primario-oscuro);
+    box-shadow: var(--input-foco-sombra);
+}
+
+.accionesPerfilEditar {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 1.25);
+    align-items: flex-start;
+}
+
+@media (min-width: 768px) {
+    .perfilEditarUsuario {
+        gap: calc(var(--unidad-espaciado) * 4);
+        padding: calc(var(--unidad-espaciado) * 3);
+    }
+
+    .perfilEditarHeader,
+    .perfilEditarBloque {
+        padding: calc(var(--unidad-espaciado) * 3);
+    }
+
+    .perfilEditarForm {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: calc(var(--unidad-espaciado) * 2);
+    }
+
+    .campoCompletoPerfilEditar {
+        grid-column: 1 / -1;
+    }
+
+    .accionesPerfilEditar {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}

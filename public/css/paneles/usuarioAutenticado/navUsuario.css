@@ -2,10 +2,12 @@
 
 .nav-usuarioAutenticado {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 10px;
     padding: 10px 20px;
-    background-color: #8ac0f5;
+    background-color: var(--color-primario);
 }
 
 .logoYperfil {
@@ -31,21 +33,32 @@
 }
 
 .nav-perfil {
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: fit-content;
+    width: 100%;
     gap: 10px;
 }
 
 .nav-perfil a {
-    padding: 5px;
+    display: block;
+    padding: 8px 12px;
     background-color: var(--color-alerta);
+    border-radius: var(--radio-pequeno);
+    color: var(--color-texto-principal);
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
 }
 
 .nav-perfil ul li {
     margin-right: 0;
-    padding: 5px
+    padding: 0;
 }
 
 .nav-perfil ul li a:hover {
@@ -57,6 +70,7 @@
         display: block;
     }
     .nav-usuarioAutenticado {
+        flex-direction: row;
         justify-content: space-between;
     }
 
@@ -70,5 +84,7 @@
     ul.nav-links {
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-end;
     }
 }

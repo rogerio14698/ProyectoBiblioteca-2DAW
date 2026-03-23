@@ -15,11 +15,12 @@
             </article>
         </div>
     </div>
-
+<hr>
     <div class="historialReservas">
         <h3>Historial de reservas eventos</h3>
         <div class="contenedorCardsHistorial">
             <article class="cardHistorialMovil">
+                <h4>Total historias: 3</h4>
                 <p><strong>Nombre evento:</strong> Lectura 2</p>
                 <p><strong>Ubicacion:</strong> Biblioteca Central</p>
                 <p><strong>Fecha:</strong> 01/02/2024</p>
@@ -32,7 +33,7 @@
             </article>
         </div>
     </div>
-
+<hr>
     <div class="historialCompras">
         <h3>Historial de compras</h3>
         <div class="contenedorCardsHistorial">
@@ -49,7 +50,7 @@
             </article>
         </div>
     </div>
-
+<hr>
     <div class="historialPublicaciones">
         <h3>Historial de publicaciones</h3>
         <div class="contenedorCardsHistorial">
@@ -84,4 +85,5 @@
             </article>
         </div>
     </div>
+    <hr>
 </section>

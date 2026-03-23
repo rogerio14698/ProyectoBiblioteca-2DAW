@@ -1,0 +1,114 @@
+.publicarUsuario {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 3);
+    background-color: var(--bgPerfilUsuario);
+    padding: calc(var(--unidad-espaciado) * 2);
+}
+
+.publicarHeader,
+.publicarBloque,
+.publicarCard {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 1.5);
+    padding: calc(var(--unidad-espaciado) * 2);
+    border: 1px solid var(--colorBorde);
+    border-radius: var(--radio-medio);
+    background-color: var(--color-blanco);
+    box-shadow: var(--sombra-media);
+}
+
+.publicarHeader h1,
+.publicarIntro h2,
+.publicarCard h2 {
+    margin: 0;
+    color: var(--color-primario-oscuro);
+    text-decoration: underline;
+}
+
+.publicarHeader p,
+.publicarIntro p,
+.publicarCard p {
+    margin: 0;
+    color: var(--color-texto-principal);
+    line-height: var(--fuente-altura-linea);
+}
+
+.publicarForm,
+.publicarMiniForm {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 1.25);
+}
+
+.campoPublicar {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.campoPublicar label,
+.publicarMiniForm label {
+    color: var(--color-primario-claro);
+    font-weight: 600;
+}
+
+.campoPublicar input,
+.campoPublicar textarea,
+.publicarMiniForm input,
+.publicarMiniForm textarea,
+.publicarMiniForm select {
+    width: 100%;
+    padding: var(--input-relleno);
+    border: 1px solid var(--input-borde);
+    border-radius: var(--radio-pequeno);
+}
+
+.campoPublicar input:focus,
+.campoPublicar textarea:focus,
+.publicarMiniForm input:focus,
+.publicarMiniForm textarea:focus,
+.publicarMiniForm select:focus {
+    outline: none;
+    border-color: var(--color-primario-oscuro);
+    box-shadow: var(--input-foco-sombra);
+}
+
+.campoPublicar textarea,
+.publicarMiniForm textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+.publicarGrid {
+    display: grid;
+    gap: calc(var(--unidad-espaciado) * 2);
+}
+
+.accionesPublicar,
+.accionesPublicarCard {
+    display: flex;
+    justify-content: flex-start;
+}
+
+@media (min-width: 768px) {
+    .publicarUsuario {
+        gap: calc(var(--unidad-espaciado) * 4);
+        padding: calc(var(--unidad-espaciado) * 3);
+    }
+
+    .publicarForm {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: calc(var(--unidad-espaciado) * 2);
+    }
+
+    .campoCompletoPublicar {
+        grid-column: 1 / -1;
+    }
+
+    .publicarGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}

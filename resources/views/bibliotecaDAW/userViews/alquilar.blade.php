@@ -3,62 +3,73 @@
 @section('title', 'Aquilar')
 
 @section('content')
-   <div class="contenedor">
-     <h1>Aquilar</h1>
-    <p>Bienvenido <span>{{ Auth::user()->name }}</span> a la sección de aquilar de la Biblioteca DAW.</p>
-    <p>En esta sección podrás alquilar los libros disponibles en la Biblioteca DAW. Para alquilar un libro, simplemente haz
-        clic en el botón "Alquilar" junto al libro que deseas alquilar. Asegúrate de tener una cuenta activa y haber
-        iniciado sesión para poder alquilar libros.</p>
-    <p>Recuerda que el alquiler de libros está sujeto a disponibilidad y a las políticas de la biblioteca. Asegúrate de
-        revisar los términos y condiciones antes de realizar un alquiler.</p>
-    <p>¡Disfruta de tu lectura!</p>
+    <div class="contenedor alquilar">
+       <div class="contenidoHeader">
+        <h1>Alquilar</h1>
+        <p>Bienvenido <span>{{ Auth::user()->name }}</span> a la sección de alquilar de la Biblioteca DAW.</p>
+       </div>
+        <section class="bloqueAlquilar formularioAlquilerBloque">
+        <h2>Formulario para alquilar libros</h2>
+        <form action="" class="formularioAlquilar">
+            <label for="libroBusqueda">Selecciona el libro que deseas alquilar:</label>
+            <div class="buscadorAlquilar">
+                <input type="text" id="libroBusqueda" name="libroBusqueda" placeholder="Buscar libro por titulo, autor o ISBN">
+            </div>
+            <div class="resultadoBusquedaAlquilar">
+                <h2>Resultados de búsqueda:</h2>
+                <a href="#">
+                    <p>Libro 1 - Autor 1 - ISBN: 1234567890</p>
+                </a>
+                <a href="#">
+                    <p>Libro 2 - Autor 2 - ISBN: 0987654321</p>
+                </a>
 
-    <h2>Formulario para alquilar libros</h2>
-    <form action="">
-        <label for="libro">Selecciona el libro que deseas alquilar:</label> <select name="libro" id="libro">
-            <option value="libro1">Libro 1</option>
-            <option value="libro2">Libro 2</option>
-            <option value="libro3">Libro 3</option>
-        </select>
-        <label for="fecha_devolucion">Fecha de devolución:</label>
-        <input type="date" id="fecha_devolucion" name="fecha_devolucion">
 
-        <label for="">Formato</label>
-        <select name="formato" id="formato">
-            <option value="fisico">Físico</option>
-            <option value="digital">Digital</option>
-        </select>
-        <button type="submit">Alquilar</button>
-    </form>
+            </div>
+            <label for="fecha_devolucion">Fecha de devolución:</label>
+            <input type="date" id="fecha_devolucion" name="fecha_devolucion">
 
-    <div class="calcular-precio">
-        <h2>Calcula el precio de tu alquiler</h2>
-        <form action=""> <label for="dias">Número de días:</label> <input type="number" id="dias" name="dias" min="1">
-            <button type="submit">Calcular Precio</button>
+            <label for="formato">Formato</label>
+            <select name="formato" id="formato">
+                <option value="fisico">Físico</option>
+                <option value="digital">Digital</option>
+            </select>
+            <button type="submit" class="btn-base btn-alquilar">Alquilar</button>
         </form>
-    </div>
-    <div class="historial-alquileres">
-        <h2>Historial de alquileres</h2>
-        <p>Aquí podrás ver el historial de tus alquileres anteriores, incluyendo los libros alquilados, las fechas de
-            alquiler y devolución, y el estado de cada alquiler.</p>
-    </div>
-    <div class="recomendaciones">
-        <h2>Recomendaciones de libros</h2>
-        <p>Basado en tus alquileres anteriores, aquí te recomendamos algunos libros que podrían interesarte.</p>
-        <form action="">
-            <input type="text" placeholder="Libro">
-            <input type="text" placeholder="Autor">
-            <textarea name="" id="" aria-placeholder="Comentario a cerca del libro"></textarea>
+        </section>
 
-        </form>
+        <section class="bloqueAlquilar calcularPrecio">
+            <h2>Calcula el precio de tu alquiler</h2>
+            <form action="" class="calcularPrecioForm">
+                <label for="dias">Número de días:</label>
+                <input type="number" id="dias" name="dias" min="1">
+                <button type="submit" class="btn-base btn-azul">Calcular Precio</button>
+            </form>
+        </section>
+        <section class="bloqueAlquilar historialAlquileres">
+            <h2>Historial de alquileres</h2>
+            <p>Aquí podrás ver el historial de tus alquileres anteriores, incluyendo los libros alquilados, las fechas de
+                alquiler y devolución, y el estado de cada alquiler.</p>
+        </section>
+        <section class="bloqueAlquilar recomendacionesAlquiler">
+            <h2>Recomendaciones de libros</h2>
+            <p>Basado en tus alquileres anteriores, aquí te recomendamos algunos libros que podrían interesarte.</p>
+            <form action="" class="recomendacionesForm">
+                <label for="libroRecomendado">Libro recomendado</label>
+                <input type="text" id="libroRecomendado" name="libroRecomendado" placeholder="Libro">
+                <label for="autorRecomendado">Autor recomendado</label>
+                <input type="text" id="autorRecomendado" name="autorRecomendado" placeholder="Autor">
+                <label for="comentarioLibro">Comentario sobre el libro</label>
+                <textarea name="comentarioLibro" id="comentarioLibro" placeholder="Comentario acerca del libro"></textarea>
+
+            </form>
+        </section>
+        <section class="bloqueAlquilar soporteAlquiler">
+            <h2>Soporte</h2>
+            <p>Si tienes alguna pregunta o necesitas ayuda con el proceso de alquiler, no dudes en contactarnos a través de
+                nuestro soporte via mail.</p>
+        </section>
     </div>
-    <div class="soporte">
-        <h2>Soporte</h2>
-        <p>Si tienes alguna pregunta o necesitas ayuda con el proceso de alquiler, no dudes en contactarnos a través de
-            nuestro soporte via mail.</p>
-    </div>
-    </div>
-   </div>
 
 
 

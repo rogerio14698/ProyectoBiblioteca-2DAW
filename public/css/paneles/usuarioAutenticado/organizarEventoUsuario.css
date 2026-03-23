@@ -1,0 +1,137 @@
+.organizarEvento {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 3);
+    background-color: var(--bgPerfilUsuario);
+    padding: calc(var(--unidad-espaciado) * 2);
+}
+
+.organizarEventoHeader {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 1.5);
+    padding: calc(var(--unidad-espaciado) * 2);
+    border: 1px solid var(--colorBorde);
+    border-radius: var(--radio-medio);
+    background-color: var(--color-blanco);
+    box-shadow: var(--sombra-suave);
+}
+
+.organizarEventoHeader h1 {
+    margin: 0;
+    color: var(--color-primario-oscuro);
+    font-size: 1.9rem;
+    text-decoration: underline;
+}
+
+.organizarEventoHeader p {
+    margin: 0;
+    color: var(--color-texto-principal);
+    font-size: 1rem;
+    line-height: var(--fuente-altura-linea);
+}
+
+.organizarEventoHeader span {
+    color: var(--color-primario);
+    font-weight: 700;
+}
+
+.organizarEventoBloque {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 2);
+    padding: calc(var(--unidad-espaciado) * 2);
+    border: 1px solid var(--colorBorde);
+    border-radius: var(--radio-medio);
+    background-color: var(--color-blanco);
+    box-shadow: var(--sombra-media);
+}
+
+.organizarEventoIntro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--unidad-espaciado);
+}
+
+.organizarEventoIntro h2 {
+    margin: 0;
+    color: var(--color-primario-oscuro);
+    font-size: 1.5rem;
+    text-decoration: underline;
+}
+
+.organizarEventoIntro p {
+    margin: 0;
+    color: var(--color-texto-principal);
+    line-height: var(--fuente-altura-linea);
+}
+
+.formOrganizarEvento {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 1.5);
+}
+
+.campoOrganizarEvento {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.campoOrganizarEvento label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-primario-claro);
+}
+
+.campoOrganizarEvento input,
+.campoOrganizarEvento textarea {
+    width: 100%;
+    padding: var(--input-relleno);
+    border: 1px solid var(--input-borde);
+    border-radius: var(--radio-pequeno);
+    background-color: var(--color-blanco);
+    color: var(--color-texto-principal);
+    transition: box-shadow var(--transicion-rapida), border-color var(--transicion-rapida);
+}
+
+.campoOrganizarEvento input:focus,
+.campoOrganizarEvento textarea:focus {
+    outline: none;
+    border-color: var(--color-primario-oscuro);
+    box-shadow: var(--input-foco-sombra);
+}
+
+.campoOrganizarEvento textarea {
+    min-height: 160px;
+    resize: vertical;
+}
+
+.accionesOrganizarEvento {
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 4px;
+}
+
+@media (min-width: 768px) {
+    .organizarEvento {
+        gap: calc(var(--unidad-espaciado) * 4);
+        padding: calc(var(--unidad-espaciado) * 3);
+    }
+
+    .organizarEventoHeader,
+    .organizarEventoBloque {
+        padding: calc(var(--unidad-espaciado) * 3);
+    }
+
+    .formOrganizarEvento {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: calc(var(--unidad-espaciado) * 2);
+        align-items: start;
+    }
+
+    .campoCompletoOrganizarEvento {
+        grid-column: 1 / -1;
+    }
+}

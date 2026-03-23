@@ -225,18 +225,13 @@ td {
     display: flex;
     border: none;
     gap: 5px;
+    max-width: 200px;
 }
 
 
 /*Estilos MQ para pantallas grandes*/
 @media (min-width: 768px) {
-    .historialVersionDesktop {
-        display: block;
-    }
-
-    .historialVersionMovil {
-        display: none;
-    }
+    
 
     .contenidoHeader {
         display: flex;
@@ -307,7 +302,20 @@ td {
         max-width: 450px;
     }
 
-    /*Estilos para el historial de actividad*/
+}
+
+@media (min-width: 1200px) {
+ /*Estilos para el historial de actividad*/
+    /*Minimo necesita 1200px para que se vea en modo tablas, si no se va a ver en cards todo*/
+
+    .historialVersionDesktop {
+        display: block;
+    }
+
+    .historialVersionMovil {
+        display: none;
+    }
+
     #contenidosHistorial {
         display: none;
     }
@@ -372,7 +380,4 @@ td {
     .tablaEventoPromocional {
         width: 10%;
     }
-
-
-
 }

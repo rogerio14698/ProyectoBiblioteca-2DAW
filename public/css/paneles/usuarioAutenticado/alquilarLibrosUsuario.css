@@ -1,0 +1,217 @@
+
+.alquilar {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 3);
+    background-color: var(--bgPerfilUsuario);
+    padding: calc(var(--unidad-espaciado) * 2);
+}
+
+.alquilar .contenidoHeader {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 1.5);
+    padding: calc(var(--unidad-espaciado) * 2);
+    border: 1px solid var(--colorBorde);
+    border-radius: var(--radio-medio);
+    background-color: var(--color-blanco);
+    box-shadow: var(--sombra-suave);
+}
+
+.alquilar .contenidoHeader h1 {
+    color: var(--color-primario-oscuro);
+    text-decoration: underline;
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.alquilar .contenidoHeader p {
+    color: var(--color-texto-principal);
+    font-size: 1rem;
+    margin: 0;
+}
+
+.alquilar .contenidoHeader span {
+    color: var(--color-primario);
+    font-weight: 700;
+}
+
+.bloqueAlquilar {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 2);
+    padding: calc(var(--unidad-espaciado) * 2);
+    border: 1px solid var(--colorBorde);
+    border-radius: var(--radio-medio);
+    background-color: var(--color-blanco);
+    box-shadow: var(--sombra-media);
+}
+
+.bloqueAlquilar h2 {
+    color: var(--color-primario-oscuro);
+    text-decoration: underline;
+    font-size: 1.4rem;
+    margin: 0;
+}
+
+.bloqueAlquilar p {
+    color: var(--color-texto-principal);
+    font-size: 1rem;
+    line-height: var(--fuente-altura-linea);
+    margin: 0;
+}
+
+.formularioAlquilar,
+.calcularPrecioForm,
+.recomendacionesForm {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 1.5);
+}
+
+.formularioAlquilar label,
+.calcularPrecioForm label,
+.recomendacionesForm label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-primario-claro);
+}
+
+.formularioAlquilar input,
+.formularioAlquilar select,
+.calcularPrecioForm input,
+.recomendacionesForm input,
+.recomendacionesForm textarea {
+    width: 100%;
+    padding: var(--input-relleno);
+    border: 1px solid var(--input-borde);
+    border-radius: var(--radio-pequeno);
+    background-color: var(--color-blanco);
+    color: var(--color-texto-principal);
+    transition: box-shadow var(--transicion-rapida), border-color var(--transicion-rapida);
+}
+
+.formularioAlquilar input:focus,
+.formularioAlquilar select:focus,
+.calcularPrecioForm input:focus,
+.recomendacionesForm input:focus,
+.recomendacionesForm textarea:focus {
+    outline: none;
+    border-color: var(--color-primario-oscuro);
+    box-shadow: var(--input-foco-sombra);
+}
+
+.buscadorAlquilar {
+    width: 100%;
+}
+
+.resultadoBusquedaAlquilar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--unidad-espaciado);
+    padding: calc(var(--unidad-espaciado) * 1.5);
+    border: 1px solid var(--colorBorde);
+    border-radius: var(--radio-pequeno);
+    background-color: var(--color-fondo-global);
+}
+
+.resultadoBusquedaAlquilar h2 {
+    font-size: 1.15rem;
+    margin: 0;
+}
+
+.resultadoBusquedaAlquilar a {
+    display: block;
+    padding: calc(var(--unidad-espaciado) * 1.5);
+    border: 1px solid var(--colorBorde);
+    border-radius: var(--radio-pequeno);
+    background-color: var(--color-blanco);
+    color: var(--color-texto-principal);
+    transition: transform var(--transicion-rapida), box-shadow var(--transicion-rapida), border-color var(--transicion-rapida);
+}
+
+.resultadoBusquedaAlquilar a:hover {
+    transform: var(--transformacion-hover-card);
+    box-shadow: var(--sombra-suave);
+    border-color: var(--color-primario);
+}
+
+.resultadoBusquedaAlquilar p {
+    margin: 0;
+}
+
+.formularioAlquilar button,
+.calcularPrecioForm button {
+    align-self: flex-start;
+}
+
+.recomendacionesForm textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+.historialAlquileres {
+    background: linear-gradient(180deg, var(--color-blanco) 0%, var(--color-fondo-global) 100%);
+}
+
+.soporteAlquiler {
+    border-left: 4px solid var(--color-primario);
+}
+
+@media (min-width: 768px) {
+    .alquilar {
+        gap: calc(var(--unidad-espaciado) * 4);
+        padding: calc(var(--unidad-espaciado) * 3);
+    }
+
+    .alquilar .contenidoHeader {
+        padding: calc(var(--unidad-espaciado) * 3);
+    }
+
+    .formularioAlquilerBloque {
+        display: grid;
+        grid-template-columns: minmax(0, 1.7fr) minmax(280px, 1fr);
+        column-gap: calc(var(--unidad-espaciado) * 3);
+        align-items: start;
+    }
+
+    .formularioAlquilerBloque h2 {
+        grid-column: 1 / -1;
+    }
+
+    .formularioAlquilar {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: calc(var(--unidad-espaciado) * 2);
+        align-items: end;
+    }
+
+    .formularioAlquilar label[for='libroBusqueda'],
+    .formularioAlquilar .buscadorAlquilar,
+    .formularioAlquilar .resultadoBusquedaAlquilar {
+        grid-column: 1 / -1;
+    }
+
+    .formularioAlquilar button {
+        justify-self: start;
+    }
+
+    .calcularPrecioForm {
+        display: grid;
+        grid-template-columns: auto minmax(180px, 220px) auto;
+        gap: calc(var(--unidad-espaciado) * 2);
+        align-items: center;
+    }
+
+    .recomendacionesForm {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: calc(var(--unidad-espaciado) * 2);
+    }
+
+    .recomendacionesForm label[for='comentarioLibro'],
+    .recomendacionesForm textarea {
+        grid-column: 1 / -1;
+    }
+}

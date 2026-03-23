@@ -7,8 +7,11 @@
     <div class="nav-perfil">
         <ul class="nav-links">
         <li><a href="{{ route('usuario.perfil') }}">Perfil</a></li>
+        <li><a href="{{ route('usuario.perfilEditar') }}">Editar Perfil</a></li>
+        <li><a href="{{ route('usuario.prestamos') }}">Préstamos</a></li>
         <li><a href="{{ route('usuario.alquilar') }}">Alquilar</a></li>
         <li><a href="{{ route('usuario.comprar') }}">Comprar</a></li>
+        <li><a href="{{ route('usuario.publicar') }}">Publicar</a></li>
         <li><a href="{{ route('usuario.organizarEvento') }}">Organizar Evento</a></li>
         <li>
             <form method="POST" action="{{ route('usuario.logout') }}">

@@ -1,0 +1,115 @@
+.comprarLibros {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 3);
+    background-color: var(--bgPerfilUsuario);
+    padding: calc(var(--unidad-espaciado) * 2);
+}
+
+.comprarHeader {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 1.5);
+    padding: calc(var(--unidad-espaciado) * 2);
+    border: 1px solid var(--colorBorde);
+    border-radius: var(--radio-medio);
+    background-color: var(--color-blanco);
+    box-shadow: var(--sombra-suave);
+}
+
+.comprarHeader h1 {
+    margin: 0;
+    color: var(--color-primario-oscuro);
+    font-size: 1.9rem;
+    text-decoration: underline;
+}
+
+.comprarHeader p {
+    margin: 0;
+    color: var(--color-texto-principal);
+    font-size: 1rem;
+    line-height: var(--fuente-altura-linea);
+}
+
+.comprarHeader span {
+    color: var(--color-primario);
+    font-weight: 700;
+}
+
+.comprarEstado {
+    display: flex;
+    justify-content: center;
+}
+
+.comprarEstadoCard {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 2);
+    width: 100%;
+    padding: calc(var(--unidad-espaciado) * 3);
+    border: 1px solid var(--colorBorde);
+    border-left: 6px solid var(--color-carrito-anadir);
+    border-radius: var(--radio-medio);
+    background: linear-gradient(180deg, var(--color-blanco) 0%, var(--color-fondo-global) 100%);
+    box-shadow: var(--sombra-media);
+}
+
+.comprarEstadoEtiqueta {
+    width: fit-content;
+    margin: 0;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background-color: var(--color-fondo-tag);
+    color: var(--color-texto-tag);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.comprarEstadoCard h2 {
+    margin: 0;
+    color: var(--color-primario-oscuro);
+    font-size: 1.5rem;
+}
+
+.comprarEstadoCard > p {
+    margin: 0;
+    color: var(--color-texto-principal);
+    font-size: 1rem;
+    line-height: var(--fuente-altura-linea);
+}
+
+.comprarEstadoLista {
+    display: grid;
+    gap: calc(var(--unidad-espaciado) * 1.5);
+}
+
+.comprarEstadoLista p {
+    margin: 0;
+    padding: calc(var(--unidad-espaciado) * 1.5);
+    border: 1px solid var(--colorBorde);
+    border-radius: var(--radio-pequeno);
+    background-color: var(--color-blanco);
+    color: var(--color-texto-principal);
+    box-shadow: var(--sombra-suave);
+}
+
+@media (min-width: 768px) {
+    .comprarLibros {
+        gap: calc(var(--unidad-espaciado) * 4);
+        padding: calc(var(--unidad-espaciado) * 3);
+    }
+
+    .comprarHeader {
+        padding: calc(var(--unidad-espaciado) * 3);
+    }
+
+    .comprarEstadoCard {
+        max-width: 820px;
+        padding: calc(var(--unidad-espaciado) * 4);
+    }
+
+    .comprarEstadoLista {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}

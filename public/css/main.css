@@ -23,6 +23,13 @@
 /*Paginas usuarios autentificados*/
 @import 'paneles/usuarioAutenticado/navUsuario.css';
 @import 'paneles/usuarioAutenticado/perfilUsuario.css';
+@import 'paneles/usuarioAutenticado/perfilEditarUsuario.css';
+@import 'paneles/usuarioAutenticado/prestamosUsuario.css';
+@import 'paneles/usuarioAutenticado/publicarUsuario.css';
+@import 'paneles/usuarioAutenticado/inicioLoginUsuario.css';
+@import 'paneles/usuarioAutenticado/alquilarLibrosUsuario.css';
+@import 'paneles/usuarioAutenticado/comprarLibrosUsuario.css';
+@import 'paneles/usuarioAutenticado/organizarEventoUsuario.css';
 
 /*Panel de administrador*/
 @import 'panelAdmin/navAdmin.css';

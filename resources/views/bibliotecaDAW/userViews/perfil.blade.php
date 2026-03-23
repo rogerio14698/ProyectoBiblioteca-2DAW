@@ -73,6 +73,7 @@
             @include('layouts.historialVersionMovil')
         </div>
     </main>
-    <div class="contenedor separador"></div>
+
+    <hr>
 
 @endsection

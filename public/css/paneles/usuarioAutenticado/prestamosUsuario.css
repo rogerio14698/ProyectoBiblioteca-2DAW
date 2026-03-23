@@ -1,0 +1,98 @@
+.prestamosUsuario {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 3);
+    background-color: var(--bgPerfilUsuario);
+    padding: calc(var(--unidad-espaciado) * 2);
+}
+
+.prestamosHeader {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 1.5);
+    padding: calc(var(--unidad-espaciado) * 2);
+    border: 1px solid var(--colorBorde);
+    border-radius: var(--radio-medio);
+    background-color: var(--color-blanco);
+    box-shadow: var(--sombra-suave);
+}
+
+.prestamosHeader h1,
+.prestamosCard h2 {
+    margin: 0;
+    color: var(--color-primario-oscuro);
+    text-decoration: underline;
+}
+
+.prestamosHeader span {
+    color: var(--color-primario);
+    font-weight: 700;
+}
+
+.prestamosHeader p,
+.prestamosCard p {
+    margin: 0;
+    color: var(--color-texto-principal);
+    line-height: var(--fuente-altura-linea);
+}
+
+.prestamosResumen,
+.prestamosGrid {
+    display: grid;
+    gap: calc(var(--unidad-espaciado) * 2);
+}
+
+.prestamosCard {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 1.5);
+    padding: calc(var(--unidad-espaciado) * 2);
+    border: 1px solid var(--colorBorde);
+    border-radius: var(--radio-medio);
+    background-color: var(--color-blanco);
+    box-shadow: var(--sombra-media);
+}
+
+.prestamosCardDestacada {
+    border-left: 6px solid var(--color-primario);
+    background: linear-gradient(180deg, var(--color-blanco) 0%, var(--color-fondo-global) 100%);
+}
+
+.prestamosEtiqueta {
+    width: fit-content;
+    margin: 0;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background-color: var(--color-fondo-tag);
+    color: var(--color-texto-tag);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.prestamosLista {
+    display: grid;
+    gap: var(--unidad-espaciado);
+}
+
+.prestamosLista p {
+    padding: calc(var(--unidad-espaciado) * 1.25);
+    border: 1px solid var(--colorBorde);
+    border-radius: var(--radio-pequeno);
+    background-color: var(--color-fondo-global);
+}
+
+@media (min-width: 768px) {
+    .prestamosUsuario {
+        gap: calc(var(--unidad-espaciado) * 4);
+        padding: calc(var(--unidad-espaciado) * 3);
+    }
+
+    .prestamosResumen {
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    }
+
+    .prestamosGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
