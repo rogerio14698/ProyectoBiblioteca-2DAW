@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventosController;
 use App\Http\Controllers\LibroController;
 use App\Http\Controllers\ContactoController;
+use App\Http\Controllers\SlideBienvenidaController;
 use App\Models\Contacto;
 
 //Redirección a la página de inicio
@@ -126,9 +127,9 @@ Route::middleware(['auth:admin'])->group(function () {
 
     // =================== Inicio gestion de contenido web ===================
     // Gestión de contenido pagina principal
-    Route::get('/admin/gestionHome', function () {
-        return view('bibliotecaDAW.adminViews.GestionarContenidoWeb.gestionarHome');
-    })->name('admin.gestionHome');
+    Route::get('/admin/gestionHome', [SlideBienvenidaController::class, 'adminHome'])->name('admin.gestionHome');
+    Route::post('/admin/gestionHome', [SlideBienvenidaController::class, 'store'])->name('admin.slide.store');
+    Route::put('/admin/gestionHome/{id}', [SlideBienvenidaController::class, 'update'])->name('admin.slide.update');
 
     //Gestion del carrusel-home
     // Vista principal del carrusel (lista + formulario reutilizable crear/editar)

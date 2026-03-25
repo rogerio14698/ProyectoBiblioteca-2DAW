@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('imagen_url')->nullable();
             $table->foreignId('usuario_id')->constrained('usuarios')->onDelete('cascade');
             $table->integer('prioridad')->default(0); //cuanto mayor sea el numero mayor prioridad
+            $table->string('url_paginaInterna')->nullable(); // Nueva columna para la URL de la página interna del evento
             $table->timestamps();
         });
     }

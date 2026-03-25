@@ -145,12 +145,9 @@
 
                         <div class="eventoInfo">
                             <h3>{{ $evento->titulo }}</h3>
-                            <p class="eventoDescripcion">{{ $evento->descripcion }}</p>
                             <div class="eventoDetalles">
                                 <p>Fecha<br><strong>{{ date('d/m', strtotime($evento->fecha_hora)) }}</strong></p>
-                                <p>Hora<br><strong>{{ date('H:i', strtotime($evento->fecha_hora)) }}</strong></p>
                                 <p>Ubicación<br><strong>{{ $evento->ubicacion }}</strong></p>
-                                <p>Organizadrx<br><strong>{{ $evento->usuario->name }}</strong></p>
                             </div>
                             <button class="btn-base btn-verde">Ir a evento</button>
                         </div>
@@ -180,16 +177,12 @@
                         </div>
                         <div class="noticiasInfo">
                             <h2>{{ $noticia->titulo }}</h2>
-                            <p>{{ $noticia->contenido }}</p>
                             <div class="noticias-detalles">
-                                <p>{{ $noticia->created_at->format('d/m/Y') }}</p>
                                 <strong>
                                     <p>{{ $noticia->autor }}</p>
                                 </strong>
                             </div>
-                            <!--Aqui me va a generar un modal con la noticia completa
-                                                                                                                        Hay que modificar la base de datos y poner un text-area
-                                                                                                                        o ver la mejor forma de hacer esto-->
+                            <!--Aqui me va a generar un modal con la noticia completa, Hay que modificar la base de datos y poner un text-area o ver la mejor forma de hacer esto-->
                             <button class="btn-base btn-verde">Leer más</button>
                         </div>
 

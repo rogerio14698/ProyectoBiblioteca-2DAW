@@ -26,6 +26,7 @@ class Noticias extends Model
         'categoria',
         'enlace_externo',
         'admin_id',
+        'url_paginaInterna'
     ];
 
     // Casting automático de tipos para ciertos campos.

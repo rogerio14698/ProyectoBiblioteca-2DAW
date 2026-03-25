@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('descripcion');
             $table->string('imagen');
             $table->string('url')->nullable();
+            $table->unsignedInteger('posicion')->nullable();
             $table->timestamps();
         });
     }

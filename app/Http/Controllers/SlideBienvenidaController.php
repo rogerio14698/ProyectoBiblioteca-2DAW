@@ -5,16 +5,36 @@ namespace App\Http\Controllers;
 use App\Models\SlideBienvenida;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class SlideBienvenidaController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Muestra la vista de gestión de Home con listado de slides.
+     *
+     * @param Request $request Petición HTTP para detectar si estamos en modo edición.
+     * @return View Vista con listado de slides y, opcionalmente, slide a editar.
      */
-    public function index()
+    public function adminHome(Request $request): View
     {
-        
-        
+        // Obtenemos los slides ordenados por posicion y, como desempate, por fecha.
+        $slidesBienvenida = SlideBienvenida::orderBy('posicion')->orderBy('created_at', 'desc')->get();
+
+        // Por defecto no se está editando ningún slide.
+        $slideEditar = null;
+
+        // Si llega ?edit=ID, buscamos ese slide para precargar el formulario.
+        if ($request->filled('edit')) {
+            $slideEditar = SlideBienvenida::find($request->query('edit'));
+        }
+
+        // Renderizamos la misma vista para crear y editar (enfoque DRY).
+        return view('bibliotecaDAW.adminViews.GestionarContenidoWeb.gestionarHome', [
+            'slidesBienvenida' => $slidesBienvenida,
+            'slideEditar' => $slideEditar,
+        ]);
     }
 
     /**
@@ -28,9 +48,39 @@ class SlideBienvenidaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    /**
+     * Guarda un nuevo slide de bienvenida.
+     *
+     * @param Request $request Datos del formulario de creación.
+     * @return RedirectResponse Redirección a la pantalla de gestión con mensaje de éxito.
+     */
+    public function store(Request $request): RedirectResponse
     {
-        //
+        // Validamos los campos mínimos del formulario para proteger integridad de datos.
+        $validatedData = $request->validate([
+            'titulo' => 'required|string|max:255',
+            'descripcion' => 'required|string',
+            'imagen' => 'required|image|mimes:jpeg,png,jpg,webp|max:4096',
+            'url' => 'nullable|url|max:255',
+            'posicion' => 'nullable|integer|min:1',
+        ]);
+
+        // Si el usuario no define posicion, se asigna al final del listado actual.
+        $posicionFinal = $validatedData['posicion'] ?? ((SlideBienvenida::max('posicion') ?? 0) + 1);
+
+        // Guardamos la imagen en disco público y persistimos la ruta final para mostrarla.
+        $pathImagen = $request->file('imagen')->store('slides-bienvenida', 'public');
+
+        // Creamos el slide con los datos validados usando asignación masiva segura.
+        SlideBienvenida::create([
+            'titulo' => $validatedData['titulo'],
+            'descripcion' => $validatedData['descripcion'],
+            'imagen' => 'storage/' . $pathImagen,
+            'url' => $validatedData['url'] ?? null,
+            'posicion' => $posicionFinal,
+        ]);
+
+        return redirect()->route('admin.gestionHome')->with('success', 'Slide creado correctamente.');
     }
 
     /**
@@ -52,9 +102,45 @@ class SlideBienvenidaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, SlideBienvenida $slideBienvenida)
+    /**
+     * Actualiza un slide existente reutilizando el mismo formulario.
+     *
+     * @param Request $request Datos del formulario de edición.
+     * @param int $id Identificador del slide a actualizar.
+     * @return RedirectResponse Redirección a la pantalla de gestión con mensaje de éxito.
+     */
+    public function update(Request $request, int $id): RedirectResponse
     {
-        //
+        // Buscamos el slide o devolvemos 404 automáticamente si no existe.
+        $slideBienvenida = SlideBienvenida::findOrFail($id);
+
+        // En edición, la imagen es opcional para no obligar a subirla de nuevo.
+        $validatedData = $request->validate([
+            'titulo' => 'required|string|max:255',
+            'descripcion' => 'required|string',
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:4096',
+            'url' => 'nullable|url|max:255',
+            'posicion' => 'nullable|integer|min:1',
+        ]);
+
+        // Si llega una imagen nueva, borramos la anterior (si era local) y guardamos la nueva.
+        if ($request->hasFile('imagen')) {
+            if ($slideBienvenida->imagen && str_starts_with($slideBienvenida->imagen, 'storage/')) {
+                Storage::disk('public')->delete(str_replace('storage/', '', $slideBienvenida->imagen));
+            }
+
+            $pathImagen = $request->file('imagen')->store('slides-bienvenida', 'public');
+            $slideBienvenida->imagen = 'storage/' . $pathImagen;
+        }
+
+        // Actualizamos datos editables comunes.
+        $slideBienvenida->titulo = $validatedData['titulo'];
+        $slideBienvenida->descripcion = $validatedData['descripcion'];
+        $slideBienvenida->url = $validatedData['url'] ?? null;
+        $slideBienvenida->posicion = $validatedData['posicion'] ?? $slideBienvenida->posicion;
+        $slideBienvenida->save();
+
+        return redirect()->route('admin.gestionHome')->with('success', 'Slide actualizado correctamente.');
     }
 
     /**

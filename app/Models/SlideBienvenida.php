@@ -12,6 +12,7 @@ class SlideBienvenida extends Model
         'descripcion',
         'imagen',
         'url',
+        'posicion',
     ];
 
 }

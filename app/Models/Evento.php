@@ -26,6 +26,7 @@ class Evento extends Model
         'imagen_url',
         'usuario_id',
         'prioridad',
+        'url_paginaInterna'
     ];
     //Validamos el formulario.
 

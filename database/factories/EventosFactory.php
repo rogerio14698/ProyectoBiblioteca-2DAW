@@ -26,6 +26,7 @@ class EventosFactory extends Factory
             'ubicacion' => $this->faker->address(),
             'usuario_id' => 4,
             'prioridad' => $this->faker->numberBetween(1, 3),
+            'url_paginaInterna' => $this->faker->url(),
         ];
     }
 }

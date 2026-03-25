@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('enlace_externo')->nullable();
             $table->unsignedBigInteger('admin_id')->nullable();
             $table->foreign('admin_id')->references('id')->on('admin')->onDelete('set null');
+            $table->string('url_paginaInterna')->nullable(); // Nueva columna para la URL de la página interna de la noticia
             $table->timestamps();
         });
     }

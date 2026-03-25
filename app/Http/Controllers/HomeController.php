@@ -16,7 +16,7 @@ class HomeController extends Controller
     public function index()
     {
         //Obtener eventos ordenados por fecha
-        $slideBienvenidas = SlideBienvenida::orderBy('created_at', 'desc')->get();
+        $slideBienvenidas = SlideBienvenida::orderBy('posicion')->orderBy('created_at', 'desc')->get();
         $eventos = Evento::with('usuario:id,name')->orderBy('fecha_hora')->paginate(6);
         $libros = Libro::all();
         $noticias = Noticias::orderBy('created_at', 'desc')->paginate(4);
