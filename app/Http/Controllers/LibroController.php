@@ -57,6 +57,7 @@ class LibroController extends Controller
             'searchGenero' => $searchGenero,
         ]);
     }
+    //Obtener todos los libros para la vista de gestion Catalago admin. con busqueda
 
     /**
      * Display highlighted books

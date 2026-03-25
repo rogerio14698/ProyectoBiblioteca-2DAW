@@ -12,14 +12,13 @@
                     <ul class="sub-menu-items">
                         <li><a href="{{ route('admin.gestionHome') }}">Gestionar Home</a></li>
                         <li><a href="{{ route('admin.gestionCarrusel') }}">Gestionar Carusel de Eventos</a></li>
-                        <li><a href="{{ route('admin.gestionCarrusel') }}">Carrusel Home</a></li>
                         <!-- <li><a href="{{ route('admin.gestionNoticias') }}">Noticias</a></li> -->
                     </ul>
                 </li>
                 <li>
                     <h3>Contenido Fijos</h3>
                     <ul class="sub-menu-items">
-                        <li><a href="{{ route('admin.gestionHeader') }}">Header y Footer</a></li>
+                        <li><a href="{{ route('admin.gestionFooter') }}">Footer</a></li>
                     </ul>
                 </li>
                 <li>
@@ -28,6 +27,7 @@
                         <li><a href="{{ route('admin.gestionCatalogo') }}">Contenido Catálogo</a></li>
                         <li><a href="{{ route('admin.gestionActividades') }}">Contenido Actividades</a></li>
                         <li><a href="{{ route('admin.gestionServicios') }}">Contenido Servicios Digitales</a></li>
+                        <li><a href="{{ route('admin.gestionNoticias') }}">Contenido Noticias</a></li>
                         <li><a href="{{ route('admin.gestionContacto') }}">Contenido Contacto</a></li>
                     </ul>
                 </li>
@@ -70,6 +70,7 @@
                     <h3>Gestión de Libros</h3>
                     <ul class="sub-menu-items">
                         <li><a href="{{ route('admin.inventario') }}">Inventario</a></li>
+                        <li><a href="{{ route('admin.gestionarLibros') }}">Listado Libros</a></li>
                         <li><a href="{{ route('admin.librosPerdidos') }}">Libros Perdidos</a></li>
                         <li><a href="{{ route('admin.librosNuevos') }}">Libros Nuevos</a></li>
                         <li><a href="{{ route('admin.librosPrestados') }}">Libros Prestados</a></li>

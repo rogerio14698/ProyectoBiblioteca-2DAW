@@ -1,0 +1,234 @@
+/* Estilos para Gestión del Carrusel Home - Panel Administrativo */
+
+
+.gestionCarruselHome{
+    background: var(--blanco);
+    margin-bottom: 20px;
+}
+.gestionCarruselHome h2{
+    color: var(--color-primario);
+    font-size: 24px;
+    text-decoration: underline;
+    margin-bottom: calc(var(--unidad-espaciado) * 0.5);
+}
+.gestionCarruselHome p{
+    color: var(--color-texto-principal);
+    font-size: 16px;
+    margin-bottom: calc(var(--unidad-espaciado) * 2);
+}
+
+/* Formulario de Eventos */
+.gestionFormularioCarrusel {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 2);
+    background-color: var(--color-fondo-global);
+    padding: calc(var(--unidad-espaciado) * 3);
+    border-radius: var(--radio-medio);
+    margin-bottom: calc(var(--unidad-espaciado) * 4);
+    border-left: 4px solid var(--color-primario);
+    box-shadow: var(--sombra-media);
+}
+
+/* Grupo de Formulario */
+.gestionGrupoFormulario {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 1);
+}
+
+/* Etiquetas del Formulario */
+.gestionGrupoFormulario label {
+    color: var(--color-primario-claro);
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* Inputs Generales */
+.gestionGrupoFormulario input[type="text"],
+.gestionGrupoFormulario input[type="datetime-local"],
+.gestionGrupoFormulario input[type="file"],
+.gestionGrupoFormulario textarea,
+.gestionGrupoFormulario select {
+    width: 100%;
+    padding: var(--input-relleno);
+    border: 1px solid var(--input-borde);
+    border-radius: var(--radio-pequeno);
+    font-family: var(--fuente-familia);
+    font-size: 14px;
+    color: var(--color-texto-principal);
+    background-color: var(--color-blanco);
+    transition: all var(--transicion-rapida);
+    box-sizing: border-box;
+}
+
+/* Focus de Inputs */
+.gestionGrupoFormulario input[type="text"]:focus,
+.gestionGrupoFormulario input[type="datetime-local"]:focus,
+.gestionGrupoFormulario input[type="file"]:focus,
+.gestionGrupoFormulario textarea:focus,
+.gestionGrupoFormulario select:focus {
+    outline: none;
+    border-color: var(--color-primario);
+    box-shadow: var(--input-foco-sombra);
+}
+
+/* Textarea */
+.gestionGrupoFormulario textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Select */
+.gestionGrupoFormulario select {
+    cursor: pointer;
+}
+
+/* Botón Envío Formulario */
+.gestionBotonEnvio {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    border: none;
+    padding: calc(var(--unidad-espaciado) * 1.5) calc(var(--unidad-espaciado) * 2);
+    border-radius: var(--radio-pequeno);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transicion-rapida);
+    width: 100%;
+}
+
+.gestionBotonEnvio:hover {
+    background-color: var(--color-primario-oscuro);
+    box-shadow: var(--sombra-media);
+    transform: translateY(-2px);
+}
+
+.gestionBotonEnvio:active {
+    transform: translateY(0);
+}
+
+/* Tabla de Eventos */
+.gestionTablaBloqueador {
+    overflow-x: auto;
+    border-radius: var(--radio-pequeno);
+    box-shadow: var(--sombra-suave);
+    margin-top: calc(var(--unidad-espaciado) * 2);
+}
+
+.gestionTablaEventos {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--color-blanco);
+}
+
+/* Encabezado de Tabla */
+.gestionTablaEventos thead {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+}
+
+.gestionTablaEventos thead th {
+    padding: calc(var(--unidad-espaciado) * 1.5);
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+/* Cuerpo de Tabla */
+.gestionTablaEventos tbody tr {
+    border-bottom: 1px solid var(--color-borde);
+    transition: background-color var(--transicion-rapida);
+}
+
+.gestionTablaEventos tbody tr:hover {
+    background-color: rgba(74, 144, 226, 0.05);
+}
+
+.gestionTablaEventos tbody td {
+    padding: calc(var(--unidad-espaciado) * 1.5);
+    color: var(--color-texto-principal);
+    font-size: 14px;
+}
+
+/* Imágenes en Tabla */
+.gestionTablaEventos tbody td img {
+    max-width: 100px;
+    height: auto;
+    border-radius: var(--radio-pequeno);
+    object-fit: cover;
+}
+
+/* Botones de Acciones */
+.gestionBotonEditar,
+.gestionBotonEliminar {
+    padding: calc(var(--unidad-espaciado) * 0.75) calc(var(--unidad-espaciado) * 1.5);
+    border: none;
+    border-radius: var(--radio-pequeno);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transicion-rapida);
+    display: inline-block;
+    margin-right: calc(var(--unidad-espaciado) * 0.5);
+}
+
+.gestionBotonEditar {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    text-decoration: none;
+}
+
+.gestionBotonEditar:hover {
+    background-color: var(--color-primario-oscuro);
+    box-shadow: var(--sombra-suave);
+}
+
+.gestionBotonEliminar {
+    background-color: var(--color-error);
+    color: var(--color-blanco);
+}
+
+.gestionBotonEliminar:hover {
+    background-color: var(--bgBtnRojoHover);
+    box-shadow: var(--sombra-suave);
+}
+
+/* Fila vacía */
+.gestionFilaVacia td {
+    text-align: center;
+    color: var(--color-texto-mutado);
+    padding: calc(var(--unidad-espaciado) * 3) !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .gestionFormularioCarrusel {
+        padding: calc(var(--unidad-espaciado) * 2);
+        gap: calc(var(--unidad-espaciado) * 1.5);
+    }
+
+    .gestionTablaBloqueador {
+        margin-top: calc(var(--unidad-espaciado) * 3);
+    }
+
+    .gestionTablaEventos thead th {
+        padding: var(--unidad-espaciado);
+        font-size: 12px;
+    }
+
+    .gestionTablaEventos tbody td {
+        padding: var(--unidad-espaciado);
+        font-size: 13px;
+    }
+
+    .gestionTablaEventos tbody td img {
+        max-width: 80px;
+    }
+
+    .gestionBotonEditar,
+    .gestionBotonEliminar {
+        padding: calc(var(--unidad-espaciado) * 0.5) var(--unidad-espaciado);
+        font-size: 11px;
+    }
+}

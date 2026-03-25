@@ -118,7 +118,7 @@ Route::middleware(['auth:admin'])->group(function () {
     })->name('admin.dashboard');
     //Gestion de roles y permisos
     Route::get('/admin/gestionRoles', function () {
-        return view('bibliotecaDAW.adminViews.GestionarRoles.gestionarRoles');
+        return view('bibliotecaDAW.adminViews.GestionarRoles.rolesYpermisos');
     })->name('admin.gestionRoles');
 
     // Fin de roles y permisos
@@ -148,7 +148,7 @@ Route::middleware(['auth:admin'])->group(function () {
     })->name('admin.gestionNoticias');
     //Gestión del catalogo
     Route::get('/admin/gestionCatalogo', function () {
-        return view('bibliotecaDAW.adminViews.GestionarContenidoWeb.gestionarCatalogo');
+        return view('bibliotecaDAW.adminViews.GestionarContenidoWeb.gestionarContenidoCatalogo');
     })->name('admin.gestionCatalogo');
     //Gestion Actividades y eventos
     Route::get('/admin/gestionActividades', function () {
@@ -173,9 +173,6 @@ Route::middleware(['auth:admin'])->group(function () {
 
 
     //Gestion varios header y footer
-    Route::get('/admin/gestionHeader', function () {
-        return view('bibliotecaDAW.adminViews.GestionarContenidoWeb.gestionarHeader');
-    })->name('admin.gestionHeader');
     Route::get('/admin/gestionFooter', function () {
         return view('bibliotecaDAW.adminViews.GestionarContenidoWeb.gestionarFooter');
     })->name('admin.gestionFooter');
@@ -190,6 +187,11 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin/gestionUsuarios', function () {
         return view('bibliotecaDAW.adminViews.GestionarUsuarios.gestionarUsuarios');
     })->name('admin.gestionUsuarios');
+        //Editar usuario
+    Route::get('/admin/editarUsuario/{id}', function ($id) {
+        // Lógica para obtener los datos del usuario con el ID proporcionado
+    })->name('admin.editarUsuario');
+
     //Gestion de sanciones
     Route::get('/admin/gestionSanciones', function () {
         return view('bibliotecaDAW.adminViews.GestionarUsuarios.gestionarSanciones');

@@ -35,4 +35,7 @@
 @import 'panelAdmin/navAdmin.css';
 @import 'panelAdmin/dashboard.css';
 @import 'panelAdmin/tablaMailDashboard.css';
+@import 'panelAdmin/gestionarHome.css';
+@import 'panelAdmin/gestionarCarruselHome.css';
+@import 'panelAdmin/gestionarContenidoCatalogo.css';
 
