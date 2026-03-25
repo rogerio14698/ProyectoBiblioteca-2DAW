@@ -7,30 +7,34 @@
 
         <div class="contactoHeader">
             <h1 class="tituloContacto">Contacto</h1>
-            <p class="descripcionContacto">Información de contacto de la Biblioteca DAW.</p>
+            <p class="descripcionContacto">Información de contacto con del desarrollador de la web</p>
         </div>
         <section class="contenedor-columnas">
             <div class="columna-izquierda">
                 <div class="contactoDirecion">
-                    <h2>Dirección: </h2>
-                    <p>Calle Principal, 123, Ciudad, País</p>
+                    <h2>Calle: </h2>
+                    <p>Pintor Orlando Pelayo, 7, 33023</p>
                 </div>
 
                 <div class="contactoTelefono">
                     <h2>Teléfono: </h2>
-                    <p>+1 234 567 890</p>
+                    <p>+34 629 94 81 07</p>
                 </div>
 
                 <div class="contactoEmail">
                     <h2>Email: </h2>
-                    <p>contacto@bibliotecadaw.com</p>
+                    <p>rogeriolucas14698@gmail.com</p>
+                </div>
+
+                <div class="pdf">
+                    <h2>Descarga mi CV</h2>
+                    <h3>Resumen mi perfil:</h3>
+                    <p>Desarrollador Full Stack finalizando el Grado Superior (DAW), con un enfoque pragmático y orientado a la resolución de problemas. Aporto experiencia práctica en el mantenimiento de aplicaciones en producción, despliegue de entornos con Docker y desarrollo backend con Laravel 12. Destaco por mi capacidad para analizar proyectos complejos, refactorizar código heredado y solucionar bugs, aportando valor y estabilidad al software desde el primer día.</p>
+                    <a href="{{ asset('docs/CV-Rogerio Lucas-DAW.pdf') }}" target="_blank" rel="noopener noreferrer">Abrir CV</a>
                 </div>
 
 
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086123456789!2d-122.41941548468123!3d37.77492977975956!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c12345678%3A0xabcdef1234567890!2sBiblioteca%20DAW!5e0!3m2!1ses-419!2sus!4v1712345678901"
-                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy">
-                </iframe>
+
             </div>
 
 
