@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Libro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 
 class LibroController extends Controller
@@ -68,6 +69,26 @@ class LibroController extends Controller
         $libros = Libro::where('destacado', true)->get();
         return view('bibliotecaDAW.index', [
             'libros' => $libros
+        ]);
+    }
+    //Obetner un libro específico para su página interna
+    public function paginaInterna($id)
+    {
+        $libro = Libro::findOrFail($id);
+
+        $portadaUrl = 'img/elPrincipito.jpg';
+
+        if (!empty($libro->portada_img)) {
+            $portadaUrl = Str::startsWith($libro->portada_img, ['http://', 'https://'])
+                ? $libro->portada_img
+                : asset($libro->portada_img);
+        } else {
+            $portadaUrl = asset($portadaUrl);
+        }
+
+        return view('bibliotecaDAW.publicViews.paginasInternas.paginaInternaLibro', [
+            'libro' => $libro,
+            'portadaUrl' => $portadaUrl,
         ]);
     }
 

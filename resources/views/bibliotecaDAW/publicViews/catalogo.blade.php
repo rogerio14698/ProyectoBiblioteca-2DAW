@@ -74,7 +74,7 @@
                     </div>
 
                     <div class="accionesCatalogo">
-                        <a href="#" class="btn-base btn-ver">Ver detalles</a>
+                        <a href="{{ route('libro.paginaInterna', $libro->id) }}" class="btn-base btn-ver">Ver detalles</a>
                         <a href="#" class="btn-base btn-carrito">Añadir al carrito</a>
                         <a href="#" class="btn-base btn-alquilar">Alquilar ahora</a>
                     </div>

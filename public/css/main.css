@@ -19,6 +19,7 @@
 @import 'paneles/Invitado/contacto.css';
 @import 'paneles/Invitado/login.css';
 @import 'paneles/Invitado/registro.css';
+@import 'paneles/Invitado/paginaInternaLibro.css';
 
 /*Paginas usuarios autentificados*/
 @import 'paneles/usuarioAutenticado/navUsuario.css';

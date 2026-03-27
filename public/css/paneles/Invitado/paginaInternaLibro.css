@@ -1,0 +1,126 @@
+.paginaInternaLibro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(var(--unidad-espaciado) * 3);
+    padding: calc(var(--unidad-espaciado) * 3);
+    background-color: var(--bgPagina);
+}
+
+.book-container {
+   width: min(100%, 340px);
+    display: flex;
+    perspective: 1100px;
+    perspective-origin: center;
+    align-items: center;
+    justify-content: center;
+    width: 351px;
+}
+
+.book {
+    position: relative;
+    width: 220px;
+    height: 300px;
+    transform-style: preserve-3d;
+    transform: rotateY(20deg) rotateX(-20deg);
+    transition: transform 500ms ease;
+}
+
+.book-container:hover .book {
+    transform: rotateY(-12deg) rotateX(7deg) translateZ(10px);
+}
+
+.book>div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-pequeno);
+    box-shadow: var(--sombra-media);
+    backface-visibility: hidden;
+}
+
+.book .front {
+    background-color: var(--color-blanco);
+    overflow: hidden;
+    transform: translateZ(14px);
+}
+
+.book .front img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.book .back {
+    background-color: var(--color-primario-oscuro);
+    transform: rotateY(180deg) translateZ(14px);
+}
+
+.book .spine {
+    width: 28px;
+    transform-origin: left center;
+    transform: rotateY(-90deg) translateX(-14px);
+    background-color: var(--color-primario);
+}
+
+.book .right {
+    width: 28px;
+    left: auto;
+    right: 0;
+    transform-origin: right center;
+    transform: rotateY(90deg) translateX(14px);
+    background-color: var(--color-blanco);
+}
+
+.book .top,
+.book .bottom,
+.book .left {
+    height: 28px;
+    background-color: var(--color-blanco);
+}
+
+.book .top {
+    transform-origin: top center;
+    transform: rotateX(90deg) translateY(-14px);
+}
+
+.book .bottom {
+    top: auto;
+    bottom: 0;
+    transform-origin: bottom center;
+    transform: rotateX(-90deg) translateY(14px);
+}
+
+.book .left {
+    width: 28px;
+    transform-origin: left center;
+    transform: rotateY(-90deg) translateX(-14px);
+    background-color: var(--color-blanco);
+}
+
+@media (min-width: 768px) {
+    .cardPaginaInterna {
+        display: flex;
+        height: 80vh;
+    }
+
+    .contenidoPaginaInterna {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .paginaInternaLibro {
+        display: flex;
+        padding: var(--relleno-movil);
+    }
+
+    .book {
+        width: 180px;
+        height: 250px;
+    }
+}

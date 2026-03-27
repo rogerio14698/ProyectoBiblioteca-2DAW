@@ -23,6 +23,9 @@ Route::get('/', function () {
 Route::get('/biblioteca', [HomeController::class, 'index']);
 Route::get('/librosDestacados', [HomeController::class, 'destacados']);
 
+//Ruta para mostrar libro específico, ruta de su pargina interna:
+Route::get('/libro/{id}', [LibroController::class, 'paginaInterna'])->name('libro.paginaInterna');
+
 // Rutas comunes para todas las páginas
 Route::get('/actividades', function () {
     $eventos = \App\Models\Evento::orderby('created_at', 'desc')->paginate(6); // Obtener todos los eventos y paginarlos de 6 en 6. 

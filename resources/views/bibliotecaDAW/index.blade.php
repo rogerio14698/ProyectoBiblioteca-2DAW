@@ -110,7 +110,7 @@
                                     <!-- Título y enlace -->
                                     <div class="novedadInfo">
                                         <h3 class="tituloCard">{{ $libro->titulo }}</h3>
-                                        <a href="#" class="btn-base btn-verde">Ver Libro</a>
+                                        <a href="{{ route('libro.paginaInterna', $libro->id) }}" class="btn-base btn-verde">Ver Libro</a>
                                     </div>
                                 </div>
                             </div>
