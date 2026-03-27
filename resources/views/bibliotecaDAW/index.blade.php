@@ -3,9 +3,9 @@
 @section('title', 'Home')
 
 @section('content')
-    <main>
-        <!--Slides de carrusel bienvenida -->
-        <section class="contenedor bienvenida">
+    <!--Slides de carrusel bienvenida -->
+
+        <section class="bienvenida separador">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                     @forelse ($slideBienvenidas as $slideBienvenida)
@@ -22,13 +22,13 @@
                     @forelse ($slideBienvenidas as $slideBienvenida)
                         <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                             <div class="bienvenidaSlideContenido">
-                                <h1 class="bienvenidaTitulo">{{ $slideBienvenida->titulo }}</h1>
-                                <p class="bienvenidaParrafo">{!! nl2br(e($slideBienvenida->descripcion)) !!}</p>
+                                <h1 class="tituloPagina">{{ $slideBienvenida->titulo }}</h1>
+                                <p class="bienvenidaParrafo parrafoTitulo">{!! nl2br(e($slideBienvenida->descripcion)) !!}</p>
                                 @if ($slideBienvenida->url)
-                                    <a href="{{ $slideBienvenida->url }}" class="btn-base btn-primario">Explorar
+                                    <a href="{{ $slideBienvenida->url }}" class="btn-base btn-verde">Explorar
                                         Biblioteca</a>
                                 @else
-                                    <button class="btn-base btn-primario" type="button" disabled>Explorar
+                                    <button class="btn-base btn-verde" type="button" disabled>Explorar
                                         Biblioteca</button>
                                 @endif
                                 <picture class="bienvenida-imagen">
@@ -70,18 +70,18 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-
         </section>
+
         <!-- Fin de la seccion de bienvenida -->
-        <hr class="separador contenedor">
         <!-- Novedades del Catálogo  -->
 
-        <section class="contenedor novedadCatalogo">
+        <section class="novedadCatalogo separador">
 
             <!-- Título y descripción de la sección -->
-            <div class="textoNovedadCat">
-                <h2>Novedades del Catálogo</h2>
-                <p>Descubre las últimas incorporaciones a nuestra colección de libros y recursos digitales</p>
+            <div class="headerContenido">
+                <h2 class="tituloContenido">Novedades del Catálogo</h2>
+                <p class="parrafoContenido">Descubre las últimas incorporaciones a nuestra colección de libros y recursos
+                    digitales</p>
             </div>
 
             <!-- Contenedor grid: columna 1 = btn prev, columna 2 = slider, columna 3 = btn next -->
@@ -109,7 +109,7 @@
                                     </div>
                                     <!-- Título y enlace -->
                                     <div class="novedadInfo">
-                                        <h3>{{ $libro->titulo }}</h3>
+                                        <h3 class="tituloCard">{{ $libro->titulo }}</h3>
                                         <a href="#" class="btn-base btn-verde">Ver Libro</a>
                                     </div>
                                 </div>
@@ -123,13 +123,11 @@
             </div>
         </section>
         <!-- Fin de la sección de novedades del catálogo -->
-
-        <hr class="contenedor separador">
         <!-- Agenda de eventos -->
-        <section class="contenedor agenda">
-            <div class="agendaTexto">
-                <h2>Agenda de Eventos</h2>
-                <p>Agenda de eventos programados</p>
+        <section class="agenda separador separador">
+            <div class="headerContenido">
+                <h2 class="tituloContenido">Agenda de Eventos</h2>
+                <p class="parrafoContenido">Agenda de eventos programados</p>
                 <!--Ver como poner un carrusel dentro de los cards de eventos. -->
             </div>
             <div class="agendaContenedor">
@@ -144,7 +142,7 @@
                         </div>
 
                         <div class="eventoInfo">
-                            <h3>{{ $evento->titulo }}</h3>
+                            <h3 class="tituloCard">{{ $evento->titulo }}</h3>
                             <div class="eventoDetalles">
                                 <p>Fecha<br><strong>{{ date('d/m', strtotime($evento->fecha_hora)) }}</strong></p>
                                 <p>Ubicación<br><strong>{{ $evento->ubicacion }}</strong></p>
@@ -159,11 +157,10 @@
             </div>
         </section>
 
-        <hr class="contenedor separador">
-        <section class="contenedor noticias">
-            <div class="noticiaTexto">
-                <h2>Noticias</h2>
-                <p>Noticias relacionadas con la biblioteca y el mundo académico</p>
+        <section class="noticias separador">
+            <div class="headerContenido">
+                <h2 class="tituloContenido">Noticias</h2>
+                <p class="parrafoContenido">Noticias relacionadas con la biblioteca y el mundo académico</p>
             </div>
             <div class="noticiasContenedor">
                 @foreach ($noticias as $noticia)
@@ -176,10 +173,10 @@
                             </picture>
                         </div>
                         <div class="noticiasInfo">
-                            <h2>{{ $noticia->titulo }}</h2>
+                            <h2 class="tituloCard">{{ $noticia->titulo }}</h2>
                             <div class="noticias-detalles">
                                 <strong>
-                                    <p>{{ $noticia->autor }}</p>
+                                    <p class="parrafoContenido">{{ $noticia->autor }}</p>
                                 </strong>
                             </div>
                             <!--Aqui me va a generar un modal con la noticia completa, Hay que modificar la base de datos y poner un text-area o ver la mejor forma de hacer esto-->
@@ -193,6 +190,4 @@
                 {{ $noticias->links('vendor.pagination.bootstrap-5') }}
             </div>
         </section>
-        <hr class="contenedor separador">
-    </main>
 @endsection

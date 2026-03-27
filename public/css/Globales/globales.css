@@ -12,18 +12,6 @@ body {
 
 }
 
-.contenedor {
-    width: 95%;
-    display: block;
-    margin: 0 auto;
-    padding: 10px;
-}
-.separador {
-    border: none;
-    border-top: 1px solid var(--color-fondo-global);
-    margin: 20px 0 0;
-}
-
 a {
     text-decoration: none;
 }
@@ -44,4 +32,79 @@ h6,
 p {
     margin: 0;
     padding: 0;
+}
+/*Estilos Estándar*/
+.contenedor {
+    width: 95%;
+    display: block;
+    margin: 0 auto;
+    box-shadow: var(--sombra);
+}
+.contenedorNav{
+    width: 95%;
+    display: block;
+    margin: 0 auto;
+}
+.separador {
+    margin-bottom: 20px;
+}
+
+/*Estilos de texto*/
+
+.tituloPagina {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--colorTerciario);
+    text-align: center;
+    margin-bottom: 20px;
+    text-decoration: underline;
+}
+.tituloContenido {
+    font-size: 1.7rem;
+    font-weight: bold;
+    color: var(--colorTerciario);
+    text-align: center;
+    margin-bottom: 20px;
+    text-decoration: underline;
+}
+.tituloCard {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--colorTexto);
+}
+.parrafoTitulo {
+    font-size: 1.2rem;
+    color: var(--colorTexto);
+}
+.parrafoContenido{
+    font-size: 1rem;
+    color: var(--colorTexto);
+}
+
+.headerContenido{
+    background: var(--bgHeaderContenido);
+    display: flex;
+    box-shadow: var(--sombra);
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+}
+/*Estilos formularios*/
+.tituloFormulario {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--colorTexto);
+    margin-bottom: 15px;
+}
+.tituloLabel {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--colorTexto);
+    margin-bottom: 5px;
+}
+.textoFormulario {
+    font-size: 1rem;
+    color: var(--colorTexto);
+    margin-bottom: 10px;
 }

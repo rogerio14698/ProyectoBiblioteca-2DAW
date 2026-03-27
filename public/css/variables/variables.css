@@ -32,9 +32,27 @@
    --bgRegistroCard: #cecece;
 
    --bgPerfilUsuario: #fff;
+   /*Nueva Paleta Colores*/
+   
+   --colorPrimario: #00DDFF;
+   --colorSecundario: #005EFF;
+   --colorTerciario: #2200FF;
+   --colorTexto: #333333;
 
+   --colorComplementarioPrimario: #FF2200;
+   --colorComplementarioSecundario: #DDFF00;
+   --colorComplementarioTerciario: #FFA200;
+   --colorComplementarioTerciarioHover: #ce7100;
 
+   --bgPagina: #f0f0f0;
+   --bgBlanco: #fff;
+   --bgHeaderContenido: #f8f8f8;
 
+   --sombra: 0 4px 6px rgba(0, 0, 0, 0.151);
+   --colorBorde: #000;
+
+   --bgFormulariosEdicionAdmin: #b1b1b1;
+   
    --bgDisponible: rgb(16, 88, 0);
    --bgNoDisponible: rgb(116, 43, 43);
    --bgFormatoDigital: #7e1dfd;
@@ -44,12 +62,8 @@
    --bgFondoGradiente: #00c767;
    --gradienteLinear: linear-gradient(194deg,rgba(0, 199, 103, 1) 1%, rgba(0, 130, 121, 1) 56%, rgba(0, 66, 133, 1) 82%);
 
-
-
-
    --colorBordeSeparacionCards: #8a8a8a;
 
-   --colorBorde: #9b9b9b5a;
    /*Colores de botones */
    --bgBtnVerde: #307941;
    --bgBtnVerdeHover: #286736;
@@ -78,70 +92,11 @@
    --fuente-altura-linea: 1.6;
 
    /* =========================================
-       3. SOMBRAS Y ELEVACIÓN (ELEGANCIA)
-       ========================================= */
-   --sombra-suave: 0 2px 4px rgba(0, 0, 0, 0.05);
-   --sombra-media: 0 4px 12px rgba(0, 0, 0, 0.08);
-   --sombra-fuerte: 0 10px 25px rgba(0, 0, 0, 0.1);
-   --sombra-portada-libro: 0 15px 30px rgba(0, 0, 0, 0.15);
-
-   /* =========================================
-       4. BORDES, RADIOS Y ESPACIADO
-       ========================================= */
-   --radio-pequeno: 4px;
-   --radio-medio: 8px;
-   /* Estándar para Cards e Inputs */
-   --radio-grande: 12px;
+      3. ESPACIADO Y TAMAÑOS BASE
+      ========================================= */
    --unidad-espaciado: 8px;
-   /* Base para escala (8, 16, 24, 32...) */
-   --relleno-interno-card: 32px;
-   --transicion-rapida: 0.2s ease;
-
-   /* =========================================
-       5. COMPONENTES ESPECÍFICOS (UI)
-       ========================================= */
-   /* Navegación y Paneles */
-   --ancho-sidebar: 260px;
-   --altura-progreso: 6px;
-   --transformacion-hover-card: translateY(-4px);
-
-   /* Etiquetas (Tags) y Categorías */
-   --color-fondo-tag: rgba(80, 227, 194, 0.15);
-   --color-texto-tag: #3AA38C;
-   --ancho-etiqueta-detalle: 120px;
-   /* Alineación Autor:, ISBN:, etc. */
-
-   /* Buscador y Filtros */
-   --margen-seccion-filtro: 24px;
-   --hueco-rejilla: 24px;
-   /* Grid Gap */
-
-   /* Formularios y Login */
-   --login-proporcion-pantalla: 50%;
-   --input-relleno: 12px 16px;
-   --formulario-ancho-maximo: 400px;
-   --color-fondo-capa: rgba(74, 144, 226, 0.05);
-   --input-borde: #D1D5DB;
-   --input-foco-sombra: 0 0 0 3px rgba(74, 144, 226, 0.2);
-
-   /* =========================================
-       6. ACCESIBILIDAD Y RESPONSIVE
-       ========================================= */
-   --ancho-anillo-foco: 3px;
-   --color-anillo-foco: rgba(74, 144, 226, 0.4);
-   --relleno-movil: 16px;
-   --altura-boton-movil: 50px;
-
-   /* =========================================
-       7. BREAKPOINTS (RESPONSIVE)
-       ========================================= */
-   --MQ-movil: 576px;
-   --MQ-Tablet: 768px;
-   --MQ-Desktop: 1200px;
-   --MQ-Desktop-XL: 1400px;
-
-   --relleno-movil: 16px;
-   --altura-boton-movil: 50px;
+   --relleno-no-movil: 16px;
+   --altura-boton-movil: 44px;
 
 
 }

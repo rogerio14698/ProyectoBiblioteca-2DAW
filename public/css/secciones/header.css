@@ -17,13 +17,12 @@
     align-items: center;
     justify-content: space-between;
     /* Separa Logo, Links y Buscador */
-    gap: var(--grid-gap);
 }
 
 .navLogo {
     font-size: 1.25rem;
     font-weight: 700;
-    color: var(--color-primario-oscuro);
+    color: var(--colorSecundario);
     text-decoration: underline;
 }
 
@@ -38,7 +37,7 @@
     font-weight: 500;
 }
 .navLista:first-child {
-    color: var(--color-primario-oscuro);
+    color: var(--colorSecundario);
 }
 
 

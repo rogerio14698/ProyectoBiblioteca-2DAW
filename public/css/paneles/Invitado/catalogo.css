@@ -1,19 +1,5 @@
 /*Contenedor header del catalogo*/
 
-.catalogoHeader {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 32px;
-    padding: 4px;
-    background-color: var(--color-blanco);
-}
-
-.catalogoHeader h1 {
-    font-size: 1.5rem;
-    color: var(--color-primario-oscuro);
-    text-decoration: underline;
-}
 
 .catalogoBuscador {
     display: flex;
@@ -33,31 +19,6 @@
     color: var(--color-texto-principal);
 }
 
-.btn-buscar,
-.btn-limpiar {
-    min-height: var(--altura-boton-movil);
-    padding: 0 calc(var(--unidad-espaciado) * 2);
-}
-
-.btn-buscar {
-    background-color: var(--color-primario);
-    color: var(--color-blanco);
-}
-
-.btn-buscar:hover {
-    background-color: var(--color-primario-oscuro);
-}
-
-.btn-limpiar {
-    background-color: var(--color-blanco);
-    color: var(--color-primario-oscuro);
-    border: 1px solid var(--color-primario-oscuro);
-    text-decoration: none;
-}
-
-.btn-limpiar:hover {
-    background-color: var(--color-fondo-global);
-}
 
 /* =========================================
    CUERPO DEL CATÁLOGO (Contenedor de tarjetas)
@@ -69,7 +30,12 @@
     flex-direction: column;
     background-color: var(--color-blanco);
     padding: var(--relleno-movil);
+    padding: 20px;
     gap: calc(var(--unidad-espaciado) * 2); /* 16px entre tarjetas */
+}
+
+.catalogoBody > .alinearCentro {
+    width: 100%;
 }
 
 /* =========================================
@@ -86,8 +52,13 @@
     padding: calc(var(--unidad-espaciado) * 3); /* 24px — espacio generoso     */
     gap: calc(var(--unidad-espaciado) * 2);     /* 16px entre secciones        */
     background-color: var(--bgCardCatalogo);
-    box-shadow: var(--sombra-fuerte);
+    box-shadow: var(--sombra);
     border-radius: var(--radio-medio);
+
+}
+.catalogoCard:hover {
+    transform: scale(1.02) translateY(-2px);
+    transition: all 0.3s ease;
 }
 
 /* =========================================
@@ -257,6 +228,11 @@
         display: grid;
         gap: calc(var(--unidad-espaciado) * 2); /* 16px */
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .catalogoBody > .alinearCentro {
+        grid-column: 1 / -1;
+        justify-content: center;
     }
 
     /* Tarjeta en modo fila horizontal con aire generoso */

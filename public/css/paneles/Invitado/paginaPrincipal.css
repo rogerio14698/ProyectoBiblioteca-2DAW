@@ -7,8 +7,6 @@
     min-height: 40vh;
     text-align: center;
     background-color: var(--color-blanco);
-    box-shadow: var(--sombra-media);
-    margin: 0 auto;
     padding: 10px;
     box-sizing: border-box;
 }
@@ -41,10 +39,12 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    gap: calc(var(--unidad-espaciado) * 3);
+    row-gap: calc(var(--unidad-espaciado) * 3);
+    column-gap: calc(var(--unidad-espaciado) * 4);
     justify-content: center;
 }
 
+.bienvenidaSlideContenido > .tituloPagina,
 .bienvenidaSlideContenido > .bienvenidaTitulo,
 .bienvenidaSlideContenido > .bienvenidaParrafo,
 .bienvenidaSlideContenido > .btn-base {
@@ -64,27 +64,10 @@
 }
 
 .bienvenida-slides {
-    font-size: 1.05rem;
-    color: var(--color-primario);
     margin-bottom: 20px;
     padding: 5px;
     text-align: justify;
     hyphens: auto;
-}
-
-.bienvenida-slides h1 {
-    display: flex;
-    justify-content: center;
-    font-size: 2rem;
-    margin-bottom: 10px;
-    text-decoration: underline;
-    color: var(--color-texto-principa);
-    text-shadow: var(--sombra-media);
-}
-
-.bienvenida-slides p {
-    font-size: .95rem;
-    color: var(--color-texto-principal);
 }
 
 .bienvenida-imagen img {
@@ -93,6 +76,7 @@
     height: auto;
     margin: 0 0 0 auto;
     box-shadow: var(--sombra-media);
+    border: 1px solid var(--colorBorde);
 }
 
 .bienvenida .carousel-indicators [data-bs-target] {
@@ -102,11 +86,11 @@
     margin: 0 6px;
     opacity: 1;
     border: 0;
-    background-color: var(--color-secundario);
+    background-color: var(--colorComplementarioTerciario);
 }
 
 .bienvenida .carousel-indicators .active {
-    background-color: var(--color-primario);
+    background-color: var(--colorComplementarioSecundario);
 }
 
 .bienvenida .carousel-indicators {
@@ -143,7 +127,7 @@
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 50%;
-    background-color: var(--color-primario);
+    background-color: var(--bgBtnVerde);
     box-shadow: var(--sombra-suave);
     background-size: 55% 55%;
 }
@@ -173,6 +157,7 @@
         grid-row: auto;
     }
 
+    .bienvenidaSlideContenido > .tituloPagina,
     .bienvenidaSlideContenido > .bienvenidaTitulo,
     .bienvenidaSlideContenido > .bienvenidaParrafo,
     .bienvenidaSlideContenido > .btn-base {
@@ -191,25 +176,14 @@
 /*Fin de bienvenida*/
 
 /*Novedad del catálogo*/
+
 .novedadCatalogo{
+    padding: 20px;
     background-color: var(--color-blanco);
     box-shadow: var(--sombra-media);
-    margin: 0 auto;
 }
 
-.textoNovedadCat{
-    font-size: 1.05rem;
-    margin: 0 0 5px 0;
-}
-.textoNovedadCat h2{
-    text-decoration: underline;
-    color: var(--color-primario);
-}
-.textoNovedadCat p{
-    font-size: 1rem;
-    color: var(--color-texto-mutado);
-    line-height: 1.05;
-}
+
 /*
  * CONTENEDOR DEL SLIDER: Layout de 3 columnas con CSS Grid
  * Columna 1 (48px): Botón "Anterior" centrado
@@ -316,11 +290,7 @@
     width: 100%;
 
 }
-.novedadInfo h3{
-    font-size: 1.05rem;
-    color: var(--color-primario);
-    margin: 0 0 5px 0;
-}
+
 .novedadInfo .btn-verde{
     margin-top: auto; /*Esto empuja el botón hacia abajo*/
 }
@@ -331,6 +301,7 @@
 
 /*Agenda de Eventos*/
 .agenda {
+    padding: 20px;
     background-color: var(--color-blanco);
     box-shadow: var(--sombra-media);
 }
@@ -343,19 +314,7 @@
     gap: 20px;
     margin-top: 20px;
 }
-.agendaTexto{
-    font-size: 1.05rem;
-    color: var(--color-primario);
-    margin: 0 0 5px 0;
-}
-.agendaTexto h2{
-    text-decoration: underline;
-}
-.agendaTexto p{
-    font-size: 1rem;
-    color: var(--color-texto-mutado);
-    line-height: 1.05;
-}
+
 
 .eventoCard {
     display: grid;
@@ -394,11 +353,6 @@
     overflow: hidden;
 }
 
-.eventoInfo h3 {
-    font-size: 1.05rem;
-    color: var(--color-primario);
-    margin: 0 0 5px 0;
-}
 
 .eventoDescripcion {
     font-size: 0.9rem;
@@ -432,6 +386,7 @@
 
 /*Noticias*/
 .noticias {
+    padding: 20px;
     background-color: var(--color-blanco);
     box-shadow: var(--sombra-media);
 }
@@ -442,19 +397,7 @@
     grid-template-columns: 1fr;
     gap: 20px;
 }
-.noticiaTexto{
-    font-size: 1.05rem;
-    color: var(--color-primario);
-    margin: 0 0 5px 0;
-}
-.noticiaTexto h2{
-    text-decoration: underline;
-}
-.noticiaTexto p{
-    font-size: 1rem;
-    color: var(--color-texto-mutado);
-    line-height: 1.05;
-}
+
 
 .noticiasCard {
     background-color: var(--color-card-noticia);
@@ -493,19 +436,13 @@
     object-fit: cover;
     /* Para que la imagen se ajuste sin deformarse */
 }
-
-.noticiasInfo h2 {
-    font-size: 1.05rem;
-    color: var(--color-primario);
-    margin: 0 0 5px 0;
+.noticiasInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
 }
 
-.noticiasInfo p {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--color-texto-mutado);
-    line-height: 1.05;
-}
 
 
 @media (min-width: 1200px) {

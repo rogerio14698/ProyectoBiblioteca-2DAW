@@ -3,65 +3,78 @@
 @section('title', 'Registro')
 
 @section('content')
-    <main class="contenedor registro">
-        <div class="registroHeader">
-            <h1>Registro</h1>
-            <p>Bienvenido a la sección de registro de la Biblioteca DAW.</p>
+    <section class="registro separador">
+        <div class="headerContenido">
+            <h1 class="tituloPagina">Registro</h1>
+            <p class="parrafoTitulo">Bienvenido a la sección de registro de la Biblioteca DAW.</p>
         </div>
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <div class="registroContenido">
+            <form action="{{ route('usuario.store') }}" method="POST">
+                @csrf
+
+                <div class="formGroup">
+                    <label for="name">Nombre completo</label>
+                    <input type="text" id="name" name="name" value="{{ old('name') }}" required>
+                    @error('name')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="formGroup">
+                    <label for="dni">DNI</label>
+                    <input type="text" id="dni" name="dni" value="{{ old('dni') }}" required>
+                    @error('dni')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="formGroup">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" name="email" value="{{ old('email') }}" required>
+                    @error('email')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="formGroup">
+                    <label for="movil">Número móvil</label>
+                    <input type="number" id="movil" name="movil" placeholder="Número de móvil"
+                        value="{{ old('movil') }}">
+                    @error('movil')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <hr>
+
+                <div class="formGroup">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" required>
+                    @error('password')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="formGroup">
+                    <label for="password_confirmation">Confirmar Contraseña</label>
+                    <input type="password" id="password_confirmation" name="password_confirmation" required>
+                    @error('password_confirmation')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
+                </div>
+                <hr>
+                <button type="submit" class="btn-base btn-verde">Registrarse</button>
+            </form>
         </div>
-    @endif
-
-    <div class="registroContenido">
-        <form action="{{ route('usuario.store') }}" method="POST">
-            @csrf
-
-            <div class="formGroup">
-                <label for="name">Nombre completo</label>
-            <input type="text" id="name" name="name" value="{{ old('name') }}" required>
-            @error('name') <span class="error">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="formGroup">
-                <label for="dni">DNI</label>
-            <input type="text" id="dni" name="dni" value="{{ old('dni') }}" required>
-            @error('dni') <span class="error">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="formGroup">
-                <label for="email">Correo electrónico</label>
-                <input type="email" id="email" name="email" value="{{ old('email') }}" required>
-                @error('email') <span class="error">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="formGroup">
-            <label for="movil">Número móvil</label>
-            <input type="number" id="movil" name="movil" placeholder="Número de móvil" value="{{ old('movil') }}">
-            @error('movil') <span class="error">{{ $message }}</span> @enderror
-            </div>
-        
-            <hr>
-
-            <div class="formGroup">
-                <label for="password">Contraseña</label>
-                <input type="password" id="password" name="password" required>
-                @error('password') <span class="error">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="formGroup">
-            <label for="password_confirmation">Confirmar Contraseña</label>
-            <input type="password" id="password_confirmation" name="password_confirmation" required>
-            @error('password_confirmation') <span class="error">{{ $message }}</span> @enderror
-            </div>
-            <hr>
-            <button type="submit" class="btn-base btn-verde">Registrarse</button>
-        </form>
-    </div>
-    </main>
-@endsection
+    </section>
+    @endsection

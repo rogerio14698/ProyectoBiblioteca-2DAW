@@ -1,7 +1,7 @@
 <header class="headerPrincipal">
     <a href="#mainContent" class="skipLink">Saltar al contenido principal</a>
 
-    <nav class="navPrincipal contenedor">
+    <nav class="contenedorNav">
         <div class="navContenedor">
             <a class="navLogo" href="{{ url('/biblioteca') }}">Biblioteca DAW</a>
 
@@ -18,7 +18,7 @@
 
             <form class="navBuscador" role="search" method="GET" action="{{ url('/catalogo') }}">
                 <input class="inputBuscador" type="search" placeholder="Buscar libro..." aria-label="Buscar libro" name="query" value="{{ request('query', '') }}">
-                <button class="btn-base btn-primario" type="submit">Buscar</button>
+                <button class="btn-base btn-azul" type="submit">Buscar</button>
             </form>
         </div>
     </nav>

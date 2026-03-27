@@ -34,7 +34,7 @@
 
 
 
-    <main>
+    <main class="contenedor">
         @yield('content')
     </main>
 

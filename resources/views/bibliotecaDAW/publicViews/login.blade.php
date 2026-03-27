@@ -3,9 +3,9 @@
 @section('title', 'Login')
 
 @section('content')
-    <main class="contenedor login">
-        <div class="loginHeader">
-            <h1>Login - Usuario</h1>
+    <section class="login separador">
+        <div class="headerContenido">
+            <h1 class="tituloPagina">Login - Usuario</h1>
         </div>
         @if ($errors->any())
             <!--Tengo que definir estilos para las alertas -->
@@ -22,7 +22,7 @@
             <form class="formLogin" action="{{ route('usuario.login.procesar') }}" method="POST">
                 @csrf
                 <div class="labelLogin">
-                    <label for="email">Email:</label>
+                    <label class="tituloLabel" for="email">Email:</label>
                     <input type="email" name="email" id="email" value="{{ old('email') }}" required>
                     @error('email')
                         <span class="error">{{ $message }}</span>
@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="labelLogin">
-                    <label for="password">Contraseña:</label>
+                    <label class="" for="password">Contraseña:</label>
                     <input type="password" name="password" id="password" required>
                     @error('password')
                         <span class="error">{{ $message }}</span>
@@ -38,13 +38,18 @@
                 </div>
 
                 <div class="labelLogin">
-                    <label for="recordar" class="recuerdame">
+                    <label class="tituloLabel recuerdame" for="recordar">
                     <input type="checkbox" name="recordar" id="recordar">
                     Recuérdame
                 </label>
                 </div>
 
-                <button type="submit" class="btn-base btn-verde">Iniciar Sesión</button>
+                <div class="btnsInicioSesion">
+                    <button type="submit" class="btn-base btn-verde">Iniciar Sesión</button>
+
+                <!-- Aun por implementar el btnDemo -->
+                <button class="btn-base btn-amarillo">Iniciar Demo Usuario</button>
+                </div>
             </form>
             <hr>
             <div class="loginOpciones">
@@ -52,5 +57,5 @@
                 <p><a href="{{ route('admin.login.mostrar') }}">¿Eres administrador? Inicia sesión aquí</a></p>
             </div>
         </div>
-    </main>
+    </section>
 @endsection

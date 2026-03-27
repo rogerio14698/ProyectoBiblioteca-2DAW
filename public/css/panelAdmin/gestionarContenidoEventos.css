@@ -1,0 +1,53 @@
+
+
+.gestionarActividadesYEvento{
+    background: var(--blanco);
+    padding: 20px;
+}
+
+.gestionarActividadesYEvento h1{
+    color: var(--color-primario-oscuro);
+    text-decoration: underline;
+    padding-bottom: 10px;
+}
+.gestionarActividadesYEvento p {
+    color: var(--color-primario);
+    margin-bottom: 20px;
+}
+
+.formularioEditarEventos {
+    background: var(--gris-claro);
+    padding: 20px;
+    border-radius: var(--radio-medio);
+        background: var(--bgFormulariosEdicionAdmin);
+width: 30%;
+}
+
+.labelEditarEventos{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 5px;
+}
+.formularioEditarEventos h2{
+    color: var(--color-primario-oscuro);
+    margin-bottom: 15px;
+    text-decoration: underline;
+}
+.labelEditarEventos:last-child{
+    padding: 0;
+}
+.labelEditarEventos label{
+    color: var(--color-primario-oscuro);
+    font-weight: bold;
+
+}
+.labelEditarEventos input,
+.labelEditarEventos textarea{
+    padding: 5px;
+    border: 1px solid var(--color-primario);
+    border-radius: var(--radio-pequeno);
+    width: 70%;
+}

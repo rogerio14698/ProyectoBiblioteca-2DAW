@@ -1,7 +1,9 @@
 
 
 .contacto{
-    background-color: var(--bgContacto);
+    background-color: var(--bgPagina);
+    padding: 20px;
+    
 }
 .contactoHeader {
     display: flex;
@@ -31,9 +33,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: var(--bgCardCatalogo);
     border-radius: 8px;
     gap: 20px;
+    width: 100%;
 }
 /*Columna izquierda*/
 
@@ -41,7 +43,7 @@
     width: 100%;
     max-width: 400px;
     padding: 10px;
-    padding-right: 0;
+    box-shadow: var(--sombra);
 }
 
 .contactoDirecion,
@@ -59,80 +61,23 @@
     border-bottom: 1px solid var(--colorBordeSeparacionCards);
 }
 
-.contactoDirecion h2,
-.contactoTelefono h2,
-.contactoEmail h2 {
-    font-weight: 600;
-    font-size: 1.5rem;
-    margin-bottom: 5px;
-    text-decoration: underline;
-    color: var(--color-primario-oscuro);
-}
-
-.contactoDirecion p,
-.contactoTelefono p,
-.contactoEmail p {
-    font-size: 1rem;
-    color: var(--color-primario-claro);
-}
 
 .pdf {
-    margin-top: calc(var(--unidad-espaciado) * 2);
-    padding: calc(var(--unidad-espaciado) * 3);
+    padding: 15px;
     border: 1px solid var(--colorBorde);
-    border-left: calc(var(--unidad-espaciado) / 2) solid var(--color-secundario);
-    border-radius: var(--radio-medio);
-    background-color: var(--color-blanco);
-    box-shadow: var(--sombra-suave);
+    background-color: var(--bgBlanco);
+    box-shadow: var(--sombra);
     display: flex;
     flex-direction: column;
-    gap: calc(var(--unidad-espaciado) * 1.5);
+
+}
+.cvs-botones {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
 }
 
-.pdf h2 {
-    margin: 0;
-    font-size: 1.4rem;
-    color: var(--color-primario-oscuro);
-}
 
-.pdf h3 {
-    margin: 0;
-    font-size: 1rem;
-    color: var(--color-primario-claro);
-}
-
-.pdf p {
-    margin: 0;
-    font-size: 1rem;
-    line-height: var(--fuente-altura-linea);
-    color: var(--color-texto-principal);
-}
-
-.pdf a {
-    align-self: flex-start;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(var(--unidad-espaciado) * 5);
-    padding: calc(var(--unidad-espaciado) * 1.25) calc(var(--unidad-espaciado) * 2.5);
-    border-radius: var(--radio-pequeno);
-    background-color: var(--bgBtnAzul);
-    color: var(--color-blanco);
-    font-weight: 600;
-    text-decoration: none;
-    transition: transform var(--transicion-rapida), background-color var(--transicion-rapida), box-shadow var(--transicion-rapida);
-}
-
-.pdf a:hover {
-    background-color: var(--bgBtnAzulHover);
-    transform: translateY(-1px);
-    box-shadow: var(--sombra-media);
-}
-
-.pdf a:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 var(--ancho-anillo-foco) var(--color-anillo-foco), var(--sombra-media);
-}
 
 
 
@@ -143,13 +88,11 @@
 
 .columna-derecha {
     display: flex;
-    flex-direction: column;
     align-items: center;
     width: 100%;
     max-width: 400px;
     padding: 10px;
-    padding-left: 0;
-
+    box-shadow: var(--sombra);
 }
 .labelContacto{
     display: flex;
@@ -161,22 +104,16 @@
 }
 .labelContacto label {
     width: 30%;
-    font-weight: 500;
-    font-size: 1rem;
-    color: var(--color-primario-claro);
+
 }
 .labelContacto input,
 .labelContacto textarea {
     width: 70%;
-    padding: 10px;
-    border: 1px solid var(--input-borde);
-    border-radius: 4px;
-    transition: box-shadow 0.3s ease;
+
 }
 .labelContacto input:focus,
 .labelContacto textarea:focus {
-    box-shadow: var(--input-foco-sombra);
-    border-color: var(--color-primario-oscuro);
+
     outline: none;
 }
 .labelContacto textarea {
@@ -223,6 +160,7 @@
         justify-content: center;
         align-items: center;
         gap: 40px;
+        min-height: 80vh;
     }
 
     .contacto-container {
@@ -232,8 +170,16 @@
 
     .contenedor-columnas {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        align-items: center;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 400px);
+        align-items: start;
+        column-gap: calc(var(--unidad-espaciado) * 4);
+        width: 100%;
+        max-width: 1100px;
+    }
+
+    .columna-derecha {
+        justify-self: end;
+        margin-left: auto;
     }
 }
 

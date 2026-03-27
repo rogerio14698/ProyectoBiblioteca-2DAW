@@ -3,10 +3,10 @@
 @section('title', 'Login Administrador')
 
 @section('content')
-    <main class="contenedor login">
-        <div class="loginHeader">
-            <h1>Login Administrador</h1>
-            <p>Acceso al panel de administración de la Biblioteca DAW.</p>
+    <section class="login">
+        <div class="headerContenido">
+            <h1 class="tituloPagina">Login Administrador</h1>
+            <p class="parrafoContenido">Acceso al panel de administración de la Biblioteca DAW.</p>
         </div>
 
         @if ($errors->any())
@@ -23,7 +23,7 @@
             <form class="formLogin" action="{{ route('admin.login.procesar') }}" method="POST">
                 @csrf
                 <div class="labelLogin">
-                    <label for="email">Email:</label>
+                    <label class="tituloLabel" for="email">Email:</label>
                     <input type="email" name="email" id="email" value="{{ old('email') }}" required>
                     @error('email')
                         <span class="error">{{ $message }}</span>
@@ -31,23 +31,26 @@
                 </div>
 
                 <div class="labelLogin">
-                    <label for="password">Contraseña:</label>
+                    <label class="tituloLabel" for="password">Contraseña:</label>
                     <input type="password" name="password" id="password" required>
                     @error('password')
                         <span class="error">{{ $message }}</span>
                     @enderror
                 </div>
 
-               <div class="labelLogin">
-                <label for="recordar" class="recuerdame">
-                    <input type="checkbox" name="recordar" id="recordar">
-                    Recuérdame
-                </label>
-               </div>
-
-                <button type="submit" class="btn-base btn-verde">Iniciar Sesión como Admin</button>
-            </form>
-            <hr>
+                <div class="labelLogin">
+                    <label class="tituloLabel recuerdame" for="recordar">
+                        <input type="checkbox" name="recordar" id="recordar">
+                        Recuérdame
+                    </label>
         </div>
-    </main>
+        <div class="btnsInicioSesion">
+            <button type="submit" class="btn-base btn-verde">Iniciar Sesión como Admin</button>
+            <!--Aún por implementar -->
+            <button class="btn-base btn-amarillo">Iniciar Demo Admin</button>
+        </div>
+        </form>
+        <hr>
+        </div>
+    </section>
 @endsection

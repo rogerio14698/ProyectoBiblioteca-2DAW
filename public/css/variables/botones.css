@@ -6,8 +6,8 @@
     padding: 5px 10px;
     font-family: var(--fuente-familia);
     font-weight: 500;
-    border-radius: var(--radio-medio);
-    transition: var(--transicion-rapida);
+    border-radius: 3px;
+    transition: all 0.3s ease;
     cursor: pointer;
     border: 1px solid transparent;
     text-decoration: none;
@@ -26,7 +26,7 @@
 .btn-verde:hover{
     cursor: pointer;
     background-color: var(--bgBtnVerdeHover);
-    box-shadow: var(--sombra-media);
+    box-shadow: var(--sombra);
 }
 .btn-verde:active{
     transform: translateY(-2px);
@@ -40,12 +40,27 @@
 .btn-azul:hover{
     cursor: pointer;
     background-color: var(--bgBtnAzulHover);
-    box-shadow: var(--sombra-media);
+    box-shadow: var(--sombra);
 }
 .btn-azul:active{
     transform: translateY(-2px);
     transition: all 0.3s ease;
 }
+.btn-amarillo{
+    width: 100%;
+    background-color: var(--colorComplementarioTerciario);
+    color: var(--blanco);
+}
+.btn-amarillo:hover{
+    cursor: pointer;
+    background-color: var(--colorComplementarioTerciarioHover);
+    box-shadow: var(--sombra);
+}
+.btn-amarillo:active{
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
 .btn-rojo{
     width: 100%;
     background-color: var(--bgBtnRojo);
@@ -54,7 +69,7 @@
 .btn-rojo:hover{
     cursor: pointer;
     background-color: var(--bgBtnRojoHover);
-    box-shadow: var(--sombra-media);
+    box-shadow: var(--sombra);
 }
 .btn-rojo:active{
     transform: translateY(-2px);
@@ -64,7 +79,7 @@
 .btn-primario:hover {
     background-color: var(--color-primario-oscuro);
     transform: translateY(-1px);
-    box-shadow: var(--sombra-media);
+    box-shadow: var(--sombra);
 }
 
 /* Botón Secundario (Turquesa / Acento) */
@@ -113,7 +128,7 @@
 .btn-logout:hover {
     background-color: var(--color-primario-oscuro);
     transform: translateY(-1px);
-    box-shadow: var(--sombra-media);
+    box-shadow: var(--sombra);
 }
 
 .btn-ver{
@@ -123,7 +138,7 @@
 }
 .btn-ver:hover{
     background-color: var(--color-primario);
-    box-shadow: var(--sombra-media);
+    box-shadow: var(--sombra);
     transform: translateY(-1px);
 }
 .btn-carrito{
@@ -133,7 +148,7 @@
 }
 .btn-carrito:hover{
     background-color: var(--color-carrito-anadir);
-    box-shadow: var(--sombra-media);
+    box-shadow: var(--sombra);
     transform: translateY(-1px);
 }
 .btn-alquilar{
@@ -143,6 +158,34 @@
 }
 .btn-alquilar:hover{
     background-color: var(--color-alquilar);
-    box-shadow: var(--sombra-media);
+    box-shadow: var(--sombra);
     transform: translateY(-1px);
+}
+
+/*Btn Buscador Catálogo*/
+
+.btn-buscar,
+.btn-limpiar {
+    min-height: var(--altura-boton-movil);
+    padding: 0 calc(var(--unidad-espaciado) * 2);
+}
+
+.btn-buscar {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+}
+
+.btn-buscar:hover {
+    background-color: var(--color-primario-oscuro);
+}
+
+.btn-limpiar {
+    background-color: var(--color-blanco);
+    color: var(--color-primario-oscuro);
+    border: 1px solid var(--color-primario-oscuro);
+    text-decoration: none;
+}
+
+.btn-limpiar:hover {
+    background-color: var(--color-fondo-global);
 }

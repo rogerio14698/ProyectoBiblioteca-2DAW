@@ -6,7 +6,7 @@
 
 /* Estilos visuales del botón: color, forma, tamaño táctil */
 .btn-slider {
-    background: var(--color-primario);
+    background: var(--bgBtnVerde);
     color: white;
     border: none;
     border-radius: 50%;

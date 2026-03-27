@@ -3,9 +3,9 @@
 @section('title', 'Catálogo')
 
 @section('content')
-    <div class="contenedor catalogoContenedor">
-        <div class="catalogoHeader">
-            <h1>Catálogo de la Biblioteca</h1>
+    <div class="catalogoContenedor">
+        <div class="headerContenido">
+            <h1 class="tituloPagina">Catálogo de la Biblioteca</h1>
             <form class="catalogoBuscador" method="GET" action="{{ url('/catalogo') }}">
                 <input type="text" name="titulo" value="{{ $searchTitulo ?? ($searchQuery ?? '') }}" placeholder="Buscar por titulo"
                     class="buscadorInput" aria-label="Buscar libros por título, autor o género">
@@ -19,7 +19,7 @@
             </form>
         </div>
 
-        <div class="catalogoBody">
+        <div class="catalogoBody separador">
             @forelse ($libros as $libro)
                 <div class="catalogoCard">
                     <div class="cardImagen">
@@ -82,11 +82,12 @@
             @empty
                 <p>No se encontraron libros que coincidan con tu búsqueda.</p>
             @endforelse
-        </div>
-        <div class="alinearCentro">
-            <div class="paginacionBase paginacionCatalogo">
-                {{ $libros->links('vendor.pagination.bootstrap-5') }} <!-- Paginación de 10 libros por página -->
+            <div class="alinearCentro">
+                <div class="paginacionBase paginacionCatalogo">
+                    {{ $libros->links('vendor.pagination.bootstrap-5') }} <!-- Paginación de 10 libros por página -->
+                </div>
             </div>
         </div>
+        
     </div>
 @endsection
