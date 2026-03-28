@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Página Interna del Libro {{ $libro->titulo }}')
+@section('title', 'Página Interna Evento')
 
 @section('content')
 
-<section class="paginaInternaLibro separador">
-    <h1>Hola desde la página interna del Libro {{ $libro->titulo }}</h1>
+<section class="paginaInternaEvento separador">
+    <h1>Hola desde la página interna del Evento</h1>
 
 </section>
 

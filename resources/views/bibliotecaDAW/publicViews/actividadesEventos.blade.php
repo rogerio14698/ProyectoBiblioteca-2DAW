@@ -36,7 +36,7 @@
                     <p class="usuarioEvento">{{ $evento->usuario->name }}</p>
                 </div>
 
-                <button class="btn-base btn-verde" id="eventoApuntar{{ $evento->id }}">Apuntarse</button>
+               <a href="{{ route('evento.apuntarse', ['id' => $evento->id]) }}" class="btn-base btn-verde">Apuntarse</a>
             </div>
         @endforeach
     </section>

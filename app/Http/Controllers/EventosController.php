@@ -36,6 +36,19 @@ class EventosController extends Controller
             'eventoEditar' => $eventoEditar,
         ]);  
     }
+    // Método para mostrar la página interna de un evento específico.
+    public function paginaInterna($id)
+    {
+        $evento = Evento::findOrFail($id);
+        return view('bibliotecaDAW.publicViews.paginasInternas.paginaInternaEvento', compact('evento'));
+    }
+    // Método para mostrar la página de apuntarse a un evento específico.
+    public function apuntarse($id)
+    {
+        $evento = Evento::findOrFail($id);
+        return view('bibliotecaDAW.publicViews.paginasInternas.paginaInternaApuntarseEvento', compact('evento'));
+    }
+    
 
     /**
      * Display a listing of the resource.

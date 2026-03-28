@@ -91,6 +91,15 @@ class LibroController extends Controller
             'portadaUrl' => $portadaUrl,
         ]);
     }
+    //Obtener un libro específico para su página interna de alquiler
+    public function paginaInternaAlquilar($id)
+    {
+        $libro = Libro::findOrFail($id);
+
+        return view('bibliotecaDAW.publicViews.paginasInternas.paginaInternaAlquilarLibro', [
+            'libro' => $libro,
+        ]);
+    }
 
     /**
      * Show the form for creating a new resource.

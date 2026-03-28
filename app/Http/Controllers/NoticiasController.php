@@ -22,6 +22,12 @@ class NoticiasController extends Controller
 
 
     }
+    // Método para mostrar la página interna de una noticia específica.
+    public function paginaInterna($id)
+    {
+        $noticia = Noticias::findOrFail($id);
+        return view('bibliotecaDAW.publicViews.paginasInternas.paginaInternaNoticias', compact('noticia'));
+    }
 
     /**
      * Show the form for creating a new resource.

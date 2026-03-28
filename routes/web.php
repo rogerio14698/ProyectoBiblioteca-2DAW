@@ -9,6 +9,7 @@ use App\Http\Controllers\EventosController;
 use App\Http\Controllers\LibroController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\SlideBienvenidaController;
+use App\Http\Controllers\NoticiasController;
 use App\Models\Contacto;
 
 //Redirección a la página de inicio
@@ -25,6 +26,14 @@ Route::get('/librosDestacados', [HomeController::class, 'destacados']);
 
 //Ruta para mostrar libro específico, ruta de su pargina interna:
 Route::get('/libro/{id}', [LibroController::class, 'paginaInterna'])->name('libro.paginaInterna');
+//Ruta para mostrar evento específico, ruta de su propia página interna:
+Route::get('/evento/{id}', [EventosController::class, 'paginaInterna'])->name('evento.paginaInterna');
+//Ruta para mostrar noticia específica, ruta de su propia página interna:
+Route::get('/noticia/{id}', [NoticiasController::class, 'paginaInterna'])->name('noticia.paginaInterna');
+//Ruta para mostrar la página de apuntarse a un evento específico:
+Route::get('/evento/{id}/apuntarse', [EventosController::class, 'apuntarse'])->name('evento.apuntarse');
+//Ruta para mostrar la página de alquilar un libro específico:
+Route::get('/libro/{id}/alquilar', [LibroController::class, 'paginaInternaAlquilar'])->name('libro.paginaInternaAlquilar');
 
 // Rutas comunes para todas las páginas
 Route::get('/actividades', function () {
@@ -35,6 +44,10 @@ Route::get('/actividades', function () {
 Route::get('/contacto', [ContactoController::class, 'create'])->name('contacto.create');
 Route::post('/contacto', [ContactoController::class, 'store'])->name('contacto.store');
 Route::get('/catalogo', [LibroController::class, 'catalogo']);
+// Ruta para aviso legal:
+Route::get('/avisoLegal', function () {
+    return view('bibliotecaDAW.publicViews.avisoLegal');
+});
 
 Route::get('/serviciosDigitales', function () {
     return view('bibliotecaDAW.publicViews.serviciosDigitales');
