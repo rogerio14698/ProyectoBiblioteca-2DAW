@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('movil')->nullable()->unique();
             $table->string('password'); // contraseña hasheada
             $table->string('nSocio', 7)->nullable()->unique(); // 5 números + 2 letras - nullable de momento
+            $table->boolean('is_demo')->default(false); // Para marcar si el usuario es de demostración
             //Deberia de poner el last_login, pero esto más adelante 
             $table->timestamps();
         });

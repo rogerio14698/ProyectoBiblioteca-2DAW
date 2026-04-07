@@ -35,6 +35,12 @@
 
 
     <main class="contenedor">
+        {{-- Alerta para usuarios demo cuando intentan realizar una acción bloqueada --}}
+        @if (session('demo_warning'))
+            <div class="alertLogin alert-dangerLogin">
+                <p>{{ session('demo_warning') }}</p>
+            </div>
+        @endif
         @yield('content')
     </main>
 

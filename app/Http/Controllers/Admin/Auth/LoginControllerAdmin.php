@@ -7,6 +7,7 @@ use App\Models\Admin;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\ValidationException;
 
 class LoginControllerAdmin extends Controller
@@ -53,6 +54,35 @@ class LoginControllerAdmin extends Controller
 
         //Redirección a dashboard del admin
         return redirect()->intended(route('admin.dashboard'));
+    }
+
+    /**
+     * Autenticar automáticamente como administrador demo (solo lectura).
+     * Busca al admin con is_demo = true y lo logea directamente sin contraseña.
+     * @param Request $request La petición HTTP actual.
+     * @return RedirectResponse Redirige al dashboard del admin.
+     * @throws ValidationException Si el admin demo no existe en la base de datos.
+     */
+    public function loginDemo(Request $request): RedirectResponse
+    {
+        // Buscamos al administrador demo en la base de datos
+        $adminDemo = Admin::where('is_demo', true)->first();
+
+        // Si no existe el admin demo, devolvemos un error informativo
+        if (!$adminDemo) {
+            throw ValidationException::withMessages([
+                'email' => 'El administrador demo no está disponible en este momento.',
+            ]);
+        }
+
+        // Autenticamos directamente al admin demo con el guard 'admin'
+        Auth::guard('admin')->login($adminDemo);
+
+        // Regeneramos la sesión por seguridad (evitar ataques de fijación de sesión)
+        $request->session()->regenerate();
+
+        // Redirigimos al dashboard del administrador
+        return redirect()->route('admin.dashboard');
     }
 
     //Cerrar sesion

@@ -43,14 +43,17 @@
                         <input type="checkbox" name="recordar" id="recordar">
                         Recuérdame
                     </label>
-        </div>
-        <div class="btnsInicioSesion">
-            <button type="submit" class="btn-base btn-verde">Iniciar Sesión como Admin</button>
-            <!--Aún por implementar -->
-            <button class="btn-base btn-amarillo">Iniciar Demo Admin</button>
-        </div>
-        </form>
-        <hr>
+                </div>
+                <div class="btnsInicioSesion">
+                <div class="btnsInicioSesion">
+                    <button type="submit" class="btn-base btn-verde">Iniciar Sesión como Admin</button>
+            </form>
+            <form action="{{ route('admin.login.demo') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn-base btn-amarillo">Iniciar Demo Admin</button>
+            </form>
+                </div>
+            <hr>
         </div>
     </section>
 @endsection

@@ -25,6 +25,7 @@
         <h1>Contacto</h1>
         <p>Contacto: info@biblioteca.local</p>
         <p>aviso legal: <a href="{{ url('/avisoLegal') }}" class="text-decoration-none">Ver aviso legal</a></p>
+        <p>Políticas de cookies: <a href="{{ url('/politicasCookies') }}" class="text-decoration-none">Ver políticas de cookies</a></p>
     </div>
 
 

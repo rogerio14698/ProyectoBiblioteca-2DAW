@@ -11,7 +11,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // Alias para el middleware que bloquea acciones de escritura a usuarios demo
+        $middleware->alias([
+            'bloquear.demo' => \App\Http\Middleware\BloquearUsuarioDemo::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

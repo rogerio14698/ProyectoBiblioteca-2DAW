@@ -48,7 +48,10 @@ Route::get('/catalogo', [LibroController::class, 'catalogo']);
 Route::get('/avisoLegal', function () {
     return view('bibliotecaDAW.publicViews.avisoLegal');
 });
-
+//Politicas de cookies:
+Route::get('/politicasCookies', function () {
+    return view('bibliotecaDAW.publicViews.politicasCookies');
+});
 Route::get('/serviciosDigitales', function () {
     return view('bibliotecaDAW.publicViews.serviciosDigitales');
 });
@@ -58,6 +61,9 @@ Route::get('/serviciosDigitales', function () {
 // ===============================================
 
 // Usuario - Login
+    //Ruta solo para demostracion
+Route::post('/login/demo', [LoginControllerUsuario::class, 'loginDemo'])->name('usuario.login.demo');   
+// Rutas para login y registro de usuarios
 Route::get('/login', [LoginControllerUsuario::class, 'mostrarLogin'])->name('usuario.login.mostrar');
 Route::post('/login', [LoginControllerUsuario::class, 'login'])->name('usuario.login.procesar');
 
@@ -68,12 +74,13 @@ Route::post('/registro', [UsuarioController::class, 'store'])->name('usuario.sto
 // Admin - Login
 Route::get('/admin/login', [LoginControllerAdmin::class, 'mostrarLogin'])->name('admin.login.mostrar');
 Route::post('/admin/login', [LoginControllerAdmin::class, 'login'])->name('admin.login.procesar');
+Route::post('/admin/login/demo', [LoginControllerAdmin::class, 'loginDemo'])->name('admin.login.demo');
 
 // ===============================================
 // RUTAS DE USUARIO REGISTRADO (Requiere auth:web)
 // ===============================================
 
-Route::middleware(['auth:web'])->group(function () {
+Route::middleware(['auth:web', 'bloquear.demo'])->group(function () {
     Route::get('/inicioUsuario', function () {
         return view('bibliotecaDAW.userViews.inicioLogin');
     })->name('usuario.inicio');
@@ -127,7 +134,7 @@ Route::middleware(['auth:web'])->group(function () {
 // RUTAS DE ADMINISTRADOR (Requiere auth:admin)
 // ===============================================
 
-Route::middleware(['auth:admin'])->group(function () {
+Route::middleware(['auth:admin', 'bloquear.demo'])->group(function () {
     // Dashboard admin
     Route::get('/admin', function () {
         $mensajes = Contacto::orderBy('created_at', 'desc')->paginate(10);

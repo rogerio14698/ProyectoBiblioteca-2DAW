@@ -18,7 +18,8 @@ class Admin extends Authenticatable
         'email',
         'password',
         'last_login',
-        'rol'
+        'rol',
+        'is_demo'
     ];
     public function setPasswordAttribute($value): void
     {

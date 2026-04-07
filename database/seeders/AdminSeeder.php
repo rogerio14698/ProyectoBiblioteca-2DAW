@@ -31,6 +31,14 @@ class AdminSeeder extends Seeder
                 'password' => 'moderador123',
                 'rol' => 'moderador',
             ],
+            // Admin demo: cuenta de demostración (solo lectura)
+            [
+                'email' => 'demo@admin.com',
+                'name' => 'Administrador Demo',
+                'password' => 'demo1234',
+                'rol' => 'editor',
+                'is_demo' => true,
+            ],
         ];
 
         foreach ($admins as $admin) {
@@ -40,6 +48,8 @@ class AdminSeeder extends Seeder
                     'name' => $admin['name'],
                     'password' => $admin['password'],
                     'rol' => $admin['rol'],
+                    // Si el admin tiene is_demo, lo guardamos; si no, false por defecto
+                    'is_demo' => $admin['is_demo'] ?? false,
                 ]
             );
         }
