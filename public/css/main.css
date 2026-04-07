@@ -31,6 +31,7 @@
 @import 'paneles/usuarioAutenticado/alquilarLibrosUsuario.css';
 @import 'paneles/usuarioAutenticado/comprarLibrosUsuario.css';
 @import 'paneles/usuarioAutenticado/organizarEventoUsuario.css';
+@import 'paneles/usuarioAutenticado/apuntarseEventoUsuario.css';
 
 /*Panel de administrador*/
 @import 'panelAdmin/navAdmin.css';

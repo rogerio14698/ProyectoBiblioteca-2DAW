@@ -32,9 +32,10 @@ class EventosSeeder extends Seeder
             ]);
         }
 
-        $evento1= ('img/evento1.jpg');
-        $evento2= ('img/evento2.jpg');
-        $evento3= ('img/evento3.jpg');
+        // URLs directas de Unsplash con imágenes temáticas (800x600, recortadas)
+        $evento1 = 'https://images.unsplash.com/photo-1531243269054-5ebf6f34081e?w=800&h=600&fit=crop'; // Arte/exposición
+        $evento2 = 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=800&h=600&fit=crop'; // Libros/biblioteca
+        $evento3 = 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&h=600&fit=crop'; // Conferencia/presentación
         Evento::factory()
             ->count(3)
             ->state(new Sequence(

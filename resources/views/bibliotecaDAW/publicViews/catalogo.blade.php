@@ -25,7 +25,11 @@
             @forelse ($libros as $libro)
                 <div class="catalogoCard">
                     <div class="cardImagen">
-                        <img src="{{ asset('img/elPrincipito.jpg') }}" alt="Portada del libro">
+                        <picture>
+                            <source media="(min-width: 1200px)" srcset="{{ $libro->portada_img }}">
+                            <source media="(min-width: 768px)" srcset="{{ $libro->portada_img }}">
+                            <img src="{{ $libro->portada_img }}" alt="Portada de {{ $libro->titulo }}">
+                        </picture>
                     </div>
                     <div class="cardContenido">
                         <h2 class="libroTitulo">{{ $libro->titulo }}</h2>
@@ -65,7 +69,7 @@
                             <div class="infoItem">
                                 <span class="infoLabel">Disponibilidad:</span>
                                 <!--Aqui evaluo el contennido de disponibilidad para dar estilos a la etiqueta
-                                                Entonces, si esta disponible se muestra en verde, si esta prestado en rojo -->
+                                                        Entonces, si esta disponible se muestra en verde, si esta prestado en rojo -->
                                 @if ($libro->disponibilidad === 'disponible')
                                     <span class="infoValue stock-disponible">{{ $libro->disponibilidad }}</span>
                                 @else

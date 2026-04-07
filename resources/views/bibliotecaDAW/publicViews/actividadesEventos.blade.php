@@ -4,6 +4,7 @@
 
 @section('content')
 
+
     <div class="headerContenido">
         <h1 class="tituloPagina">Agenda de actividades y eventos</h1>
         <p class="parrafoTitulo">Bienvenido a la sección de actividades y eventos de la Biblioteca DAW.</p>
@@ -18,9 +19,14 @@
                 </div>
                 <div class="eventoImagen">
                     <picture>
-                        <source srcset="{{ asset($evento->imagen_url) }}" type="image/webp">
-                        <img src="{{ asset($evento->imagen_url) }}" alt="Imagen del evento {{ $evento->titulo }}"
-                            class="imagenEvento">
+                        @php
+                        // Comprobamos si la URL ya es un enlace externo.
+                        $url = Str::startsWith($evento->imagen_url, ['http://', 'https://'])
+                        ? $evento->imagen_url
+                        : asset('storage/' . $evento->imagen_url);
+                        @endphp    
+                        <source srcset="{{ $url }}" type="image/jpeg">
+                        <img src="{{ $url }}" alt="Imagen del evento {{ $evento->titulo }}" class="imgEvento">
                     </picture>
                 </div>
                 <div class="eventosFecha">
@@ -35,8 +41,14 @@
                     <p class="ubicacionEvento">{{ $evento->ubicacion }}</p>
                     <p class="usuarioEvento">{{ $evento->usuario->name }}</p>
                 </div>
+                <a href="{{ route('evento.apuntarse', ['id' => $evento->id]) }}" class="btn-base btn-verde">Enlace Produccion</a>
+<!--Verifica si el usuario está autenticado -->
 
-               <a href="{{ route('evento.apuntarse', ['id' => $evento->id]) }}" class="btn-base btn-verde">Apuntarse</a>
+               @if (Auth::check())
+                   <a href="{{ route('evento.apuntarse', ['id' => $evento->id]) }}" class="btn-base btn-verde">Apuntarse</a>
+               @else
+                   <p>Debes iniciar sesión para apuntarte al evento. O enviar tus datos a través del formulario de contacto.</p>
+               @endif
             </div>
         @endforeach
     </section>

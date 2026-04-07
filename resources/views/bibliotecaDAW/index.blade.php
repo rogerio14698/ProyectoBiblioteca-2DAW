@@ -97,9 +97,9 @@
                                 <!-- Imagen del libro -->
                                 <div class="novedadImagen">
                                     <picture>
-                                        <source media="(min-width: 1200px)" srcset="{{ asset('img/elPrincipito.jpg') }}">
-                                        <source media="(min-width: 768px)" srcset="{{ asset('img/elPrincipito.jpg') }}">
-                                        <img src="{{ asset('img/elPrincipito.jpg') }}" alt="Portada de {{ $libro->titulo }}">
+                                        <source media="(min-width: 1200px)" srcset="{{ $libro->portada_img }}">
+                                        <source media="(min-width: 768px)" srcset="{{ $libro->portada_img }}">
+                                        <img src="{{ $libro->portada_img }}" alt="Portada de {{ $libro->titulo }}">
                                     </picture>
                                 </div>
                                 <!-- Título y enlace -->
@@ -131,9 +131,9 @@
                 <div class="eventoCard">
                     <div class="eventoImg">
                         <picture>
-                            <source media="(min-width: 1200px)" srcset="{{ asset('img/img-landingPage.png') }}">
-                            <source media="(min-width: 768px)" srcset="{{ asset('img/img-landingPage.png') }}">
-                            <img src="{{ asset('img/img-landingPage.png') }}" alt="Imagen de {{ $evento->titulo }}">
+                            <source media="(min-width: 1200px)" srcset="{{ $evento->imagen_url }}">
+                            <source media="(min-width: 768px)" srcset="{{ $evento->imagen_url }}">
+                            <img src="{{ $evento->imagen_url }}" alt="Imagen de {{ $evento->titulo }}">
                         </picture>
                     </div>
 

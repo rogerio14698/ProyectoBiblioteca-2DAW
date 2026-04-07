@@ -9,25 +9,23 @@ use Illuminate\Database\Seeder;
 
 /**
  * Seeder para poblar la tabla 'libros' con datos de ejemplo.
- * Utiliza la imagen 'elPrincipito.jpg' como portada genérica de muestra
- * para todos los libros, ya que aún no se dispone de las portadas reales.
+ * Utiliza la Factory LibroFactory para generar los datos aleatorios.
+ * Cada libro recibe una portada distinta usando images.unsplash.com.
  */
 class LibroSeeder extends Seeder
 {
     /**
      * Ejecutar el seeder de libros.
-     * Crea 10 libros de ejemplo con diferentes géneros, formatos y disponibilidad.
+     * Crea 500 libros de ejemplo usando la Factory, cada uno con portada diferente.
      *
      * @return void
      *
-     * @efectos Inserta registros en la tabla 'libros'.
+     * @efectos Inserta 500 registros en la tabla 'libros'.
      */
-
-        // Array con los datos de cada libro de ejemplo.
-        public function run(): void{
-            \App\Models\Libro::factory()->count(500)->create();
-        }
-
-    
-    
+    public function run(): void
+    {
+        // Creamos 500 libros usando la Factory.
+        // Cada portada se genera automáticamente con un ID único en LibroFactory.
+        Libro::factory()->count(500)->create();
+    }
 }

@@ -27,7 +27,8 @@ class LibroFactory extends Factory
             'opcion_compra' => $this->faker->randomElement(['compra', 'prestamo']),
             'cantidad_ejemplares' => $this->faker->numberBetween(1, 10),
             'isbn' => $this->faker->isbn13(),
-            'portada_img' => 'img/elPrincipito.jpg', // Imagen de muestra para todos los libros
+            // Cada libro recibe una portada única usando un ID aleatorio como seed.
+            'portada_img' => 'https://picsum.photos/seed/book-' . $this->faker->unique()->numberBetween(1, 10000) . '/400/600',
         ];
     }
 }
