@@ -58,6 +58,9 @@ Route::get('/serviciosDigitales', function () {
 // ===============================================
 
 // Usuario - Login
+    //Ruta solo para demostracion
+Route::post('/login/demo', [LoginControllerUsuario::class, 'loginDemo'])->name('usuario.login.demo');   
+// Rutas para login y registro de usuarios
 Route::get('/login', [LoginControllerUsuario::class, 'mostrarLogin'])->name('usuario.login.mostrar');
 Route::post('/login', [LoginControllerUsuario::class, 'login'])->name('usuario.login.procesar');
 

@@ -48,9 +48,17 @@
                     <button type="submit" class="btn-base btn-verde">Iniciar Sesión</button>
 
                 <!-- Aun por implementar el btnDemo -->
-                <button class="btn-base btn-amarillo">Iniciar Demo Usuario</button>
-                </div>
             </form>
+            <form action="{{ route('usuario.login.demo') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn-base btn-amarillo">Iniciar Demo Usuario</button>
+                </form>
+                </div>
+                <div class="usuarioDemo">
+                    <p><strong>Usuario de demostración:</strong></p>
+                    <p>Email: demo@demo.com</p>
+                    <p>Contraseña: demo123</p>
+                </div>
             <hr>
             <div class="loginOpciones">
                 <p>¿No tienes cuenta? <a href="{{ route('usuario.show') }}">Regístrate aquí</a></p>

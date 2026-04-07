@@ -16,6 +16,21 @@ class UsuarioSeeder extends Seeder
         // Usuario de prueba para desarrollo local
         // Email: usuario@test.com
         // Contraseña: password123
+
+
+        //Usuario de demo para demostraciones en producción
+        Usuario::updateOrCreate(
+            ['email' => 'demo@demo.com'],
+            [
+                'name' => 'Usuario Demo',
+                'dni' => '00000000D',
+                'movil' => '600000000',
+                'password' => 'demo1234', // Se hasheará automáticamente en el modelo
+                'nSocio' => '00000DE', // Se genera automáticamente en booted
+                'is_demo' => true, // Marcamos este usuario como de demostración
+            ]
+        );
+
         Usuario::updateOrCreate(
             ['email' => 'usuario@test.com'],
             [
