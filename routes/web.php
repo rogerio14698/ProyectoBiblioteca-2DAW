@@ -48,7 +48,10 @@ Route::get('/catalogo', [LibroController::class, 'catalogo']);
 Route::get('/avisoLegal', function () {
     return view('bibliotecaDAW.publicViews.avisoLegal');
 });
-
+//Politicas de cookies:
+Route::get('/politicasCookies', function () {
+    return view('bibliotecaDAW.publicViews.politicasCookies');
+});
 Route::get('/serviciosDigitales', function () {
     return view('bibliotecaDAW.publicViews.serviciosDigitales');
 });
@@ -77,7 +80,7 @@ Route::post('/admin/login/demo', [LoginControllerAdmin::class, 'loginDemo'])->na
 // RUTAS DE USUARIO REGISTRADO (Requiere auth:web)
 // ===============================================
 
-Route::middleware(['auth:web'])->group(function () {
+Route::middleware(['auth:web', 'bloquear.demo'])->group(function () {
     Route::get('/inicioUsuario', function () {
         return view('bibliotecaDAW.userViews.inicioLogin');
     })->name('usuario.inicio');
@@ -131,7 +134,7 @@ Route::middleware(['auth:web'])->group(function () {
 // RUTAS DE ADMINISTRADOR (Requiere auth:admin)
 // ===============================================
 
-Route::middleware(['auth:admin'])->group(function () {
+Route::middleware(['auth:admin', 'bloquear.demo'])->group(function () {
     // Dashboard admin
     Route::get('/admin', function () {
         $mensajes = Contacto::orderBy('created_at', 'desc')->paginate(10);
