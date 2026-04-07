@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('password');
             $table->dateTime('last_login')->nullable();
             $table->enum('rol', ['superadmin', 'editor', 'moderador']);
+            $table->boolean('is_demo')->default(false); // Para marcar si el admin es de demostración
             $table->timestamps();
         });
     }

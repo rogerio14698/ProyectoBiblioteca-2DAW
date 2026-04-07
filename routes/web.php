@@ -71,6 +71,7 @@ Route::post('/registro', [UsuarioController::class, 'store'])->name('usuario.sto
 // Admin - Login
 Route::get('/admin/login', [LoginControllerAdmin::class, 'mostrarLogin'])->name('admin.login.mostrar');
 Route::post('/admin/login', [LoginControllerAdmin::class, 'login'])->name('admin.login.procesar');
+Route::post('/admin/login/demo', [LoginControllerAdmin::class, 'loginDemo'])->name('admin.login.demo');
 
 // ===============================================
 // RUTAS DE USUARIO REGISTRADO (Requiere auth:web)

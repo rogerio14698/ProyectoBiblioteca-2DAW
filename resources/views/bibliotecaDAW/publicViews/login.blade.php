@@ -39,31 +39,26 @@
 
                 <div class="labelLogin">
                     <label class="tituloLabel recuerdame" for="recordar">
-                    <input type="checkbox" name="recordar" id="recordar">
-                    Recuérdame
-                </label>
+                        <input type="checkbox" name="recordar" id="recordar">
+                        Recuérdame
+                    </label>
                 </div>
 
                 <div class="btnsInicioSesion">
                     <button type="submit" class="btn-base btn-verde">Iniciar Sesión</button>
 
-                <!-- Aun por implementar el btnDemo -->
+                    <!-- Aun por implementar el btnDemo -->
             </form>
             <form action="{{ route('usuario.login.demo') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="btn-base btn-amarillo">Iniciar Demo Usuario</button>
-                </form>
-                </div>
-                <div class="usuarioDemo">
-                    <p><strong>Usuario de demostración:</strong></p>
-                    <p>Email: demo@demo.com</p>
-                    <p>Contraseña: demo123</p>
-                </div>
-            <hr>
-            <div class="loginOpciones">
-                <p>¿No tienes cuenta? <a href="{{ route('usuario.show') }}">Regístrate aquí</a></p>
-                <p><a href="{{ route('admin.login.mostrar') }}">¿Eres administrador? Inicia sesión aquí</a></p>
-            </div>
+                @csrf
+                <button type="submit" class="btn-base btn-amarillo">Iniciar Demo Usuario</button>
+            </form>
+        </div>
+        <hr>
+        <div class="loginOpciones">
+            <p>¿No tienes cuenta? <a href="{{ route('usuario.show') }}">Regístrate aquí</a></p>
+            <p><a href="{{ route('admin.login.mostrar') }}">¿Eres administrador? Inicia sesión aquí</a></p>
+        </div>
         </div>
     </section>
 @endsection
