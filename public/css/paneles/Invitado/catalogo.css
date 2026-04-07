@@ -13,10 +13,45 @@
 
 .buscadorInput {
     min-height: var(--altura-boton-movil);
-    padding: 0 var(--unidad-espaciado);
+    padding: 0 calc(var(--unidad-espaciado) * 1.5);
     border: 1px solid var(--color-borde);
     border-radius: var(--radio-medio);
     color: var(--color-texto-principal);
+    background: var(--bgBlanco);
+    font-size: 0.9rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Focus en los inputs del buscador */
+.buscadorInput:focus {
+    outline: none;
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
+}
+
+/* Botón buscar del catálogo */
+.btn-buscar {
+    background: var(--color-primario);
+    color: var(--blanco);
+    min-height: var(--altura-boton-movil);
+    font-weight: 600;
+}
+
+.btn-buscar:hover {
+    background: var(--color-primario-oscuro);
+}
+
+/* Botón limpiar filtros */
+.btn-limpiar {
+    background: transparent;
+    color: var(--color-texto-mutado);
+    border: 1px solid var(--color-borde);
+    min-height: var(--altura-boton-movil);
+}
+
+.btn-limpiar:hover {
+    color: var(--bgBtnRojo);
+    border-color: var(--bgBtnRojo);
 }
 
 
@@ -28,10 +63,10 @@
 .catalogoBody {
     display: flex;
     flex-direction: column;
-    background-color: var(--color-blanco);
+    background-color: transparent;
     padding: var(--relleno-movil);
     padding: 20px;
-    gap: calc(var(--unidad-espaciado) * 2); /* 16px entre tarjetas */
+    gap: calc(var(--unidad-espaciado) * 2.5);
 }
 
 .catalogoBody > .alinearCentro {
@@ -47,18 +82,20 @@
    ========================================= */
 .catalogoCard {
     display: flex;
-    flex-direction: column;               /* Móvil: apilado vertical           */
-    align-items: center;                  /* Centra hijos horizontalmente      */
-    padding: calc(var(--unidad-espaciado) * 3); /* 24px — espacio generoso     */
-    gap: calc(var(--unidad-espaciado) * 2);     /* 16px entre secciones        */
-    background-color: var(--bgCardCatalogo);
-    box-shadow: var(--sombra);
-    border-radius: var(--radio-medio);
-
+    flex-direction: column;
+    align-items: center;
+    padding: calc(var(--unidad-espaciado) * 3);
+    gap: calc(var(--unidad-espaciado) * 2);
+    background-color: var(--bgBlanco);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    border: 1px solid var(--color-borde);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .catalogoCard:hover {
-    transform: scale(1.02) translateY(-2px);
-    transition: all 0.3s ease;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 /* =========================================
@@ -80,11 +117,17 @@
    completa dentro del espacio sin recortarla (cover prohibido). */
 .cardImagen img {
     display: block;
-    width: 160px;                         /* Ancho fijo absoluto              */
-    height: auto;                         /* Altura proporcional automática   */
-    border-radius: var(--radio-medio);
-    box-shadow: var(--sombra-media);
-    object-fit: contain;                  /* Imagen completa, sin cortes      */
+    width: 160px;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+/* Hover sutil en la portada */
+.catalogoCard:hover .cardImagen img {
+    transform: scale(1.03);
 }
 
 /* =========================================
@@ -107,13 +150,14 @@
 /* Título del libro — aseguramos que títulos largos bajen de línea
    de forma ordenada sin empujar ni romper el layout.              */
 .libroTitulo {
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: var(--color-primario-oscuro);
-    margin-bottom: calc(var(--unidad-espaciado) / 2); /* 4px */
-    text-decoration: underline;
-    word-wrap: break-word;                /* Seguridad para títulos largos    */
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--negro);
+    margin-bottom: calc(var(--unidad-espaciado) * 1);
+    word-wrap: break-word;
     overflow-wrap: break-word;
+    line-height: 1.3;
+    letter-spacing: -0.3px;
 }
 
 /* =========================================
@@ -132,14 +176,46 @@
     gap: var(--unidad-espaciado);         /* 8px entre botones                */
 }
 
-/* Botones más pequeños e integrados dentro del catálogo.
-   Se sobreescriben aquí (scoped) para no afectar a .btn-base global. */
+/* Botones del catálogo con hover suave */
 .accionesCatalogo .btn-base {
     font-size: 0.8rem;
-    padding: 6px 12px;
+    padding: 8px 14px;
     width: 100%;
-    max-width: 200px;                     /* Ancho contenido en móvil         */
+    max-width: 200px;
     text-align: center;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+/* Botón ver detalles */
+.btn-ver {
+    background: var(--color-primario);
+    color: var(--blanco);
+}
+
+.btn-ver:hover {
+    background: var(--color-primario-oscuro);
+}
+
+/* Botón carrito */
+.btn-carrito {
+    background: var(--color-carrito-anadir);
+    color: var(--blanco);
+}
+
+.btn-carrito:hover {
+    opacity: 0.85;
+}
+
+/* Botón alquilar */
+.btn-alquilar {
+    background: var(--color-alquilar);
+    color: var(--blanco);
+}
+
+.btn-alquilar:hover {
+    opacity: 0.85;
 }
 
 /* =========================================
@@ -165,46 +241,59 @@
 .infoLabel {
     font-weight: 600;
     white-space: nowrap;
-    color: var(--color-primario-oscuro);
+    color: var(--color-texto-mutado);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
 }
 
 .infoValue {
-    font-weight: bold;
-    color: var(--color-primario-claro);
+    font-weight: 500;
+    color: var(--color-texto-principal);
 }
 .stock-disponible {
     color: var(--blanco);
-    border-radius: var(--radio-medio);
-    font-weight: bold;
-    padding: 5px;
+    border-radius: 20px;
+    font-weight: 600;
+    padding: 3px 10px;
+    font-size: 0.7rem;
     text-transform: uppercase;
     max-width: fit-content;
     background-color: var(--bgDisponible);
+    letter-spacing: 0.5px;
 }
-.stock-no-disponible{
+
+.stock-no-disponible {
     color: var(--blanco);
-    border-radius: var(--radio-medio);
-    font-weight: bold;
-    padding: 5px;
+    border-radius: 20px;
+    font-weight: 600;
+    padding: 3px 10px;
+    font-size: 0.7rem;
     text-transform: uppercase;
     max-width: fit-content;
     background-color: var(--bgNoDisponible);
+    letter-spacing: 0.5px;
 }
 .formato-digital {
     background-color: var(--bgFormatoDigital);
     color: var(--color-blanco);
-    border-radius: var(--radio-medio);
-    padding: 2px 6px;
-    font-size: 0.75rem;
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 0.7rem;
+    font-weight: 600;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
+
 .formato-fisico {
     background-color: var(--bgFormatoFisico);
     color: var(--color-blanco);
-    border-radius: var(--radio-medio);
-    padding: 2px 6px;
-    font-size: 0.75rem;
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 0.7rem;
+    font-weight: 600;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 /* =========================================

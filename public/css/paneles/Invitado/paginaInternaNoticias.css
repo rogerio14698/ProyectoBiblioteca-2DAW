@@ -1,0 +1,161 @@
+/* =================================================
+   Estilos para la página interna de detalle de noticia.
+   Diseño inspirado en periódicos online: limpio, tipografía
+   protagonista, mucho espacio en blanco, lectura cómoda.
+   Las variables se cargan desde main.css → variables/variables.css
+   ================================================= */
+
+/* -------------------------------------------------
+   CONTENEDOR PRINCIPAL: artículo centrado y estrecho
+   para una lectura cómoda tipo columna de periódico.
+   ------------------------------------------------- */
+.noticiaInterna {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: calc(var(--unidad-espaciado) * 4) calc(var(--unidad-espaciado) * 2);
+    background: var(--bgBlanco);
+}
+
+/* -------------------------------------------------
+   CABECERA: categoría, título, autor y fecha.
+   Jerarquía visual clara con separador inferior.
+   ------------------------------------------------- */
+.noticiaInternaHeader {
+    text-align: center;
+    padding-bottom: calc(var(--unidad-espaciado) * 3);
+    margin-bottom: calc(var(--unidad-espaciado) * 3);
+    border-bottom: 1px solid var(--color-borde);
+}
+
+/* Badge de categoría (ej: "Instalaciones", "Avisos") */
+.noticiaInternaCategoria {
+    display: inline-block;
+    padding: calc(var(--unidad-espaciado) * 0.5) calc(var(--unidad-espaciado) * 2);
+    background: var(--color-primario);
+    color: var(--blanco);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-radius: 2px;
+    margin-bottom: calc(var(--unidad-espaciado) * 2);
+}
+
+/* Título principal del artículo — grande y serif para look editorial */
+.noticiaInternaTitulo {
+    font-size: 2.4rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--negro);
+    margin: 0 0 calc(var(--unidad-espaciado) * 2) 0;
+    letter-spacing: -0.5px;
+}
+
+/* Línea de metadatos: autor + fecha */
+.noticiaInternaMeta {
+    display: flex;
+    justify-content: center;
+    gap: calc(var(--unidad-espaciado) * 3);
+    font-size: 0.9rem;
+    color: var(--color-texto-mutado);
+}
+
+/* Autor y fecha con iconos alineados */
+.noticiaInternaAutor,
+.noticiaInternaFecha {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--unidad-espaciado) * 0.5);
+}
+
+/* -------------------------------------------------
+   IMAGEN PRINCIPAL: a ancho completo con bordes limpios
+   ------------------------------------------------- */
+.noticiaInternaFigura {
+    margin: 0 0 calc(var(--unidad-espaciado) * 4) 0;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+/* Imagen responsive que ocupa todo el ancho disponible */
+.noticiaInternaImg {
+    width: 100%;
+    height: auto;
+    max-height: 420px;
+    object-fit: cover;
+    display: block;
+}
+
+/* -------------------------------------------------
+   CUERPO DEL ARTÍCULO: tipografía optimizada para lectura.
+   Interlineado generoso y párrafos bien separados.
+   ------------------------------------------------- */
+.noticiaInternaCuerpo {
+    margin-bottom: calc(var(--unidad-espaciado) * 4);
+}
+
+/* Texto del artículo con estilo editorial */
+.noticiaInternaTexto {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    color: var(--color-texto-principal);
+    text-align: justify;
+    hyphens: auto;
+}
+
+/* Drop cap: primera letra grande estilo periódico */
+
+
+/* -------------------------------------------------
+   PIE DEL ARTÍCULO: botones de acción
+   ------------------------------------------------- */
+.noticiaInternaFooter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--unidad-espaciado) * 2);
+    padding-top: calc(var(--unidad-espaciado) * 3);
+    border-top: 1px solid var(--color-borde);
+}
+
+/* Botones con iconos alineados */
+.noticiaInternaEnlace,
+.noticiaInternaVolver {
+    gap: calc(var(--unidad-espaciado) * 1);
+}
+
+/* -------------------------------------------------
+   RESPONSIVE: Móvil
+   ------------------------------------------------- */
+@media (max-width: 768px) {
+    .noticiaInterna {
+        padding: var(--relleno-no-movil);
+    }
+
+    /* Título más pequeño en móvil */
+    .noticiaInternaTitulo {
+        font-size: 1.6rem;
+    }
+
+    /* Metadatos en columna en móvil */
+    .noticiaInternaMeta {
+        flex-direction: column;
+        gap: calc(var(--unidad-espaciado) * 1);
+    }
+
+    /* Botones de acción a ancho completo en móvil */
+    .noticiaInternaFooter {
+        flex-direction: column;
+    }
+
+    .noticiaInternaEnlace,
+    .noticiaInternaVolver {
+        width: 100%;
+        text-align: center;
+        min-height: var(--altura-boton-movil);
+    }
+
+    /* Imagen con menos altura máxima en móvil */
+    .noticiaInternaImg {
+        max-height: 250px;
+    }
+}

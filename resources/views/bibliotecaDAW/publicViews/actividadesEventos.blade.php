@@ -14,7 +14,10 @@
         @foreach ($eventos as $evento)
             <div class="actividadEventoCard">
                 <div class="eventosTitulo">
-                    <h2 class="tituloCard">{{ $evento->titulo }}</h2>
+                    {{-- El título enlaza a la página interna del evento --}}
+                    <a href="{{ route('evento.paginaInterna', ['id' => $evento->id]) }}">
+                        <h2 class="tituloCard">{{ $evento->titulo }}</h2>
+                    </a>
                     <p class="parrafoContenido">{{ $evento->descripcion }}</p>
                 </div>
                 <div class="eventoImagen">
@@ -41,8 +44,8 @@
                     <p class="ubicacionEvento">{{ $evento->ubicacion }}</p>
                     <p class="usuarioEvento">{{ $evento->usuario->name }}</p>
                 </div>
-                <a href="{{ route('evento.apuntarse', ['id' => $evento->id]) }}" class="btn-base btn-verde">Enlace Produccion</a>
-<!--Verifica si el usuario está autenticado -->
+                <a href="{{ route('evento.paginaInterna', ['id' => $evento->id]) }}" class="btn-base btn-azul">Ver evento</a>
+                {{-- Verifica si el usuario está autenticado --}}
 
                @if (Auth::check())
                    <a href="{{ route('evento.apuntarse', ['id' => $evento->id]) }}" class="btn-base btn-verde">Apuntarse</a>

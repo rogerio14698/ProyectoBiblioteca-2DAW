@@ -1,53 +1,84 @@
+/* =================================================
+   Estilos para la página interna de detalle del libro.
+   Estructura: Libro 3D (izquierda) + Info (derecha).
+   Las variables se cargan desde main.css → variables/variables.css
+   ================================================= */
+
+/* -------------------------------------------------
+   CONTENEDOR PRINCIPAL de la sección
+   ------------------------------------------------- */
 .paginaInternaLibro {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: calc(var(--unidad-espaciado) * 3);
-    padding: calc(var(--unidad-espaciado) * 3);
+    padding: calc(var(--unidad-espaciado) * 4) calc(var(--unidad-espaciado) * 2);
     background-color: var(--bgPagina);
 }
 
-.book-container {
-   width: min(100%, 340px);
+/* -------------------------------------------------
+   CARD PRINCIPAL: layout de dos columnas en desktop
+   ------------------------------------------------- */
+.cardPaginaInterna {
     display: flex;
-    perspective: 1100px;
-    perspective-origin: center;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(var(--unidad-espaciado) * 4);
+    width: 100%;
+    max-width: 1100px;
+}
+
+/* -------------------------------------------------
+   LIBRO 3D: Contenedor con perspectiva
+   Tamaño grande: 320x460px (más del doble que antes)
+   ------------------------------------------------- */
+.book-container {
+    display: flex;
     align-items: center;
     justify-content: center;
-    width: 351px;
+    perspective: 1200px;
+    perspective-origin: center;
+    min-height: 520px;
+    width: 100%;
+    max-width: 450px;
 }
 
+/* Estructura 3D del libro con rotación inicial */
 .book {
     position: relative;
-    width: 220px;
-    height: 300px;
+    width: 320px;
+    height: 460px;
     transform-style: preserve-3d;
-    transform: rotateY(20deg) rotateX(-20deg);
-    transition: transform 500ms ease;
+    transform: rotateY(20deg) rotateX(-10deg);
+    transition: transform 600ms ease;
 }
 
+/* Hover: el libro gira suavemente al pasar el ratón */
 .book-container:hover .book {
-    transform: rotateY(-12deg) rotateX(7deg) translateZ(10px);
+    transform: rotateY(-15deg) rotateX(5deg) translateZ(15px);
 }
 
-.book>div {
+/* Caras base del libro */
+.book > div {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     border: 1px solid var(--color-borde);
-    border-radius: var(--radio-pequeno);
-    box-shadow: var(--sombra-media);
+    border-radius: 4px;
     backface-visibility: hidden;
 }
 
+/* Cara frontal: portada del libro */
 .book .front {
     background-color: var(--color-blanco);
     overflow: hidden;
-    transform: translateZ(14px);
+    transform: translateZ(18px);
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3);
 }
 
+/* Imagen de la portada ocupa toda la cara frontal */
 .book .front img {
     display: block;
     width: 100%;
@@ -55,72 +86,180 @@
     object-fit: cover;
 }
 
+/* Cara trasera */
 .book .back {
     background-color: var(--color-primario-oscuro);
-    transform: rotateY(180deg) translateZ(14px);
+    transform: rotateY(180deg) translateZ(18px);
 }
 
+/* Lomo del libro (lateral izquierdo visible) */
 .book .spine {
-    width: 28px;
+    width: 36px;
     transform-origin: left center;
-    transform: rotateY(-90deg) translateX(-14px);
-    background-color: var(--color-primario);
+    transform: rotateY(-90deg) translateX(-18px);
+    background: linear-gradient(180deg, var(--color-primario), var(--color-primario-oscuro));
 }
 
+/* Lateral derecho */
 .book .right {
-    width: 28px;
+    width: 36px;
     left: auto;
     right: 0;
     transform-origin: right center;
-    transform: rotateY(90deg) translateX(14px);
+    transform: rotateY(90deg) translateX(18px);
     background-color: var(--color-blanco);
 }
 
+/* Caras superior, inferior e izquierda */
 .book .top,
 .book .bottom,
 .book .left {
-    height: 28px;
+    height: 36px;
     background-color: var(--color-blanco);
 }
 
+/* Cara superior */
 .book .top {
     transform-origin: top center;
-    transform: rotateX(90deg) translateY(-14px);
+    transform: rotateX(90deg) translateY(-18px);
 }
 
+/* Cara inferior */
 .book .bottom {
     top: auto;
     bottom: 0;
     transform-origin: bottom center;
-    transform: rotateX(-90deg) translateY(14px);
+    transform: rotateX(-90deg) translateY(18px);
 }
 
+/* Cara izquierda */
 .book .left {
-    width: 28px;
+    width: 36px;
     transform-origin: left center;
-    transform: rotateY(-90deg) translateX(-14px);
+    transform: rotateY(-90deg) translateX(-18px);
     background-color: var(--color-blanco);
 }
 
+/* -------------------------------------------------
+   COLUMNA DERECHA: Información del libro
+   ------------------------------------------------- */
+.contenidoPaginaInterna {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 2);
+    background: var(--bgBlanco);
+    border-radius: 12px;
+    padding: calc(var(--unidad-espaciado) * 4);
+    box-shadow: var(--sombra);
+    width: 100%;
+}
+
+/* Título del libro */
+.libroInternoTitulo {
+    font-size: 1.8rem;
+    color: var(--color-primario-oscuro);
+    margin: 0;
+    line-height: 1.3;
+}
+
+/* Nombre del autor destacado */
+.libroInternoAutor {
+    font-size: 1.1rem;
+    color: var(--color-texto-mutado);
+    margin: 0;
+    font-style: italic;
+}
+
+/* Grid de datos (género, editorial, ISBN, año) */
+.libroInternoDatos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: calc(var(--unidad-espaciado) * 1.5);
+    margin-top: calc(var(--unidad-espaciado) * 1);
+}
+
+/* Cada celda de dato */
+.libroInternoDato {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: calc(var(--unidad-espaciado) * 1.5);
+    background: var(--bgPagina);
+    border-radius: 8px;
+    border-left: 3px solid var(--color-primario);
+}
+
+/* Etiqueta del dato (ej: "Género") */
+.libroInternoDatoLabel {
+    font-size: 0.75rem;
+    color: var(--color-texto-mutado);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+/* Valor del dato (ej: "Ficción") */
+.libroInternoDatoValor {
+    font-size: 0.95rem;
+    color: var(--color-texto-principal);
+    font-weight: 500;
+}
+
+/* Contenedor de badges de formato y disponibilidad */
+.libroInternoBadges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--unidad-espaciado) * 2);
+    align-items: center;
+}
+
+/* Botones de acción (carrito + alquilar) */
+.accionesCatalogo {
+    display: flex;
+    gap: calc(var(--unidad-espaciado) * 1.5);
+    flex-wrap: wrap;
+    margin-top: calc(var(--unidad-espaciado) * 1);
+}
+
+/* Botón de volver al catálogo */
+.libroInternoVolver {
+    align-self: flex-start;
+    gap: calc(var(--unidad-espaciado) * 1);
+}
+
+/* -------------------------------------------------
+   RESPONSIVE: Desktop (dos columnas lado a lado)
+   ------------------------------------------------- */
 @media (min-width: 768px) {
     .cardPaginaInterna {
-        display: flex;
-        height: 80vh;
+        flex-direction: row;
+        align-items: stretch;
     }
 
+    /* El libro ocupa un ancho fijo a la izquierda */
+    .book-container {
+        flex-shrink: 0;
+        width: 450px;
+    }
+
+    /* La info del libro crece para ocupar el resto */
     .contenidoPaginaInterna {
-        display: flex;
-        flex-direction: column;
+        flex: 1;
         justify-content: center;
     }
+}
 
-    .paginaInternaLibro {
-        display: flex;
-        padding: var(--relleno-movil);
+/* -------------------------------------------------
+   RESPONSIVE: Pantallas muy grandes
+   ------------------------------------------------- */
+@media (min-width: 1200px) {
+    /* Libro aún más grande en pantallas amplias */
+    .book {
+        width: 360px;
+        height: 520px;
     }
 
-    .book {
-        width: 180px;
-        height: 250px;
+    .book-container {
+        min-height: 580px;
     }
 }

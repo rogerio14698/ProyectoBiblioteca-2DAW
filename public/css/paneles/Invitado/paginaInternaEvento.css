@@ -1,0 +1,298 @@
+/* =================================================
+   Estilos para la página interna de detalle del evento.
+   Estructura: Hero (imagen) + Contenido (info + panel lateral).
+   Las variables se cargan desde main.css → variables/variables.css
+   ================================================= */
+
+/* -------------------------------------------------
+   HERO: Imagen de cabecera a ancho completo
+   con overlay oscuro y texto superpuesto.
+   ------------------------------------------------- */
+.eventoInternoHero {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+    border-radius: 0 0 12px 12px;
+}
+
+/* Imagen de fondo del hero, recortada para cubrir todo el espacio */
+.eventoInternoHeroImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Overlay con degradado oscuro para dar contraste al texto */
+.eventoInternoHeroOverlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: calc(var(--unidad-espaciado) * 4);
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
+    color: var(--blanco);
+}
+
+/* Título principal del evento sobre la imagen */
+.eventoInternoTitulo {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 calc(var(--unidad-espaciado) * 1) 0;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Ubicación con icono sobre la imagen */
+.eventoInternoUbicacion {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    gap: calc(var(--unidad-espaciado) * 1);
+}
+
+/* -------------------------------------------------
+   CONTENIDO: Layout de dos columnas (info + panel)
+   ------------------------------------------------- */
+.eventoInternoContenido {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: calc(var(--unidad-espaciado) * 4);
+    padding: calc(var(--unidad-espaciado) * 4) calc(var(--unidad-espaciado) * 2);
+}
+
+/* -------------------------------------------------
+   COLUMNA IZQUIERDA: Información del evento
+   ------------------------------------------------- */
+.eventoInternoInfo {
+    background: var(--bgBlanco);
+    border-radius: 12px;
+    padding: calc(var(--unidad-espaciado) * 4);
+    box-shadow: var(--sombra);
+}
+
+/* Subtítulo "Sobre este evento" */
+.eventoInternoSubtitulo {
+    font-size: 1.4rem;
+    color: var(--color-primario-oscuro);
+    margin: 0 0 calc(var(--unidad-espaciado) * 2) 0;
+    padding-bottom: calc(var(--unidad-espaciado) * 1);
+    border-bottom: 2px solid var(--color-primario);
+}
+
+/* Párrafo de descripción del evento */
+.eventoInternoDescripcion {
+    font-size: 1rem;
+    color: var(--color-texto-principal);
+    line-height: 1.8;
+    margin-bottom: calc(var(--unidad-espaciado) * 3);
+}
+
+/* Grid de tarjetas con los datos clave (fecha, hora, ubicación, organizador) */
+.eventoInternoDatos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: calc(var(--unidad-espaciado) * 2);
+}
+
+/* Cada tarjeta individual de dato */
+.eventoInternoDato {
+    display: flex;
+    align-items: flex-start;
+    gap: calc(var(--unidad-espaciado) * 1.5);
+    padding: calc(var(--unidad-espaciado) * 2);
+    background: var(--color-card-evento);
+    border-radius: 8px;
+    border-left: 3px solid var(--color-primario);
+}
+
+/* Icono de cada dato */
+.eventoInternoDato i {
+    font-size: 1.4rem;
+    color: var(--color-primario);
+    margin-top: 2px;
+}
+
+/* Etiqueta superior del dato (ej: "Fecha") */
+.eventoInternoDatoLabel {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--color-texto-mutado);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+/* Valor del dato (ej: "15 de marzo, 2026") */
+.eventoInternoDatoValor {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--color-texto-principal);
+    font-weight: 500;
+}
+
+/* -------------------------------------------------
+   COLUMNA DERECHA: Panel lateral de inscripción
+   ------------------------------------------------- */
+.eventoInternoPanel {
+    align-self: start;
+}
+
+/* Tarjeta del panel de inscripción con posición sticky */
+.eventoInternoPanelCard {
+    background: var(--bgBlanco);
+    border-radius: 12px;
+    padding: calc(var(--unidad-espaciado) * 3);
+    box-shadow: var(--sombra);
+    position: sticky;
+    top: calc(var(--unidad-espaciado) * 10);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 2);
+}
+
+/* Título del panel "Inscripción" */
+.eventoInternoPanelTitulo {
+    font-size: 1.2rem;
+    color: var(--color-primario-oscuro);
+    margin: 0;
+    text-align: center;
+}
+
+/* Contenedor de la barra de aforo */
+.eventoInternoAforo {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 1);
+}
+
+/* Texto superior de la barra "X / Y asistentes | Z plazas" */
+.eventoInternoAforoTexto {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--color-texto-mutado);
+}
+
+/* Fondo de la barra de progreso */
+.eventoInternoBarraFondo {
+    width: 100%;
+    height: 10px;
+    background: var(--grisClaro);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+/* Relleno de la barra de progreso según el porcentaje de ocupación */
+.eventoInternoBarra {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-primario), var(--color-secundario));
+    border-radius: 5px;
+    transition: width 0.5s ease;
+}
+
+/* Contenedor del badge de prioridad */
+.eventoInternoPrioridad {
+    text-align: center;
+}
+
+/* Badge base de prioridad */
+.eventoInternoPrioridadBadge {
+    display: inline-block;
+    padding: calc(var(--unidad-espaciado) * 0.5) calc(var(--unidad-espaciado) * 2);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--blanco);
+}
+
+/* Prioridad 1 = Alta (rojo) */
+.eventoInternoPrioridad1 {
+    background-color: var(--bgBtnRojo);
+}
+
+/* Prioridad 2 = Media (amarillo con texto oscuro) */
+.eventoInternoPrioridad2 {
+    background-color: var(--bgBtnAmarillo);
+    color: var(--negro);
+}
+
+/* Prioridad 3 = Baja (verde) */
+.eventoInternoPrioridad3 {
+    background-color: var(--bgBtnVerde);
+}
+
+/* Prioridad 0 o sin definir (gris) */
+.eventoInternoPrioridad0 {
+    background-color: var(--grisClaro);
+    color: var(--color-texto-principal);
+}
+
+/* Botones del panel (apuntarse, volver) a ancho completo */
+.eventoInternoBtn {
+    width: 100%;
+    text-align: center;
+    gap: calc(var(--unidad-espaciado) * 1);
+}
+
+/* Mensaje cuando el evento está completo */
+.eventoInternoCompleto {
+    text-align: center;
+    color: var(--bgBtnRojo);
+    font-weight: 600;
+    padding: calc(var(--unidad-espaciado) * 1.5);
+    background: #fde8e8;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(var(--unidad-espaciado) * 1);
+}
+
+/* Aviso para usuarios no autenticados */
+.eventoInternoLoginAviso {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--color-texto-mutado);
+    padding: calc(var(--unidad-espaciado) * 1.5);
+    background: var(--color-card-evento);
+    border-radius: 8px;
+}
+
+/* Enlace de login dentro del aviso */
+.eventoInternoLoginAviso a {
+    color: var(--color-primario);
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+/* -------------------------------------------------
+   RESPONSIVE: Móvil (una sola columna)
+   ------------------------------------------------- */
+@media (max-width: 768px) {
+    /* Hero más bajo en móvil */
+    .eventoInternoHero {
+        height: 250px;
+    }
+
+    .eventoInternoTitulo {
+        font-size: 1.4rem;
+    }
+
+    /* El contenido pasa a una columna */
+    .eventoInternoContenido {
+        grid-template-columns: 1fr;
+        padding: var(--relleno-no-movil);
+    }
+
+    /* Los datos clave pasan a columna única en móvil */
+    .eventoInternoDatos {
+        grid-template-columns: 1fr;
+    }
+
+    /* Botones a altura mínima táctil (accesibilidad) */
+    .eventoInternoBtn {
+        min-height: var(--altura-boton-movil);
+    }
+}

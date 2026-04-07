@@ -20,6 +20,9 @@
 @import 'paneles/Invitado/login.css';
 @import 'paneles/Invitado/registro.css';
 @import 'paneles/Invitado/paginaInternaLibro.css';
+@import 'paneles/Invitado/paginaInternaEvento.css';
+@import 'paneles/Invitado/paginaInternaNoticias.css';
+@import 'paneles/Invitado/paginaInternaAlquilarLibro.css';
 
 /*Paginas usuarios autentificados*/
 @import 'paneles/usuarioAutenticado/navUsuario.css';

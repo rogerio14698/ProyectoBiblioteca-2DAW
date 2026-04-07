@@ -90,6 +90,66 @@
 .accionesPublicarCard {
     display: flex;
     justify-content: flex-start;
+    gap: calc(var(--unidad-espaciado) * 2);
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+/* -------------------------------------------------
+   INPUT FILE PERSONALIZADO: zona de arrastrar/soltar
+   con icono, texto descriptivo y formatos aceptados.
+   ------------------------------------------------- */
+
+/* Contenedor del campo de archivo */
+.campoArchivoPublicar {
+    flex: 1;
+    min-width: 250px;
+}
+
+/* Oculta el input nativo del navegador */
+.inputArchivoPublicar {
+    display: none;
+}
+
+/* Label que actúa como zona de carga visible */
+.labelArchivoPublicar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: calc(var(--unidad-espaciado) * 1);
+    padding: calc(var(--unidad-espaciado) * 3) calc(var(--unidad-espaciado) * 2);
+    border: 2px dashed var(--color-primario);
+    border-radius: 8px;
+    background: var(--color-card-evento);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+/* Hover: borde más oscuro y fondo más visible */
+.labelArchivoPublicar:hover {
+    border-color: var(--color-primario-oscuro);
+    background: rgba(74, 144, 226, 0.1);
+}
+
+/* Icono de subida */
+.labelArchivoPublicar i {
+    font-size: 2rem;
+    color: var(--color-primario);
+}
+
+/* Texto principal del label */
+.labelArchivoTexto {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-texto-principal);
+}
+
+/* Texto secundario con formatos aceptados */
+.labelArchivoFormatos {
+    font-size: 0.8rem;
+    color: var(--color-texto-mutado);
 }
 
 @media (min-width: 768px) {

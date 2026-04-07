@@ -32,6 +32,14 @@
             </div>
 
             <div class="accionesPublicar campoCompletoPublicar">
+                <div class="campoArchivoPublicar">
+                    <label for="archivoLibro" class="labelArchivoPublicar">
+                        <i class="bi bi-cloud-arrow-up"></i>
+                        <span class="labelArchivoTexto">Añade el libro en formato digital</span>
+                        <span class="labelArchivoFormatos">PDF, EPUB, MOBI (máx. 50MB)</span>
+                    </label>
+                    <input type="file" id="archivoLibro" name="archivoLibro" class="inputArchivoPublicar" accept=".pdf,.epub,.mobi">
+                </div>
                 <button type="submit" class="btn-base btn-verde">Publicar Libro</button>
             </div>
         </form>

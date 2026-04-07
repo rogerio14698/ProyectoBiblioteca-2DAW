@@ -1,0 +1,429 @@
+/* =================================================
+   Estilos para la página interna de alquiler de libro.
+   Diseño limpio y editorial que transmite confianza.
+   Estructura: Ficha del libro (izq) + Formulario/Login (der).
+   Las variables se cargan desde main.css → variables/variables.css
+   ================================================= */
+
+/* -------------------------------------------------
+   CONTENEDOR PRINCIPAL
+   ------------------------------------------------- */
+.alquilarInterno {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: calc(var(--unidad-espaciado) * 4) calc(var(--unidad-espaciado) * 2);
+}
+
+/* -------------------------------------------------
+   GRID: dos columnas (ficha + acción)
+   ------------------------------------------------- */
+.alquilarInternoGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: calc(var(--unidad-espaciado) * 4);
+}
+
+/* -------------------------------------------------
+   FICHA DEL LIBRO: portada + detalles
+   ------------------------------------------------- */
+.alquilarInternoFicha {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(var(--unidad-espaciado) * 3);
+    background: var(--bgBlanco);
+    border-radius: 12px;
+    padding: calc(var(--unidad-espaciado) * 4);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--color-borde);
+}
+
+/* Contenedor de la portada */
+.alquilarInternoPortada {
+    flex-shrink: 0;
+}
+
+/* Imagen de portada con sombra elegante */
+.alquilarInternoImg {
+    display: block;
+    width: 200px;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    object-fit: contain;
+}
+
+/* Info del libro */
+.alquilarInternoDetalles {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 1.5);
+    width: 100%;
+}
+
+/* Título del libro */
+.alquilarInternoTitulo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--negro);
+    margin: 0;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+}
+
+/* Autor en cursiva */
+.alquilarInternoAutor {
+    font-size: 1rem;
+    color: var(--color-texto-mutado);
+    margin: 0;
+    font-style: italic;
+}
+
+/* Grid de datos (editorial, ISBN, género, año) */
+.alquilarInternoDatos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: calc(var(--unidad-espaciado) * 1.5);
+}
+
+/* Cada dato individual */
+.alquilarInternoDato {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+/* Etiqueta del dato */
+.alquilarInternoDatoLabel {
+    font-size: 0.7rem;
+    color: var(--color-texto-mutado);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 600;
+}
+
+/* Valor del dato */
+.alquilarInternoDatoValor {
+    font-size: 0.95rem;
+    color: var(--color-texto-principal);
+    font-weight: 500;
+}
+
+/* Línea de estado (disponibilidad + ejemplares) */
+.alquilarInternoEstado {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--unidad-espaciado) * 2);
+    padding-top: calc(var(--unidad-espaciado) * 1.5);
+    border-top: 1px solid var(--color-borde);
+}
+
+/* Badge de estado base */
+.alquilarInternoBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--unidad-espaciado) * 0.5);
+    padding: calc(var(--unidad-espaciado) * 0.5) calc(var(--unidad-espaciado) * 1.5);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--blanco);
+}
+
+/* Badge disponible (verde) */
+.alquilarInternoDisponible {
+    background-color: var(--bgDisponible);
+}
+
+/* Badge no disponible (rojo) */
+.alquilarInternoNoDisponible {
+    background-color: var(--bgNoDisponible);
+}
+
+/* Texto de ejemplares */
+.alquilarInternoEjemplares {
+    font-size: 0.85rem;
+    color: var(--color-texto-mutado);
+}
+
+/* -------------------------------------------------
+   COLUMNA DERECHA: Panel de acción (form o login)
+   ------------------------------------------------- */
+.alquilarInternoAccion {
+    align-self: start;
+}
+
+/* -------------------------------------------------
+   TARJETA DE FORMULARIO (usuario autenticado)
+   ------------------------------------------------- */
+.alquilarInternoFormCard {
+    background: var(--bgBlanco);
+    border-radius: 12px;
+    padding: calc(var(--unidad-espaciado) * 4);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--color-borde);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 2);
+}
+
+/* Cabecera del formulario con icono de confianza */
+.alquilarInternoFormHeader {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--unidad-espaciado) * 1);
+    color: var(--bgDisponible);
+    font-size: 1.3rem;
+}
+
+/* Título del formulario */
+.alquilarInternoFormTitulo {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--negro);
+    margin: 0;
+}
+
+/* Saludo personalizado */
+.alquilarInternoSaludo {
+    font-size: 0.9rem;
+    color: var(--color-texto-mutado);
+    margin: 0;
+    padding-bottom: calc(var(--unidad-espaciado) * 1);
+    border-bottom: 1px solid var(--color-borde);
+}
+
+/* Formulario */
+.alquilarInternoForm {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 2);
+}
+
+/* Cada campo del formulario */
+.alquilarInternoCampo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* Labels del formulario */
+.alquilarInternoCampo label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-texto-mutado);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Inputs y selects del formulario */
+.alquilarInternoCampo input,
+.alquilarInternoCampo select {
+    padding: calc(var(--unidad-espaciado) * 1.25) calc(var(--unidad-espaciado) * 1.5);
+    border: 1px solid var(--color-borde);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    color: var(--color-texto-principal);
+    background: var(--bgBlanco);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Focus en inputs */
+.alquilarInternoCampo input:focus,
+.alquilarInternoCampo select:focus {
+    outline: none;
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
+}
+
+/* -------------------------------------------------
+   RESUMEN DE ALQUILER: genera confianza visual
+   ------------------------------------------------- */
+.alquilarInternoResumen {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 1);
+    padding: calc(var(--unidad-espaciado) * 2);
+    background: var(--color-card-evento);
+    border-radius: 8px;
+    border-left: 3px solid var(--color-primario);
+}
+
+/* Cada línea del resumen */
+.alquilarInternoResumenItem {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--unidad-espaciado) * 1);
+    font-size: 0.85rem;
+    color: var(--color-texto-principal);
+}
+
+/* Iconos del resumen */
+.alquilarInternoResumenItem i {
+    color: var(--color-primario);
+    font-size: 1rem;
+}
+
+/* Botón de acción a ancho completo */
+.alquilarInternoBtn {
+    width: 100%;
+    text-align: center;
+    gap: calc(var(--unidad-espaciado) * 1);
+    font-size: 1rem;
+    padding: calc(var(--unidad-espaciado) * 1.5);
+}
+
+/* Mensaje de no disponible */
+.alquilarInternoNoDisponibleMsg {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--unidad-espaciado) * 1);
+    font-size: 0.9rem;
+    color: var(--bgBtnRojo);
+    background: #fde8e8;
+    padding: calc(var(--unidad-espaciado) * 1.5);
+    border-radius: 8px;
+    margin: 0;
+}
+
+/* -------------------------------------------------
+   TARJETA DE LOGIN (usuario no autenticado)
+   ------------------------------------------------- */
+.alquilarInternoLoginCard {
+    background: var(--bgBlanco);
+    border-radius: 12px;
+    padding: calc(var(--unidad-espaciado) * 5) calc(var(--unidad-espaciado) * 4);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--color-borde);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: calc(var(--unidad-espaciado) * 2);
+}
+
+/* Icono de candado grande */
+.alquilarInternoLockIcon {
+    font-size: 3rem;
+    color: var(--color-primario);
+    opacity: 0.8;
+}
+
+/* Título del aviso de login */
+.alquilarInternoLoginTitulo {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--negro);
+    margin: 0;
+}
+
+/* Texto del aviso */
+.alquilarInternoLoginTexto {
+    font-size: 0.9rem;
+    color: var(--color-texto-mutado);
+    line-height: 1.7;
+    margin: 0;
+    max-width: 340px;
+}
+
+/* Botones de login y registro */
+.alquilarInternoLoginBotones {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 1);
+    width: 100%;
+    max-width: 280px;
+}
+
+/* -------------------------------------------------
+   GARANTÍAS: badges de confianza (datos protegidos, etc.)
+   ------------------------------------------------- */
+.alquilarInternoGarantias {
+    display: flex;
+    justify-content: center;
+    gap: calc(var(--unidad-espaciado) * 3);
+    padding-top: calc(var(--unidad-espaciado) * 2);
+    border-top: 1px solid var(--color-borde);
+    width: 100%;
+}
+
+/* Cada garantía */
+.alquilarInternoGarantia {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    color: var(--color-texto-mutado);
+}
+
+/* Iconos de garantía */
+.alquilarInternoGarantia i {
+    font-size: 1.2rem;
+    color: var(--bgDisponible);
+}
+
+/* -------------------------------------------------
+   ENLACE VOLVER
+   ------------------------------------------------- */
+.alquilarInternoVolver {
+    margin-top: calc(var(--unidad-espaciado) * 3);
+}
+
+/* -------------------------------------------------
+   RESPONSIVE: Desktop (dos columnas)
+   ------------------------------------------------- */
+@media (min-width: 768px) {
+    .alquilarInternoGrid {
+        grid-template-columns: 1fr 400px;
+    }
+
+    /* Ficha del libro en fila horizontal */
+    .alquilarInternoFicha {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .alquilarInternoImg {
+        width: 240px;
+    }
+
+    /* Panel sticky para que siga al scroll */
+    .alquilarInternoAccion {
+        position: sticky;
+        top: calc(var(--unidad-espaciado) * 10);
+    }
+}
+
+/* -------------------------------------------------
+   RESPONSIVE: Móvil
+   ------------------------------------------------- */
+@media (max-width: 767px) {
+    .alquilarInterno {
+        padding: var(--relleno-no-movil);
+    }
+
+    .alquilarInternoTitulo {
+        font-size: 1.4rem;
+    }
+
+    .alquilarInternoImg {
+        width: 160px;
+    }
+
+    /* Botones a altura táctil mínima */
+    .alquilarInternoBtn {
+        min-height: var(--altura-boton-movil);
+    }
+
+    /* Garantías en columna en móvil */
+    .alquilarInternoGarantias {
+        flex-direction: column;
+        align-items: center;
+        gap: calc(var(--unidad-espaciado) * 1.5);
+    }
+
+    .alquilarInternoDatos {
+        grid-template-columns: 1fr;
+    }
+}
