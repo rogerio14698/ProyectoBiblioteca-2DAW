@@ -33,13 +33,13 @@ class SlideBienvenidaSeeder extends Seeder
                 'titulo'      => 'Bienvenido a la Biblioteca DAW',
                 'descripcion' => 'Tu espacio de lectura, aprendizaje y comunidad. Descubre miles de títulos disponibles en formato físico y digital. Hazte socio y accede a todos nuestros servicios.',
                 'imagen'      => $imagenMuestra,
-                'url'         => '/catalogo',
+                'url'         => '/contacto',
             ],
             [
                 'titulo'      => 'Eventos y Actividades',
                 'descripcion' => 'Participa en nuestros clubes de lectura, talleres de escritura, presentaciones de libros y mucho más. Cada semana organizamos actividades para todos los públicos.',
                 'imagen'      => $imagenMuestra,
-                'url'         => '/eventos',
+                'url'         => '/actividades',
             ],
             [
                 'titulo'      => 'Catálogo Digital',

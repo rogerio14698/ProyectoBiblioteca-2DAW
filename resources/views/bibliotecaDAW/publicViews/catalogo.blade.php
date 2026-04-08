@@ -83,8 +83,7 @@
                         <a href="{{ route('libro.paginaInterna', $libro->id) }}" class="btn-base btn-ver">Ver detalles</a>
                         <a href="#" class="btn-base btn-carrito" id="alertaMantenimiento"
                             onclick="mostrarAlertaMantenimiento()">Añadir al carrito</a>
-                        <a href="{{ route('libro.paginaInternaAlquilar', $libro->id) }}" class="btn-base btn-alquilar">Alquilar
-                            ahora</a>
+                        <a href="{{ route('libro.paginaInternaAlquilar', $libro->id) }}" class="btn-base btn-alquilar">Alquilar ahora</a>
                     </div>
                 </div>
             @empty

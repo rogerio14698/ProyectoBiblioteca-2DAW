@@ -27,8 +27,7 @@
                                 <a href="{{ $slideBienvenida->url }}" class="btn-base btn-verde">Explorar
                                     Biblioteca</a>
                             @else
-                                <button class="btn-base btn-verde" type="button" disabled>Explorar
-                                    Biblioteca</button>
+                                <button class="btn-base btn-verde" type="button" disabled>Explorar Biblioteca</button>
                             @endif
                             <picture class="bienvenida-imagen">
                                 <source media="(min-width: 1200px)"

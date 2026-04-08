@@ -71,12 +71,9 @@
 
                 {{-- Botones de acción --}}
                 <div class="accionesCatalogo">
-                    <a href="#" class="btn-base btn-carrito">
-                        <i class="bi bi-cart-plus"></i> Añadir al carrito
-                    </a>
-                    <a href="#" class="btn-base btn-alquilar">
-                        <i class="bi bi-book"></i> Alquilar ahora
-                    </a>
+                    <a href="#" class="btn-base btn-carrito" id="alertaMantenimiento"
+                            onclick="mostrarAlertaMantenimiento()">Añadir al carrito</a>
+                    <a href="{{ route('libro.paginaInternaAlquilar', $libro->id) }}" class="btn-base btn-alquilar">Alquilar ahora</a>
                 </div>
 
                 {{-- Enlace para volver al catálogo --}}

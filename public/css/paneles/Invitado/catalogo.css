@@ -232,10 +232,11 @@
 /* Cada fila de info es un mini-grid de 2 columnas:
    [Etiqueta 100px] | [Valor fluido]                                       */
 .infoItem {
-    display: grid;
-    grid-template-columns: 100px 1fr ;
-    gap: calc(var(--unidad-espaciado) / 2); /* 4px */
-    align-items: baseline;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+        justify-content: space-between;
+        display: flex;
 }
 
 .infoLabel {
@@ -369,8 +370,8 @@
 
     /* Columna de etiqueta un poco más ancha en desktop */
     .infoItem {
-        gap: 10px; /* 50px entre etiqueta y valor en desktop */
-        grid-template-columns: 80px 1fr 1fr;
-        max-width: fit-content;
+        width: 100%;
+        justify-content: space-between;
+        display: flex;
     }
 }
