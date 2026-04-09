@@ -1,13 +1,11 @@
-
-
 /* ==============================================
-   PÁGINA: Gestionar Actividades y Eventos
+   PÁGINA: Gestionar Noticias
    Layout: Formulario (izquierda) + Listado cards (derecha)
-   Sigue el patrón de gestionarCarruselHome.css
+   Sigue el patrón de gestionarContenidoEventos.css
    ============================================== */
 
 /* --- Contenedor principal de la página --- */
-.gestionarActividadesYEventos {
+.gestionarNoticias {
     display: flex;
     flex-direction: column;
     background: var(--blanco);
@@ -16,12 +14,12 @@
 }
 
 /* --- Encabezado superior de la sección --- */
-.eventosEncabezado h1 {
+.noticiasEncabezado h1 {
     color: var(--color-primario-oscuro);
     margin-bottom: calc(var(--unidad-espaciado) * 0.5);
 }
 
-.eventosEncabezado p {
+.noticiasEncabezado p {
     color: var(--color-texto-mutado);
     font-size: 0.95rem;
 }
@@ -29,7 +27,7 @@
 /* ==============================================
    LAYOUT DE DOS COLUMNAS (formulario + listado)
    ============================================== */
-.eventosLayout {
+.noticiasLayout {
     display: grid;
     grid-template-columns: 1fr 1.5fr;
     gap: calc(var(--unidad-espaciado) * 3);
@@ -39,15 +37,15 @@
 /* ==============================================
    COLUMNA IZQUIERDA: FORMULARIO
    ============================================== */
-.eventosFormulario {
+.noticiasFormulario {
     position: sticky;
     top: calc(var(--unidad-espaciado) * 2);
 }
 
 /* Estilo del formulario interior con barra lateral de acento */
-.eventosFormularioInner {
+.noticiasFormularioInner {
     background: var(--color-fondo-global);
-    border-left: 4px solid var(--color-primario);
+    border-left: 4px solid var(--color-secundario);
     border-radius: 0 8px 8px 0;
     padding: calc(var(--unidad-espaciado) * 3);
     box-shadow: var(--sombra-suave);
@@ -57,7 +55,7 @@
 }
 
 /* Título del formulario */
-.eventosFormularioInner h2 {
+.noticiasFormularioInner h2 {
     color: var(--color-primario-oscuro);
     font-size: 1.2rem;
     padding-bottom: calc(var(--unidad-espaciado) * 1);
@@ -65,22 +63,32 @@
 }
 
 /* Grupo de campo (label + input) en columna */
-.eventosGrupoFormulario {
+.noticiasGrupoFormulario {
     display: flex;
     flex-direction: column;
     gap: calc(var(--unidad-espaciado) * 0.5);
 }
 
+/* Grupo de campo tipo checkbox en fila */
+.noticiasGrupoFormularioCheck {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: calc(var(--unidad-espaciado) * 1);
+}
+
 /* Etiqueta del campo */
-.eventosGrupoFormulario label {
+.noticiasGrupoFormulario label,
+.noticiasGrupoFormularioCheck label {
     color: var(--color-primario-oscuro);
     font-weight: 600;
     font-size: 0.88rem;
 }
 
-/* Inputs y textarea del formulario */
-.eventosGrupoFormulario input,
-.eventosGrupoFormulario textarea {
+/* Inputs, textarea y select del formulario */
+.noticiasGrupoFormulario input,
+.noticiasGrupoFormulario textarea,
+.noticiasGrupoFormulario select {
     padding: calc(var(--unidad-espaciado) * 1) calc(var(--unidad-espaciado) * 1.5);
     border: 1px solid var(--color-borde);
     border-radius: 6px;
@@ -91,21 +99,32 @@
 }
 
 /* Estado de foco en los campos del formulario */
-.eventosGrupoFormulario input:focus,
-.eventosGrupoFormulario textarea:focus {
+.noticiasGrupoFormulario input:focus,
+.noticiasGrupoFormulario textarea:focus,
+.noticiasGrupoFormulario select:focus {
     outline: none;
-    border-color: var(--color-primario);
-    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
+    border-color: var(--color-secundario);
+    box-shadow: 0 0 0 3px rgba(80, 227, 194, 0.2);
 }
 
-/* Textarea con altura mínima para la descripción */
-.eventosGrupoFormulario textarea {
+/* Textarea con altura mínima para el contenido */
+.noticiasGrupoFormulario textarea {
     resize: vertical;
-    min-height: 80px;
+    min-height: 100px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* Checkbox con tamaño accesible */
+.noticiasGrupoFormularioCheck input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-secundario);
+    cursor: pointer;
 }
 
 /* Botón de enviar formulario (ancho completo) */
-.eventosBotonEnvio {
+.noticiasBotonEnvio {
     width: 100%;
     padding: calc(var(--unidad-espaciado) * 1.5);
     background: var(--color-primario);
@@ -119,16 +138,16 @@
 }
 
 /* Hover del botón de envío */
-.eventosBotonEnvio:hover {
+.noticiasBotonEnvio:hover {
     background: var(--color-primario-oscuro);
     box-shadow: var(--sombra-media);
     transform: translateY(-2px);
 }
 
 /* ==============================================
-   COLUMNA DERECHA: LISTADO DE EVENTOS
+   COLUMNA DERECHA: LISTADO DE NOTICIAS
    ============================================== */
-.eventosListado h2 {
+.noticiasListado h2 {
     color: var(--color-primario-oscuro);
     font-size: 1.2rem;
     margin-bottom: calc(var(--unidad-espaciado) * 2);
@@ -137,7 +156,7 @@
 }
 
 /* Contenedor con scroll para las tarjetas */
-.eventosListadoCards {
+.noticiasListadoCards {
     display: flex;
     flex-direction: column;
     gap: calc(var(--unidad-espaciado) * 2);
@@ -145,13 +164,13 @@
     overflow-y: auto;
     padding-right: calc(var(--unidad-espaciado) * 1);
     scrollbar-width: thin;
-    scrollbar-color: var(--color-primario) transparent;
+    scrollbar-color: var(--color-secundario) transparent;
 }
 
 /* ==============================================
-   TARJETA INDIVIDUAL DE EVENTO
+   TARJETA INDIVIDUAL DE NOTICIA
    ============================================== */
-.eventoCard {
+.noticiaCard {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -159,7 +178,7 @@
     gap: calc(var(--unidad-espaciado) * 2);
     background: var(--blanco);
     border: 1px solid var(--color-borde);
-    border-left: 4px solid var(--color-primario);
+    border-left: 4px solid var(--color-secundario);
     border-radius: 0 8px 8px 0;
     padding: calc(var(--unidad-espaciado) * 2);
     box-shadow: var(--sombra-suave);
@@ -167,46 +186,72 @@
 }
 
 /* Efecto hover en la tarjeta */
-.eventoCard:hover {
+.noticiaCard:hover {
     box-shadow: var(--sombra-media);
     transform: translateY(-2px);
 }
 
 /* Bloque de info (ocupa todo el espacio disponible) */
-.eventoCardInfo {
+.noticiaCardInfo {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: calc(var(--unidad-espaciado) * 0.75);
 }
 
-/* Cabecera de la tarjeta: ID + nombre */
-.eventoCardCabecera {
+/* Cabecera de la tarjeta: categoría + destacado */
+.noticiaCardCabecera {
     display: flex;
     align-items: center;
     gap: calc(var(--unidad-espaciado) * 1);
+    flex-wrap: wrap;
 }
 
-/* Badge del ID del evento */
-.eventoCardId {
-    background: var(--color-primario);
-    color: var(--blanco);
+/* Badge de categoría genérico */
+.noticiaCardCategoria {
     font-size: 0.72rem;
     font-weight: 700;
-    padding: 2px 8px;
+    padding: 2px 10px;
     border-radius: 10px;
+    color: var(--blanco);
     white-space: nowrap;
+    background: var(--color-texto-mutado);
 }
 
-/* Nombre del evento en la tarjeta */
-.eventoCardNombre {
+/* Variantes de categoría por color */
+.noticiaCardCategoria--general {
+    background: var(--color-primario);
+}
+
+.noticiaCardCategoria--eventos {
+    background: var(--color-secundario);
+    color: var(--color-texto-principal);
+}
+
+.noticiaCardCategoria--novedades {
+    background: var(--bgBtnVerde);
+}
+
+.noticiaCardCategoria--avisos {
+    background: var(--colorComplementarioTerciario);
+}
+
+/* Badge de noticia destacada */
+.noticiaCardDestacado {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--colorComplementarioTerciario);
+}
+
+/* Título de la noticia en la tarjeta */
+.noticiaCardTitulo {
     color: var(--color-texto-principal);
     font-size: 1rem;
     font-weight: 600;
 }
 
-/* Descripción del evento (máximo 2 líneas) */
-.eventoCardDescripcion {
+/* Contenido de la noticia (máximo 2 líneas) */
+.noticiaCardContenido {
     color: var(--color-texto-mutado);
     font-size: 0.88rem;
     line-height: 1.4;
@@ -216,8 +261,8 @@
     overflow: hidden;
 }
 
-/* Fila de metadatos (lugar, hora, fecha) */
-.eventoCardMeta {
+/* Fila de metadatos (autor, fecha) */
+.noticiaCardMeta {
     display: flex;
     flex-wrap: wrap;
     gap: calc(var(--unidad-espaciado) * 1.5);
@@ -225,7 +270,7 @@
 }
 
 /* Cada ítem de metadatos */
-.eventoCardMetaItem {
+.noticiaCardMetaItem {
     font-size: 0.8rem;
     color: var(--color-texto-mutado);
     background: var(--color-card-evento);
@@ -237,7 +282,7 @@
 /* ==============================================
    ACCIONES DE LA TARJETA (Editar / Eliminar)
    ============================================== */
-.eventoCardAcciones {
+.noticiaCardAcciones {
     display: flex;
     flex-direction: column;
     gap: calc(var(--unidad-espaciado) * 1);
@@ -245,13 +290,62 @@
 }
 
 /* Botones de acción dentro de la tarjeta */
-.btnEditarEvento,
-.btnEliminarEvento {
+.btnEditarNoticia,
+.btnEliminarNoticia {
     padding: 6px 12px;
     font-size: 0.78rem;
     border-radius: 4px;
     cursor: pointer;
     white-space: nowrap;
+    text-align: center;
+    text-decoration: none;
+}
+
+/* ==============================================
+   ALERTAS DE FEEDBACK (Éxito / Error)
+   ============================================== */
+.gestionarNoticias .alertaExito {
+    background: var(--color-exito);
+    color: var(--blanco);
+    padding: calc(var(--unidad-espaciado) * 1.5);
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.92rem;
+}
+
+.gestionarNoticias .alertaError {
+    background: var(--color-error);
+    color: var(--blanco);
+    padding: calc(var(--unidad-espaciado) * 1.5);
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.92rem;
+}
+
+/* Errores de validación bajo cada campo */
+.noticiasError {
+    color: var(--color-error);
+    font-size: 0.78rem;
+    font-weight: 500;
+}
+
+/* Botón de cancelar edición (ancho completo) */
+.noticiasBtnCancelar {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: calc(var(--unidad-espaciado) * 1);
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+/* Mensaje cuando no hay noticias */
+.noticiaCardVacio {
+    text-align: center;
+    color: var(--color-texto-mutado);
+    padding: calc(var(--unidad-espaciado) * 4) 0;
+    font-size: 0.95rem;
 }
 
 /* ==============================================
@@ -259,17 +353,17 @@
    ============================================== */
 @media (max-width: 992px) {
     /* En tablet, se apilan las columnas */
-    .eventosLayout {
+    .noticiasLayout {
         grid-template-columns: 1fr;
     }
 
     /* El formulario deja de ser sticky */
-    .eventosFormulario {
+    .noticiasFormulario {
         position: static;
     }
 
     /* El scroll del listado se reduce */
-    .eventosListadoCards {
+    .noticiasListadoCards {
         max-height: 60vh;
     }
 }
@@ -279,25 +373,25 @@
    ============================================== */
 @media (max-width: 600px) {
     /* Reducimos el padding general */
-    .gestionarActividadesYEventos {
+    .gestionarNoticias {
         padding: var(--relleno-no-movil);
     }
 
     /* Las tarjetas se apilan en columna */
-    .eventoCard {
+    .noticiaCard {
         flex-direction: column;
         align-items: flex-start;
     }
 
     /* Las acciones pasan a fila horizontal */
-    .eventoCardAcciones {
+    .noticiaCardAcciones {
         flex-direction: row;
         width: 100%;
     }
 
     /* Botones ocupan ancho completo en móvil */
-    .btnEditarEvento,
-    .btnEliminarEvento {
+    .btnEditarNoticia,
+    .btnEliminarNoticia {
         flex: 1;
         text-align: center;
         min-height: var(--altura-boton-movil);
@@ -307,7 +401,7 @@
     }
 
     /* Los metadatos en columna en móvil */
-    .eventoCardMeta {
+    .noticiaCardMeta {
         flex-direction: column;
         gap: calc(var(--unidad-espaciado) * 0.5);
     }

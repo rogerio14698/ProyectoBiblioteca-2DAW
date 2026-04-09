@@ -26,9 +26,7 @@
                     <ul class="sub-menu-items">
                         <li><a href="{{ route('admin.gestionCatalogo') }}">Contenido Catálogo</a></li>
                         <li><a href="{{ route('admin.gestionActividades') }}">Contenido Actividades</a></li>
-                        <li><a href="{{ route('admin.gestionServicios') }}">Contenido Servicios Digitales</a></li>
                         <li><a href="{{ route('admin.gestionNoticias') }}">Contenido Noticias</a></li>
-                        <li><a href="{{ route('admin.gestionContacto') }}">Contenido Contacto</a></li>
                     </ul>
                 </li>
             </ul>

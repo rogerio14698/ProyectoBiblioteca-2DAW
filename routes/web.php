@@ -53,10 +53,6 @@ Route::get('/avisoLegal', function () {
 Route::get('/politicasCookies', function () {
     return view('bibliotecaDAW.publicViews.politicasCookies');
 });
-Route::get('/serviciosDigitales', function () {
-    return view('bibliotecaDAW.publicViews.serviciosDigitales');
-});
-
 // ===============================================
 // RUTAS DE LOGIN/REGISTRO (Públicas)
 // ===============================================
@@ -168,10 +164,11 @@ Route::middleware(['auth:admin', 'bloquear.demo'])->group(function () {
 
 
 
-    //Gestión de noticas
-    Route::get('/admin/gestionNoticias', function () {
-        return view('bibliotecaDAW.adminViews.GestionarContenidoWeb.gestionarNoticias');
-    })->name('admin.gestionNoticias');
+    //Gestión de noticias (GET con listado, POST crear, PUT actualizar, DELETE eliminar)
+    Route::get('/admin/gestionNoticias', [NoticiasController::class, 'gestionNoticias'])->name('admin.gestionNoticias');
+    Route::post('/admin/gestionNoticias', [NoticiasController::class, 'store'])->name('admin.gestionNoticias.store');
+    Route::put('/admin/gestionNoticias/{id}', [NoticiasController::class, 'update'])->name('admin.gestionNoticias.update');
+    Route::delete('/admin/gestionNoticias/{id}', [NoticiasController::class, 'destroy'])->name('admin.gestionNoticias.destroy');
     //Gestión del catalogo (GET con filtros y paginación, POST para crear, GET edit, PUT update, DELETE para eliminar)
     Route::get('/admin/gestionCatalogo', [LibroController::class, 'gestionCatalogo'])->name('admin.gestionCatalogo');
     Route::post('/admin/gestionCatalogo', [LibroController::class, 'store'])->name('admin.gestionCatalogo.store');
@@ -182,10 +179,6 @@ Route::middleware(['auth:admin', 'bloquear.demo'])->group(function () {
     Route::get('/admin/gestionActividades', function () {
         return view('bibliotecaDAW.adminViews.GestionarContenidoWeb.gestionarActividades');
     })->name('admin.gestionActividades');
-    //Gestion Servicios digitales
-    Route::get('/admin/gestionServicios', function () {
-        return view('bibliotecaDAW.adminViews.GestionarContenidoWeb.gestionarServicios');
-    })->name('admin.gestionServicios');
     //Gestion contenido de contacto
 
     //Gestión de los emails de contacto
@@ -195,11 +188,6 @@ Route::middleware(['auth:admin', 'bloquear.demo'])->group(function () {
     Route::delete('/admin/mensajes/{contacto}', [ContactoController::class, 'destroy'])->name('admin.mensajes.delete');
     Route::post('/admin/mensajes/{id}/responder', [ContactoController::class, 'responder'])->name('admin.mensajes.responder');
     /*Fin de la gestión de emails */
-
-    Route::get('/admin/gestionContacto', function () {
-        return view('bibliotecaDAW.adminViews.GestionarContenidoWeb.gestionarContacto');
-    })->name('admin.gestionContacto');
-
 
     //Gestion varios header y footer
     Route::get('/admin/gestionFooter', [FooterConfigController::class, 'edit'])->name('admin.gestionFooter');
