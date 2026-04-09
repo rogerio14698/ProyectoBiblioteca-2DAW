@@ -51,7 +51,7 @@
                         @foreach ($mensajes as $mail)
                         <div class="dataListadoMail">
                             <span class="dataNombre">{{ $mail->nombre }}</span>
-                            <span class="dataEmail">{{ $mail->email }}</span>3
+                            <span class="dataEmail">{{ $mail->email }}</span>
                             <span class="dataAsunto">{{ $mail->asunto }}</span>
                             <span class="dataMensaje">{{ $mail->mensaje }}</span>
                             <!--Poner solo el dia en la fecha -->
@@ -67,21 +67,21 @@
                                 <form action="{{ route('admin.mensajes.delete', $mail->id) }}" method="POST" style="display: inline;" onsubmit="return confirm('¿Estas seguro que quieres eliminar este mensaje?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn-base">Eliminar</button>
+                                    <button type="submit" class="btn-base btnEliminarMail">Eliminar</button>
                                 </form>
                                 <!--Cambia las etiquetas de estado-->
                                 <form action="{{ route('admin.mensajes.update', $mail->id) }}" method="POST" style="display: inline;">
                                     @csrf
                                     @method('PATCH')
-                                    <select class="btn-base selectEstado" name="estado" id="estado_{{ $mail->id }}">
+                                    <select class="selectEstadoMail" name="estado" id="estado_{{ $mail->id }}">
                                         <option value="pendiente" {{ $mail->estado === 'pendiente' ? 'selected' : '' }}>Pendiente</option>
                                         <option value="en_proceso" {{ $mail->estado === 'en_proceso' ? 'selected' : '' }}>En proceso</option>
                                         <option value="leido" {{ $mail->estado === 'leido' ? 'selected' : '' }}>Leido</option>
                                     </select>
-                                    <button type="submit" class="btn-base">Cambiar Estado</button>
+                                    <button type="submit" class="btn-base btnCambiarEstadoMail">Cambiar Estado</button>
                                 </form>
                                 <!--Este btn responde al email que se ha recibido -->
-                                <button  class="btn-base">Responder</button>
+                                <button class="btn-base btnResponderMail">Responder</button>
                             </span>
                         </div>
                         @endforeach

@@ -60,30 +60,31 @@
 
 .dashboardListadoMail {
     margin-top: 20px;
-    padding: 5px;
-    background-color: burlywood;
+    padding: 10px;
     box-shadow: var(--sombra-suave);
+    background-color: var(--color-fondo-global);
+    border-radius: var(--radio-borde);
 }
 
 .cardHeaderMail {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
-    padding: 10px;
+    margin-bottom: 15px;
+    padding: 12px 16px;
     background-color: var(--color-primario);
     color: var(--color-blanco);
-    text-decoration: underline;
+    border-radius: var(--radio-borde);
 }
 
 /* Contenedor principal para permitir scroll horizontal si la pantalla es muy pequeña */
 .bodyListadoMail {
     width: 100%;
-    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 80vh; /* Limita la altura para evitar que ocupe toda la pantalla */
 }
 
 .tablaListadoMail {
-    min-width: 1000px; /* Evita que la tabla se colapse demasiado */
     display: flex;
     flex-direction: column;
 }
@@ -91,12 +92,12 @@
 /* Fila de Títulos y Fila de Datos */
 .titulosListados, .dataListadoMail {
     display: grid;
-    /* Definición de columnas: Nombre, Email, Asunto, MENSAJE (más grande), Fecha, Estado, Acciones */
-    grid-template-columns: 120px 1fr 150px 1fr 100px 100px 220px;
+    /* Columnas 100% fluidas en fr para adaptarse a cualquier ancho */
+    /* Nombre | Email | Asunto | Mensaje | Fecha | Estado | Acciones */
+    grid-template-columns: 0.7fr 0.8fr 1.1fr 1.5fr 0.5fr 0.4fr 0.5fr;
     align-items: center;
-    padding: 12px;
-    gap: 15px;
-    box-shadow: var(--sombra-fuerte);
+    padding: 12px 16px;
+    gap: 12px;
 }
 
 /* Estilo de la cabecera */
@@ -105,19 +106,25 @@
     color: white;
     font-weight: bold;
     text-transform: uppercase;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    border-radius: var(--radio-borde) var(--radio-borde) 0 0;
 }
 
-/* Estilo de las filas de datos */
+/* Estilo de las filas de datos - alternancia de color (zebra) para legibilidad */
 .dataListadoMail {
     color: var(--negro);
-    background-color: white;
-    border-bottom: 1px solid #eee;
+    background-color: var(--color-blanco);
+    border-bottom: 1px solid #e2e8f0;
     transition: background 0.2s;
 }
 
 .dataListadoMail:hover {
-    background-color: #f1f5f9;
+    background-color: #e2e8f0;
+}
+
+.dataListadoMail:last-child {
+    border-radius: 0 0 var(--radio-borde) var(--radio-borde);
 }
 
 /* --- EL MENSAJE CON SCROLL --- */
@@ -135,21 +142,53 @@
 /* Estilo de los botones de acciones */
 .dataListadoMail span:last-child {
     display: flex;
-    gap: 5px;
+    gap: 6px;
     flex-wrap: wrap;
+    align-items: center;
+}
+
+
+
+/* Select de estado estilizado */
+.selectEstadoMail {
+    font-size: 0.78rem;
+    padding: 5px 8px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    background-color: var(--color-blanco);
+    color: #334155;
+    cursor: pointer;
+    outline: none;
+}
+
+.selectEstadoMail:focus {
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 2px rgba(var(--color-primario-rgb, 74, 144, 226), 0.2);
 }
 
 /* Estados */
 .estadoMail {
-    padding: 4px 8px;
+    padding: 4px 10px;
     border-radius: 12px;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
 }
 
 .estadoPendiente {
     background-color: #ffeaa7;
     color: #d35400;
+}
+
+.estadoProceso {
+    background-color: #dfe6e9;
+    color: #2d3436;
+}
+
+.estadoLeido {
+    background-color: #55efc4;
+    color: #00b894;
 }
 
 .dashboard-informacionSistema {
@@ -176,5 +215,66 @@
     .dashboard-body {
         grid-template-columns: 1fr;
         padding-top: 20px;
+    }
+
+    /* --- TABLA DE MAILS: diseño tipo tarjeta en móvil --- */
+
+    /* Eliminamos el min-width para que no fuerce scroll horizontal */
+    .tablaListadoMail {
+        min-width: unset;
+    }
+
+    /* Ocultamos la cabecera de columnas en móvil */
+    .titulosListados {
+        display: none;
+    }
+
+    /* Cada fila de datos se convierte en una tarjeta apilada */
+    .dataListadoMail {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: var(--relleno-movil, 12px);
+        margin-bottom: 12px;
+        border-radius: var(--radio-borde);
+        border-bottom: none;
+        box-shadow: var(--sombra-suave);
+    }
+
+    /* Etiquetas visibles en móvil mediante ::before con el nombre del campo */
+    .dataListadoMail .dataNombre::before,
+    .dataListadoMail .dataEmail::before,
+    .dataListadoMail .dataAsunto::before,
+    .dataListadoMail .dataMensaje::before,
+    .dataListadoMail .dataFecha::before,
+    .dataListadoMail .dataEstado::before {
+        display: block;
+        font-weight: bold;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--color-primario);
+        margin-bottom: 2px;
+    }
+
+    .dataListadoMail .dataNombre::before { content: "Nombre"; }
+    .dataListadoMail .dataEmail::before { content: "Email"; }
+    .dataListadoMail .dataAsunto::before { content: "Asunto"; }
+    .dataListadoMail .dataMensaje::before { content: "Mensaje"; }
+    .dataListadoMail .dataFecha::before { content: "Fecha"; }
+    .dataListadoMail .dataEstado::before { content: "Estado"; }
+
+    /* Los campos de texto recuperan su altura completa en movil */
+    .dataMensaje, .dataNombre, .dataAsunto, .dataEmail {
+        max-height: none;
+        overflow-y: visible;
+    }
+
+    /* Los botones de acciones se apilan en columna */
+    .dataListadoMail span:last-child {
+        flex-direction: column;
+        gap: 8px;
+        padding-top: 8px;
+        border-top: 1px solid #e2e8f0;
     }
 }

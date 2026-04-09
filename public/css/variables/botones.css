@@ -189,3 +189,53 @@
 .btn-limpiar:hover {
     background-color: var(--color-fondo-global);
 }
+
+/*Botones mail admin*/
+
+/* Botón Eliminar - rojo peligro */
+.btnEliminarMail {
+    background-color: #e74c3c;
+    color: var(--color-blanco);
+    font-size: 0.78rem;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    width: 100%;
+}
+
+.btnEliminarMail:hover {
+    background-color: #c0392b;
+    box-shadow: var(--sombra-suave);
+}
+
+/* Botón Cambiar Estado - primario */
+.btnCambiarEstadoMail {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    font-size: 0.78rem;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    width: 100%;
+}
+
+.btnCambiarEstadoMail:hover {
+    filter: brightness(0.9);
+    box-shadow: var(--sombra-suave);
+}
+
+/* Botón Responder - verde acento */
+.btnResponderMail {
+    background-color: #27ae60;
+    color: var(--color-blanco);
+    font-size: 0.78rem;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    width: 100%;
+}
+
+.btnResponderMail:hover {
+    background-color: #1e8449;
+    box-shadow: var(--sombra-suave);
+}
