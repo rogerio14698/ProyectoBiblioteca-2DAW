@@ -189,6 +189,7 @@ Route::middleware(['auth:admin', 'bloquear.demo'])->group(function () {
     Route::get('/admin/mensajes', [ContactoController::class, 'index'])->name('admin.mensajes.index');
     Route::patch('/admin/mensajes/{id}/estado', [ContactoController::class, 'updateEstado'])->name('admin.mensajes.update');
     Route::delete('/admin/mensajes/{contacto}', [ContactoController::class, 'destroy'])->name('admin.mensajes.delete');
+    Route::post('/admin/mensajes/{id}/responder', [ContactoController::class, 'responder'])->name('admin.mensajes.responder');
     /*Fin de la gestión de emails */
 
     Route::get('/admin/gestionContacto', function () {

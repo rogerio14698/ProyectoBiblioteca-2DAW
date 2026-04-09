@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Contacto;
 use App\Mail\ContactoRecibido;
+use App\Mail\RespuestaDeAdminAContacto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
@@ -100,6 +101,49 @@ class ContactoController extends Controller
     {
         //
     }
+    //Aqui enviamos el email de vuelta al usuario y lo guardamos en la base de datos:
+
+    /**
+     * Responder a un mensaje de contacto enviando un email al usuario.
+     * @param Request $request Contiene el campo 'respuesta' con el texto del admin.
+     * @param int $id Identificador del mensaje de contacto original.
+     * @return \Illuminate\Http\RedirectResponse Redirección con mensaje de éxito o error.
+     * @effect Envía un correo SMTP al email del contacto original.
+     */
+    public function responder(Request $request, int $id): \Illuminate\Http\RedirectResponse
+    {
+        // Validamos que el campo respuesta no esté vacío.
+        $request->validate([
+            'respuesta' => 'required|string',
+        ]);
+
+        // Buscamos el mensaje original en la base de datos.
+        $contacto = Contacto::findOrFail($id);
+
+        // Guardamos la respuesta en la base de datos antes de enviar el email.
+        $contacto->respuesta = $request->input('respuesta');
+        $contacto->estado = 'leido';
+        $contacto->save();
+
+        // Intentamos enviar el correo de respuesta al usuario.
+        try {
+            Mail::to($contacto->email)->send(
+                new RespuestaDeAdminAContacto(
+                    nombreUsuario: $contacto->nombre,
+                    emailUsuario: $contacto->email,
+                    asuntoOriginal: $contacto->asunto,
+                    mensajeRespuesta: $request->input('respuesta'),
+                )
+            );
+        } catch (\Exception $e) {
+            // Si falla el envío, lo registramos y avisamos al admin.
+            Log::error('Error al enviar respuesta al contacto: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'La respuesta se guardó pero no se pudo enviar el email. Inténtalo de nuevo.');
+        }
+
+        return redirect()->back()->with('success', 'Respuesta enviada correctamente a ' . $contacto->email);
+    }
+
 
     /**
      * Show the form for editing the specified resource.

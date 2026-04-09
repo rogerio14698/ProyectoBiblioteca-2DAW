@@ -80,9 +80,18 @@
                                     </select>
                                     <button type="submit" class="btn-base btnCambiarEstadoMail">Cambiar Estado</button>
                                 </form>
-                                <!--Este btn responde al email que se ha recibido -->
-                                <button class="btn-base btnResponderMail">Responder</button>
+                                <!--Este btn abre el formulario de respuesta al email recibido -->
+                                <button type="button" class="btn-base btnResponderMail" onclick="document.getElementById('formResponder_{{ $mail->id }}').classList.toggle('oculto')">Responder</button>
                             </span>
+                            <!--Formulario de respuesta que se muestra/oculta al pulsar Responder -->
+                            <div id="formResponder_{{ $mail->id }}" class="formResponderMail oculto">
+                                <form action="{{ route('admin.mensajes.responder', $mail->id) }}" method="POST">
+                                    @csrf
+                                    <label for="respuesta_{{ $mail->id }}">Respuesta para <strong>{{ $mail->nombre }}</strong>:</label>
+                                    <textarea class="textareaResponderMail" name="respuesta" id="respuesta_{{ $mail->id }}" rows="3" required placeholder="Escribe tu respuesta aquí..."></textarea>
+                                    <button type="submit" class="btn-base btnCambiarEstadoMail">Enviar respuesta</button>
+                                </form>
+                            </div>
                         </div>
                         @endforeach
                     </div>

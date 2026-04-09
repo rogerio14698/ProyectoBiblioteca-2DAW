@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('asunto');
             $table->text('mensaje');
+            $table->text('respuesta')->nullable();
             $table->enum('estado', ['pendiente','en_proceso','leido'])->default('pendiente');
             $table->timestamps();
         });

@@ -14,6 +14,7 @@ class Contacto extends Model
         'email',
         'asunto',
         'mensaje',
+        'respuesta',
         'estado',
     ];
 }
