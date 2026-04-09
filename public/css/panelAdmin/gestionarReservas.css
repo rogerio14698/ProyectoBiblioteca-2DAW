@@ -1,0 +1,505 @@
+/* ==============================================
+   PÁGINA: Gestionar Reservas (Historial + Activas)
+   Layout: Buscador + Formulario + Listado cards
+   Sigue el patrón de gestionarUsuarios.css
+   ============================================== */
+
+/* --- Contenedor principal de la página --- */
+.gestionReservas {
+    display: flex;
+    flex-direction: column;
+    background: var(--blanco);
+    padding: calc(var(--unidad-espaciado) * 3);
+    gap: calc(var(--unidad-espaciado) * 3);
+}
+
+/* --- Encabezado superior: título + botón de navegación --- */
+.reservasEncabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: calc(var(--unidad-espaciado) * 2);
+}
+
+.reservasEncabezado h1 {
+    color: var(--color-primario-oscuro);
+    margin-bottom: calc(var(--unidad-espaciado) * 0.5);
+}
+
+.reservasEncabezado p {
+    color: var(--color-texto-mutado);
+    font-size: 0.95rem;
+}
+
+/* Navegación entre historial y activas */
+.reservasNav .btn-base {
+    text-decoration: none;
+}
+
+/* --- Alertas de feedback --- */
+.gestionReservas .alertaExito {
+    background: var(--color-exito);
+    color: var(--blanco);
+    padding: calc(var(--unidad-espaciado) * 1.5);
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.92rem;
+}
+
+.gestionReservas .alertaError {
+    background: var(--color-error);
+    color: var(--blanco);
+    padding: calc(var(--unidad-espaciado) * 1.5);
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.92rem;
+}
+
+/* ==============================================
+   BUSCADOR / FILTROS
+   ============================================== */
+.reservasBuscador {
+    background: var(--color-fondo-global);
+    border-left: 4px solid var(--color-primario);
+    border-radius: 0 8px 8px 0;
+    padding: calc(var(--unidad-espaciado) * 2.5);
+    box-shadow: var(--sombra-suave);
+}
+
+.reservasBuscador h2 {
+    color: var(--color-primario-oscuro);
+    font-size: 1.1rem;
+    margin-bottom: calc(var(--unidad-espaciado) * 2);
+    padding-bottom: calc(var(--unidad-espaciado) * 1);
+    border-bottom: 1px solid var(--color-borde);
+}
+
+/* Fila de filtros en grid responsive */
+.reservasFiltros {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: calc(var(--unidad-espaciado) * 2);
+    margin-bottom: calc(var(--unidad-espaciado) * 2);
+}
+
+/* Grupo de filtro individual (label + input/select) */
+.reservasGrupoFiltro {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 0.5);
+}
+
+.reservasGrupoFiltro label {
+    color: var(--color-primario-oscuro);
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.reservasGrupoFiltro input,
+.reservasGrupoFiltro select {
+    padding: calc(var(--unidad-espaciado) * 1) calc(var(--unidad-espaciado) * 1.5);
+    border: 1px solid var(--color-borde);
+    border-radius: 6px;
+    font-size: 0.92rem;
+    font-family: var(--fuente-familia);
+    background: var(--blanco);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.reservasGrupoFiltro input:focus,
+.reservasGrupoFiltro select:focus {
+    outline: none;
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
+}
+
+/* Botones de filtrar y limpiar */
+.reservasBotonesFiltro {
+    display: flex;
+    gap: calc(var(--unidad-espaciado) * 1.5);
+}
+
+.reservasBotonesFiltro .btn-base {
+    text-decoration: none;
+}
+
+/* ==============================================
+   LAYOUT: FORMULARIO + LISTADO (2 columnas)
+   ============================================== */
+.reservasLayout {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: calc(var(--unidad-espaciado) * 3);
+    align-items: start;
+}
+
+/* ==============================================
+   FORMULARIO DE CREACIÓN / EDICIÓN
+   ============================================== */
+.reservasFormulario {
+    position: sticky;
+    top: calc(var(--unidad-espaciado) * 2);
+}
+
+.reservasFormInner {
+    background: var(--color-fondo-global);
+    border-left: 4px solid var(--color-primario);
+    border-radius: 0 8px 8px 0;
+    padding: calc(var(--unidad-espaciado) * 3);
+    box-shadow: var(--sombra-suave);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 2);
+}
+
+.reservasFormInner h2 {
+    color: var(--color-primario-oscuro);
+    font-size: 1.2rem;
+    padding-bottom: calc(var(--unidad-espaciado) * 1);
+    border-bottom: 1px solid var(--color-borde);
+}
+
+/* Grupo de campo del formulario (label + input/select/textarea) */
+.reservasGrupoForm {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 0.5);
+}
+
+.reservasGrupoForm label {
+    color: var(--color-primario-oscuro);
+    font-weight: 600;
+    font-size: 0.88rem;
+}
+
+.reservasGrupoForm input,
+.reservasGrupoForm select,
+.reservasGrupoForm textarea {
+    padding: calc(var(--unidad-espaciado) * 1) calc(var(--unidad-espaciado) * 1.5);
+    border: 1px solid var(--color-borde);
+    border-radius: 6px;
+    font-size: 0.92rem;
+    font-family: var(--fuente-familia);
+    background: var(--blanco);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.reservasGrupoForm input:focus,
+.reservasGrupoForm select:focus,
+.reservasGrupoForm textarea:focus {
+    outline: none;
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
+}
+
+.reservasGrupoForm textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+/* Botón de enviar formulario */
+.reservasBotonEnvio {
+    width: 100%;
+    padding: calc(var(--unidad-espaciado) * 1.5);
+    background: var(--color-primario);
+    color: var(--blanco);
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.reservasBotonEnvio:hover {
+    background: var(--color-primario-oscuro);
+    box-shadow: var(--sombra-media);
+    transform: translateY(-2px);
+}
+
+/* Botón cancelar edición */
+.reservasBtnCancelar {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: calc(var(--unidad-espaciado) * 1);
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+/* ==============================================
+   LISTADO DE RESERVAS
+   ============================================== */
+.reservasListado h2 {
+    color: var(--color-primario-oscuro);
+    font-size: 1.2rem;
+    margin-bottom: calc(var(--unidad-espaciado) * 2);
+    padding-bottom: calc(var(--unidad-espaciado) * 1);
+    border-bottom: 1px solid var(--color-borde);
+}
+
+/* Contenedor scrollable con tarjetas */
+.reservasListadoCards {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 2);
+    max-height: 78vh;
+    overflow-y: auto;
+    padding-right: calc(var(--unidad-espaciado) * 1);
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primario) transparent;
+}
+
+/* ==============================================
+   TARJETA INDIVIDUAL DE RESERVA
+   Borde izquierdo coloreado según estado:
+   - activa: azul (primario)
+   - devuelta: verde (éxito)
+   - vencida: rojo (error)
+   - cancelada: gris (mutado)
+   ============================================== */
+.reservaCard {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(var(--unidad-espaciado) * 2);
+    background: var(--blanco);
+    border: 1px solid var(--color-borde);
+    border-left: 4px solid var(--color-primario);
+    border-radius: 0 8px 8px 0;
+    padding: calc(var(--unidad-espaciado) * 2);
+    box-shadow: var(--sombra-suave);
+    transition: box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.reservaCard:hover {
+    box-shadow: var(--sombra-media);
+    transform: translateY(-2px);
+}
+
+/* Bordes coloreados según estado */
+.reservaCard--activa {
+    border-left-color: var(--color-primario);
+}
+
+.reservaCard--devuelta {
+    border-left-color: var(--bgBtnVerde);
+}
+
+.reservaCard--vencida {
+    border-left-color: var(--bgBtnRojo);
+}
+
+.reservaCard--cancelada {
+    border-left-color: var(--color-texto-mutado);
+}
+
+/* Bloque de información (ocupa el espacio disponible) */
+.reservaCardInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 0.75);
+}
+
+/* Cabecera de la tarjeta: ID + badge de estado */
+.reservaCardCabecera {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--unidad-espaciado) * 1);
+    flex-wrap: wrap;
+}
+
+/* Badge del ID de la reserva */
+.reservaCardId {
+    background: var(--color-primario);
+    color: var(--blanco);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+}
+
+/* Badge de estado con colores dinámicos */
+.reservaCardEstado {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 10px;
+    color: var(--blanco);
+    white-space: nowrap;
+}
+
+.reservaCardEstado--activa {
+    background: var(--color-primario);
+}
+
+.reservaCardEstado--devuelta {
+    background: var(--bgBtnVerde);
+}
+
+.reservaCardEstado--vencida {
+    background: var(--bgBtnRojo);
+}
+
+.reservaCardEstado--cancelada {
+    background: var(--color-texto-mutado);
+}
+
+/* Título del libro */
+.reservaCardTitulo {
+    color: var(--color-texto-principal);
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Usuario asociado a la reserva */
+.reservaCardUsuario {
+    color: var(--color-texto-mutado);
+    font-size: 0.88rem;
+    margin: 0;
+}
+
+/* Badge del número de socio */
+.reservaCardSocio {
+    background: var(--color-secundario);
+    color: var(--color-texto-principal);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+    margin-left: calc(var(--unidad-espaciado) * 0.5);
+}
+
+/* Fila de metadatos (fechas) */
+.reservaCardMeta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--unidad-espaciado) * 1.5);
+    margin-top: calc(var(--unidad-espaciado) * 0.5);
+}
+
+.reservaCardMetaItem {
+    font-size: 0.8rem;
+    color: var(--color-texto-mutado);
+    background: var(--color-card-evento);
+    padding: 2px 10px;
+    border-radius: 10px;
+    white-space: nowrap;
+}
+
+/* Observaciones */
+.reservaCardObs {
+    font-size: 0.82rem;
+    color: var(--color-texto-mutado);
+    font-style: italic;
+    margin: calc(var(--unidad-espaciado) * 0.5) 0 0 0;
+}
+
+/* Acciones de la tarjeta (editar, devolver, eliminar) */
+.reservaCardAcciones {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 1);
+    flex-shrink: 0;
+}
+
+.btnEditarReserva,
+.btnDevolverReserva,
+.btnEliminarReserva {
+    padding: 6px 12px;
+    font-size: 0.78rem;
+    border-radius: 4px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: center;
+    text-decoration: none;
+}
+
+/* Mensaje cuando no hay reservas */
+.reservaCardVacio {
+    text-align: center;
+    color: var(--color-texto-mutado);
+    padding: calc(var(--unidad-espaciado) * 4) 0;
+    font-size: 0.95rem;
+}
+
+/* ==============================================
+   RESPONSIVE: Tablet (menos de 992px)
+   ============================================== */
+@media (max-width: 992px) {
+    /* Formulario y listado se apilan en una columna */
+    .reservasLayout {
+        grid-template-columns: 1fr;
+    }
+
+    /* Formulario deja de ser sticky */
+    .reservasFormulario {
+        position: static;
+    }
+
+    /* Scroll del listado se reduce */
+    .reservasListadoCards {
+        max-height: 60vh;
+    }
+
+    /* Encabezado se apila */
+    .reservasEncabezado {
+        flex-direction: column;
+    }
+}
+
+/* ==============================================
+   RESPONSIVE: Móvil (menos de 600px)
+   ============================================== */
+@media (max-width: 600px) {
+    /* Reducir padding general */
+    .gestionReservas {
+        padding: var(--relleno-movil);
+    }
+
+    /* Filtros en una sola columna */
+    .reservasFiltros {
+        grid-template-columns: 1fr;
+    }
+
+    /* Tarjetas de reserva se apilan verticalmente */
+    .reservaCard {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* Acciones se ponen en fila horizontal */
+    .reservaCardAcciones {
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .btnEditarReserva,
+    .btnDevolverReserva,
+    .btnEliminarReserva {
+        flex: 1;
+        text-align: center;
+        min-height: var(--altura-boton-movil);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Metadatos en columna para evitar overflow */
+    .reservaCardMeta {
+        flex-direction: column;
+        gap: calc(var(--unidad-espaciado) * 0.5);
+    }
+
+    /* Botones de filtro en columna */
+    .reservasBotonesFiltro {
+        flex-direction: column;
+    }
+}

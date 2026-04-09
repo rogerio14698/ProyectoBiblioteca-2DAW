@@ -1,0 +1,26 @@
+.paginaEnObras {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+}
+
+.enObrasContenido {
+    text-align: center;
+    background: var(--color-fondo-global);
+    padding: calc(var(--unidad-espaciado) * 5);
+    border-radius: 8px;
+    box-shadow: var(--sombra-suave);
+    border-left: 4px solid var(--colorComplementarioTerciario);
+}
+
+
+.enObrasContenido h1 {
+    color: var(--color-primario-oscuro);
+    margin-bottom: calc(var(--unidad-espaciado) * 1);
+}
+
+.enObrasContenido p {
+    color: var(--color-texto-mutado);
+    font-size: 0.95rem;
+}

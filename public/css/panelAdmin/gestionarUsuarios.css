@@ -1,0 +1,554 @@
+/* ==============================================
+   PÁGINA: Gestionar Usuarios y Administradores
+   Layout: Buscador + Formulario edición + Listado cards
+   Sigue el patrón de gestionarNoticias.css
+   ============================================== */
+
+/* --- Contenedor principal de la página --- */
+.gestionUsuarios {
+    display: flex;
+    flex-direction: column;
+    background: var(--blanco);
+    padding: calc(var(--unidad-espaciado) * 3);
+    gap: calc(var(--unidad-espaciado) * 3);
+}
+
+/* --- Encabezado superior de la sección --- */
+.gestionUsuariosEncabezado h1 {
+    color: var(--color-primario-oscuro);
+    margin-bottom: calc(var(--unidad-espaciado) * 0.5);
+}
+
+.gestionUsuariosEncabezado p {
+    color: var(--color-texto-mutado);
+    font-size: 0.95rem;
+}
+
+/* --- Alertas de feedback --- */
+.gestionUsuarios .alertaExito {
+    background: var(--color-exito);
+    color: var(--blanco);
+    padding: calc(var(--unidad-espaciado) * 1.5);
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.92rem;
+}
+
+.gestionUsuarios .alertaError {
+    background: var(--color-error);
+    color: var(--blanco);
+    padding: calc(var(--unidad-espaciado) * 1.5);
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.92rem;
+}
+
+/* ==============================================
+   BUSCADOR DE USUARIOS
+   ============================================== */
+.gestionUsuariosBuscador {
+    background: var(--color-fondo-global);
+    border-left: 4px solid var(--color-primario);
+    border-radius: 0 8px 8px 0;
+    padding: calc(var(--unidad-espaciado) * 2.5);
+    box-shadow: var(--sombra-suave);
+}
+
+.gestionUsuariosBuscador h2 {
+    color: var(--color-primario-oscuro);
+    font-size: 1.1rem;
+    margin-bottom: calc(var(--unidad-espaciado) * 2);
+    padding-bottom: calc(var(--unidad-espaciado) * 1);
+    border-bottom: 1px solid var(--color-borde);
+}
+
+/* Fila de filtros en grid responsive */
+.gestionUsuariosFiltros {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: calc(var(--unidad-espaciado) * 2);
+    margin-bottom: calc(var(--unidad-espaciado) * 2);
+}
+
+/* Grupo de filtro (label + input) */
+.gestionUsuariosGrupoFiltro {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 0.5);
+}
+
+.gestionUsuariosGrupoFiltro label {
+    color: var(--color-primario-oscuro);
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.gestionUsuariosGrupoFiltro input {
+    padding: calc(var(--unidad-espaciado) * 1) calc(var(--unidad-espaciado) * 1.5);
+    border: 1px solid var(--color-borde);
+    border-radius: 6px;
+    font-size: 0.92rem;
+    font-family: var(--fuente-familia);
+    background: var(--blanco);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gestionUsuariosGrupoFiltro input:focus {
+    outline: none;
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
+}
+
+/* Botones de buscar y limpiar */
+.gestionUsuariosBotonesFiltr {
+    display: flex;
+    gap: calc(var(--unidad-espaciado) * 1.5);
+}
+
+.gestionUsuariosBotonesFiltr .btn-base {
+    text-decoration: none;
+}
+
+/* ==============================================
+   LAYOUT: FORMULARIO DE EDICIÓN + LISTADO
+   ============================================== */
+.gestionUsuariosLayout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: calc(var(--unidad-espaciado) * 3);
+    align-items: start;
+}
+
+/* Si existe el formulario de edición, activamos 2 columnas */
+.gestionUsuariosLayout:has(.gestionUsuariosFormulario) {
+    grid-template-columns: 1fr 1.5fr;
+}
+
+/* ==============================================
+   FORMULARIO DE EDICIÓN DE USUARIO
+   ============================================== */
+.gestionUsuariosFormulario {
+    position: sticky;
+    top: calc(var(--unidad-espaciado) * 2);
+}
+
+.gestionUsuariosFormInner {
+    background: var(--color-fondo-global);
+    border-left: 4px solid var(--color-primario);
+    border-radius: 0 8px 8px 0;
+    padding: calc(var(--unidad-espaciado) * 3);
+    box-shadow: var(--sombra-suave);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 2);
+}
+
+.gestionUsuariosFormInner h2 {
+    color: var(--color-primario-oscuro);
+    font-size: 1.2rem;
+    padding-bottom: calc(var(--unidad-espaciado) * 1);
+    border-bottom: 1px solid var(--color-borde);
+}
+
+/* Grupo de campo (label + input) en columna */
+.gestionUsuariosGrupoForm {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 0.5);
+}
+
+.gestionUsuariosGrupoForm label {
+    color: var(--color-primario-oscuro);
+    font-weight: 600;
+    font-size: 0.88rem;
+}
+
+.gestionUsuariosGrupoForm input {
+    padding: calc(var(--unidad-espaciado) * 1) calc(var(--unidad-espaciado) * 1.5);
+    border: 1px solid var(--color-borde);
+    border-radius: 6px;
+    font-size: 0.92rem;
+    font-family: var(--fuente-familia);
+    background: var(--blanco);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gestionUsuariosGrupoForm input:focus {
+    outline: none;
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
+}
+
+.gestionUsuariosGrupoForm input:disabled {
+    background: var(--grisClaro);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Errores de validación */
+.gestionUsuariosError {
+    color: var(--color-error);
+    font-size: 0.78rem;
+    font-weight: 500;
+}
+
+/* Botón de enviar formulario */
+.gestionUsuariosBotonEnvio {
+    width: 100%;
+    padding: calc(var(--unidad-espaciado) * 1.5);
+    background: var(--color-primario);
+    color: var(--blanco);
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.gestionUsuariosBotonEnvio:hover {
+    background: var(--color-primario-oscuro);
+    box-shadow: var(--sombra-media);
+    transform: translateY(-2px);
+}
+
+/* Botón de cancelar edición */
+.gestionUsuariosBtnCancelar {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: calc(var(--unidad-espaciado) * 1);
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+/* ==============================================
+   LISTADO DE USUARIOS
+   ============================================== */
+.gestionUsuariosListado h2 {
+    color: var(--color-primario-oscuro);
+    font-size: 1.2rem;
+    margin-bottom: calc(var(--unidad-espaciado) * 2);
+    padding-bottom: calc(var(--unidad-espaciado) * 1);
+    border-bottom: 1px solid var(--color-borde);
+}
+
+/* Contenedor con scroll para las tarjetas de usuarios */
+.gestionUsuariosCards {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 2);
+    max-height: 70vh;
+    overflow-y: auto;
+    padding-right: calc(var(--unidad-espaciado) * 1);
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primario) transparent;
+}
+
+/* ==============================================
+   TARJETA INDIVIDUAL DE USUARIO
+   ============================================== */
+.usuarioCard {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(var(--unidad-espaciado) * 2);
+    background: var(--blanco);
+    border: 1px solid var(--color-borde);
+    border-left: 4px solid var(--color-primario);
+    border-radius: 0 8px 8px 0;
+    padding: calc(var(--unidad-espaciado) * 2);
+    box-shadow: var(--sombra-suave);
+    transition: box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.usuarioCard:hover {
+    box-shadow: var(--sombra-media);
+    transform: translateY(-2px);
+}
+
+/* Bloque de info (ocupa todo el espacio disponible) */
+.usuarioCardInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 0.75);
+}
+
+/* Cabecera de la tarjeta: ID + nombre + nº socio */
+.usuarioCardCabecera {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--unidad-espaciado) * 1);
+    flex-wrap: wrap;
+}
+
+/* Badge del ID del usuario */
+.usuarioCardId {
+    background: var(--color-primario);
+    color: var(--blanco);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+}
+
+/* Nombre del usuario */
+.usuarioCardNombre {
+    color: var(--color-texto-principal);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* Badge del nº de socio */
+.usuarioCardSocio {
+    background: var(--color-secundario);
+    color: var(--color-texto-principal);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+}
+
+/* Fila de metadatos (email, DNI, móvil, fecha) */
+.usuarioCardMeta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--unidad-espaciado) * 1.5);
+    margin-top: calc(var(--unidad-espaciado) * 0.5);
+}
+
+.usuarioCardMetaItem {
+    font-size: 0.8rem;
+    color: var(--color-texto-mutado);
+    background: var(--color-card-evento);
+    padding: 2px 10px;
+    border-radius: 10px;
+    white-space: nowrap;
+}
+
+/* Acciones de la tarjeta */
+.usuarioCardAcciones {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 1);
+    flex-shrink: 0;
+}
+
+.btnEditarUsuario,
+.btnEliminarUsuario {
+    padding: 6px 12px;
+    font-size: 0.78rem;
+    border-radius: 4px;
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: center;
+    text-decoration: none;
+}
+
+/* Mensaje cuando no hay usuarios */
+.usuarioCardVacio {
+    text-align: center;
+    color: var(--color-texto-mutado);
+    padding: calc(var(--unidad-espaciado) * 4) 0;
+    font-size: 0.95rem;
+}
+
+/* ==============================================
+   SECCIÓN: LISTADO DE ADMINISTRADORES
+   ============================================== */
+.gestionAdminsSeccion {
+    border-top: 2px solid var(--color-borde);
+    padding-top: calc(var(--unidad-espaciado) * 3);
+}
+
+.gestionAdminsSeccion h2 {
+    color: var(--color-primario-oscuro);
+    font-size: 1.2rem;
+    margin-bottom: calc(var(--unidad-espaciado) * 2);
+    padding-bottom: calc(var(--unidad-espaciado) * 1);
+    border-bottom: 1px solid var(--color-borde);
+}
+
+/* Grid de tarjetas de administradores */
+.gestionAdminsCards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: calc(var(--unidad-espaciado) * 2);
+}
+
+/* Tarjeta individual de administrador */
+.adminCard {
+    background: var(--blanco);
+    border: 1px solid var(--color-borde);
+    border-left: 4px solid var(--colorComplementarioTerciario);
+    border-radius: 0 8px 8px 0;
+    padding: calc(var(--unidad-espaciado) * 2);
+    box-shadow: var(--sombra-suave);
+    transition: box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.adminCard:hover {
+    box-shadow: var(--sombra-media);
+    transform: translateY(-2px);
+}
+
+.adminCardInfo {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 0.75);
+}
+
+/* Cabecera: ID + nombre + rol */
+.adminCardCabecera {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--unidad-espaciado) * 1);
+    flex-wrap: wrap;
+}
+
+.adminCardId {
+    background: var(--colorComplementarioTerciario);
+    color: var(--blanco);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+}
+
+.adminCardNombre {
+    color: var(--color-texto-principal);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* Badges de roles */
+.adminCardRol {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 10px;
+    color: var(--blanco);
+    white-space: nowrap;
+}
+
+.adminCardRol--superadmin {
+    background: var(--bgBtnRojo);
+}
+
+.adminCardRol--editor {
+    background: var(--color-primario);
+}
+
+.adminCardRol--moderador {
+    background: var(--bgBtnVerde);
+}
+
+/* Metadatos del admin */
+.adminCardMeta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--unidad-espaciado) * 1.5);
+    margin-top: calc(var(--unidad-espaciado) * 0.5);
+}
+
+.adminCardMetaItem {
+    font-size: 0.8rem;
+    color: var(--color-texto-mutado);
+    background: var(--color-card-evento);
+    padding: 2px 10px;
+    border-radius: 10px;
+    white-space: nowrap;
+}
+
+/* Badge de cuenta demo */
+.adminCardMetaItemDemo {
+    font-size: 0.8rem;
+    color: var(--blanco);
+    background: var(--bgBtnRojo);
+    padding: 2px 10px;
+    border-radius: 10px;
+    white-space: nowrap;
+    font-weight: 600;
+}
+
+.adminCardVacio {
+    text-align: center;
+    color: var(--color-texto-mutado);
+    padding: calc(var(--unidad-espaciado) * 3) 0;
+    font-size: 0.95rem;
+}
+
+/* ==============================================
+   RESPONSIVE: Tablet (menos de 992px)
+   ============================================== */
+@media (max-width: 992px) {
+    /* En tablet, formulario y listado se apilan */
+    .gestionUsuariosLayout,
+    .gestionUsuariosLayout:has(.gestionUsuariosFormulario) {
+        grid-template-columns: 1fr;
+    }
+
+    .gestionUsuariosFormulario {
+        position: static;
+    }
+
+    .gestionUsuariosCards {
+        max-height: 60vh;
+    }
+
+    /* Admins en una sola columna */
+    .gestionAdminsCards {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==============================================
+   RESPONSIVE: Móvil (menos de 600px)
+   ============================================== */
+@media (max-width: 600px) {
+    .gestionUsuarios {
+        padding: var(--relleno-no-movil);
+    }
+
+    /* Filtros en una columna */
+    .gestionUsuariosFiltros {
+        grid-template-columns: 1fr;
+    }
+
+    /* Tarjetas de usuario se apilan */
+    .usuarioCard {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .usuarioCardAcciones {
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .btnEditarUsuario,
+    .btnEliminarUsuario {
+        flex: 1;
+        text-align: center;
+        min-height: var(--altura-boton-movil);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .usuarioCardMeta {
+        flex-direction: column;
+        gap: calc(var(--unidad-espaciado) * 0.5);
+    }
+
+    .adminCardMeta {
+        flex-direction: column;
+        gap: calc(var(--unidad-espaciado) * 0.5);
+    }
+}

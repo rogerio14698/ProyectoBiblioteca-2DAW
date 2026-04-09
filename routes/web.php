@@ -11,6 +11,8 @@ use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\SlideBienvenidaController;
 use App\Http\Controllers\NoticiasController;
 use App\Http\Controllers\FooterConfigController;
+use App\Http\Controllers\GestionUsuariosController;
+use App\Http\Controllers\ReservaController;
 use App\Models\Contacto;
 
 //Redirección a la página de inicio
@@ -194,43 +196,33 @@ Route::middleware(['auth:admin', 'bloquear.demo'])->group(function () {
     Route::put('/admin/gestionFooter', [FooterConfigController::class, 'update'])->name('admin.gestionFooter.update');
 
     // =================== Fin gestion de contenido web ===================
-    Route::get('/admin/gestionUsuarios', function () {
-        return view('bibliotecaDAW.adminViews.GestionarUsuarios.gestionarUsuarios');
-    })->name('admin.gestionUsuarios');
 
     // =================== Inicio gestion de usuarios ===================
-    //Gestion de usuarios vista principal
-    Route::get('/admin/gestionUsuarios', function () {
-        return view('bibliotecaDAW.adminViews.GestionarUsuarios.gestionarUsuarios');
-    })->name('admin.gestionUsuarios');
-        //Editar usuario
-    Route::get('/admin/editarUsuario/{id}', function ($id) {
-        // Lógica para obtener los datos del usuario con el ID proporcionado
-    })->name('admin.editarUsuario');
+    //Gestion de usuarios vista principal (GET con filtros + edición inline)
+    Route::get('/admin/gestionUsuarios', [GestionUsuariosController::class, 'index'])->name('admin.gestionUsuarios');
+    //Actualizar usuario (PUT desde formulario de edición)
+    Route::put('/admin/gestionUsuarios/{id}', [GestionUsuariosController::class, 'update'])->name('admin.gestionUsuarios.update');
+    //Dar de baja (eliminar) un usuario
+    Route::delete('/admin/gestionUsuarios/{id}', [GestionUsuariosController::class, 'destroy'])->name('admin.gestionUsuarios.destroy');
 
     //Gestion de sanciones
     Route::get('/admin/gestionSanciones', function () {
         return view('bibliotecaDAW.adminViews.GestionarUsuarios.gestionarSanciones');
     })->name('admin.gestionSanciones');
-    //Historial de reservas
-    Route::get('/admin/historialReservas', function () {
-        return view('bibliotecaDAW.adminViews.GestionarUsuarios.historialReservas');
-    })->name('admin.historialReservas');
-    //Reservas activas
-    Route::get('/admin/reservasActivas', function () {
-        return view('bibliotecaDAW.adminViews.GestionarUsuarios.reservasActivas');
-    })->name('admin.reservasActivas');
+    //Historial de reservas (CRUD completo)
+    Route::get('/admin/historialReservas', [ReservaController::class, 'historial'])->name('admin.historialReservas');
+    Route::post('/admin/historialReservas', [ReservaController::class, 'store'])->name('admin.reservas.store');
+    Route::put('/admin/historialReservas/{id}', [ReservaController::class, 'update'])->name('admin.reservas.update');
+    Route::delete('/admin/historialReservas/{id}', [ReservaController::class, 'destroy'])->name('admin.reservas.destroy');
+    //Marcar una reserva como devuelta (atajo rápido)
+    Route::patch('/admin/reservas/{id}/devolver', [ReservaController::class, 'devolver'])->name('admin.reservas.devolver');
+    //Reservas activas (solo activas y vencidas)
+    Route::get('/admin/reservasActivas', [ReservaController::class, 'activas'])->name('admin.reservasActivas');
     //Publicaciones Usuario
     Route::get('/admin/publicacionesUser', function () {
         return view('bibliotecaDAW.adminViews.GestionarUsuarios.publicacionesUser');
     })->name('admin.publicacionesUser');
-    //Dar de baja a un usuario
-    Route::post('/admin/darBaja/{id}', function ($id) {
-        // Lógica para dar de baja al usuario con el ID proporcionado
-        // Por ejemplo, podrías usar el modelo User para actualizar el estado del usuario a "baja"
-        // User::where('id', $id)->update(['estado' => 'baja']);
-        return redirect()->route('admin.gestionUsuarios')->with('success', 'Usuario dado de baja correctamente.');
-    })->name('admin.darBaja');
+    //Dar de baja a un usuario (deprecated: usar DELETE /admin/gestionUsuarios/{id})
     //Formulario que muestre las cancelaciones de cada usuario
     Route::get('/admin/gestionarCancelaciones', function () {
         return view('bibliotecaDAW.adminViews.GestionarUsuarios.gestionarCancelaciones');

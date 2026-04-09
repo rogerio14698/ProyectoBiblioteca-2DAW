@@ -5,6 +5,7 @@
 @import 'Globales/globales.css';
 @import 'variables/paginacion.css';
 @import 'variables/btnSlider.css';
+@import 'variables/paginaMantenimiento.css';
 
 
 
@@ -47,4 +48,5 @@
 @import 'panelAdmin/gestionarNoticias.css';
 @import 'panelAdmin/gestionarFooter.css';
 @import 'panelAdmin/gestionarCatalogo.css';
-
+@import 'panelAdmin/gestionarUsuarios.css';
+@import 'panelAdmin/gestionarReservas.css';
