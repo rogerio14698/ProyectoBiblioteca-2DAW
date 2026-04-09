@@ -172,10 +172,12 @@ Route::middleware(['auth:admin', 'bloquear.demo'])->group(function () {
     Route::get('/admin/gestionNoticias', function () {
         return view('bibliotecaDAW.adminViews.GestionarContenidoWeb.gestionarNoticias');
     })->name('admin.gestionNoticias');
-    //Gestión del catalogo
-    Route::get('/admin/gestionCatalogo', function () {
-        return view('bibliotecaDAW.adminViews.GestionarContenidoWeb.gestionarContenidoCatalogo');
-    })->name('admin.gestionCatalogo');
+    //Gestión del catalogo (GET con filtros y paginación, POST para crear, GET edit, PUT update, DELETE para eliminar)
+    Route::get('/admin/gestionCatalogo', [LibroController::class, 'gestionCatalogo'])->name('admin.gestionCatalogo');
+    Route::post('/admin/gestionCatalogo', [LibroController::class, 'store'])->name('admin.gestionCatalogo.store');
+    Route::get('/admin/gestionCatalogo/{id}/edit', [LibroController::class, 'edit'])->name('admin.gestionCatalogo.edit');
+    Route::put('/admin/gestionCatalogo/{id}', [LibroController::class, 'update'])->name('admin.gestionCatalogo.update');
+    Route::delete('/admin/gestionCatalogo/{id}', [LibroController::class, 'destroy'])->name('admin.gestionCatalogo.destroy');
     //Gestion Actividades y eventos
     Route::get('/admin/gestionActividades', function () {
         return view('bibliotecaDAW.adminViews.GestionarContenidoWeb.gestionarActividades');

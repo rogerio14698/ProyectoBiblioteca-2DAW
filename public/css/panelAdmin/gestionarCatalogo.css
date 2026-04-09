@@ -1,0 +1,338 @@
+/* Estilos para la página de gestión del catálogo - Panel Admin */
+
+/* === CONTENEDOR PRINCIPAL === */
+.gestionCatalogoPage {
+    background: var(--blanco);
+    padding: 20px;
+}
+
+.gestionCatalogoPage h1 {
+    color: var(--color-primario);
+    margin-bottom: calc(var(--unidad-espaciado) * 0.5);
+}
+
+.gestionCatalogoPage > p {
+    color: var(--color-texto-principal);
+    margin-bottom: calc(var(--unidad-espaciado) * 2);
+}
+
+/* Alertas de éxito y error tras operaciones CRUD */
+.alertaExito {
+    background-color: var(--color-exito);
+    color: var(--color-blanco);
+    padding: 10px 16px;
+    border-radius: var(--radio-borde);
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+.alertaError {
+    background-color: var(--color-error);
+    color: var(--color-blanco);
+    padding: 10px 16px;
+    border-radius: var(--radio-borde);
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+/* Error de campo de validación */
+.errorCampo {
+    color: var(--color-error);
+    font-size: 0.8rem;
+    margin-top: 2px;
+}
+
+/* === LAYOUT 2 COLUMNAS === */
+.catalogoLayout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 24px;
+    margin-top: 16px;
+}
+
+/* === COLUMNA IZQUIERDA: FORMULARIO === */
+.catalogoFormularioCol {
+    align-self: start;
+}
+
+.catalogoFormularioCol h2,
+.catalogoListadoCol h2 {
+    color: var(--color-primario);
+    margin-bottom: 12px;
+}
+
+/* === COLUMNA DERECHA: LISTADO === */
+.catalogoListadoCol {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Filtros de búsqueda en una fila compacta */
+.catalogoFiltros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+    align-items: center;
+}
+
+.catalogoFiltros input,
+.catalogoFiltros select {
+    padding: 6px 10px;
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-borde);
+    font-size: 0.82rem;
+    flex: 1;
+    min-width: 100px;
+}
+
+.btnFiltrar {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    border: none;
+    padding: 6px 14px;
+    border-radius: var(--radio-borde);
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.btnFiltrar:hover {
+    background-color: var(--color-primario-oscuro);
+}
+
+.btnLimpiarFiltros {
+    color: var(--color-texto-mutado);
+    font-size: 0.82rem;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Contenedor scrolleable para las cards (80vh de alto) */
+.catalogoListadoScroll {
+    max-height: 80vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-right: 8px;
+}
+
+/* Scrollbar sutil */
+.catalogoListadoScroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.catalogoListadoScroll::-webkit-scrollbar-thumb {
+    background: var(--color-borde);
+    border-radius: 3px;
+}
+
+/* === CARD DE LIBRO === */
+.catalogoCard {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 12px;
+    align-items: center;
+    background: var(--color-blanco);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-borde);
+    padding: 10px 14px;
+    box-shadow: var(--sombra-suave);
+    transition: box-shadow 0.2s;
+}
+
+.catalogoCard:hover {
+    box-shadow: var(--sombra-media);
+}
+
+/* Imagen de portada en la card */
+.catalogoCardImg {
+    width: 80px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.catalogoCardImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Información del libro en la card */
+.catalogoCardInfo h3 {
+    font-size: 0.95rem;
+    color: var(--color-texto-principal);
+    margin-bottom: 4px;
+}
+
+.catalogoCardInfo p {
+    font-size: 0.8rem;
+    color: var(--color-texto-mutado);
+    margin: 1px 0;
+}
+
+/* Badges de metadatos (año, formato, disponibilidad, ejemplares) */
+.catalogoCardMeta {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+}
+
+.catalogoCardMeta span {
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.catalogoCardAnio {
+    background: var(--color-fondo-global);
+    color: var(--color-texto-principal);
+}
+
+/* Badge de formato según tipo */
+.catalogoCardFormato--fisico {
+    background: var(--bgFormatoFisico);
+    color: var(--color-blanco);
+}
+
+.catalogoCardFormato--digital {
+    background: var(--bgFormatoDigital);
+    color: var(--color-blanco);
+}
+
+.catalogoCardFormato--ambos {
+    background: var(--color-primario);
+    color: var(--color-blanco);
+}
+
+/* Badge de disponibilidad según estado */
+.catalogoCardDisponibilidad--disponible {
+    background: var(--bgDisponible);
+    color: var(--color-blanco);
+}
+
+.catalogoCardDisponibilidad--prestado {
+    background: var(--bgNoDisponible);
+    color: var(--color-blanco);
+}
+
+.catalogoCardEjemplares {
+    background: var(--color-borde);
+    color: var(--color-texto-principal);
+}
+
+/* Botón eliminar dentro de la card */
+.catalogoCardAcciones {
+    gap: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.btnEliminarCatalogo {
+    background-color: var(--bgBtnRojo);
+    color: var(--color-blanco);
+    border: none;
+    padding: 6px 12px;
+    border-radius: var(--radio-borde);
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.btnEliminarCatalogo:hover {
+    background-color: var(--bgBtnRojoHover);
+}
+
+/* Botón editar dentro de la card */
+.btnEditarCatalogo {
+    background-color: var(--bgBtnAzul);
+    color: var(--color-blanco);
+    border: none;
+    padding: 6px 12px;
+    border-radius: var(--radio-borde);
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.btnEditarCatalogo:hover {
+    background-color: var(--bgBtnAzulHover);
+}
+
+/* Miniatura de portada actual en modo edición */
+.catalogoPortadaPreview {
+    width: 60px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-top: 6px;
+    border: 1px solid var(--color-borde);
+}
+
+/* Botones del formulario (enviar + cancelar) */
+.catalogoFormBotones {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 8px;
+}
+
+/* Botón cancelar edición */
+.btnCancelarEdicion {
+    color: var(--color-texto-mutado);
+    font-size: 0.85rem;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Mensaje cuando no hay libros */
+.catalogoVacio {
+    text-align: center;
+    color: var(--color-texto-mutado);
+    padding: 40px 0;
+    font-size: 0.95rem;
+}
+
+/* Paginación fuera del scroll */
+.catalogoPaginacion {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    .catalogoLayout {
+        grid-template-columns: 1fr;
+    }
+
+    .catalogoFiltros {
+        flex-direction: column;
+    }
+
+    .catalogoFiltros input,
+    .catalogoFiltros select {
+        width: 100%;
+    }
+
+    .catalogoCard {
+        grid-template-columns: 60px 1fr;
+    }
+
+    .catalogoCardAcciones {
+        grid-column: 1 / -1;
+        justify-content: flex-end;
+    }
+
+    .catalogoListadoScroll {
+        max-height: 60vh;
+    }
+}

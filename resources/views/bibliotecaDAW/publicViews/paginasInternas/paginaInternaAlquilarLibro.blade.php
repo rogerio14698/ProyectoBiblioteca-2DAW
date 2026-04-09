@@ -12,12 +12,7 @@
             {{-- Columna izquierda: ficha del libro que se va a alquilar --}}
             <article class="alquilarInternoFicha">
                 <div class="alquilarInternoPortada">
-                    @php
-                        $portadaUrl = Str::startsWith($libro->portada_img, ['http://', 'https://'])
-                            ? $libro->portada_img
-                            : asset($libro->portada_img);
-                    @endphp
-                    <img src="{{ $portadaUrl }}" alt="Portada de {{ $libro->titulo }}" class="alquilarInternoImg">
+                    <img src="{{ $libro->portada_url }}" alt="Portada de {{ $libro->titulo }}" class="alquilarInternoImg">
                 </div>
                 <div class="alquilarInternoDetalles">
                     <h1 class="alquilarInternoTitulo">{{ $libro->titulo }}</h1>

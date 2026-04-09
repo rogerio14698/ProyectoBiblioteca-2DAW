@@ -96,9 +96,9 @@
                                 <!-- Imagen del libro -->
                                 <div class="novedadImagen">
                                     <picture>
-                                        <source media="(min-width: 1200px)" srcset="{{ $libro->portada_img }}">
-                                        <source media="(min-width: 768px)" srcset="{{ $libro->portada_img }}">
-                                        <img src="{{ $libro->portada_img }}" alt="Portada de {{ $libro->titulo }}">
+                                        <source media="(min-width: 1200px)" srcset="{{ $libro->portada_url }}">
+                                        <source media="(min-width: 768px)" srcset="{{ $libro->portada_url }}">
+                                        <img src="{{ $libro->portada_url }}" alt="Portada de {{ $libro->titulo }}">
                                     </picture>
                                 </div>
                                 <!-- Título y enlace -->
