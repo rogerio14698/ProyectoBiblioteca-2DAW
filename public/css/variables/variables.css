@@ -77,6 +77,11 @@
    --bgBtnAzul: #17a2b8;
    --bgBtnAzulHover: #138496;
 
+   /* Colores del Footer (tema oscuro) */
+   --color-footer-fondo: #1a1a2e;
+   --color-footer-texto: #e0e0e0;
+   --color-footer-texto-mutado: #b0b0b0;
+
    /* Colores de Estado (Feedback) */
    --color-exito: #00e235;
    --color-error: #dc3545;

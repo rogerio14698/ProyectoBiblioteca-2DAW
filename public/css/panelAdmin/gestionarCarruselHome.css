@@ -1,20 +1,39 @@
 /* Estilos para Gestión del Carrusel Home - Panel Administrativo */
 
-
-.gestionCarruselHome{
+.gestionCarruselHome {
     background: var(--blanco);
     margin-bottom: 20px;
 }
-.gestionCarruselHome h2{
+
+.gestionCarruselHome h2 {
     color: var(--color-primario);
     font-size: 24px;
     text-decoration: underline;
     margin-bottom: calc(var(--unidad-espaciado) * 0.5);
 }
-.gestionCarruselHome p{
+
+.gestionCarruselHome p {
     color: var(--color-texto-principal);
     font-size: 16px;
     margin-bottom: calc(var(--unidad-espaciado) * 2);
+}
+
+/* === LAYOUT 2 COLUMNAS === */
+.eventosLayout {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 24px;
+    margin-top: 16px;
+}
+
+/* Columna del formulario */
+.eventosFormulario {
+    align-self: start;
+}
+
+.eventosFormulario h3 {
+    color: var(--color-primario);
+    margin-bottom: 12px;
 }
 
 /* Formulario de Eventos */
@@ -25,7 +44,6 @@
     background-color: var(--color-fondo-global);
     padding: calc(var(--unidad-espaciado) * 3);
     border-radius: var(--radio-medio);
-    margin-bottom: calc(var(--unidad-espaciado) * 4);
     border-left: 4px solid var(--color-primario);
     box-shadow: var(--sombra-media);
 }
@@ -48,6 +66,8 @@
 .gestionGrupoFormulario input[type="text"],
 .gestionGrupoFormulario input[type="datetime-local"],
 .gestionGrupoFormulario input[type="file"],
+.gestionGrupoFormulario input[type="number"],
+.gestionGrupoFormulario input[type="url"],
 .gestionGrupoFormulario textarea,
 .gestionGrupoFormulario select {
     width: 100%;
@@ -66,6 +86,8 @@
 .gestionGrupoFormulario input[type="text"]:focus,
 .gestionGrupoFormulario input[type="datetime-local"]:focus,
 .gestionGrupoFormulario input[type="file"]:focus,
+.gestionGrupoFormulario input[type="number"]:focus,
+.gestionGrupoFormulario input[type="url"]:focus,
 .gestionGrupoFormulario textarea:focus,
 .gestionGrupoFormulario select:focus {
     outline: none;
@@ -108,127 +130,193 @@
     transform: translateY(0);
 }
 
-/* Tabla de Eventos */
-.gestionTablaBloqueador {
-    overflow-x: auto;
-    border-radius: var(--radio-pequeno);
-    box-shadow: var(--sombra-suave);
-    margin-top: calc(var(--unidad-espaciado) * 2);
+/* === COLUMNA DERECHA: LISTADO DE EVENTOS === */
+.eventosListado h3 {
+    color: var(--color-primario);
+    margin-bottom: 12px;
 }
 
-.gestionTablaEventos {
-    width: 100%;
-    border-collapse: collapse;
+/* Contenedor con scroll vertical */
+.eventosListadoCards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 78vh;
+    overflow-y: auto;
+    padding-right: 4px;
+    scrollbar-width: thin;
+}
+
+/* Tarjeta individual de evento */
+.eventoCard {
+    display: grid;
+    grid-template-columns: 110px 1fr auto;
+    gap: 12px;
+    align-items: center;
+    padding: 12px;
     background-color: var(--color-blanco);
+    border-radius: var(--radio-borde);
+    box-shadow: var(--sombra-suave);
+    border-left: 4px solid var(--color-primario);
+    transition: box-shadow 0.2s;
 }
 
-/* Encabezado de Tabla */
-.gestionTablaEventos thead {
-    background-color: var(--color-primario);
-    color: var(--color-blanco);
+.eventoCard:hover {
+    box-shadow: var(--sombra-media);
 }
 
-.gestionTablaEventos thead th {
-    padding: calc(var(--unidad-espaciado) * 1.5);
-    text-align: left;
-    font-weight: 600;
-    font-size: 13px;
-}
-
-/* Cuerpo de Tabla */
-.gestionTablaEventos tbody tr {
-    border-bottom: 1px solid var(--color-borde);
-    transition: background-color var(--transicion-rapida);
-}
-
-.gestionTablaEventos tbody tr:hover {
-    background-color: rgba(74, 144, 226, 0.05);
-}
-
-.gestionTablaEventos tbody td {
-    padding: calc(var(--unidad-espaciado) * 1.5);
-    color: var(--color-texto-principal);
-    font-size: 14px;
-}
-
-/* Imágenes en Tabla */
-.gestionTablaEventos tbody td img {
-    max-width: 100px;
-    height: auto;
-    border-radius: var(--radio-pequeno);
+/* Imagen dentro de la tarjeta */
+.eventoCardImagen img {
+    width: 110px;
+    height: 75px;
     object-fit: cover;
+    border-radius: var(--radio-borde);
 }
 
-/* Botones de Acciones */
-.gestionBotonEditar,
-.gestionBotonEliminar {
-    padding: calc(var(--unidad-espaciado) * 0.75) calc(var(--unidad-espaciado) * 1.5);
-    border: none;
-    border-radius: var(--radio-pequeno);
-    font-size: 12px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all var(--transicion-rapida);
-    display: inline-block;
-    margin-right: calc(var(--unidad-espaciado) * 0.5);
+.eventoCardSinImagen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 110px;
+    height: 75px;
+    background-color: #e2e8f0;
+    border-radius: var(--radio-borde);
+    font-size: 0.75rem;
+    color: #94a3b8;
 }
 
-.gestionBotonEditar {
+/* Información del evento */
+.eventoCardInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.eventoCardCabecera {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.eventoCardTitulo {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1e293b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Badges de prioridad */
+.eventoCardPrioridad {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.eventoCardPrioridad--1 {
+    background-color: #dfe6e9;
+    color: #636e72;
+}
+
+.eventoCardPrioridad--2 {
+    background-color: #ffeaa7;
+    color: #d35400;
+}
+
+.eventoCardPrioridad--3 {
+    background-color: #fab1a0;
+    color: #d63031;
+}
+
+.eventoCardDescripcion {
+    font-size: 0.82rem;
+    color: #64748b;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Metadatos: fecha, ubicación, autor */
+.eventoCardMeta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 0.75rem;
+    color: #94a3b8;
+}
+
+/* Acciones de la tarjeta */
+.eventoCardAcciones {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.btnEditarEvento {
     background-color: var(--color-primario);
     color: var(--color-blanco);
-    text-decoration: none;
-}
-
-.gestionBotonEditar:hover {
-    background-color: var(--color-primario-oscuro);
-    box-shadow: var(--sombra-suave);
-}
-
-.gestionBotonEliminar {
-    background-color: var(--color-error);
-    color: var(--color-blanco);
-}
-
-.gestionBotonEliminar:hover {
-    background-color: var(--bgBtnRojoHover);
-    box-shadow: var(--sombra-suave);
-}
-
-/* Fila vacía */
-.gestionFilaVacia td {
+    font-size: 0.78rem;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 600;
     text-align: center;
-    color: var(--color-texto-mutado);
-    padding: calc(var(--unidad-espaciado) * 3) !important;
 }
 
-/* Responsive */
+.btnEditarEvento:hover {
+    filter: brightness(0.9);
+}
+
+.btnEliminarEvento {
+    background-color: #e74c3c;
+    color: var(--color-blanco);
+    font-size: 0.78rem;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.btnEliminarEvento:hover {
+    background-color: #c0392b;
+}
+
+.eventoCardVacio {
+    text-align: center;
+    color: #94a3b8;
+    padding: 40px 20px;
+    font-style: italic;
+}
+
+/* === RESPONSIVE === */
 @media (max-width: 768px) {
+    .eventosLayout {
+        grid-template-columns: 1fr;
+    }
+
     .gestionFormularioCarrusel {
         padding: calc(var(--unidad-espaciado) * 2);
         gap: calc(var(--unidad-espaciado) * 1.5);
     }
 
-    .gestionTablaBloqueador {
-        margin-top: calc(var(--unidad-espaciado) * 3);
+    .eventoCard {
+        grid-template-columns: 80px 1fr;
+        grid-template-rows: auto auto;
     }
 
-    .gestionTablaEventos thead th {
-        padding: var(--unidad-espaciado);
-        font-size: 12px;
+    .eventoCardAcciones {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        justify-content: flex-end;
     }
 
-    .gestionTablaEventos tbody td {
-        padding: var(--unidad-espaciado);
-        font-size: 13px;
-    }
-
-    .gestionTablaEventos tbody td img {
-        max-width: 80px;
-    }
-
-    .gestionBotonEditar,
-    .gestionBotonEliminar {
-        padding: calc(var(--unidad-espaciado) * 0.5) var(--unidad-espaciado);
-        font-size: 11px;
+    .eventosListadoCards {
+        max-height: none;
     }
 }

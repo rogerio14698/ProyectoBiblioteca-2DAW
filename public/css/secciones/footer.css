@@ -1,94 +1,95 @@
 @import '../main.css';
 
+/* === FOOTER PRINCIPAL (tema oscuro, réplica de la vista previa del admin) === */
+
 .footer {
-    background-color: var(--color-blanco);
-    padding: 20px;
-    color: var(--color-fuente-principal);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
-    display: flex;
-    flex-direction: column;
+    background-color: var(--color-footer-fondo);
+    color: var(--color-footer-texto);
+    padding: 24px;
 }
 
+/* Títulos de cada columna del footer */
 .footer h1 {
-    text-decoration: underline;
-    font-size: 1.5rem;
+    color: var(--color-blanco);
+    font-size: 0.95rem;
     margin-bottom: 10px;
-    color: var(--color-primario-oscuro);
+    border-bottom: 2px solid var(--color-primario);
+    padding-bottom: 6px;
+    text-decoration: none;
+}
+
+/* Párrafos del footer (teléfono, dirección, horarios, etc.) */
+.footer p {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--color-footer-texto-mutado);
+}
+
+/* Enlaces dentro del footer (aviso legal, cookies) */
+.footer a {
+    color: var(--color-primario);
+    text-decoration: underline;
+    font-size: 0.82rem;
+}
+
+/* === Columna 1: Info general === */
+.footerDireccion {
+    display: flex;
+    flex-direction: column;
 }
 
 .footerInfo {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     margin: 0;
     padding: 0;
-    color: var(--color-texto-principal);
-    font-weight: 500;
-    gap: 5px;
+    gap: 2px;
 }
 
+/* Iconos de redes sociales */
 .footerRedesSociales {
     display: flex;
-    justify-content: center;
-    gap: 20px
+    gap: 12px;
+    margin-top: 10px;
 }
 
 .footerRedesSociales a {
-    background-color: var(--color-primario);
-    color: var(--color-blanco);
-    padding: 12px 12px;
-    border-radius: 100%;
-}
-.footerHorarios{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
+    color: var(--color-footer-texto);
+    font-size: 1.2rem;
+    transition: color 0.2s;
+    text-decoration: none;
+    background: none;
     padding: 0;
-    color: var(--color-texto-principal);
-    font-weight: 500;
-    gap: 5px;
-}
-.footerContacto{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    color: var(--color-texto-principal);
-    font-weight: 500;
-    gap: 5px;
+    border-radius: 0;
 }
 
+.footerRedesSociales a:hover {
+    color: var(--color-primario);
+}
 
-@media (min-width: 1200px) {
+/* === Columna 2: Horarios === */
+.footerHorarios {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+/* === Columna 3: Contacto === */
+.footerContacto {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+/* === RESPONSIVE: en móvil una sola columna === */
+@media (max-width: 768px) {
     .footer {
-        padding: 20px;
-        display: grid;
-        margin: 0 auto;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: 1fr;
+        gap: 16px;
     }
-
-    .footer h1 {
-        text-decoration: underline;
-        font-size: 1.5rem;
-        margin-bottom: 10px;
-        color: var(--color-primario-oscuro);
-    }
-    .footerHorarios{
-        display: flex;
-        align-items: flex-start;
-        padding: 0;
-        margin: 0;
-    }
-    .footerContacto{
-        display: flex;
-        align-items: flex-start;
-        padding: 0;
-        margin: 0;
-    }
-
 }

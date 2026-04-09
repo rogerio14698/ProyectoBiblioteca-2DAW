@@ -10,6 +10,7 @@ use App\Http\Controllers\LibroController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\SlideBienvenidaController;
 use App\Http\Controllers\NoticiasController;
+use App\Http\Controllers\FooterConfigController;
 use App\Models\Contacto;
 
 //Redirección a la página de inicio
@@ -153,6 +154,7 @@ Route::middleware(['auth:admin', 'bloquear.demo'])->group(function () {
     Route::get('/admin/gestionHome', [SlideBienvenidaController::class, 'adminHome'])->name('admin.gestionHome');
     Route::post('/admin/gestionHome', [SlideBienvenidaController::class, 'store'])->name('admin.slide.store');
     Route::put('/admin/gestionHome/{id}', [SlideBienvenidaController::class, 'update'])->name('admin.slide.update');
+    Route::delete('/admin/gestionHome/{id}', [SlideBienvenidaController::class, 'destroy'])->name('admin.slide.destroy');
 
     //Gestion del carrusel-home
     // Vista principal del carrusel (lista + formulario reutilizable crear/editar)
@@ -198,9 +200,8 @@ Route::middleware(['auth:admin', 'bloquear.demo'])->group(function () {
 
 
     //Gestion varios header y footer
-    Route::get('/admin/gestionFooter', function () {
-        return view('bibliotecaDAW.adminViews.GestionarContenidoWeb.gestionarFooter');
-    })->name('admin.gestionFooter');
+    Route::get('/admin/gestionFooter', [FooterConfigController::class, 'edit'])->name('admin.gestionFooter');
+    Route::put('/admin/gestionFooter', [FooterConfigController::class, 'update'])->name('admin.gestionFooter.update');
 
     // =================== Fin gestion de contenido web ===================
     Route::get('/admin/gestionUsuarios', function () {

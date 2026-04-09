@@ -144,10 +144,19 @@ class SlideBienvenidaController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Eliminar un slide de bienvenida de la base de datos.
+     * @param int $id Identificador del slide a eliminar.
+     * @return \Illuminate\Http\RedirectResponse Redirección con mensaje de éxito.
+     * @effect Elimina el registro del slide en la tabla slide_bienvenidas.
      */
-    public function destroy(SlideBienvenida $slideBienvenida)
+    public function destroy(int $id): \Illuminate\Http\RedirectResponse
     {
-        //
+        // Buscamos el slide por su ID o lanzamos un 404 si no existe.
+        $slide = SlideBienvenida::findOrFail($id);
+
+        // Eliminamos el slide de la base de datos.
+        $slide->delete();
+
+        return redirect()->back()->with('success', 'Slide eliminado correctamente.');
     }
 }
