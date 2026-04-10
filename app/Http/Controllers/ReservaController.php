@@ -48,8 +48,7 @@ class ReservaController extends Controller
         // Ordenamos por fecha de reserva (más recientes primero).
         $reservas = $query->orderBy('fecha_reserva', 'desc')->get();
 
-        // Cargamos usuarios y libros para los selects del formulario.
-        $usuarios = Usuario::orderBy('name')->get();
+        // Cargamos libros para el select del formulario.
         $libros = Libro::orderBy('titulo')->get();
 
         // Si viene ?edit=ID, cargamos esa reserva para el formulario de edición.
@@ -60,7 +59,6 @@ class ReservaController extends Controller
 
         return view('bibliotecaDAW.adminViews.GestionarUsuarios.historialReservas', [
             'reservas'      => $reservas,
-            'usuarios'      => $usuarios,
             'libros'        => $libros,
             'reservaEditar' => $reservaEditar,
         ]);
@@ -102,17 +100,25 @@ class ReservaController extends Controller
     {
         // Validamos los campos obligatorios del formulario.
         $request->validate([
-            'usuario_id'                => 'required|exists:usuarios,id',
+            'usuario_id'                => 'required|string|max:255',
             'libro_id'                  => 'required|exists:libros,id',
             'fecha_reserva'             => 'required|date',
             'fecha_devolucion_prevista' => 'required|date|after_or_equal:fecha_reserva',
             'observaciones'             => 'nullable|string|max:500',
         ]);
 
+        // Resolvemos el texto introducido (nombre o nSocio) al ID real del usuario.
+        $usuario = $this->resolveUsuarioFromInput($request->input('usuario_id'));
+        if ($usuario === null) {
+            return redirect()->back()
+                ->withErrors(['usuario_id' => 'No se pudo identificar un usuario único con ese nombre o número de socio.'])
+                ->withInput();
+        }
+
         try {
             // Creamos la reserva con estado 'activa' por defecto.
             Reserva::create([
-                'usuario_id'                => $request->input('usuario_id'),
+                'usuario_id'                => $usuario->id,
                 'libro_id'                  => $request->input('libro_id'),
                 'fecha_reserva'             => $request->input('fecha_reserva'),
                 'fecha_devolucion_prevista' => $request->input('fecha_devolucion_prevista'),
@@ -138,7 +144,7 @@ class ReservaController extends Controller
     public function update(Request $request, int $id): RedirectResponse
     {
         $request->validate([
-            'usuario_id'                => 'required|exists:usuarios,id',
+            'usuario_id'                => 'required|string|max:255',
             'libro_id'                  => 'required|exists:libros,id',
             'fecha_reserva'             => 'required|date',
             'fecha_devolucion_prevista' => 'required|date',
@@ -147,11 +153,19 @@ class ReservaController extends Controller
             'observaciones'             => 'nullable|string|max:500',
         ]);
 
+        // Resolvemos el texto introducido (nombre o nSocio) al ID real del usuario.
+        $usuario = $this->resolveUsuarioFromInput($request->input('usuario_id'));
+        if ($usuario === null) {
+            return redirect()->back()
+                ->withErrors(['usuario_id' => 'No se pudo identificar un usuario único con ese nombre o número de socio.'])
+                ->withInput();
+        }
+
         try {
             $reserva = Reserva::findOrFail($id);
 
             $reserva->update([
-                'usuario_id'                => $request->input('usuario_id'),
+                'usuario_id'                => $usuario->id,
                 'libro_id'                  => $request->input('libro_id'),
                 'fecha_reserva'             => $request->input('fecha_reserva'),
                 'fecha_devolucion_prevista' => $request->input('fecha_devolucion_prevista'),
@@ -210,5 +224,40 @@ class ReservaController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('admin.historialReservas')->with('error', 'Error al eliminar la reserva: ' . $e->getMessage());
         }
+    }
+
+    /**
+     * Resolver el usuario escrito en el formulario por nombre o número de socio.
+     *
+     * @param string $usuarioInput Texto introducido en el campo de usuario.
+     * @return Usuario|null Usuario encontrado o null si no existe coincidencia única.
+     */
+    private function resolveUsuarioFromInput(string $usuarioInput): ?Usuario
+    {
+        $searchTerm = trim($usuarioInput);
+        if ($searchTerm === '') {
+            return null;
+        }
+
+        // Priorizamos nSocio exacto para evitar ambigüedades por nombres repetidos.
+        $usuarioBySocio = Usuario::where('nSocio', strtoupper($searchTerm))->first();
+        if ($usuarioBySocio !== null) {
+            return $usuarioBySocio;
+        }
+
+        // Intentamos coincidencia exacta por nombre.
+        $usuarioByExactName = Usuario::where('name', $searchTerm)->first();
+        if ($usuarioByExactName !== null) {
+            return $usuarioByExactName;
+        }
+
+        // Si hay una sola coincidencia parcial por nombre, la usamos.
+        $usuariosByPartialName = Usuario::where('name', 'like', '%' . $searchTerm . '%')
+            ->limit(2)
+            ->get();
+
+        return $usuariosByPartialName->count() === 1
+            ? $usuariosByPartialName->first()
+            : null;
     }
 }

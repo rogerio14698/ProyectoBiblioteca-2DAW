@@ -1,0 +1,131 @@
+/* ==================================================
+   PANEL ADMIN - INVENTARIO DE LIBROS
+   ================================================== */
+
+.inventarioPage {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 3);
+    background: var(--blanco);
+    padding: calc(var(--unidad-espaciado) * 3);
+}
+
+/* --- Cabecera --- */
+.inventarioEncabezado h1 {
+    color: var(--color-primario-oscuro);
+    margin-bottom: calc(var(--unidad-espaciado) * 0.5);
+}
+
+.inventarioEncabezado p {
+    color: var(--color-texto-mutado);
+    margin: 0;
+}
+
+/* --- Resumen tipo dashboard --- */
+.inventarioResumen {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: calc(var(--unidad-espaciado) * 1.5);
+}
+
+.inventarioResumenCard {
+    background: var(--color-fondo-global);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-borde);
+    padding: calc(var(--unidad-espaciado) * 1.5);
+    box-shadow: var(--sombra-suave);
+}
+
+.inventarioResumenCard h3 {
+    font-size: 0.82rem;
+    color: var(--color-texto-mutado);
+    margin-bottom: calc(var(--unidad-espaciado) * 0.5);
+    text-transform: uppercase;
+}
+
+.inventarioResumenCard p {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--color-primario-oscuro);
+    margin: 0;
+}
+
+.inventarioResumenCard--disponible {
+    border-left: 4px solid var(--bgDisponible);
+}
+
+.inventarioResumenCard--prestado {
+    border-left: 4px solid var(--bgNoDisponible);
+}
+
+/* --- Sección de filtros para generar PDF --- */
+.inventarioFiltros {
+    background: var(--color-fondo-global);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-borde);
+    padding: calc(var(--unidad-espaciado) * 2.5);
+    box-shadow: var(--sombra-suave);
+}
+
+.inventarioFiltros h2 {
+    color: var(--color-primario-oscuro);
+    margin-bottom: calc(var(--unidad-espaciado) * 0.5);
+}
+
+.inventarioFiltrosDesc {
+    color: var(--color-texto-mutado);
+    font-size: 0.88rem;
+    margin-bottom: calc(var(--unidad-espaciado) * 2);
+}
+
+.inventarioFiltrosForm {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 2);
+}
+
+.inventarioFiltrosGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: calc(var(--unidad-espaciado) * 1.5);
+}
+
+.inventarioFiltroCampo {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 0.5);
+}
+
+.inventarioFiltroCampo label {
+    color: var(--color-texto-principal);
+    font-weight: 600;
+    font-size: 0.86rem;
+}
+
+.inventarioFiltroCampo input,
+.inventarioFiltroCampo select {
+    min-height: var(--altura-boton-movil);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-borde);
+    padding: 10px 12px;
+    background: var(--blanco);
+    color: var(--color-texto-principal);
+    font-size: 0.88rem;
+}
+
+.inventarioFiltrosBtns {
+    display: flex;
+    gap: calc(var(--unidad-espaciado) * 1.5);
+    flex-wrap: wrap;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .inventarioFiltrosGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .inventarioFiltrosBtns {
+        flex-direction: column;
+    }
+}

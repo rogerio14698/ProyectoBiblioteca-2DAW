@@ -1,0 +1,114 @@
+/*
+ * Estilos para la sección de gestión de libros perdidos (admin)
+ * Cumple la guía de estilo del proyecto (variables, camelCase, sin valores hardcoded)
+ * Autor: Copilot (comentado para nivel junior)
+ */
+
+.gestionarLibrosPerdidosContenedor {
+    background: var(--color-fondo-global);
+    padding: calc(var(--unidad-espaciado) * 2);
+    border-radius: var(--unidad-espaciado);
+    box-shadow: var(--sombra-suave);
+    margin-bottom: calc(var(--unidad-espaciado) * 3);
+}
+
+.formularioBajaLibro {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--unidad-espaciado);
+    align-items: flex-end;
+}
+
+.campoLibro,
+.campoMotivo {
+    flex: 1 1 220px;
+    min-width: 220px;
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) / 2);
+}
+
+.campoLibro label,
+.campoMotivo label {
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.campoLibro input,
+.campoMotivo input {
+    padding: var(--unidad-espaciado);
+    border: 1px solid var(--color-secundario);
+    border-radius: var(--unidad-espaciado);
+    background: #fff;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.campoLibro input:focus,
+.campoMotivo input:focus {
+    outline: none;
+    border-color: var(--color-primario);
+}
+
+.botonAccion {
+    height: var(--altura-boton-movil);
+    padding: 0 calc(var(--unidad-espaciado) * 2);
+    background: var(--color-primario);
+    color: #fff;
+    border: none;
+    border-radius: var(--unidad-espaciado);
+    font-weight: bold;
+    box-shadow: var(--sombra-media);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.botonAccion:hover {
+    background: var(--color-secundario);
+}
+
+.historialBajas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: calc(var(--unidad-espaciado) * 2);
+}
+
+.tarjetaLibroPerdido {
+    border: 1px solid var(--color-secundario);
+    padding: var(--unidad-espaciado);
+    border-radius: var(--unidad-espaciado);
+    background: #fff;
+    box-shadow: var(--sombra-suave);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) / 2);
+}
+
+.tarjetaLibroPerdido h3 {
+    margin-top: 0;
+    color: var(--color-primario);
+    font-size: 1.2rem;
+}
+
+.tarjetaLibroPerdido p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.tarjetaLibroPerdido .fechaBaja {
+    font-size: 0.9em;
+    color: var(--color-secundario);
+}
+
+@media (max-width: 600px) {
+    .gestionarLibrosPerdidosContenedor {
+        padding: var(--relleno-movil);
+    }
+    .formularioBajaLibro {
+        flex-direction: column;
+        gap: var(--unidad-espaciado);
+    }
+    .historialBajas {
+        grid-template-columns: 1fr;
+    }
+}

@@ -11,6 +11,7 @@
     background: var(--blanco);
     padding: calc(var(--unidad-espaciado) * 3);
     gap: calc(var(--unidad-espaciado) * 3);
+    height: 80vh;
 }
 
 /* --- Encabezado superior: título + botón de navegación --- */
@@ -194,8 +195,16 @@
 }
 
 .reservasGrupoForm textarea {
-    resize: vertical;
     min-height: 60px;
+    max-height: 80px;
+    overflow-y: auto;
+}
+
+/* Mensaje de error de validación en campos del formulario */
+.gestionReservas .errorCampo {
+    color: var(--color-error);
+    font-size: 0.8rem;
+    margin-top: calc(var(--unidad-espaciado) * 0.25);
 }
 
 /* Botón de enviar formulario */

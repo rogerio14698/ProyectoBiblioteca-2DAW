@@ -50,8 +50,7 @@
                     <ul class="sub-menu-items">
                         <li><a href="{{ route('admin.reservasActivas') }}">Reservas Activas</a></li>
                         <li><a href="{{ route('admin.historialReservas') }}">Historial de Reservas</a></li>
-                        <li><a href="{{ route('admin.gestionarCancelaciones') }}">Cancelaciones</a></li>
-                        <li><a href="{{ route('admin.publicacionesUser') }}">Publicaciones</a></li>
+                        <li><a href="{{ route('admin.publicacionesUser') }}">Publicaciones Usuarios</a></li>
                     </ul>
                 </li>
                 <!-- Agrega más enlaces según las funcionalidades que quieras ofrecer -->
@@ -68,9 +67,7 @@
                     <h3>Gestión de Libros</h3>
                     <ul class="sub-menu-items">
                         <li><a href="{{ route('admin.inventario') }}">Inventario</a></li>
-                        <li><a href="{{ route('admin.gestionarLibros') }}">Listado Libros</a></li>
                         <li><a href="{{ route('admin.librosPerdidos') }}">Libros Perdidos</a></li>
-                        <li><a href="{{ route('admin.librosNuevos') }}">Libros Nuevos</a></li>
                         <li><a href="{{ route('admin.librosPrestados') }}">Libros Prestados</a></li>
                     </ul>
                 </li>

@@ -32,6 +32,12 @@ class Libro extends Model
         'cantidad_ejemplares',
         'isbn',
         'portada_img',
+        'perdido',
+        'motivo_baja',
+    ];
+
+    protected $casts = [
+        'perdido' => 'boolean',
     ];
 
     /**

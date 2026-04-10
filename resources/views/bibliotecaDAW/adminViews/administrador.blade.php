@@ -49,50 +49,65 @@
                             <span class="tituloAcciones">Acciones</span>
                         </div>
                         @foreach ($mensajes as $mail)
-                        <div class="dataListadoMail">
-                            <span class="dataNombre">{{ $mail->nombre }}</span>
-                            <span class="dataEmail">{{ $mail->email }}</span>
-                            <span class="dataAsunto">{{ $mail->asunto }}</span>
-                            <span class="dataMensaje">{{ $mail->mensaje }}</span>
-                            <!--Poner solo el dia en la fecha -->
-                            <span class="dataFecha">{{ $mail->created_at->format('d/m/Y') }}</span>
-                            <!--Mostramos el estado real guardado en base de datos para evitar inconsistencias visuales. -->
-                            <span class="dataEstado">
-                                <span class="estadoMail {{ $mail->estado === 'pendiente' ? 'estadoPendiente' : ($mail->estado === 'en_proceso' ? 'estadoProceso' : 'estadoLeido') }}">
-                                    {{ $mail->estado === 'pendiente' ? 'Pendiente' : ($mail->estado === 'en_proceso' ? 'En proceso' : 'Leido') }}
+                            <div class="dataListadoMail">
+                                <span class="dataNombre">{{ $mail->nombre }}</span>
+                                <span class="dataEmail">{{ $mail->email }}</span>
+                                <span class="dataAsunto">{{ $mail->asunto }}</span>
+                                <span class="dataMensaje">{{ $mail->mensaje }}</span>
+                                <!--Poner solo el dia en la fecha -->
+                                <span class="dataFecha">{{ $mail->created_at->format('d/m/Y') }}</span>
+                                <!--Mostramos el estado real guardado en base de datos para evitar inconsistencias visuales. -->
+                                <span class="dataEstado">
+                                    <span
+                                        class="estadoMail {{ $mail->estado === 'pendiente' ? 'estadoPendiente' : ($mail->estado === 'en_proceso' ? 'estadoProceso' : 'estadoLeido') }}">
+                                        {{ $mail->estado === 'pendiente' ? 'Pendiente' : ($mail->estado === 'en_proceso' ? 'En proceso' : 'Leido') }}
+                                    </span>
                                 </span>
-                            </span>
-                            <span>
+
                                 <!--Elimina el mensaje de la base de datos pero no del email-->
-                                <form action="{{ route('admin.mensajes.delete', $mail->id) }}" method="POST" style="display: inline;" onsubmit="return confirm('¿Estas seguro que quieres eliminar este mensaje?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn-base btnEliminarMail">Eliminar</button>
-                                </form>
-                                <!--Cambia las etiquetas de estado-->
-                                <form action="{{ route('admin.mensajes.update', $mail->id) }}" method="POST" style="display: inline;">
-                                    @csrf
-                                    @method('PATCH')
-                                    <select class="selectEstadoMail" name="estado" id="estado_{{ $mail->id }}">
-                                        <option value="pendiente" {{ $mail->estado === 'pendiente' ? 'selected' : '' }}>Pendiente</option>
-                                        <option value="en_proceso" {{ $mail->estado === 'en_proceso' ? 'selected' : '' }}>En proceso</option>
-                                        <option value="leido" {{ $mail->estado === 'leido' ? 'selected' : '' }}>Leido</option>
-                                    </select>
-                                    <button type="submit" class="btn-base btnCambiarEstadoMail">Cambiar Estado</button>
-                                </form>
-                                <!--Este btn abre el formulario de respuesta al email recibido -->
-                                <button type="button" class="btn-base btnResponderMail" onclick="document.getElementById('formResponder_{{ $mail->id }}').classList.toggle('oculto')">Responder</button>
-                            </span>
-                            <!--Formulario de respuesta que se muestra/oculta al pulsar Responder -->
-                            <div id="formResponder_{{ $mail->id }}" class="formResponderMail oculto">
-                                <form action="{{ route('admin.mensajes.responder', $mail->id) }}" method="POST">
-                                    @csrf
-                                    <label for="respuesta_{{ $mail->id }}">Respuesta para <strong>{{ $mail->nombre }}</strong>:</label>
-                                    <textarea class="textareaResponderMail" name="respuesta" id="respuesta_{{ $mail->id }}" rows="3" required placeholder="Escribe tu respuesta aquí..."></textarea>
-                                    <button type="submit" class="btn-base btnCambiarEstadoMail">Enviar respuesta</button>
-                                </form>
+                                <div class="btnsAccionesDashboard">
+                                    <form action="{{ route('admin.mensajes.delete', $mail->id) }}" method="POST"
+                                        style="display: inline;"
+                                        onsubmit="return confirm('¿Estas seguro que quieres eliminar este mensaje?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn-base btnEliminarMail">Eliminar</button>
+                                    </form>
+                                    <!--Cambia las etiquetas de estado-->
+                                    <form  action="{{ route('admin.mensajes.update', $mail->id) }}" method="POST"
+                                        style="display: inline;">
+                                        @csrf
+                                        @method('PATCH')
+                                        <select class="selectEstadoMail" name="estado" id="estado_{{ $mail->id }}">
+                                            <option value="pendiente"
+                                                {{ $mail->estado === 'pendiente' ? 'selected' : '' }}>
+                                                Pendiente</option>
+                                            <option value="en_proceso"
+                                                {{ $mail->estado === 'en_proceso' ? 'selected' : '' }}>
+                                                En proceso</option>
+                                            <option value="leido" {{ $mail->estado === 'leido' ? 'selected' : '' }}>Leido
+                                            </option>
+                                        </select>
+                                        <button type="submit" class="btn-base btnCambiarEstadoMail">Cambiar Estado</button>
+                                    </form>
+                                    <!--Este btn abre el formulario de respuesta al email recibido -->
+                                    <button type="button" class="btn-base btnResponderMail"
+                                        onclick="document.getElementById('formResponder_{{ $mail->id }}').classList.toggle('oculto')">Responder</button>
+
+                                    <!--Formulario de respuesta que se muestra/oculta al pulsar Responder -->
+                                    <div id="formResponder_{{ $mail->id }}" class="formResponderMail oculto">
+                                        <form action="{{ route('admin.mensajes.responder', $mail->id) }}" method="POST">
+                                            @csrf
+                                            <label for="respuesta_{{ $mail->id }}">Respuesta para
+                                                <strong>{{ $mail->nombre }}</strong>:</label>
+                                            <textarea class="textareaResponderMail" name="respuesta" id="respuesta_{{ $mail->id }}" rows="3" required
+                                                placeholder="Escribe tu respuesta aquí..."></textarea>
+                                            <button type="submit" class="btn-base btnCambiarEstadoMail">Enviar
+                                                respuesta</button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
                         @endforeach
                     </div>
                 </div>

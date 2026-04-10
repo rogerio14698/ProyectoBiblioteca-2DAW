@@ -77,16 +77,11 @@
 
                     <!-- Campo: Usuario -->
                     <div class="reservasGrupoForm">
-                        <label for="usuario_id">Usuario</label>
-                        <select id="usuario_id" name="usuario_id" required>
-                            <option value="">Seleccionar usuario</option>
-                            @foreach ($usuarios as $usuario)
-                                <option value="{{ $usuario->id }}"
-                                    {{ old('usuario_id', $reservaEditar->usuario_id ?? '') == $usuario->id ? 'selected' : '' }}>
-                                    {{ $usuario->name }} ({{ $usuario->nSocio }})
-                                </option>
-                            @endforeach
-                        </select>
+                        <label for="usuario_id">Usuario (Nombre o N. de socio)</label>
+                        <input type="text" id="usuario_id" name="usuario_id" value="{{ old('usuario_id', $reservaEditar->usuario->name ?? '') }}" placeholder="Ej: Ana Pérez o 12345AB" required>
+                        @error('usuario_id')
+                            <span class="errorCampo">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <!-- Campo: Libro -->

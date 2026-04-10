@@ -25,6 +25,9 @@ return new class extends Migration
             $table->string('isbn')->unique();
             $table->string('portada_img')->nullable();
             $table->timestamps();
+            $table->boolean('perdido')->default(false)->after('cantidad_ejemplares');
+            // Opcional: motivo de baja
+            $table->string('motivo_baja')->nullable()->after('perdido');
         });
     }
 

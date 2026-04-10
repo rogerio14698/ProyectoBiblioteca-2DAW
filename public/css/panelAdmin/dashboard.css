@@ -212,6 +212,12 @@
     color: #334155;
     margin-bottom: 6px;
 }
+.btnsAccionesDashboard{
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
 
 /* Textarea de respuesta */
 .textareaResponderMail {

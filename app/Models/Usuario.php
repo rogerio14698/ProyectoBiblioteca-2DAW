@@ -18,7 +18,9 @@ class Usuario extends Authenticatable
         'dni',
         'movil',
         'password',
-        'nSocio'
+        'nSocio',
+        'es_escritor_verificado',
+        'tipo_escritor',
     ];
 
     /**
@@ -30,6 +32,7 @@ class Usuario extends Authenticatable
     {
         return [
             'password' => 'hashed',
+            'es_escritor_verificado' => 'boolean',
         ];
     }
 

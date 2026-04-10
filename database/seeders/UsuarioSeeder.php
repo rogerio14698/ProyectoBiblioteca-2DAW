@@ -39,6 +39,8 @@ class UsuarioSeeder extends Seeder
                 'movil' => '666123456',
                 'password' => 'password123', // Se hasheará automáticamente en el modelo
                 'nSocio' => '12345AB', // Se genera automáticamente en booted(), pero lo ponemos aquí como respaldo
+                'es_escritor_verificado' => true,
+                'tipo_escritor' => 'profesional',
             ]
         );
 
@@ -50,6 +52,8 @@ class UsuarioSeeder extends Seeder
                 'movil' => '666654321',
                 'password' => 'password123',
                 'nSocio' => '54321CD', // Se genera automáticamente en booted(), pero lo ponemos aquí como respaldo
+                'es_escritor_verificado' => true,
+                'tipo_escritor' => 'aficion',
             ]
         );
     }

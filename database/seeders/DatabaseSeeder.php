@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             EventosSeeder::class,
             LibroSeeder::class,
             NoticiasSeeder::class,
+            PublicacionSeeder::class,
             ContactoSeeder::class,
             SlideBienvenidaSeeder::class,
             FooterConfigSeeder::class,

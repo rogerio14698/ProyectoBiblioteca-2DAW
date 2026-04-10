@@ -13,6 +13,9 @@ use App\Http\Controllers\NoticiasController;
 use App\Http\Controllers\FooterConfigController;
 use App\Http\Controllers\GestionUsuariosController;
 use App\Http\Controllers\ReservaController;
+use App\Http\Controllers\PublicacionController;
+use App\Http\Controllers\InventarioController;
+use App\Http\Controllers\PrestamosController;
 use App\Models\Contacto;
 
 //Redirección a la página de inicio
@@ -60,8 +63,8 @@ Route::get('/politicasCookies', function () {
 // ===============================================
 
 // Usuario - Login
-    //Ruta solo para demostracion
-Route::post('/login/demo', [LoginControllerUsuario::class, 'loginDemo'])->name('usuario.login.demo');   
+//Ruta solo para demostracion
+Route::post('/login/demo', [LoginControllerUsuario::class, 'loginDemo'])->name('usuario.login.demo');
 // Rutas para login y registro de usuarios
 Route::get('/login', [LoginControllerUsuario::class, 'mostrarLogin'])->name('usuario.login.mostrar');
 Route::post('/login', [LoginControllerUsuario::class, 'login'])->name('usuario.login.procesar');
@@ -219,39 +222,33 @@ Route::middleware(['auth:admin', 'bloquear.demo'])->group(function () {
     //Reservas activas (solo activas y vencidas)
     Route::get('/admin/reservasActivas', [ReservaController::class, 'activas'])->name('admin.reservasActivas');
     //Publicaciones Usuario
-    Route::get('/admin/publicacionesUser', function () {
-        return view('bibliotecaDAW.adminViews.GestionarUsuarios.publicacionesUser');
-    })->name('admin.publicacionesUser');
+    Route::get('/admin/publicacionesUser', [PublicacionController::class, 'index'])->name('admin.publicacionesUser');
+    Route::post('/admin/publicacionesUser', [PublicacionController::class, 'store'])->name('admin.publicacionesUser.store');
     //Dar de baja a un usuario (deprecated: usar DELETE /admin/gestionUsuarios/{id})
     //Formulario que muestre las cancelaciones de cada usuario
-    Route::get('/admin/gestionarCancelaciones', function () {
-        return view('bibliotecaDAW.adminViews.GestionarUsuarios.gestionarCancelaciones');
-    })->name('admin.gestionarCancelaciones');
 
 
     // =================== Fin gestion de usuarios ===================
 
     // =================== Gestion de Libros ===================
     //Gestion de libros vista principal
-    Route::get('/admin/gestionarLibros', function () {
-        return view('bibliotecaDAW.adminViews.GestionarLibros.gestionarLibros');
-    })->name('admin.gestionarLibros');
     //Libros Nuevos
-    Route::get('/admin/librosNuevos', function () {
-        return view('bibliotecaDAW.adminViews.GestionarLibros.gestionarLibrosNuevos');
-    })->name('admin.librosNuevos');
     //Libros Perdidos
-    Route::get('/admin/librosPerdidos', function () {
-        return view('bibliotecaDAW.adminViews.GestionarLibros.gestionarLibrosPerdidos');
-    })->name('admin.librosPerdidos');
+    Route::get('/admin/librosPerdidos', [LibroController::class, 'librosPerdidos'])->name('admin.librosPerdidos');
+    Route::post('/admin/librosPerdidos/marcar', [LibroController::class, 'marcarPerdido'])->name('admin.librosPerdidos.marcar');
     //Inventario de libros
-    Route::get('/admin/inventario', function () {
-        return view('bibliotecaDAW.adminViews.GestionarLibros.gestionarInventario');
-    })->name('admin.inventario');
+    Route::get('/admin/inventario', [InventarioController::class, 'index'])->name('admin.inventario');
+    //Generar PDF de inventario con filtros personalizados
+    Route::get('/admin/inventario/pdf', [InventarioController::class, 'generarPdf'])->name('admin.inventario.pdf');
     //Libros prestados
-    Route::get('/admin/librosPrestados', function () {
-        return view('bibliotecaDAW.adminViews.GestionarLibros.gestionarLibrosPrestados');
-    })->name('admin.librosPrestados');
+    // Ruta para VER el listado de libros prestados
+    Route::get('/admin/librosPrestados', [PrestamosController::class, 'index'])
+        ->name('admin.librosPrestados');
+
+    // Ruta para PROCESAR la devolución (usamos PATCH porque estamos actualizando un campo existente)
+    Route::patch('/admin/librosPrestados/{id}/devolver', [PrestamosController::class, 'update'])
+        ->name('admin.librosPrestados.devolver');
+
     // =================== Fin gestion de libros ===================
 
 

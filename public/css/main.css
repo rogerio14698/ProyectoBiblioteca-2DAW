@@ -50,3 +50,7 @@
 @import 'panelAdmin/gestionarCatalogo.css';
 @import 'panelAdmin/gestionarUsuarios.css';
 @import 'panelAdmin/gestionarReservas.css';
+@import 'panelAdmin/publicacionesUser.css';
+@import 'panelAdmin/gestionarInventario.css';
+@import 'panelAdmin/gestionarLibrosPerdidos.css';
+
