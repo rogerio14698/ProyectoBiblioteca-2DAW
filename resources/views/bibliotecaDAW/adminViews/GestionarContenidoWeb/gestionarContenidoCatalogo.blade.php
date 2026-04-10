@@ -4,23 +4,23 @@
 
 @section('content')
 
-    <main class="contenedor gestionCatalogoPage">
+    <main class="contenedor gestionCatalogoPageAdmin">
         <h1>Gestión del Contenido del Catálogo</h1>
         <p>Administra los libros y productos del catálogo de la biblioteca</p>
 
         <!--Mensajes de éxito o error tras crear/eliminar -->
         @if (session('success'))
-            <div class="alertaExito">{{ session('success') }}</div>
+            <div class="alertaExitoAdmin">{{ session('success') }}</div>
         @endif
         @if (session('error'))
-            <div class="alertaError">{{ session('error') }}</div>
+            <div class="alertaErrorAdmin">{{ session('error') }}</div>
         @endif
 
         <!--Layout 2 columnas: formulario izquierda, listado derecha -->
-        <div class="catalogoLayout">
+        <div class="catalogoLayoutAdmin">
 
             <!--Columna izquierda: formulario de creación / edición -->
-            <div class="catalogoFormularioCol">
+            <div class="catalogoFormularioColAdmin">
                 <!--Si $libroEditar existe, estamos en modo edición; si no, modo creación -->
                 @if (isset($libroEditar))
                     <h2>Editar libro</h2>
@@ -36,32 +36,32 @@
                     <div class="gestionGrupoFormulario">
                         <label for="titulo">Título:</label>
                         <input type="text" id="titulo" name="titulo" value="{{ old('titulo', $libroEditar->titulo ?? '') }}" required>
-                        @error('titulo') <span class="errorCampo">{{ $message }}</span> @enderror
+                        @error('titulo') <span class="errorCampoAdmin">{{ $message }}</span> @enderror
                     </div>
                     <div class="gestionGrupoFormulario">
                         <label for="autor">Autor:</label>
                         <input type="text" id="autor" name="autor" value="{{ old('autor', $libroEditar->autor ?? '') }}" required>
-                        @error('autor') <span class="errorCampo">{{ $message }}</span> @enderror
+                        @error('autor') <span class="errorCampoAdmin">{{ $message }}</span> @enderror
                     </div>
                     <div class="gestionGrupoFormulario">
                         <label for="genero">Género:</label>
                         <input type="text" id="genero" name="genero" value="{{ old('genero', $libroEditar->genero ?? '') }}" required>
-                        @error('genero') <span class="errorCampo">{{ $message }}</span> @enderror
+                        @error('genero') <span class="errorCampoAdmin">{{ $message }}</span> @enderror
                     </div>
                     <div class="gestionGrupoFormulario">
                         <label for="anio">Año:</label>
                         <input type="number" id="anio" name="anio" value="{{ old('anio', $libroEditar->anio ?? '') }}" min="1000" max="{{ date('Y') }}" required>
-                        @error('anio') <span class="errorCampo">{{ $message }}</span> @enderror
+                        @error('anio') <span class="errorCampoAdmin">{{ $message }}</span> @enderror
                     </div>
                     <div class="gestionGrupoFormulario">
                         <label for="editorial">Editorial:</label>
                         <input type="text" id="editorial" name="editorial" value="{{ old('editorial', $libroEditar->editorial ?? '') }}" required>
-                        @error('editorial') <span class="errorCampo">{{ $message }}</span> @enderror
+                        @error('editorial') <span class="errorCampoAdmin">{{ $message }}</span> @enderror
                     </div>
                     <div class="gestionGrupoFormulario">
                         <label for="isbn">ISBN:</label>
                         <input type="text" id="isbn" name="isbn" value="{{ old('isbn', $libroEditar->isbn ?? '') }}" required>
-                        @error('isbn') <span class="errorCampo">{{ $message }}</span> @enderror
+                        @error('isbn') <span class="errorCampoAdmin">{{ $message }}</span> @enderror
                     </div>
                     <div class="gestionGrupoFormulario">
                         <label for="disponibilidad">Disponibilidad:</label>
@@ -95,17 +95,17 @@
                     <div class="gestionGrupoFormulario">
                         <label for="portada_img">Portada (imagen):</label>
                         <input type="file" id="portada_img" name="portada_img" accept="image/jpeg,image/png,image/jpg,image/webp">
-                        @error('portada_img') <span class="errorCampo">{{ $message }}</span> @enderror
+                        @error('portada_img') <span class="errorCampoAdmin">{{ $message }}</span> @enderror
                         <!--Si estamos editando y ya tiene portada, mostramos la miniatura actual -->
                         @if (isset($libroEditar) && $libroEditar->portada_img)
-                            <img src="{{ $libroEditar->portada_url }}" alt="Portada actual" class="catalogoPortadaPreview">
+                            <img src="{{ $libroEditar->portada_url }}" alt="Portada actual" class="catalogoPortadaPreviewAdmin">
                         @endif
                     </div>
 
-                    <div class="catalogoFormBotones">
+                    <div class="catalogoFormBotonesAdmin">
                         @if (isset($libroEditar))
                             <button type="submit" class="gestionBotonEnvio">Guardar cambios</button>
-                            <a href="{{ route('admin.gestionCatalogo') }}" class="btnCancelarEdicion">Cancelar</a>
+                            <a href="{{ route('admin.gestionCatalogo') }}" class="btnCancelarEdicionAdmin">Cancelar</a>
                         @else
                             <button type="submit" class="gestionBotonEnvio">Añadir libro</button>
                         @endif
@@ -114,11 +114,11 @@
             </div>
 
             <!--Columna derecha: listado de libros con filtros y scroll -->
-            <div class="catalogoListadoCol">
+            <div class="catalogoListadoColAdmin">
                 <h2>Listado del catálogo ({{ $libros->total() }} libros)</h2>
 
                 <!--Filtros de búsqueda -->
-                <form action="{{ route('admin.gestionCatalogo') }}" method="GET" class="catalogoFiltros">
+                <form action="{{ route('admin.gestionCatalogo') }}" method="GET" class="catalogoFiltrosAdmin">
                     <input type="text" name="filtroTitulo" value="{{ $filtroTitulo }}" placeholder="Título...">
                     <input type="text" name="filtroAutor" value="{{ $filtroAutor }}" placeholder="Autor...">
                     <input type="text" name="filtroGenero" value="{{ $filtroGenero }}" placeholder="Género...">
@@ -129,34 +129,34 @@
                         <option value="disponible" {{ $filtroDisponibilidad === 'disponible' ? 'selected' : '' }}>Disponible</option>
                         <option value="prestado" {{ $filtroDisponibilidad === 'prestado' ? 'selected' : '' }}>Prestado</option>
                     </select>
-                    <button type="submit" class="btnFiltrar">Filtrar</button>
-                    <a href="{{ route('admin.gestionCatalogo') }}" class="btnLimpiarFiltros">Limpiar</a>
+                    <button type="submit" class="btnFiltrarAdmin">Filtrar</button>
+                    <a href="{{ route('admin.gestionCatalogo') }}" class="btnLimpiarFiltrosAdmin">Limpiar</a>
                 </form>
 
                 <!--Contenedor con scroll de 80vh para el listado de cards -->
-                <div class="catalogoListadoScroll">
+                <div class="catalogoListadoScrollAdmin">
                     @forelse ($libros as $libro)
-                        <div class="catalogoCard">
+                        <div class="catalogoCardAdmin">
                             <!--Imagen de portada del libro -->
-                            <div class="catalogoCardImg">
+                            <div class="catalogoCardImgAdmin">
                                 <img src="{{ $libro->portada_url }}" alt="Portada de {{ $libro->titulo }}">
                             </div>
                             <!--Información del libro -->
-                            <div class="catalogoCardInfo">
+                            <div class="catalogoCardInfoAdmin">
                                 <h3>{{ $libro->titulo }}</h3>
                                 <p><strong>Autor:</strong> {{ $libro->autor }}</p>
                                 <p><strong>Género:</strong> {{ $libro->genero }}</p>
                                 <p><strong>Editorial:</strong> {{ $libro->editorial }}</p>
                                 <p><strong>ISBN:</strong> {{ $libro->isbn }}</p>
-                                <div class="catalogoCardMeta">
-                                    <span class="catalogoCardAnio">{{ $libro->anio }}</span>
-                                    <span class="catalogoCardFormato catalogoCardFormato--{{ $libro->formato }}">{{ $libro->formato }}</span>
-                                    <span class="catalogoCardDisponibilidad catalogoCardDisponibilidad--{{ $libro->disponibilidad }}">{{ $libro->disponibilidad }}</span>
-                                    <span class="catalogoCardEjemplares">{{ $libro->cantidad_ejemplares }} ej.</span>
+                                <div class="catalogoCardMetaAdmin">
+                                    <span class="catalogoCardAnioAdmin">{{ $libro->anio }}</span>
+                                    <span class="catalogoCardFormatoAdmin catalogoCardFormatoAdmin--{{ $libro->formato }}">{{ $libro->formato }}</span>
+                                    <span class="catalogoCardDisponibilidadAdmin catalogoCardDisponibilidadAdmin--{{ $libro->disponibilidad }}">{{ $libro->disponibilidad }}</span>
+                                    <span class="catalogoCardEjemplaresAdmin">{{ $libro->cantidad_ejemplares }} ej.</span>
                                 </div>
                             </div>
                             <!--Botón eliminar -->
-                            <div class="catalogoCardAcciones">
+                            <div class="catalogoCardAccionesAdmin">
                                 <form action="{{ route('admin.gestionCatalogo.destroy', $libro->id) }}" method="POST" onsubmit="return confirm('¿Eliminar este libro?')">
                                     @csrf
                                     @method('DELETE')
@@ -168,12 +168,12 @@
                             </div>
                         </div>
                     @empty
-                        <p class="catalogoVacio">No se encontraron libros con esos filtros.</p>
+                        <p class="catalogoVacioAdmin">No se encontraron libros con esos filtros.</p>
                     @endforelse
                 </div>
 
                 <!--Paginación fuera del scroll -->
-                <div class="catalogoPaginacion">
+                <div class="catalogoPaginacionAdmin">
                     {{ $libros->links('vendor.pagination.bootstrap-5') }}
                 </div>
             </div>

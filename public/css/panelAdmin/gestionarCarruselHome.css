@@ -74,12 +74,11 @@
     padding: var(--input-relleno);
     border: 1px solid var(--input-borde);
     border-radius: var(--radio-pequeno);
-    font-family: var(--fuente-familia);
-    font-size: 14px;
+
     color: var(--color-texto-principal);
     background-color: var(--color-blanco);
     transition: all var(--transicion-rapida);
-    box-sizing: border-box;
+
 }
 
 /* Focus de Inputs */

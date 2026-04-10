@@ -81,21 +81,19 @@
    [Imagen fija 160px] | [Contenido fluido] | [Acciones fija 160px]
    ========================================= */
 .catalogoCard {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 0.3fr 1fr auto;
     align-items: center;
-    padding: calc(var(--unidad-espaciado) * 3);
-    gap: calc(var(--unidad-espaciado) * 2);
-    background-color: var(--bgBlanco);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-    border-radius: 10px;
+    background: var(--color-blanco);
     border: 1px solid var(--color-borde);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: var(--radio-borde);
+    box-shadow: var(--sombra-suave);
+    transition: box-shadow 0.2s;
 }
 
 .catalogoCard:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--sombra);
 }
 
 /* =========================================
@@ -316,7 +314,7 @@
     /* Rejilla de 3 columnas para las tarjetas */
     .catalogoBody {
         display: grid;
-        gap: calc(var(--unidad-espaciado) * 2); /* 16px */
+        gap: 16px; 
         grid-template-columns: repeat(2, 1fr);
     }
 
@@ -327,10 +325,9 @@
 
     /* Tarjeta en modo fila horizontal con aire generoso */
     .catalogoCard {
-        flex-direction: row;              /* Cambia a fila horizontal         */
-        align-items: center;              /* Centra hijos verticalmente       */
-        padding: calc(var(--unidad-espaciado) * 3); /* 24px internos         */
-        gap: calc(var(--unidad-espaciado) * 4);     /* 32px — aire entre zonas */
+        flex-direction: row;              
+        align-items: center;              
+        padding: 24px; 
     }
 
     /* ===== CLAVE DE LA SOLUCIÓN =====
