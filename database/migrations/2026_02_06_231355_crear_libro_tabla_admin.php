@@ -20,14 +20,16 @@ return new class extends Migration
             $table->string('editorial');
             $table->enum('disponibilidad', ['disponible', 'prestado']);
             $table->enum('formato', ['fisico', 'digital', 'ambos'])->default('ambos');
-            $table->enum('opcion_compra', ['compra', 'prestamo']);;
+            $table->enum('opcion_compra', ['compra', 'prestamo']);
             $table->integer('cantidad_ejemplares');
-            $table->string('isbn')->unique();
+
+            // Mueve estas líneas aquí para que queden después de cantidad_ejemplares
+            $table->boolean('perdido')->default(false);
+            $table->string('motivo_baja')->nullable();
+
+            $table->string('isbn');
             $table->string('portada_img')->nullable();
             $table->timestamps();
-            $table->boolean('perdido')->default(false)->after('cantidad_ejemplares');
-            // Opcional: motivo de baja
-            $table->string('motivo_baja')->nullable()->after('perdido');
         });
     }
 
