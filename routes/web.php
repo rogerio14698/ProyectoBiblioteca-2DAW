@@ -140,7 +140,27 @@ Route::middleware(['auth:admin', 'bloquear.demo'])->group(function () {
     // Dashboard admin
     Route::get('/admin', function () {
         $mensajes = Contacto::orderBy('created_at', 'desc')->paginate(10);
-        return view('bibliotecaDAW.adminViews.administrador', compact('mensajes'));
+        $totalPublicaciones = \App\Models\Publicacion::count();
+        $totalNoticias = \App\Models\Noticias::count();
+        $totalPaginas = 0; // Si tienes modelo de páginas, reemplaza aquí
+        $totalMenu = 0; // Si tienes modelo de menú, reemplaza aquí
+        $librosDisponibles = \App\Models\Libro::where('disponibilidad', true)->count();
+        $usuariosRegistrados = \App\Models\Usuario::count();
+        $prestamosActivos = \App\Models\Prestamos::whereNull('fecha_devolucion_real')->count();
+        $reservasActivas = \App\Models\Reserva::where('estado', 'activa')->count();
+        $eventosProximos = \App\Models\Evento::where('fecha_hora', '>', now())->count();
+        return view('bibliotecaDAW.adminViews.administrador', compact(
+            'mensajes',
+            'totalPublicaciones',
+            'totalNoticias',
+            'totalPaginas',
+            'totalMenu',
+            'librosDisponibles',
+            'usuariosRegistrados',
+            'prestamosActivos',
+            'reservasActivas',
+            'eventosProximos'
+        ));
     })->name('admin.dashboard');
     //Gestion de roles y permisos
     Route::get('/admin/gestionRoles', function () {

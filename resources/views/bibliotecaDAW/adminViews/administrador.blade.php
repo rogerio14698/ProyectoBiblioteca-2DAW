@@ -11,26 +11,27 @@
 
         <!-- Aqui la idea ahora es poner varios cards tipo un panel de control                                  con diferentes secciones -->
         <div class="dashboard-cards">
-            <div class="card-contenidoTotal">
-                <h5>Contenido Total: <span>12</span></h5>
-                <p>Contenidos Totales</p>
-                <button class="btn-base">Más info</button>
+            <div class="cardElementosDashboard">
+                <h2>Libros disponibles: {{ $librosDisponibles }}</h2>
+                <p>Contenidos Totales (publicaciones)</p>
+                <a href="{{ route('admin.gestionCatalogo') }}" class="btn-base btn-verde">Más info</a>
             </div>
-            <div class="card-noticias">
-                <h5>Noticias o Destacados: <span>5</span></h5>
+            <div class="cardElementosDashboard">
+                <h2>Eventos próximos: {{ $eventosProximos }}</h2>
+                <p>Próximos eventos en la biblioteca</p>
+                <a href="{{ route('admin.gestionCarrusel') }}" class="btn-base btn-verde">Más info</a>
+            </div>
+            <div class="cardElementosDashboard">
+                <h2>Usuarios registrados: {{ $usuariosRegistrados }}</h2>
+                <p>Total de usuarios registrados en el sistema</p>
+                <a href="{{ route('admin.gestionUsuarios') }}" class="btn-base btn-verde">Más info</a>
+            </div>
+            <div class="cardElementosDashboard">
+                <h2>Noticias o Destacados: <span>{{ $totalNoticias }}</span></h2>
                 <p>Contenidos de Noticias o Destacados</p>
-                <button class="btn-base">Más info</button>
+                <a href="{{ route('admin.gestionNoticias') }}" class="btn-base btn-verde">Más info</a>
             </div>
-            <div class="card-paginas">
-                <h5>Páginas: <span>8</span></h5>
-                <p>Gestión de Páginas</p>
-                <button class="btn-base">Más info</button>
-            </div>
-            <div class="card-elementosMenu">
-                <h5>Elementos del Menú: <span>10</span></h5>
-                <p>Gestión de Elementos del Menú</p>
-                <button class="btn-base">Más info</button>
-            </div>
+
         </div>
         <div class="bodyDashboard">
             <div class="dashboardListadoMail ">
@@ -74,16 +75,14 @@
                                         <button type="submit" class="btn-base btnEliminarMail">Eliminar</button>
                                     </form>
                                     <!--Cambia las etiquetas de estado-->
-                                    <form  action="{{ route('admin.mensajes.update', $mail->id) }}" method="POST"
+                                    <form action="{{ route('admin.mensajes.update', $mail->id) }}" method="POST"
                                         style="display: inline;">
                                         @csrf
                                         @method('PATCH')
                                         <select class="selectEstadoMail" name="estado" id="estado_{{ $mail->id }}">
-                                            <option value="pendiente"
-                                                {{ $mail->estado === 'pendiente' ? 'selected' : '' }}>
+                                            <option value="pendiente" {{ $mail->estado === 'pendiente' ? 'selected' : '' }}>
                                                 Pendiente</option>
-                                            <option value="en_proceso"
-                                                {{ $mail->estado === 'en_proceso' ? 'selected' : '' }}>
+                                            <option value="en_proceso" {{ $mail->estado === 'en_proceso' ? 'selected' : '' }}>
                                                 En proceso</option>
                                             <option value="leido" {{ $mail->estado === 'leido' ? 'selected' : '' }}>Leido
                                             </option>
@@ -100,7 +99,8 @@
                                             @csrf
                                             <label for="respuesta_{{ $mail->id }}">Respuesta para
                                                 <strong>{{ $mail->nombre }}</strong>:</label>
-                                            <textarea class="textareaResponderMail" name="respuesta" id="respuesta_{{ $mail->id }}" rows="3" required
+                                            <textarea class="textareaResponderMail" name="respuesta"
+                                                id="respuesta_{{ $mail->id }}" rows="3" required
                                                 placeholder="Escribe tu respuesta aquí..."></textarea>
                                             <button type="submit" class="btn-base btnCambiarEstadoMail">Enviar
                                                 respuesta</button>
@@ -111,22 +111,6 @@
                         @endforeach
                     </div>
                 </div>
-            </div>
-            <div class="dashboard-informacionSistema">
-                <h5>Informacion del sistema</h5>
-                <p>Libros disponibles: 100</p>
-                <p>Usuarios registrados: 50</p>
-                <p>Préstamos activos: 20</p>
-                <p>Reservas activas: 10</p>
-                <p>Eventos próximos: 5</p>
-                <p>Usuarios en línea: 3</p>
-                <hr>
-                <h5>Estado del sistema</h5>
-                <p>Estado del servidor: Estable</p>
-                <p>Último respaldo: Hace 2 horas</p>
-                <p>Actualizaciones pendientes: 0</p>
-                <p>Rendimiento del sistema: Óptimo</p>
-                <p>Alertas de seguridad: Ninguna</p>
             </div>
         </div>
     </div>

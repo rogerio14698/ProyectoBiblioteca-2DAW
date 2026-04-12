@@ -2,14 +2,13 @@
     <button class="btn-base" id="btnMenuPrincipal" aria-expanded="false"><i class="bi bi-list"></i> Menú
         Principal</button>
     <nav class="navAdmin">
+        <a href="/admin" class="btn-base irADashboard">Dashboard</a>
         <div class="navContenidoWeb">
             <div class=" btnDesplegableAdmin">
-                <button type="button" aria-expanded="false"><i class="bi bi-list"></i> Contenido Web</button>
+                <button type="button" aria-expanded="false"> Contenido Web</button>
             </div>
             <ul class="menu-items">
-                <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                 <li>
-                    <h3>Gestionar Home</h3>
                     <ul class="sub-menu-items">
                         <li><a href="{{ route('admin.gestionHome') }}">Gestionar Home</a></li>
                         <li><a href="{{ route('admin.gestionCarrusel') }}">Gestionar Carusel de Eventos</a></li>
@@ -17,13 +16,11 @@
                     </ul>
                 </li>
                 <li>
-                    <h3>Contenido Fijos</h3>
                     <ul class="sub-menu-items">
                         <li><a href="{{ route('admin.gestionFooter') }}">Footer</a></li>
                     </ul>
                 </li>
                 <li>
-                    <h3>Otros contenidos</h3>
                     <ul class="sub-menu-items">
                         <li><a href="{{ route('admin.gestionCatalogo') }}">Contenido Catálogo</a></li>
                         <li><a href="{{ route('admin.gestionActividades') }}">Contenido Actividades</a></li>
@@ -35,11 +32,10 @@
         <!--Fin de contenido web -->
         <div class="navContenidoUsuario">
             <div class="btnDesplegableAdmin">
-                <button type="button" aria-expanded="false"><span>☰</span> Menu Contenido Usuarios</button>
+                <button type="button" aria-expanded="false"> Menu Contenido Usuarios</button>
             </div>
             <ul class="menu-items">
                 <li>
-                    <h3>Gestión de Usuarios</h3>
                     <ul class="sub-menu-items">
                         <li><a href="{{ route('admin.gestionUsuarios') }}">Usuarios Registrados</a></li>
                         <li><a href="{{ route('admin.gestionSanciones') }}">Sanciones</a></li>
@@ -47,7 +43,6 @@
                     </ul>
                 </li>
                 <li>
-                    <h3>Gestión de Reservas</h3>
                     <ul class="sub-menu-items">
                         <li><a href="{{ route('admin.reservasActivas') }}">Reservas Activas</a></li>
                         <li><a href="{{ route('admin.historialReservas') }}">Historial de Reservas</a></li>
@@ -61,11 +56,10 @@
 
         <div class="navContenidoLibro">
             <div class="btnDesplegableAdmin">
-                <button type="button" aria-expanded="false"><span>☰</span> Menu Contenido Libros</button>
+                <button type="button" aria-expanded="false"> Menu Contenido Libros</button>
             </div>
             <ul class="menu-items">
                 <li>
-                    <h3>Gestión de Libros</h3>
                     <ul class="sub-menu-items">
                         <li><a href="{{ route('admin.inventario') }}">Inventario</a></li>
                         <li><a href="{{ route('admin.librosPerdidos') }}">Libros Perdidos</a></li>
@@ -74,6 +68,7 @@
                 </li>
             </ul>
         </div>
+         
         <!--Fin de contenido libros -->
         <div class="navContenidoSesion">
             <form action="{{ route('admin.logout') }}" method="POST">
