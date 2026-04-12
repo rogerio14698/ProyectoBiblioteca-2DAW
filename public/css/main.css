@@ -8,8 +8,6 @@
 @import 'variables/paginaMantenimiento.css';
 
 
-
-
 /*Mantener este orden es importante ya que las variables deben cargarse antes de los estilos globales*/
 @import 'secciones/header.css';
 @import 'secciones/footer.css';
