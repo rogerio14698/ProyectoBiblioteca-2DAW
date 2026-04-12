@@ -7,6 +7,7 @@
                 <button type="button" aria-expanded="false"><i class="bi bi-list"></i> Contenido Web</button>
             </div>
             <ul class="menu-items">
+                <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                 <li>
                     <h3>Gestionar Home</h3>
                     <ul class="sub-menu-items">
