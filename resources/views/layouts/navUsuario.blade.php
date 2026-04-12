@@ -6,6 +6,7 @@
     </div>
     <div class="nav-perfil">
         <ul class="nav-links">
+            <li><a href="{{ route('usuario.inicio') }}">Inicio</a></li>
         <li><a href="{{ route('usuario.perfil') }}">Perfil</a></li>
         <li><a href="{{ route('usuario.perfilEditar') }}">Editar Perfil</a></li>
         <li><a href="{{ route('usuario.prestamos') }}">Préstamos</a></li>

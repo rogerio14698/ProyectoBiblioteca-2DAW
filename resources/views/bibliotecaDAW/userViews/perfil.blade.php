@@ -32,7 +32,6 @@
                     Métodos de Pago</button>
                 <button type="button" class="btn-base btn-azul" onclick="location.href='#contenidosHistorial'">Historial de
                     Actividad</button>
-                <button type="button" class="btn-base btn-azul">Cambiar Contraseña</button>
             </div>
         </section>
 

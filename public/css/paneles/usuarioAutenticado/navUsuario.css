@@ -7,7 +7,7 @@
     align-items: center;
     gap: 10px;
     padding: 10px 20px;
-    background-color: var(--color-primario);
+        background-color: var(--color-primario);
 }
 
 .logoYperfil {
@@ -36,13 +36,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
     gap: 10px;
 }
 
 .nav-perfil a {
     display: block;
-    padding: 8px 12px;
+    padding: 5px 10px;
     background-color: var(--color-alerta);
     border-radius: var(--radio-pequeno);
     color: var(--color-texto-principal);
@@ -53,16 +52,19 @@
     flex-direction: column;
     align-items: center;
     gap: 6px;
-    width: 100%;
 }
 
 .nav-perfil ul li {
     margin-right: 0;
     padding: 0;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--colorTexto);
 }
 
 .nav-perfil ul li a:hover {
-    color: var(--color-primario);
+    color: var(--blanco);
 }
 
 @media (min-width: 768px) {
@@ -81,10 +83,20 @@
         min-width: fit-content;
     }
 
-    ul.nav-links {
+    .nav-links {
         display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+        flex-direction: row; /* Esto los pone en fila */
+        flex-wrap: nowrap;    /* Evita que salten de línea si hay muchos */
         justify-content: flex-end;
+        align-items: center;
+        gap: 12px;
+        list-style: none;    /* Quita los puntos de la lista */
+        margin: 0;
+        padding: 0;
+    }
+   .nav-links li {
+        width: 100%;
+        display: inline-block;
+
     }
 }

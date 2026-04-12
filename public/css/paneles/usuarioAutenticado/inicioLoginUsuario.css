@@ -102,6 +102,7 @@
 
 @media (min-width: 768px) {
     .inicioLoginUsuario {
+        height: 80vh;
         gap: calc(var(--unidad-espaciado) * 4);
         padding: calc(var(--unidad-espaciado) * 3);
     }

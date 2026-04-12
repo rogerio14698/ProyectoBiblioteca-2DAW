@@ -20,54 +20,16 @@
                     Consulta tus préstamos, revisa próximos eventos, gestiona tus compras y mantén organizada tu
                     actividad dentro de la biblioteca desde un único lugar.
                 </p>
+                <a href="{{ route('usuario.prestamos') }}" class="btn-base btn-azul">Ver mis préstamos</a>
+                <a href="{{ route('usuario.organizarEvento') }}" class="btn-base btn-verde">Ver eventos</a>
             </article>
 
             <article class="inicioLoginCard">
                 <h2>Qué puedes hacer aquí</h2>
                 <div class="inicioLoginLista">
-                    <p>Alquilar libros físicos o digitales.</p>
-                    <p>Consultar tus compras y futuras reservas.</p>
-                    <p>Organizar y seguir eventos de la comunidad.</p>
-                </div>
-            </article>
-        </section>
-
-        <section class="inicioLoginGrid">
-            <article class="inicioLoginCard">
-                <h2>Próximos pasos recomendados</h2>
-                <p>
-                    Si acabas de iniciar sesión, puedes comenzar revisando tu perfil, explorando el catálogo o
-                    preparando un nuevo préstamo según tus intereses actuales.
-                </p>
-                <div class="inicioLoginLista">
-                    <p>Revisa los libros que tienes en préstamo.</p>
-                    <p>Comprueba fechas de devolución pendientes.</p>
-                    <p>Descubre nuevas lecturas según tu actividad.</p>
-                </div>
-            </article>
-
-            <article class="inicioLoginCard">
-                <h2>Actividad sugerida</h2>
-                <p>
-                    Este panel puede servir como punto de inicio diario para ver novedades de la biblioteca y acceder
-                    rápidamente a las tareas más frecuentes de tu cuenta.
-                </p>
-                <div class="inicioLoginAcciones">
-                    <button type="button" class="btn-base btn-azul">Ver mis préstamos</button>
-                    <button type="button" class="btn-base btn-verde">Explorar catálogo</button>
-                </div>
-            </article>
-
-            <article class="inicioLoginCard">
-                <h2>Espacio para futuras mejoras</h2>
-                <p>
-                    Más adelante aquí podrás mostrar recordatorios, recomendaciones personalizadas, un resumen de tus
-                    eventos y avisos importantes relacionados con tu cuenta.
-                </p>
-                <div class="inicioLoginLista">
-                    <p>Carrusel de eventos destacados.</p>
-                    <p>Estado de préstamos activos.</p>
-                    <p>Acceso rápido para publicar libros propios.</p>
+                    <a class="btn-base btn-verde" href="{{ route('usuario.alquilar') }}">Alquilar libros físicos o digitales.</a>
+                    <a class="btn-base btn-azul" href="{{ route('usuario.comprar') }}">Consultar tus compras y futuras reservas.</a>
+                    <a class="btn-base btn-amarillo" href="{{ route('usuario.organizarEvento') }}">Organizar y seguir eventos de la comunidad.</a>
                 </div>
             </article>
         </section>

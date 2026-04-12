@@ -1,6 +1,7 @@
 /* Estilos para Gestión del Carrusel Home - Panel Administrativo */
 
 .gestionCarruselHome {
+    padding: 20px;
     background: var(--blanco);
     margin-bottom: 20px;
 }
