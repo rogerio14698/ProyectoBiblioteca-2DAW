@@ -1,0 +1,119 @@
+/*
+ * Estilos avanzados para la gestión de libros prestados (admin)
+ * Cumple la guía de estilo del proyecto (variables, camelCase, sin valores hardcoded)
+ * Autor: Copilot (comentado para nivel junior)
+ */
+
+.gestionarLibrosPrestadosContenedor {
+    background: var(--color-fondo-global);
+    padding: calc(var(--unidad-espaciado) * 4);
+    border-radius: calc(var(--unidad-espaciado) * 2);
+    box-shadow: var(--sombra-media);
+    margin-bottom: calc(var(--unidad-espaciado) * 4);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 2);
+    min-height: 60vh;
+    transition: box-shadow 0.2s, background 0.2s;
+}
+
+.gestionarLibrosPrestadosContenedor:hover {
+    box-shadow: var(--sombra-fuerte);
+    background: var(--bgBlanco);
+}
+
+.tituloPagina {
+    color: var(--color-primario);
+    font-size: 2.2rem;
+    margin: 0 0 var(--unidad-espaciado) 0;
+}
+
+.tituloPagina.secundaria {
+    color: var(--color-secundario);
+    font-size: 1.5rem;
+}
+
+.descripcionPagina {
+    color: var(--color-texto-mutado);
+    font-size: 1.1rem;
+    margin-bottom: calc(var(--unidad-espaciado) * 2);
+}
+
+.tablaContenedor {
+    background: var(--bgBlanco);
+    border-radius: var(--unidad-espaciado);
+    box-shadow: var(--sombra-suave);
+    overflow-x: auto;
+    margin-bottom: calc(var(--unidad-espaciado) * 2);
+}
+
+.tablaCabecera, .tablaFila {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1.2fr 1.2fr;
+    align-items: center;
+    gap: var(--unidad-espaciado);
+    padding: var(--unidad-espaciado) 0;
+}
+
+.celdaHeader {
+    font-weight: bold;
+    color: var(--color-primario);
+    text-align: left;
+    padding: 0 var(--unidad-espaciado);
+}
+
+.celdaBody {
+    padding: 0 var(--unidad-espaciado);
+    color: var(--color-texto-principal);
+    font-size: 1rem;
+}
+
+.textCenter {
+    text-align: center;
+}
+
+.tituloPrincipal {
+    font-weight: 600;
+}
+
+.subTexto {
+    color: var(--color-texto-mutado);
+    font-size: 0.95em;
+}
+
+.botonDevolver {
+    background: var(--color-primario);
+    color: #fff;
+    border: none;
+    border-radius: var(--unidad-espaciado);
+    padding: 0.5em 1.5em;
+    font-weight: bold;
+    box-shadow: var(--sombra-suave);
+    cursor: pointer;
+    transition: background 0.2s;
+    height: var(--altura-boton-movil);
+}
+
+.botonDevolver:hover {
+    background: var(--color-secundario);
+}
+
+.sinResultados {
+    color: var(--color-texto-mutado);
+    text-align: center;
+    padding: var(--unidad-espaciado);
+}
+
+@media (max-width: 800px) {
+    .tablaCabecera, .tablaFila {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        font-size: 0.95em;
+    }
+    .gestionarLibrosPrestadosContenedor {
+        padding: var(--relleno-movil);
+        border-radius: var(--unidad-espaciado);
+    }
+    .tituloPagina {
+        font-size: 1.3rem;
+    }
+}

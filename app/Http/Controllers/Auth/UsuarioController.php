@@ -1,4 +1,7 @@
 <?php
+/**
+ * @property-read \App\Models\Usuario $usuario
+ */
 
 namespace App\Http\Controllers\Auth;
 

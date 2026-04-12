@@ -1,4 +1,17 @@
 <?php
+/**
+ * App\Models\Admin
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|static where($column, $operator = null, $value = null, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|static create(array $attributes = [])
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property string $password
+ * @property string|null $last_login
+ * @property string|null $rol
+ * @property bool $is_demo
+ */
 
 namespace App\Models;
 

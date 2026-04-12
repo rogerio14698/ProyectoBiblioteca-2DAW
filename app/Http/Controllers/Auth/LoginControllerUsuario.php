@@ -1,4 +1,7 @@
 <?php
+/**
+ * @property-read \Illuminate\Contracts\Auth\StatefulGuard $guard
+ */
 
 namespace App\Http\Controllers\Auth;
 

@@ -8,6 +8,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Illuminate\Support\Facades\Log;
 
 class Handler extends ExceptionHandler
@@ -16,7 +17,7 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      * @param \Illuminate\Http\Request $request
      * @param \Throwable $exception
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Illuminate\Http\Response
      */
     public function render($request, Throwable $exception): Response
     {
@@ -28,8 +29,11 @@ class Handler extends ExceptionHandler
             'url' => $request->fullUrl(),
         ]);
 
-        // Detectar código de error
-        $status = $this->isHttpException($exception) ? $exception->getStatusCode() : 500;
+        // Detectar código de error de forma segura
+        $status = 500;
+        if ($exception instanceof HttpExceptionInterface) {
+            $status = $exception->getStatusCode();
+        }
         $view = "errors.{$status}";
         if (view()->exists($view)) {
             return response()->view($view, [

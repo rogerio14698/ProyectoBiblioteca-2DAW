@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'Lisbros Prestados')
+@section('title', 'Libros Prestados')
 
 @section('content')
-    <main class="contenedor">
+    <main class="gestionarLibrosPrestadosContenedor">
     <h1 class="tituloPagina">Gestión de Préstamos Activos</h1>
     <p class="descripcionPagina">Visualiza y gestiona los libros que están actualmente en manos de los usuarios.</p>
 

@@ -1,4 +1,19 @@
 <?php
+/**
+ * App\Models\Usuario
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|static where($column, $operator = null, $value = null, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|static create(array $attributes = [])
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property string $dni
+ * @property string|null $movil
+ * @property string $password
+ * @property string $nSocio
+ * @property bool $es_escritor_verificado
+ * @property string|null $tipo_escritor
+ */
 
 namespace App\Models;
 
