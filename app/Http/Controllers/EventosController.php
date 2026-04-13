@@ -48,7 +48,55 @@ class EventosController extends Controller
         $evento = Evento::findOrFail($id);
         return view('bibliotecaDAW.publicViews.paginasInternas.paginaInternaApuntarseEvento', compact('evento'));
     }
-    
+
+    /**
+     * Procesar la inscripción de un usuario autenticado a un evento.
+     * Registra la relación en la tabla pivote 'evento_usuario' e incrementa asistentes.
+     *
+     * @param Request $request Datos del formulario (nombre, apellido, email, nsocio, telefono).
+     * @param int     $id      ID del evento al que inscribirse.
+     * @return \Illuminate\Http\RedirectResponse Redirección con mensaje de éxito o error.
+     * @sideEffect Inserta registro en tabla pivote 'evento_usuario'.
+     * @sideEffect Incrementa el campo 'asistentes' del evento.
+     */
+    public function procesarApuntarse(Request $request, int $id): \Illuminate\Http\RedirectResponse
+    {
+        // Validamos los campos del formulario de inscripción.
+        $request->validate([
+            'nombre'   => 'required|string|max:255',
+            'apellido' => 'required|string|max:255',
+            'email'    => 'required|email|max:255',
+            'nsocio'   => 'required|string|max:50',
+            'telefono' => 'required|string|max:20',
+        ]);
+
+        // Buscamos el evento o lanzamos 404.
+        $evento = Evento::findOrFail($id);
+
+        // Verificamos que haya plazas libres antes de inscribir.
+        if ($evento->plazas_libres <= 0) {
+            return redirect()->back()->with('error', 'No quedan plazas disponibles para este evento.');
+        }
+
+        // Obtenemos el ID del usuario autenticado.
+        $usuarioId = \Illuminate\Support\Facades\Auth::id();
+
+        // Verificamos que el usuario no esté ya inscrito (evitar duplicados).
+        if ($evento->usuariosInscritos()->where('usuario_id', $usuarioId)->exists()) {
+            return redirect()->back()->with('error', 'Ya estás inscrito en este evento.');
+        }
+
+        // Registramos la inscripción en la tabla pivote con fecha actual y estado 'inscrito'.
+        $evento->usuariosInscritos()->attach($usuarioId, [
+            'fecha_inscripcion' => now(),
+            'estado'            => 'inscrito',
+        ]);
+
+        // Incrementamos el contador de asistentes del evento.
+        $evento->increment('asistentes');
+
+        return redirect()->back()->with('success', 'Te has inscrito correctamente al evento «' . $evento->titulo . '».');
+    }
 
     /**
      * Display a listing of the resource.

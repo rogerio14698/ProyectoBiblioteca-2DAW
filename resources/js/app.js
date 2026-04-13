@@ -5,3 +5,4 @@ import './mediaQueryUsuarioAutenticado';
 import './iniciarSwiper';
 import './alertas';
 import './perfilEditar';
+import './ticketEvento';

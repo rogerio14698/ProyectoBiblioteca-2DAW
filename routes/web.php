@@ -20,6 +20,8 @@ use App\Http\Controllers\PrestamosUsuarioController;
 use App\Http\Controllers\AlquilerController;
 use App\Http\Controllers\PublicarUsuarioController;
 use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\OrganizarEventoController;
+use App\Http\Controllers\TicketEventoController;
 use App\Models\Contacto;
 
 //Redirección a la página de inicio
@@ -42,6 +44,8 @@ Route::get('/evento/{id}', [EventosController::class, 'paginaInterna'])->name('e
 Route::get('/noticia/{id}', [NoticiasController::class, 'paginaInterna'])->name('noticia.paginaInterna');
 //Ruta para mostrar la página de apuntarse a un evento específico:
 Route::get('/evento/{id}/apuntarse', [EventosController::class, 'apuntarse'])->name('evento.apuntarse');
+//Ruta POST para procesar la inscripción al evento:
+Route::post('/evento/{id}/apuntarse', [EventosController::class, 'procesarApuntarse'])->name('evento.procesarApuntarse');
 //Ruta para mostrar la página de alquilar un libro específico:
 Route::get('/libro/{id}/alquilar', [LibroController::class, 'paginaInternaAlquilar'])->name('libro.paginaInternaAlquilar');
 
@@ -113,9 +117,8 @@ Route::middleware(['auth:web', 'bloquear.demo'])->group(function () {
         return view('bibliotecaDAW.userViews.comprar');
     })->name('usuario.comprar');
 
-    Route::get('/organizarEvento', function () {
-        return view('bibliotecaDAW.userViews.organizarEvento');
-    })->name('usuario.organizarEvento');
+    Route::get('/organizarEvento', [OrganizarEventoController::class, 'index'])->name('usuario.organizarEvento');
+    Route::post('/organizarEvento', [OrganizarEventoController::class, 'store'])->name('usuario.organizarEvento.store');
 
     Route::get('/vender', function () {
         return view('bibliotecaDAW.userViews.vender');
@@ -124,6 +127,10 @@ Route::middleware(['auth:web', 'bloquear.demo'])->group(function () {
     Route::get('/publicar', [PublicarUsuarioController::class, 'index'])->name('usuario.publicar');
     Route::post('/publicar', [PublicarUsuarioController::class, 'store'])->name('usuario.publicar.store');
     Route::get('/publicar/{id}/archivo', [PublicarUsuarioController::class, 'download'])->name('usuario.publicar.archivo');
+
+    // Ticket PDF de eventos: generar y enviar por email
+    Route::post('/evento/{id}/ticket-pdf', [TicketEventoController::class, 'generarPdf'])->name('evento.ticketPdf');
+    Route::post('/evento/{id}/ticket-email', [TicketEventoController::class, 'enviarPorEmail'])->name('evento.ticketEmail');
 
     // Logout de usuario
     Route::post('/logout', [LoginControllerUsuario::class, 'logout'])->name('usuario.logout');

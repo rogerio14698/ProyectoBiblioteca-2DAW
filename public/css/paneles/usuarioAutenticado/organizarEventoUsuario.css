@@ -85,7 +85,8 @@
 }
 
 .campoOrganizarEvento input,
-.campoOrganizarEvento textarea {
+.campoOrganizarEvento textarea,
+.campoOrganizarEvento select {
     width: 100%;
     padding: var(--input-relleno);
     border: 1px solid var(--input-borde);
@@ -96,7 +97,8 @@
 }
 
 .campoOrganizarEvento input:focus,
-.campoOrganizarEvento textarea:focus {
+.campoOrganizarEvento textarea:focus,
+.campoOrganizarEvento select:focus {
     outline: none;
     border-color: var(--color-primario-oscuro);
     box-shadow: var(--input-foco-sombra);
@@ -134,4 +136,96 @@
     .campoCompletoOrganizarEvento {
         grid-column: 1 / -1;
     }
+}
+
+/* Mensaje de éxito tras crear evento */
+.alertaExito {
+    padding: calc(var(--unidad-espaciado) * 1.5);
+    background-color: var(--color-exito-fondo, #d4edda);
+    color: var(--color-exito-texto, #155724);
+    border: 1px solid var(--color-exito-borde, #c3e6cb);
+    border-radius: var(--radio-medio);
+    font-size: 1rem;
+    line-height: var(--fuente-altura-linea);
+}
+
+/* Mensaje de error debajo de cada campo */
+.errorCampo {
+    color: var(--color-error, #dc3545);
+    font-size: 0.85rem;
+    margin-top: 2px;
+}
+
+/* Texto de ayuda debajo del campo de imagen */
+.ayudaCampo {
+    color: var(--color-texto-secundario, #666);
+    font-size: 0.85rem;
+    margin-top: 2px;
+}
+
+/* Texto cuando no hay inscripciones */
+.textoVacio {
+    color: var(--color-texto-secundario, #666);
+    font-style: italic;
+}
+
+/* Contenedor con scroll horizontal para tablas en móvil */
+.tablaDesbordamiento {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Tabla de eventos inscritos */
+.tablaEventosInscritos {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.tablaEventosInscritos th,
+.tablaEventosInscritos td {
+    padding: calc(var(--unidad-espaciado) * 1) calc(var(--unidad-espaciado) * 1.5);
+    text-align: left;
+    border-bottom: 1px solid var(--colorBorde, #e0e0e0);
+}
+
+.tablaEventosInscritos th {
+    background-color: var(--color-primario-oscuro, #1a3a5c);
+    color: var(--color-blanco, #fff);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.tablaEventosInscritos tbody tr:hover {
+    background-color: var(--color-fondo-hover, #f5f5f5);
+}
+
+/* Badges de estado de inscripción */
+.estadoInscripcion {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: var(--radio-pequeno, 4px);
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.estadoInscripcion--inscrito {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.estadoInscripcion--asistido {
+    background-color: #cce5ff;
+    color: #004085;
+}
+
+.estadoInscripcion--cancelado {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.estadoInscripcion--no_asistio {
+    background-color: #fff3cd;
+    color: #856404;
 }

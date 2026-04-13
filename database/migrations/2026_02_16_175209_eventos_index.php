@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('asistentes')->default(0);
             //Calcula las plazas libres restando el número de asistentes al aforo total del evento.
             $table->integer('plazas_libres')->storedAs('aforo - asistentes');
-            $table->string('imagen_url')->nullable();
+            $table->string('imagen_url', 500)->nullable();
             $table->foreignId('usuario_id')->constrained('usuarios')->onDelete('cascade');
             $table->integer('prioridad')->default(0); //cuanto mayor sea el numero mayor prioridad
             $table->string('url_paginaInterna')->nullable(); // Nueva columna para la URL de la página interna del evento

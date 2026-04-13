@@ -55,6 +55,12 @@
             </div>
         @endforeach
     </section>
+
+    {{-- Enlaces de paginación (6 eventos por página) --}}
+    <div class="paginacionEventos paginacionBase paginacionAgenda">
+        {{ $eventos->links() }}
+    </div>
+
     <section class="contactarEvento separador">
         <div class="contactarEventoCard">
             <h2 class="tituloContenido">Crea un evento</h2>
