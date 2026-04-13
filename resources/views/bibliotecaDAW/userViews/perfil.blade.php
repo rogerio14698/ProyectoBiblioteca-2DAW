@@ -27,48 +27,15 @@
             <div class="configCuentaUsuario">
                 <button type="button" class="btn-base btn-verde"
                     onclick="location.href='{{ route('usuario.perfilEditar') }}'">Editar Perfil</button>
-                <button type="button" class="btn-base btn-azul" onclick="location.href='#contenidosMetodosPago'">Gestionar
-                    Métodos de Pago</button>
                 <button type="button" class="btn-base btn-azul" onclick="location.href='#contenidosHistorial'">Historial de
                     Actividad</button>
             </div>
-        </section>
-
-        <!-- Métodos de pago -->
-        <button class="btn-base btn-azul" id="btnMetodosPago" aria-expanded="false">MetodosPago</button>
-        <section class="contenidoMetodosPago">
-            <div class="metodosPago">
-                <h3>Añadir metodo pago</h3>
-                <div class="tarjetaCredito">
-                    <h4>Tarjeta de Crédito</h4>
-                    <div class="labelTarjetaCredito">
-                        <label for="card_number">Número de tarjeta:</label>
-                        <input type="text" id="card_number">
-                    </div>
-                    <div class="labelTarjetaCredito">
-                        <label for="expiry_date">Fecha de expiración:</label>
-                        <input type="text" id="expiry_date" placeholder="MM/AA">
-                    </div>
-                    <button type="button" class="btn-base btn-verde">Añadir Tarjeta</button>
-                </div>
-                <div class="paypal">
-                    <h4>PayPal</h4>
-                    <div class="labelPaypal">
-                        <label for="paypal_email">Correo electrónico de PayPal:</label>
-                        <input type="email" id="paypal_email">
-                    </div>
-
-                    <button type="button" class="btn-base btn-verde">Añadir PayPal</button>
-                </div>
         </section>
 
         <!-- Historial de actividad -->
         <button id="contenidosHistorial" class="btn-base btn-verde">Ver historial</button>
         <div class="historialVersionDesktop">
             @include('layouts.historialVersionDesktop')
-        </div>
-        <div class="historialVersionMovil">
-            @include('layouts.historialVersionMovil')
         </div>
     </main>
 

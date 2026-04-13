@@ -85,63 +85,6 @@
     display: flex;
 }
 
-/* ======== MÉTODOS DE PAGO ======== */
-.contenidoMetodosPago {
-    display: none;
-    flex-direction: column;
-    padding: 10px;
-    gap: 10px;
-    border-bottom: 1px solid var(--colorBorde);
-}
-
-.contenidoMetodosPago h3 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    text-decoration: underline;
-    color: var(--color-primario-oscuro);
-}
-
-.metodosPagoVisible {
-    display: flex;
-}
-
-.metodosPago {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.metodosPago input[type="text"],
-.metodosPago input[type="email"] {
-    padding: 8px;
-    border: 1px solid var(--colorBorde);
-    border-radius: var(--radio-pequeno);
-    width: 100%;
-    max-width: 300px;
-}
-
-.labelTarjetaCredito label,
-.labelPaypal label {
-    font-size: 0.9rem;
-    flex: 1;
-}
-
-.labelTarjetaCredito,
-.labelPaypal {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px;
-}
-
-.tarjetaCredito h4,
-.paypal h4 {
-    font-size: 1.2rem;
-    margin-bottom: 5px;
-    text-decoration: underline;
-    color: var(--color-primario);
-}
-
 /* ======== HISTORIAL DE ACTIVIDAD ======== */
 .contenidoHistorial {
     display: flex;
@@ -178,12 +121,7 @@
 }
 
 /* ======== CONTENEDOR TIPO TABLA RESPONSIVA (divs) ======== */
-/* En móvil oculta la versión desktop, en desktop oculta la móvil */
 .historialVersionDesktop {
-    display: none;
-}
-
-.historialVersionMovil {
     display: block;
 }
 
@@ -236,6 +174,7 @@
 }
 
 .celdaAcciones .tablaAccionesBotones {
+    width: 100%;
     padding-top: 4px;
 }
 
@@ -277,54 +216,10 @@
     #btnConfigUsuario {
         display: none;
     }
-
-    .metodosPago {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        justify-content: space-evenly;
-        align-items: flex-end;
-    }
-
-    .metodosPago h3 {
-        align-self: center;
-        min-width: 250px;
-    }
-
-    .contenidoMetodosPago {
-        display: flex;
-        flex-direction: row;
-        align-items: end;
-        gap: 15px;
-        width: 100%;
-    }
-
-    #btnMetodosPago {
-        display: none;
-    }
-
-    .tarjetaCredito,
-    .paypal {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 3px;
-        justify-content: flex-end;
-        max-width: 450px;
-    }
 }
 
 /* ======== MEDIA QUERY DESKTOP (1200px+) ======== */
 @media (min-width: 1200px) {
-
-    /* En desktop mostramos la versión "tabla" y ocultamos las cards */
-    .historialVersionDesktop {
-        display: block;
-    }
-
-    .historialVersionMovil {
-        display: none;
-    }
 
     #contenidosHistorial {
         display: none;

@@ -92,9 +92,9 @@
 .publicacionesCampo select,
 .publicacionesCampo textarea {
     min-height: var(--altura-boton-movil);
-    border: 1px solid var(--color-borde);
+    border: 1px solid var(--color-borde-input);
     border-radius: var(--radio-borde);
-    padding: 10px 12px;
+    padding: var(--input-relleno);
     background: var(--blanco);
     color: var(--color-texto-principal);
 }

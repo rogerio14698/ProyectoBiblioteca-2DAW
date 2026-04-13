@@ -90,18 +90,21 @@
                 <div class="accionesPerfilEditar campoCompletoPerfilEditar">
                     <button type="submit" class="btn-base btn-verde">Guardar Cambios</button>
                     <button type="button" class="btn-base btn-azul" id="btnMostrarPassword">Cambiar Contraseña</button>
-                    <form action="{{ route('logout') }}" method="POST" class="formLogoutEditar">
-                        @csrf
-                        <button type="submit" class="btn-base btn-rojo">Cerrar Sesión</button>
-                    </form>
                 </div>
+            </form>
+
+            {{-- Formulario de logout separado (HTML no permite formularios anidados) --}}
+            <form action="{{ route('logout') }}" method="POST" class="formLogoutEditar">
+                @csrf
+                <button type="submit" class="btn-base btn-rojo">Cerrar Sesión</button>
             </form>
         </section>
 
         {{-- ========================================= --}}
         {{-- BLOQUE 2: Cambio de contraseña --}}
         {{-- ========================================= --}}
-        <section class="perfilEditarBloque seccionPassword" id="seccionPassword">
+        <section class="perfilEditarBloque seccionPassword" id="seccionPassword"
+            data-password-errors="{{ $errors->has('current_password') || $errors->has('new_password') ? 'true' : 'false' }}">
             <div class="perfilEditarIntro">
                 <h2>Cambiar Contraseña</h2>
                 <p>Introduce tu contraseña actual para verificar tu identidad y luego escribe la nueva contraseña dos veces.
@@ -148,41 +151,4 @@
         </section>
     </main>
 
-    {{-- Script para previsualización de foto y toggle de sección de contraseña --}}
-    <script>
-        // Previsualización de la foto de perfil seleccionada.
-        const inputFoto = document.getElementById('profile_photo');
-        const previewFoto = document.getElementById('previewFoto');
-
-        inputFoto.addEventListener('change', (evento) => {
-            // Obtenemos el primer archivo seleccionado.
-            const archivo = evento.target.files[0];
-            if (archivo) {
-                // Creamos una URL temporal para mostrar la imagen seleccionada.
-                const urlTemporal = URL.createObjectURL(archivo);
-                previewFoto.src = urlTemporal;
-            }
-        });
-
-        // Toggle para mostrar/ocultar la sección de cambio de contraseña.
-        const seccionPassword = document.getElementById('seccionPassword');
-        const btnMostrar = document.getElementById('btnMostrarPassword');
-        const btnOcultar = document.getElementById('btnOcultarPassword');
-
-        btnMostrar.addEventListener('click', () => {
-            // Mostramos la sección y hacemos scroll hacia ella.
-            seccionPassword.classList.add('seccionPasswordVisible');
-            seccionPassword.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-
-        btnOcultar.addEventListener('click', () => {
-            // Ocultamos la sección de contraseña.
-            seccionPassword.classList.remove('seccionPasswordVisible');
-        });
-
-        // Si hay errores de validación de contraseña, mostramos la sección automáticamente.
-        @if ($errors->has('current_password') || $errors->has('new_password'))
-            seccionPassword.classList.add('seccionPasswordVisible');
-        @endif
-    </script>
 @endsection

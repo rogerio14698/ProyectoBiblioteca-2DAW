@@ -87,9 +87,12 @@ margin-top: 2px;
 .campoPerfilEditar input {
     width: 100%;
     padding: var(--input-relleno);
-    border: 1px solid var(--input-borde);
+    border: 1px solid var(--color-borde-input);
     border-radius: var(--radio-pequeno);
 }
+ #profile_photo {
+    border: none;
+ }
 
 .campoPerfilEditar input:focus {
     outline: none;

@@ -103,6 +103,13 @@
    --relleno-no-movil: 16px;
    --altura-boton-movil: 44px;
 
+   /* =========================================
+      4. FORMULARIOS (INPUTS)
+      ========================================= */
+   --color-borde-input: #444;
+   --input-borde: var(--color-borde-input);
+   --input-relleno: 10px 12px;
+
 
 }
 

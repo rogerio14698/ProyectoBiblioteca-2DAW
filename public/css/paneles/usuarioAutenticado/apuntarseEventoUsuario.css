@@ -32,10 +32,10 @@
 
 .campoApuntarseEvento input {
     width: 100%;
-    border: 1px solid var(--color-borde);
+    border: 1px solid var(--color-borde-input);
     background-color: var(--color-blanco);
     color: var(--color-texto-principal);
-    padding: 10px;
+    padding: var(--input-relleno);
 }
 
 .campoApuntarseEvento input:focus {

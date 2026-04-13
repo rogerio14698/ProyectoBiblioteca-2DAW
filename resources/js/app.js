@@ -4,3 +4,4 @@ import './mediaQueryAdminAutenticado';
 import './mediaQueryUsuarioAutenticado';
 import './iniciarSwiper';
 import './alertas';
+import './perfilEditar';

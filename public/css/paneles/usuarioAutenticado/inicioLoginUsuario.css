@@ -52,10 +52,6 @@
     box-shadow: var(--sombra-media);
 }
 
-.inicioLoginCardDestacada {
-    background: linear-gradient(180deg, var(--color-blanco) 0%, var(--color-fondo-global) 100%);
-    border-left: 6px solid var(--color-primario);
-}
 
 .inicioLoginEtiqueta {
     width: fit-content;

@@ -53,10 +53,10 @@
     font-size: 1rem;
 }
 .contenidoLogin input{
-    padding: 5px;
+    padding: var(--input-relleno);
     width: 70%;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 1px solid var(--color-borde-input);
+    border-radius: var(--radio-pequeno);
 }   
 .recuerdame{
     display: flex;         /* Activa el modo flexible */

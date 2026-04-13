@@ -13,7 +13,7 @@
         </section>
 
         <section class="inicioLoginResumen">
-            <article class="inicioLoginCard inicioLoginCardDestacada">
+            <article class="inicioLoginCard ">
                 <p class="inicioLoginEtiqueta">Tu espacio personal</p>
                 <h2>Panel de usuario</h2>
                 <p>
