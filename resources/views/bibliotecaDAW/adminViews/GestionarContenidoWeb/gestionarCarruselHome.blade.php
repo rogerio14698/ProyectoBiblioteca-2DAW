@@ -70,7 +70,12 @@
                             <!--Imagen del evento -->
                             <div class="eventoCardImagen">
                                 @if ($evento->imagen_url)
-                                    <img src="{{ asset('storage/' . $evento->imagen_url) }}" alt="Imagen de {{ $evento->titulo }}">
+                                    @php
+                                        $urlImagen = \Illuminate\Support\Str::startsWith($evento->imagen_url, ['http://', 'https://'])
+                                            ? $evento->imagen_url
+                                            : asset('storage/' . $evento->imagen_url);
+                                    @endphp
+                                    <img src="{{ $urlImagen }}" alt="Imagen de {{ $evento->titulo }}">
                                 @else
                                     <span class="eventoCardSinImagen">Sin imagen</span>
                                 @endif
