@@ -71,18 +71,14 @@
                             Hola, <strong>{{ Auth::user()->name }}</strong>. Confirma los datos para tu solicitud.
                         </p>
 
-                        <form action="#" method="POST" class="alquilarInternoForm">
+                        <form action="{{ route('usuario.alquilar.store') }}" method="POST" class="alquilarInternoForm">
                             @csrf
-                            <div class="alquilarInternoCampo">
-                                <label for="fechaInicio">Fecha de recogida</label>
-                                <input type="date" id="fechaInicio" name="fecha_inicio"
-                                       min="{{ date('Y-m-d') }}" required>
-                            </div>
+                            <input type="hidden" name="libro_id" value="{{ $libro->id }}">
 
                             <div class="alquilarInternoCampo">
-                                <label for="fechaDevolucion">Fecha de devolución</label>
-                                <input type="date" id="fechaDevolucion" name="fecha_devolucion"
-                                       min="{{ date('Y-m-d', strtotime('+1 day')) }}" required>
+                                <label for="diasPrestamo">Dias de prestamo (1-60)</label>
+                                <input type="number" id="diasPrestamo" name="dias_prestamo"
+                                       min="1" max="60" value="14" required>
                             </div>
 
                             <div class="alquilarInternoCampo">

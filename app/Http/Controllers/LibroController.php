@@ -63,12 +63,14 @@ class LibroController extends Controller
             'titulo' => ['nullable', 'string', 'max:120'],
             'autor' => ['nullable', 'string', 'max:120'],
             'genero' => ['nullable', 'string', 'max:120'],
+            'opcion' => ['nullable', 'string', 'in:compra,prestamo'],
         ]);
 
         $searchQuery = trim((string) ($validatedData['query'] ?? ''));
         $searchTitulo = trim((string) ($validatedData['titulo'] ?? ''));
         $searchAutor = trim((string) ($validatedData['autor'] ?? ''));
         $searchGenero = trim((string) ($validatedData['genero'] ?? ''));
+        $searchOpcion = trim((string) ($validatedData['opcion'] ?? ''));
 
         $libros = Libro::query()
             ->when($searchQuery !== '', fn($query) => $query->where(function ($subQuery) use ($searchQuery) {
@@ -79,6 +81,7 @@ class LibroController extends Controller
             ->when($searchTitulo !== '', fn($query) => $query->where('titulo', 'like', "%{$searchTitulo}%"))
             ->when($searchAutor !== '', fn($query) => $query->where('autor', 'like', "%{$searchAutor}%"))
             ->when($searchGenero !== '', fn($query) => $query->where('genero', 'like', "%{$searchGenero}%"))
+            ->when($searchOpcion !== '', fn($query) => $query->where('opcion_compra', $searchOpcion))
             ->orderBy('created_at', 'desc')
             ->paginate(12)
             ->withQueryString();
@@ -89,14 +92,52 @@ class LibroController extends Controller
             'searchTitulo' => $searchTitulo,
             'searchAutor' => $searchAutor,
             'searchGenero' => $searchGenero,
+            'searchOpcion' => $searchOpcion,
         ]);
     }
 
     /**
      * Panel de administración del catálogo.
+     *
+     * @param Request $request Parámetros de filtrado del listado.
+     * @return \Illuminate\View\View Vista de gestión con listado paginado.
      */
-    public function gestionCatalogo(Request $request)
+    public function gestionCatalogo(Request $request): \Illuminate\View\View
     {
+        return $this->vistaGestionCatalogo($request);
+    }
+
+    /**
+     * Cargar el panel de gestión con un libro precargado para edición.
+     *
+     * Reutiliza la misma vista que gestionCatalogo, pasando $libroEditar
+     * para que el formulario cambie a modo edición.
+     *
+     * @param Request $request Parámetros de filtrado del listado.
+     * @param int $id Identificador del libro a editar.
+     * @return \Illuminate\View\View Vista de gestión con formulario en modo edición.
+     */
+    public function edit(Request $request, int $id): \Illuminate\View\View
+    {
+        // Buscamos el libro que se quiere editar o lanzamos 404.
+        $libroEditar = Libro::findOrFail($id);
+
+        return $this->vistaGestionCatalogo($request, $libroEditar);
+    }
+
+    /**
+     * Construir la vista de gestión del catálogo con filtros y paginación.
+     *
+     * Método privado reutilizado por gestionCatalogo() y edit() para evitar
+     * duplicar la lógica de filtrado y consulta (principio DRY).
+     *
+     * @param Request $request Parámetros de filtrado del listado.
+     * @param Libro|null $libroEditar Libro a editar (null = modo creación).
+     * @return \Illuminate\View\View Vista renderizada con datos del catálogo.
+     */
+    private function vistaGestionCatalogo(Request $request, ?Libro $libroEditar = null): \Illuminate\View\View
+    {
+        // Validamos filtros permitidos para controlar valores de entrada.
         $validatedData = $request->validate([
             'filtroTitulo' => ['nullable', 'string', 'max:120'],
             'filtroAutor' => ['nullable', 'string', 'max:120'],
@@ -106,6 +147,7 @@ class LibroController extends Controller
             'filtroDisponibilidad' => ['nullable', 'string', 'in:disponible,prestado'],
         ]);
 
+        // Normalizamos valores de filtro con defaults vacíos.
         $filtroTitulo = trim((string) ($validatedData['filtroTitulo'] ?? ''));
         $filtroAutor = trim((string) ($validatedData['filtroAutor'] ?? ''));
         $filtroGenero = trim((string) ($validatedData['filtroGenero'] ?? ''));
@@ -113,6 +155,7 @@ class LibroController extends Controller
         $filtroEditorial = trim((string) ($validatedData['filtroEditorial'] ?? ''));
         $filtroDisponibilidad = trim((string) ($validatedData['filtroDisponibilidad'] ?? ''));
 
+        // Construimos consulta con filtros dinámicos aplicados condicionalmente.
         $libros = Libro::query()
             ->when($filtroTitulo !== '', fn($q) => $q->where('titulo', 'like', "%{$filtroTitulo}%"))
             ->when($filtroAutor !== '', fn($q) => $q->where('autor', 'like', "%{$filtroAutor}%"))
@@ -124,7 +167,8 @@ class LibroController extends Controller
             ->paginate(15)
             ->withQueryString();
 
-        return view('bibliotecaDAW.adminViews.GestionarContenidoWeb.gestionarContenidoCatalogo', [
+        // Preparamos datos base para la vista.
+        $viewData = [
             'libros' => $libros,
             'filtroTitulo' => $filtroTitulo,
             'filtroAutor' => $filtroAutor,
@@ -132,7 +176,14 @@ class LibroController extends Controller
             'filtroAnio' => $filtroAnio,
             'filtroEditorial' => $filtroEditorial,
             'filtroDisponibilidad' => $filtroDisponibilidad,
-        ]);
+        ];
+
+        // Si hay libro a editar, lo incluimos para que la vista cambie a modo edición.
+        if ($libroEditar !== null) {
+            $viewData['libroEditar'] = $libroEditar;
+        }
+
+        return view('bibliotecaDAW.adminViews.GestionarContenidoWeb.gestionarContenidoCatalogo', $viewData);
     }
 
     public function destacados()
@@ -150,9 +201,25 @@ class LibroController extends Controller
         ]);
     }
 
-    public function paginaInternaAlquilar(int $id)
+    /**
+     * Mostrar la página interna de alquiler de un libro.
+     *
+     * Solo permite acceso a libros cuyo tipo de operación sea 'prestamo'.
+     * Si el libro es de tipo 'compra', redirige al catálogo con mensaje de error.
+     *
+     * @param int $id Identificador del libro a alquilar.
+     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse Vista de alquiler o redirección.
+     */
+    public function paginaInternaAlquilar(int $id): \Illuminate\View\View|\Illuminate\Http\RedirectResponse
     {
+        // Buscamos el libro por su ID o lanzamos 404 si no existe.
         $libro = Libro::findOrFail($id);
+
+        // Verificamos que el libro sea de tipo préstamo; los de compra no se alquilan.
+        if ($libro->opcion_compra !== 'prestamo') {
+            return redirect()->route('catalogo')->with('error', 'Este libro solo está disponible para compra, no para alquiler.');
+        }
+
         return view('bibliotecaDAW.publicViews.paginasInternas.paginaInternaAlquilarLibro', ['libro' => $libro]);
     }
 

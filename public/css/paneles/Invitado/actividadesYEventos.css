@@ -59,7 +59,20 @@
     flex-direction: column;
     align-items: center;
     gap: 5px;
+    width: 100%;
+    overflow: hidden;
+}
 
+/* Descripcion del evento dentro del card: limita a 3 lineas */
+.eventosTitulo .parrafoContenido {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    width: 100%;
 }
 
 .tituloEvento {

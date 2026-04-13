@@ -15,6 +15,13 @@
                 <input type="text" name="genero" value="{{ $searchGenero ?? '' }}" placeholder="Buscar por género"
                     class="buscadorInput" aria-label="Buscar libros por género">
 
+                {{-- Filtro por tipo de operación: compra o préstamo --}}
+                <select name="opcion" class="buscadorInput" aria-label="Filtrar por tipo de operación">
+                    <option value="">Todos (compra y préstamo)</option>
+                    <option value="compra" {{ ($searchOpcion ?? '') === 'compra' ? 'selected' : '' }}>Solo compra</option>
+                    <option value="prestamo" {{ ($searchOpcion ?? '') === 'prestamo' ? 'selected' : '' }}>Solo préstamo</option>
+                </select>
+
                 <button type="submit" class="btn-base btn-buscar">Buscar</button>
                 <a href="{{ url('/catalogo') }}" class="btn-base btn-limpiar"
                     aria-label="Limpiar filtros de búsqueda">Limpiar filtros</a>
@@ -81,9 +88,15 @@
 
                     <div class="accionesCatalogo">
                         <a href="{{ route('libro.paginaInterna', $libro->id) }}" class="btn-base btn-ver">Ver detalles</a>
-                        <a href="#" class="btn-base btn-carrito" id="alertaMantenimiento"
-                            onclick="mostrarAlertaMantenimiento()">Añadir al carrito</a>
-                        <a href="{{ route('libro.paginaInternaAlquilar', $libro->id) }}" class="btn-base btn-alquilar">Alquilar ahora</a>
+                        @if ($libro->opcion_compra === 'compra')
+                            {{-- Solo los libros de compra muestran el botón de carrito --}}
+                            <a href="#" class="btn-base btn-carrito" id="alertaMantenimiento"
+                                onclick="mostrarAlertaMantenimiento()">Añadir al carrito</a>
+                        @endif
+                        @if ($libro->opcion_compra === 'prestamo')
+                            {{-- Solo los libros de préstamo muestran el botón de alquilar --}}
+                            <a href="{{ route('libro.paginaInternaAlquilar', $libro->id) }}" class="btn-base btn-alquilar">Alquilar ahora</a>
+                        @endif
                     </div>
                 </div>
             @empty

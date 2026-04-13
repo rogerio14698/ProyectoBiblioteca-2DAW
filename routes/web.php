@@ -57,7 +57,7 @@ Route::get('/actividades', function () {
 
 Route::get('/contacto', [ContactoController::class, 'create'])->name('contacto.create');
 Route::post('/contacto', [ContactoController::class, 'store'])->name('contacto.store');
-Route::get('/catalogo', [LibroController::class, 'catalogo']);
+Route::get('/catalogo', [LibroController::class, 'catalogo'])->name('catalogo');
 Route::get('/publicaciones', [PublicarUsuarioController::class, 'communityIndex'])->name('publicaciones.index');
 Route::get('/publicaciones/{id}/ver', [PublicarUsuarioController::class, 'view'])->name('publicaciones.ver');
 // Ruta para aviso legal:
