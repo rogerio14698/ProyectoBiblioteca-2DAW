@@ -78,7 +78,7 @@
                     <label for="profile_photo">Foto de perfil</label>
                     <div class="fotoPerfilPreview">
                         <img src="{{ Auth::user()->profile_photo_url }}" alt="Foto de perfil actual" class="fotoPerfilImg"
-                            id="previewFoto" loading="lazy" width="150" height="150">
+                            id="previewFoto" loading="lazy" width="80" height="80">
                         <input type="file" id="profile_photo" name="profile_photo" accept="image/jpeg,image/png,image/webp">
                     </div>
                     @error('profile_photo')
