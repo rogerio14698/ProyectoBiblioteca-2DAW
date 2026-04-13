@@ -17,21 +17,22 @@ class HomeController extends Controller
     {
         //Obtener eventos ordenados por fecha
         $slideBienvenidas = SlideBienvenida::orderBy('posicion')->orderBy('created_at', 'desc')->get();
-        $eventos = Evento::with('usuario:id,name')->orderBy('fecha_hora')->paginate(6);
+        $eventos = Evento::with('usuario:id,name')->orderBy('fecha_hora')->paginate(6, ['*'], 'eventos_page');
         $libros = Libro::all();
-        $noticias = Noticias::orderBy('created_at', 'desc')->paginate(4);
+        $noticias = Noticias::orderBy('created_at', 'desc')->paginate(4, ['*'], 'noticias_page');
 
         return view('bibliotecaDAW.index', [
             'slideBienvenidas' => $slideBienvenidas,
             'eventos' => $eventos,
             'libros' => $libros,
-            'noticias' => $noticias,]);
+            'noticias' => $noticias,
+        ]);
 
         //Aqui se pondría mas informacion para la pagina principal.
         //Los controladores como EventosController y LibroController se encargan de gestionar la lógica específica de cada sección, mientras que HomeController se encarga de la lógica de SU PROPIA sección
         //Es decir. url/eventos; url/libros
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -40,9 +41,9 @@ class HomeController extends Controller
 
     public function destacados()
     {
-        $eventos = Evento::with('usuario:id,name')->orderBy('fecha_hora')->paginate(6);
+        $eventos = Evento::with('usuario:id,name')->orderBy('fecha_hora')->paginate(6, ['*'], 'eventos_page');
         $libros = Libro::where('destacado', true)->get();
-        $noticias = Noticias::orderBy('created_at', 'desc')->paginate(4);
+        $noticias = Noticias::orderBy('created_at', 'desc')->paginate(4, ['*'], 'noticias_page');
         return view('bibliotecaDAW.index', [
             'eventos' => $eventos,
             'libros' => $libros,

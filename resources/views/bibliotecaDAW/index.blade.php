@@ -148,7 +148,7 @@
             @endforeach
         </div>
         <div class="paginacionBase paginacionAgenda">
-            {{ $eventos->links('vendor.pagination.bootstrap-5') }}
+            {{ $eventos->appends(['noticias_page' => $noticias->currentPage()])->links('vendor.pagination.bootstrap-5') }}
         </div>
     </section>
 
@@ -182,7 +182,7 @@
             @endforeach
         </div>
         <div class="paginacionBase paginacionNoticias">
-            {{ $noticias->links('vendor.pagination.bootstrap-5') }}
+            {{ $noticias->appends(['eventos_page' => $eventos->currentPage()])->links('vendor.pagination.bootstrap-5') }}
         </div>
     </section>
 @endsection
