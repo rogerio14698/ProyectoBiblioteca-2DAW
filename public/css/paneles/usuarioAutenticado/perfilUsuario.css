@@ -1,7 +1,14 @@
+/* =============================================
+   ESTILOS DEL PERFIL DE USUARIO
+   Contiene los estilos para la cabecera, métodos
+   de pago e historial de actividad.
+   ============================================= */
+
 .perfilUsuario {
     background-color: var(--bgPerfilUsuario);
 }
 
+/* ======== CABECERA DEL PERFIL ======== */
 .contenidoHeader {
     display: flex;
     flex-direction: column;
@@ -54,6 +61,7 @@
     font-size: 1rem;
 }
 
+/* ======== CONFIGURACIÓN DESPLEGABLE ======== */
 .configCuentaUsuario {
     display: none;
     flex-direction: column;
@@ -77,8 +85,7 @@
     display: flex;
 }
 
-/*Contenido metodos de pago en version movil es despegable*/
-
+/* ======== MÉTODOS DE PAGO ======== */
 .contenidoMetodosPago {
     display: none;
     flex-direction: column;
@@ -98,14 +105,12 @@
     display: flex;
 }
 
-
 .metodosPago {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-/*Estilos de los inputs*/
 .metodosPago input[type="text"],
 .metodosPago input[type="email"] {
     padding: 8px;
@@ -119,10 +124,7 @@
 .labelPaypal label {
     font-size: 0.9rem;
     flex: 1;
-
 }
-
-/*Fin de los estilos de los inputs*/
 
 .labelTarjetaCredito,
 .labelPaypal {
@@ -140,7 +142,7 @@
     color: var(--color-primario);
 }
 
-/*Estilos para el historial de actividad*/
+/* ======== HISTORIAL DE ACTIVIDAD ======== */
 .contenidoHistorial {
     display: flex;
     flex-direction: column;
@@ -158,31 +160,25 @@
     color: var(--color-primario-oscuro);
 }
 
-.historialPrestamos {
+.historialPrestamos,
+.historialReservas,
+.historialCompras,
+.historialPublicaciones {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-bottom: 24px;
 }
 
-.contenedorTabla {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    justify-content: center;
+/* Mensaje cuando no hay registros */
+.sinRegistros {
+    font-style: italic;
+    color: var(--color-texto-mutado);
+    padding: 8px 0;
 }
 
-.contenedorTabla table {
-    border-collapse: collapse;
-    /*Esto hace que las columnas tengan un ancho fijo*/
-    table-layout: fixed;
-    width: 100%;
-}
-
-/*Dimensiones de las celdas*/
-/*Tabla de prestamos*/
-/*sobra un 20% para el espaciado*/
-
-/*Cambio de table a cards para version movil*/
+/* ======== CONTENEDOR TIPO TABLA RESPONSIVA (divs) ======== */
+/* En móvil oculta la versión desktop, en desktop oculta la móvil */
 .historialVersionDesktop {
     display: none;
 }
@@ -191,47 +187,65 @@
     display: block;
 }
 
-
-
-.contenedorTabla table,
-thead,
-tbody,
-th,
-td,
-tr {
-    border: 1px solid black;
+/* Contenedor del grid que simula una tabla */
+.tablaResponsive {
+    width: 100%;
+    border: 1px solid var(--colorBorde);
+    border-radius: 4px;
+    overflow: hidden;
 }
 
-.contenedorTabla th,
-.contenedorTabla td {
-    padding: 8px;
-    text-align: left;
+/* Fila de cabecera (simula <thead>) */
+.filaHeader {
+    display: none;
+    /* En móvil se oculta la cabecera */
 }
 
-.contenedorTabla thead {
-    background-color: var(--color-primario);
-    color: var(--color-blanco);
-    font-weight: bold;
+/* Cada fila de datos (simula <tr>) */
+.filaBody {
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    border-bottom: 1px solid var(--colorBorde);
 }
 
-.contendorTabla tbody,
-tr,
-td {
-    font-weight: 500;
+.filaBody:last-child {
+    border-bottom: none;
+}
+
+/* Cada celda de datos (simula <td>) */
+.celdaBody {
+    display: flex;
+    padding: 4px 0;
     font-size: 0.9rem;
+    word-break: break-word;
 }
 
+/* En móvil mostramos el data-label como etiqueta */
+.celdaBody::before {
+    content: attr(data-label) ": ";
+    font-weight: bold;
+    min-width: 140px;
+    flex-shrink: 0;
+}
+
+/* Botones de acciones dentro de la "tabla" */
 .tablaAccionesBotones {
     display: flex;
-    border: none;
     gap: 5px;
-    max-width: 200px;
 }
 
+.celdaAcciones .tablaAccionesBotones {
+    padding-top: 4px;
+}
 
-/*Estilos MQ para pantallas grandes*/
+/* Ocultar el label del campo acciones en móvil */
+.celdaAcciones::before {
+    display: none;
+}
+
+/* ======== MEDIA QUERY TABLETS (768px+) ======== */
 @media (min-width: 768px) {
-    
 
     .contenidoHeader {
         display: flex;
@@ -245,7 +259,6 @@ td {
     .info-personalFoto {
         padding-top: 10px;
         padding-bottom: 10px;
-
     }
 
     .texto-bienvenidaUsuario {
@@ -269,7 +282,6 @@ td {
         display: flex;
         flex-direction: row;
         width: 100%;
-        display: flex;
         justify-content: space-evenly;
         align-items: flex-end;
     }
@@ -279,7 +291,6 @@ td {
         min-width: 250px;
     }
 
-    /*Metodos de pago*/
     .contenidoMetodosPago {
         display: flex;
         flex-direction: row;
@@ -301,13 +312,12 @@ td {
         justify-content: flex-end;
         max-width: 450px;
     }
-
 }
 
+/* ======== MEDIA QUERY DESKTOP (1200px+) ======== */
 @media (min-width: 1200px) {
- /*Estilos para el historial de actividad*/
-    /*Minimo necesita 1200px para que se vea en modo tablas, si no se va a ver en cards todo*/
 
+    /* En desktop mostramos la versión "tabla" y ocultamos las cards */
     .historialVersionDesktop {
         display: block;
     }
@@ -320,64 +330,60 @@ td {
         display: none;
     }
 
-    .tablaTitulo {
-        width: 25%;
+    /* La cabecera se muestra como fila de grid */
+    .filaHeader {
+        display: grid;
+        background-color: var(--color-primario);
+        color: var(--color-blanco);
+        font-weight: bold;
+        font-size: 0.85rem;
     }
 
-    .tablaIsbn {
-        width: 10%;
+    /* Las filas de datos también se muestran como grid */
+    .filaBody {
+        display: grid;
+        flex-direction: unset;
+        padding: 8px 0;
+        align-items: center;
+        border-bottom: 1px solid var(--colorBorde);
     }
 
-    .tablaFechaPrestamo,
-    .tablaFechaDevolucion,
-    .tablaHora,
-    .tablaFecha,
-    .tablaPrecio {
-        width: 5%;
+    .filaBody:nth-child(even) {
+        background-color: var(--color-fondo-global);
     }
 
-    .tablaUbicacion {
-        width: 20%;
+    /* Celdas en modo desktop: sin label pseudo-element */
+    .celdaBody::before {
+        display: none;
     }
 
-    .tablaEstado {
-        width: 5%;
+    .celdaHeader,
+    .celdaBody {
+        padding: 8px 10px;
+        font-size: 0.85rem;
     }
 
-    .tablaAcciones {
-        width: 10%;
+    /* ---- Grid para préstamos (6 columnas) ---- */
+    .historialPrestamos .filaHeader,
+    .historialPrestamos .filaBody {
+        grid-template-columns: 2fr 1.2fr 1fr 1fr 0.8fr 0.8fr;
     }
 
-    /*Historial de publicaciones*/
-    .tablaTituloPublicacion {
-        width: 15%;
+    /* ---- Grid para reservas eventos (6 columnas) ---- */
+    .historialReservas .filaHeader,
+    .historialReservas .filaBody {
+        grid-template-columns: 2fr 1.5fr 1fr 0.6fr 0.8fr 0.8fr;
     }
 
-    .tablaResumenPublicacion {
-        width: 15%;
+    /* ---- Grid para compras (6 columnas) ---- */
+    .historialCompras .filaHeader,
+    .historialCompras .filaBody {
+        grid-template-columns: 2fr 1.2fr 1fr 0.7fr 0.8fr 0.8fr;
     }
 
-    .tablaGeneroPublicacion {
-        width: 5%;
-    }
-
-    .tablaAutorPublicacion {
-        width: 10%;
-    }
-
-    .tablaFormatoPublicacion {
-        width: 5%;
-    }
-
-    .tablaEstadoPublicacion {
-        width: 5%;
-    }
-
-    .tablaFechaPublicacion {
-        width: 5%;
-    }
-
-    .tablaEventoPromocional {
-        width: 10%;
+    /* ---- Grid para publicaciones (6 columnas) ---- */
+    .historialPublicaciones .filaHeader,
+    .historialPublicaciones .filaBody {
+        grid-template-columns: 1.5fr 2fr 1.5fr 0.6fr 1fr 0.8fr;
     }
 }

@@ -14,14 +14,10 @@ return new class extends Migration
     Schema::create('prestamos', function (Blueprint $table) {
         $table->id();
         $table->foreignId('libro_id')->constrained('libros')->onDelete('cascade');
-        $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-        
+        $table->foreignId('usuario_id')->constrained('usuarios')->onDelete('cascade');
         $table->timestamp('fecha_prestamo')->useCurrent();
         $table->timestamp('fecha_devolucion_esperada')->nullable();
-        
-        // ESTA ES LA COLUMNA QUE TE FALTA:
         $table->timestamp('fecha_devolucion_real')->nullable(); 
-        
         $table->timestamps();
     });
 }

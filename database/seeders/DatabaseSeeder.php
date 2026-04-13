@@ -27,6 +27,12 @@ class DatabaseSeeder extends Seeder
             ContactoSeeder::class,
             SlideBienvenidaSeeder::class,
             FooterConfigSeeder::class,
+            // Seeders que dependen de usuarios, libros y eventos existentes.
+            ReservaSeeder::class,
+            PrestamosSeeder::class,
+            EventoUsuarioSeeder::class,
+            ComprasSeeder::class,
+            MetodosPagoSeeder::class,
         ]);
     }
 }

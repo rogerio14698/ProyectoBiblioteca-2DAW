@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('metodos_pago', function(Blueprint $table) {
+        Schema::create('metodos_pago', function (Blueprint $table) {
             $table->id();
             $table->foreignId('usuario_id')
                 ->constrained('usuarios')
@@ -24,7 +24,7 @@ return new class extends Migration
                 'otro'
             ]);
             $table->string('provider')->nullable(); //Strip, paypal, etc
-            $table->string('token'); //Esto va a ser token seguro del proveedor
+            $table->text('token'); //Esto va a ser token seguro del proveedor (encriptado, supera 255 chars)
             $table->string('last_four', 4)->nullable(); //Últimos 4 dígitos para tarjetas
             $table->string('paypal_email')->nullable(); //Email para PayPal
 

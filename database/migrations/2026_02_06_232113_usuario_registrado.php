@@ -22,6 +22,8 @@ return new class extends Migration
             $table->boolean('es_escritor_verificado')->default(false);
             $table->enum('tipo_escritor', ['profesional', 'aficion'])->nullable();
             $table->boolean('is_demo')->default(false); // Para marcar si el usuario es de demostración
+            // Ruta de la foto de perfil (hasheada por Storage, puede superar 255 chars).
+            $table->string('profile_photo_path', 500)->nullable();
             //Deberia de poner el last_login, pero esto más adelante 
             $table->timestamps();
         });

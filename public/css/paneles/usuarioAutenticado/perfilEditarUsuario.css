@@ -32,6 +32,41 @@
     line-height: var(--fuente-altura-linea);
 }
 
+/* ===== Alertas de éxito ===== */
+.alertaExito {
+    padding: calc(var(--unidad-espaciado) * 1.5);
+    border-radius: var(--radio-pequeno);
+    background-color: var(--color-exito-fondo, #d4edda);
+    color: var(--color-exito-texto, #155724);
+    border: 1px solid var(--color-exito-borde, #c3e6cb);
+    font-weight: 600;
+}
+
+/* ===== Errores de validación ===== */
+.errorCampo {
+    color: var(--color-error, #dc3545);
+    font-size: var(--fuente-pequena, 0.85rem);
+
+}
+
+/* ===== Info de campo estático (solo lectura) ===== */
+.infoEstatico {
+    color: var(--color-texto-secundario, #6c757d);
+    font-size: var(--fuente-pequena, 0.85rem);
+    font-style: italic;
+}
+
+/* Input deshabilitado con aspecto diferenciado */
+.campoPerfilEditar input:disabled {
+    background-color: var(--color-fondo-global, #f0f0f0);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+margin-top: 2px;
+}
+
+/* ===== Formulario de edición ===== */
 .perfilEditarForm {
     display: flex;
     flex-direction: column;
@@ -62,6 +97,23 @@
     box-shadow: var(--input-foco-sombra);
 }
 
+/* ===== Preview de la foto de perfil ===== */
+.fotoPerfilPreview {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--unidad-espaciado) * 2);
+    flex-wrap: wrap;
+}
+
+.fotoPerfilImg {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--colorBorde);
+}
+
+/* ===== Botones de acción ===== */
 .accionesPerfilEditar {
     display: flex;
     flex-direction: column;
@@ -69,6 +121,21 @@
     align-items: flex-start;
 }
 
+/* Formulario de logout anidado dentro del bloque de acciones */
+.formLogoutEditar {
+    display: inline;
+}
+
+/* ===== Sección de cambio de contraseña (oculta por defecto) ===== */
+.seccionPassword {
+    display: none;
+}
+
+.seccionPasswordVisible {
+    display: flex;
+}
+
+/* ===== Media query escritorio ===== */
 @media (min-width: 768px) {
     .perfilEditarUsuario {
         gap: calc(var(--unidad-espaciado) * 4);
@@ -93,5 +160,10 @@
     .accionesPerfilEditar {
         flex-direction: row;
         flex-wrap: wrap;
+    }
+
+    .fotoPerfilImg {
+        width: 100px;
+        height: 100px;
     }
 }

@@ -16,6 +16,7 @@ use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\PublicacionController;
 use App\Http\Controllers\InventarioController;
 use App\Http\Controllers\PrestamosController;
+use App\Http\Controllers\PerfilController;
 use App\Models\Contacto;
 
 //Redirección a la página de inicio
@@ -87,18 +88,12 @@ Route::middleware(['auth:web', 'bloquear.demo'])->group(function () {
         return view('bibliotecaDAW.userViews.inicioLogin');
     })->name('usuario.inicio');
 
-    Route::get('/perfil', function () {
-        return view('bibliotecaDAW.userViews.perfil');
-    })->name('usuario.perfil');
+    Route::get('/perfil', [PerfilController::class, 'index'])->name('usuario.perfil');
 
     // Editar perfil
-    Route::get('/perfilEditar', function () {
-        return view('bibliotecaDAW.userViews.perfilEditar');
-    })->name('usuario.perfilEditar');
-
-    Route::put('/perfilEditar', function () {
-        return redirect()->route('usuario.perfilEditar');
-    })->name('usuario.perfilActualizar');
+    Route::get('/perfilEditar', [PerfilController::class, 'edit'])->name('usuario.perfilEditar');
+    Route::put('/perfilEditar', [PerfilController::class, 'update'])->name('usuario.perfilActualizar');
+    Route::put('/cambiarPassword', [PerfilController::class, 'changePassword'])->name('usuario.cambiarPassword');
 
     //Gestionar contacto con la biblioteca
     Route::get('/mis-consultas', [ContactoController::class, 'misConsultas'])->name('usuario.consultas');

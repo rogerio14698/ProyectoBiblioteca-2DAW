@@ -47,11 +47,11 @@
                 <a href="{{ route('evento.paginaInterna', ['id' => $evento->id]) }}" class="btn-base btn-azul">Ver evento</a>
                 {{-- Verifica si el usuario está autenticado --}}
 
-               @if (Auth::check())
-                   <a href="{{ route('evento.apuntarse', ['id' => $evento->id]) }}" class="btn-base btn-verde">Apuntarse</a>
-               @else
-                   <p>Debes iniciar sesión para apuntarte al evento. O enviar tus datos a través del formulario de contacto.</p>
-               @endif
+            @if (Auth::check())
+                <a href="{{ route('evento.apuntarse', ['id' => $evento->id]) }}" class="btn-base btn-verde">Apuntarse</a>
+            @else
+                <p>Debes iniciar sesión para apuntarte al evento. O enviar tus datos a través del formulario de contacto.</p>
+            @endif
             </div>
         @endforeach
     </section>

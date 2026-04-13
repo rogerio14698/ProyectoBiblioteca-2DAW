@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Usuario;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 
 class Evento extends Model
@@ -51,5 +52,17 @@ class Evento extends Model
     protected static function newFactory(): EventosFactory
     {
         return EventosFactory::new();
+    }
+
+    /**
+     * Relación: un evento puede tener muchos usuarios inscritos (tabla pivote evento_usuario).
+     *
+     * @return BelongsToMany Relación con el modelo Usuario.
+     */
+    public function usuariosInscritos(): BelongsToMany
+    {
+        return $this->belongsToMany(Usuario::class, 'evento_usuario', 'evento_id', 'usuario_id')
+            ->withPivot('fecha_inscripcion', 'estado')
+            ->withTimestamps();
     }
 }

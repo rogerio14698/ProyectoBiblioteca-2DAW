@@ -1,89 +1,99 @@
-<section class="historialVersionMovil">
-    <div class="historialPrestamos">
-        <h3>Historial de prestamos</h3>
-        <div class="contenedorCardsHistorial">
-            <article class="cardHistorialMovil">
-                <p><strong>Libro:</strong> Libro 1</p>
-                <p><strong>ISBN:</strong> 1234567890</p>
-                <p><strong>Fecha de prestamo:</strong> 01/01/2024</p>
-                <p><strong>Fecha de devolucion:</strong> 15/01/2024</p>
-                <p><strong>Estado:</strong> Devuelto</p>
-                <div class="tablaAccionesBotones">
-                    <button class="btn-base btn-verde">Ver</button>
-                    <button class="btn-base btn-rojo">Resolver</button>
-                </div>
-            </article>
-        </div>
-    </div>
-<hr>
-    <div class="historialReservas">
-        <h3>Historial de reservas eventos</h3>
-        <div class="contenedorCardsHistorial">
-            <article class="cardHistorialMovil">
-                <h4>Total historias: 3</h4>
-                <p><strong>Nombre evento:</strong> Lectura 2</p>
-                <p><strong>Ubicacion:</strong> Biblioteca Central</p>
-                <p><strong>Fecha:</strong> 01/02/2024</p>
-                <p><strong>Hora:</strong> 18:00</p>
-                <p><strong>Estado:</strong> Asistido</p>
-                <div class="tablaAccionesBotones">
-                    <button class="btn-base btn-verde">Ver</button>
-                    <button class="btn-base btn-rojo">Eliminar</button>
-                </div>
-            </article>
-        </div>
-    </div>
-<hr>
-    <div class="historialCompras">
-        <h3>Historial de compras</h3>
-        <div class="contenedorCardsHistorial">
-            <article class="cardHistorialMovil">
-                <p><strong>Libro:</strong> Libro 1</p>
-                <p><strong>ISBN:</strong> 1234567890</p>
-                <p><strong>Fecha de compra:</strong> 01/01/2024</p>
-                <p><strong>Precio:</strong> 15,00 EUR</p>
-                <p><strong>Estado:</strong> Completado Recibido</p>
-                <div class="tablaAccionesBotones">
-                    <button class="btn-base btn-verde">Ver</button>
-                    <button class="btn-base btn-rojo">Eliminar</button>
-                </div>
-            </article>
-        </div>
-    </div>
-<hr>
-    <div class="historialPublicaciones">
-        <h3>Historial de publicaciones</h3>
-        <div class="contenedorCardsHistorial">
-            <article class="cardHistorialMovil">
-                <p><strong>Titulo:</strong> Publicacion 1</p>
-                <p><strong>Resumen:</strong> Resumen de la publicacion 1</p>
-                <p><strong>Genero:</strong> Ficcion</p>
-                <p><strong>Autor:</strong> Autor 1</p>
-                <p><strong>Formato:</strong> PDF</p>
-                <p><strong>Estado:</strong> Publicado</p>
-                <p><strong>Fecha de publicacion:</strong> 01/03/2024</p>
-                <p><strong>Evento promocional:</strong> Evento 1</p>
-                <div class="tablaAccionesBotones">
-                    <button class="btn-base btn-verde">Ver</button>
-                    <button class="btn-base btn-rojo">Eliminar</button>
-                </div>
-            </article>
+{{-- ============================================================
+HISTORIAL DE ACTIVIDAD DEL USUARIO (versión móvil: cards)
+Esta vista se muestra en pantallas < 1200px. Usa cards (article) para cada registro, ideal para pantallas
+    pequeñas.============================================================--}} <section class="historialVersionMovil">
 
-            <article class="cardHistorialMovil">
-                <p><strong>Titulo:</strong> Publicacion 2</p>
-                <p><strong>Resumen:</strong> Resumen de la publicacion 2</p>
-                <p><strong>Genero:</strong> Ficcion</p>
-                <p><strong>Autor:</strong> Autor 2</p>
-                <p><strong>Formato:</strong> PDF</p>
-                <p><strong>Estado:</strong> Publicado</p>
-                <p><strong>Fecha de publicacion:</strong> 01/03/2024</p>
-                <p><strong>Evento promocional:</strong> Evento 1</p>
-                <div class="tablaAccionesBotones">
-                    <button class="btn-base btn-verde">Ver</button>
-                    <button class="btn-base btn-rojo">Eliminar</button>
-                </div>
-            </article>
+    {{-- ===================== HISTORIAL DE PRÉSTAMOS ===================== --}}
+    <div class="historialPrestamos">
+        <h3>Historial de préstamos</h3>
+        <div class="contenedorCardsHistorial">
+            @forelse($prestamos as $prestamo)
+                <article class="cardHistorialMovil">
+                    <p><strong>Libro:</strong> {{ $prestamo->libro->titulo }}</p>
+                    <p><strong>ISBN:</strong> {{ $prestamo->libro->isbn ?? 'N/A' }}</p>
+                    <p><strong>Fecha de préstamo:</strong> {{ $prestamo->fecha_prestamo->format('d/m/Y') }}</p>
+                    <p><strong>Fecha de devolución:</strong>
+                        {{ $prestamo->fecha_devolucion_real ? $prestamo->fecha_devolucion_real->format('d/m/Y') : 'Pendiente' }}
+                    </p>
+                    <p><strong>Estado:</strong>
+                        {{ $prestamo->fecha_devolucion_real ? 'Devuelto' : 'En préstamo' }}
+                    </p>
+                    <div class="tablaAccionesBotones">
+                        <a href="{{ route('libro.paginaInterna', $prestamo->libro->id) }}"
+                            class="btn-base btn-verde">Ver</a>
+                    </div>
+                </article>
+            @empty
+                <p class="sinRegistros">No tienes préstamos registrados.</p>
+            @endforelse
         </div>
     </div>
     <hr>
-</section>
+
+    {{-- ===================== HISTORIAL DE RESERVAS EVENTOS ===================== --}}
+    <div class="historialReservas">
+        <h3>Historial de reservas eventos</h3>
+        <div class="contenedorCardsHistorial">
+            @forelse($eventosInscritos as $evento)
+                <article class="cardHistorialMovil">
+                    <p><strong>Nombre evento:</strong> {{ $evento->titulo }}</p>
+                    <p><strong>Ubicación:</strong> {{ $evento->ubicacion ?? 'Sin ubicación' }}</p>
+                    <p><strong>Fecha:</strong> {{ date('d/m/Y', strtotime($evento->fecha_hora)) }}</p>
+                    <p><strong>Hora:</strong> {{ date('H:i', strtotime($evento->fecha_hora)) }}</p>
+                    <p><strong>Estado:</strong> {{ ucfirst(str_replace('_', ' ', $evento->pivot->estado)) }}</p>
+                    <div class="tablaAccionesBotones">
+                        <a href="{{ route('evento.paginaInterna', $evento->id) }}" class="btn-base btn-verde">Ver</a>
+                    </div>
+                </article>
+            @empty
+                <p class="sinRegistros">No tienes inscripciones a eventos.</p>
+            @endforelse
+        </div>
+    </div>
+    <hr>
+
+    {{-- ===================== HISTORIAL DE COMPRAS ===================== --}}
+    <div class="historialCompras">
+        <h3>Historial de compras</h3>
+        <div class="contenedorCardsHistorial">
+            @forelse($compras as $compra)
+                <article class="cardHistorialMovil">
+                    <p><strong>Libro:</strong> {{ $compra->libro->titulo }}</p>
+                    <p><strong>ISBN:</strong> {{ $compra->libro->isbn ?? 'N/A' }}</p>
+                    <p><strong>Fecha de compra:</strong> {{ $compra->fecha_compra->format('d/m/Y') }}</p>
+                    <p><strong>Precio:</strong> {{ number_format((float) $compra->precio, 2, ',', '.') }} €</p>
+                    <p><strong>Estado:</strong> {{ ucfirst($compra->estado) }}</p>
+                    <div class="tablaAccionesBotones">
+                        <a href="{{ route('libro.paginaInterna', $compra->libro->id) }}" class="btn-base btn-verde">Ver</a>
+                    </div>
+                </article>
+            @empty
+                <p class="sinRegistros">No tienes compras registradas.</p>
+            @endforelse
+        </div>
+    </div>
+    <hr>
+
+    {{-- ===================== HISTORIAL DE PUBLICACIONES ===================== --}}
+    <div class="historialPublicaciones">
+        <h3>Historial de publicaciones</h3>
+        <div class="contenedorCardsHistorial">
+            @forelse($publicaciones as $publicacion)
+                <article class="cardHistorialMovil">
+                    <p><strong>Título:</strong> {{ $publicacion->titulo_publicacion }}</p>
+                    <p><strong>Resumen:</strong> {{ Str::limit($publicacion->resumen_publicacion, 80) }}</p>
+                    <p><strong>Libro:</strong> {{ $publicacion->nombre_libro }}</p>
+                    <p><strong>Formato:</strong> {{ strtoupper($publicacion->archivo_extension) }}</p>
+                    <p><strong>Fecha de publicación:</strong> {{ $publicacion->fecha_publicacion->format('d/m/Y') }}</p>
+                    <div class="tablaAccionesBotones">
+                        <button class="btn-base btn-verde">Ver</button>
+                    </div>
+                </article>
+            @empty
+                <p class="sinRegistros">No tienes publicaciones registradas.</p>
+            @endforelse
+        </div>
+    </div>
+    <hr>
+
+    </section>
