@@ -270,9 +270,13 @@ Route::middleware(['auth:admin', 'bloquear.demo'])->group(function () {
     Route::get('/admin/librosPrestados', [PrestamosController::class, 'index'])
         ->name('admin.librosPrestados');
 
-    // Ruta para PROCESAR la devolución (usamos PATCH porque estamos actualizando un campo existente)
+    // Ruta para PROCESAR la devolucion (usamos PATCH porque estamos actualizando un campo existente)
     Route::patch('/admin/librosPrestados/{id}/devolver', [PrestamosController::class, 'update'])
         ->name('admin.librosPrestados.devolver');
+
+    // Ruta para MARCAR un libro prestado como perdido (cierra el prestamo y lo envia a libros perdidos)
+    Route::patch('/admin/librosPrestados/{id}/perdido', [PrestamosController::class, 'marcarPerdido'])
+        ->name('admin.librosPrestados.perdido');
 
     // =================== Fin gestion de libros ===================
 
