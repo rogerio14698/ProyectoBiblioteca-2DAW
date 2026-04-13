@@ -1,3 +1,30 @@
+# ===========================================
+# COMPRESION GZIP - Reduce tamaño de transferencia
+# ===========================================
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css
+    AddOutputFilterByType DEFLATE text/javascript application/javascript application/json
+    AddOutputFilterByType DEFLATE image/svg+xml application/xml text/xml
+    AddOutputFilterByType DEFLATE application/font-woff application/font-woff2
+</IfModule>
+
+# ===========================================
+# CACHE - Revalidacion obligatoria para CSS/JS
+# El navegador comprueba si el archivo cambio (304), pero no re-descarga si no.
+# Para imagenes y fuentes si permitimos cache larga (no cambian tras deploy).
+# ===========================================
+<IfModule mod_headers.c>
+    # CSS y JS: siempre revalidar con el servidor
+    <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "no-cache, must-revalidate"
+    </FilesMatch>
+
+    # Imagenes y fuentes: cache larga (30 dias), cambian poco
+    <FilesMatch "\.(jpg|jpeg|png|gif|webp|svg|ico|woff|woff2|ttf|eot)$">
+        Header set Cache-Control "public, max-age=2592000, immutable"
+    </FilesMatch>
+</IfModule>
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
