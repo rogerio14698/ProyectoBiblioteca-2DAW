@@ -176,7 +176,12 @@ class EventosController extends Controller
         if ($hasPrioridadColumn) {
             $nuevoEvento->prioridad = $request->prioridad ?? 1;
         }
-        //Vamos a dejar un espacio para la imagen, eso luego la gestionamos
+
+        // Si el usuario ha subido imagen, la almacenamos en disco publico y guardamos la ruta.
+        if ($request->hasFile('imagen')) {
+            $pathImagen = $request->file('imagen')->store('eventos', 'public');
+            $nuevoEvento->imagen_url = $pathImagen;
+        }
 
         // Cambio aplicado: usuario_id se toma de tabla usuarios (no del guard admin) para respetar la FK
         $usuarioId = Usuario::query()->value('id');
@@ -243,6 +248,16 @@ class EventosController extends Controller
             $evento->prioridad = $request->prioridad ?? 1;
         }
 
+        // Si llega una imagen nueva, borramos la anterior del disco y guardamos la nueva.
+        if ($request->hasFile('imagen')) {
+            // Eliminamos la imagen anterior si existia en almacenamiento local.
+            if ($evento->imagen_url) {
+                Storage::disk('public')->delete($evento->imagen_url);
+            }
+            $pathImagen = $request->file('imagen')->store('eventos', 'public');
+            $evento->imagen_url = $pathImagen;
+        }
+
         // Guardamos los cambios en base de datos.
         $evento->save();
 
@@ -258,8 +273,10 @@ class EventosController extends Controller
         //Busca el evento o devuevle 404 si falla
         $evento = Evento::findOrFail($id);
 
-        //Deja un espacio para borrar la imagen en un futuro.
-
+        // Eliminamos la imagen del disco si existia antes de borrar el registro.
+        if ($evento->imagen_url) {
+            Storage::disk('public')->delete($evento->imagen_url);
+        }
 
         //Eliminar registros de la base de datos.
         $evento->delete();

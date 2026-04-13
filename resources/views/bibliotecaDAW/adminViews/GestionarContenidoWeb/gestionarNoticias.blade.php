@@ -141,7 +141,7 @@
                                         </span>
                                     @endif
                                     @if ($noticia->destacado)
-                                        <span class="noticiaCardDestacado">⭐ Destacada</span>
+                                        <span class="noticiaCardDestacado">Destacada</span>
                                     @endif
                                 </div>
 
@@ -154,10 +154,10 @@
                                 <!-- Metadatos: autor y fecha -->
                                 <div class="noticiaCardMeta">
                                     @if ($noticia->autor)
-                                        <span class="noticiaCardMetaItem">✍️ {{ $noticia->autor }}</span>
+                                        <span class="noticiaCardMetaItem">{{ $noticia->autor }}</span>
                                     @endif
                                     @if ($noticia->fecha_publicacion)
-                                        <span class="noticiaCardMetaItem">📅 {{ $noticia->fecha_publicacion->format('d/m/Y') }}</span>
+                                        <span class="noticiaCardMetaItem">{{ $noticia->fecha_publicacion->format('d/m/Y') }}</span>
                                     @endif
                                 </div>
                             </div>

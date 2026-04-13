@@ -56,6 +56,10 @@
     grid-column: 2;
     grid-row: 1 / span 3;
     width: 100%;
+    /* Altura fija para que ninguna imagen deforme el contenedor del slide */
+    max-height: 420px;
+    overflow: hidden;
+    border-radius: var(--radio-borde);
 }
 
 .bienvenidaSlideContenido > .btn-base {
@@ -73,7 +77,9 @@
 .bienvenida-imagen img {
     width: 100%;
     max-width: 680px;
-    height: auto;
+    /* Altura fija + object-fit:cover recorta la imagen al centro sin deformarla */
+    height: 420px;
+    object-fit: cover;
     margin: 0 0 0 auto;
     box-shadow: var(--sombra-media);
     border: 1px solid var(--colorBorde);
@@ -155,6 +161,12 @@
     .bienvenidaSlideContenido > .bienvenida-imagen {
         grid-column: 1;
         grid-row: auto;
+        /* En móvil la imagen ocupa menos alto para no dominar la pantalla */
+        max-height: 280px;
+    }
+
+    .bienvenida-imagen img {
+        height: 280px;
     }
 
     .bienvenidaSlideContenido > .tituloPagina,

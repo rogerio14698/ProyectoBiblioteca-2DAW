@@ -48,7 +48,6 @@
    ============================================== */
 .gestionUsuariosBuscador {
     background: var(--color-fondo-global);
-    border-left: 4px solid var(--color-primario);
     border-radius: 0 8px 8px 0;
     padding: calc(var(--unidad-espaciado) * 2.5);
     box-shadow: var(--sombra-suave);
@@ -103,15 +102,13 @@
 .gestionUsuariosBotonesFiltr {
     display: flex;
     gap: calc(var(--unidad-espaciado) * 1.5);
+    width: 200px;
 }
 
 .gestionUsuariosBotonesFiltr .btn-base {
     text-decoration: none;
 }
 
-/* ==============================================
-   LAYOUT: FORMULARIO DE EDICIÓN + LISTADO
-   ============================================== */
 .gestionUsuariosLayout {
     display: grid;
     grid-template-columns: 1fr;
@@ -257,7 +254,6 @@
     gap: calc(var(--unidad-espaciado) * 2);
     background: var(--blanco);
     border: 1px solid var(--color-borde);
-    border-left: 4px solid var(--color-primario);
     border-radius: 0 8px 8px 0;
     padding: calc(var(--unidad-espaciado) * 2);
     box-shadow: var(--sombra-suave);
@@ -385,7 +381,6 @@
 .adminCard {
     background: var(--blanco);
     border: 1px solid var(--color-borde);
-    border-left: 4px solid var(--colorComplementarioTerciario);
     border-radius: 0 8px 8px 0;
     padding: calc(var(--unidad-espaciado) * 2);
     box-shadow: var(--sombra-suave);

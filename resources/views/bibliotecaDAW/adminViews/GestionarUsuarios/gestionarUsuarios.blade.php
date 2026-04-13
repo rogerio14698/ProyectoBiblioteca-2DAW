@@ -141,14 +141,14 @@
 
                                 <!-- Datos del usuario -->
                                 <div class="usuarioCardMeta">
-                                    <span class="usuarioCardMetaItem">📧 {{ $usuario->email }}</span>
+                                    <span class="usuarioCardMetaItem">{{ $usuario->email }}</span>
                                     @if ($usuario->dni)
-                                        <span class="usuarioCardMetaItem">🪪 {{ $usuario->dni }}</span>
+                                        <span class="usuarioCardMetaItem">{{ $usuario->dni }}</span>
                                     @endif
                                     @if ($usuario->movil)
-                                        <span class="usuarioCardMetaItem">📱 {{ $usuario->movil }}</span>
+                                        <span class="usuarioCardMetaItem">{{ $usuario->movil }}</span>
                                     @endif
-                                    <span class="usuarioCardMetaItem">📅 {{ $usuario->created_at->format('d/m/Y') }}</span>
+                                    <span class="usuarioCardMetaItem">{{ $usuario->created_at->format('d/m/Y') }}</span>
                                 </div>
                             </div>
 
@@ -196,12 +196,12 @@
                                 </span>
                             </div>
                             <div class="adminCardMeta">
-                                <span class="adminCardMetaItem">📧 {{ $admin->email }}</span>
+                                <span class="adminCardMetaItem">{{ $admin->email }}</span>
                                 @if ($admin->last_login)
-                                    <span class="adminCardMetaItem">🕐 Último login: {{ \Carbon\Carbon::parse($admin->last_login)->format('d/m/Y H:i') }}</span>
+                                    <span class="adminCardMetaItem">Último login: {{ \Carbon\Carbon::parse($admin->last_login)->format('d/m/Y H:i') }}</span>
                                 @endif
                                 @if ($admin->is_demo)
-                                    <span class="adminCardMetaItemDemo">🔒 Cuenta Demo</span>
+                                    <span class="adminCardMetaItemDemo">Cuenta Demo</span>
                                 @endif
                             </div>
                         </div>

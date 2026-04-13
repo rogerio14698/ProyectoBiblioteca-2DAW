@@ -45,7 +45,6 @@
     background-color: var(--color-fondo-global);
     padding: calc(var(--unidad-espaciado) * 3);
     border-radius: var(--radio-medio);
-    border-left: 4px solid var(--color-primario);
     box-shadow: var(--sombra-media);
 }
 
@@ -104,6 +103,15 @@
 /* Select */
 .gestionGrupoFormulario select {
     cursor: pointer;
+}
+
+/* Texto de ayuda bajo los campos del formulario */
+.gestionAyudaCampo {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.82rem;
+    color: var(--colorTexto);
+    line-height: 1.4;
 }
 
 /* Botón Envío Formulario */

@@ -85,9 +85,9 @@
                                 </div>
                                 <p class="eventoCardDescripcion">{{ $evento->descripcion }}</p>
                                 <div class="eventoCardMeta">
-                                    <span>📅 {{ \Illuminate\Support\Carbon::parse($evento->fecha_hora)->format('d/m/Y H:i') }}</span>
-                                    <span>📍 {{ $evento->ubicacion }}</span>
-                                    <span>👤 {{ $evento->usuario->name ?? 'Sin autor' }}</span>
+                                    <span>{{ \Illuminate\Support\Carbon::parse($evento->fecha_hora)->format('d/m/Y H:i') }}</span>
+                                    <span>{{ $evento->ubicacion }}</span>
+                                    <span>{{ $evento->usuario->name ?? 'Sin autor' }}</span>
                                 </div>
                             </div>
                             <!--Acciones del evento -->

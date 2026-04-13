@@ -170,7 +170,7 @@
 
                                 <!-- Libro y usuario -->
                                 <h3 class="reservaCardTitulo">{{ $reserva->libro->titulo ?? 'Libro eliminado' }}</h3>
-                                <p class="reservaCardUsuario">👤 {{ $reserva->usuario->name ?? 'Usuario eliminado' }}
+                                <p class="reservaCardUsuario">{{ $reserva->usuario->name ?? 'Usuario eliminado' }}
                                     @if ($reserva->usuario && $reserva->usuario->nSocio)
                                         <span class="reservaCardSocio">({{ $reserva->usuario->nSocio }})</span>
                                     @endif
@@ -178,16 +178,16 @@
 
                                 <!-- Fechas -->
                                 <div class="reservaCardMeta">
-                                    <span class="reservaCardMetaItem">📅 Reserva: {{ $reserva->fecha_reserva->format('d/m/Y') }}</span>
-                                    <span class="reservaCardMetaItem">⏰ Límite: {{ $reserva->fecha_devolucion_prevista->format('d/m/Y') }}</span>
+                                    <span class="reservaCardMetaItem">Reserva: {{ $reserva->fecha_reserva->format('d/m/Y') }}</span>
+                                    <span class="reservaCardMetaItem">Límite: {{ $reserva->fecha_devolucion_prevista->format('d/m/Y') }}</span>
                                     @if ($reserva->fecha_devolucion_real)
-                                        <span class="reservaCardMetaItem">✅ Devuelto: {{ $reserva->fecha_devolucion_real->format('d/m/Y') }}</span>
+                                        <span class="reservaCardMetaItem">Devuelto: {{ $reserva->fecha_devolucion_real->format('d/m/Y') }}</span>
                                     @endif
                                 </div>
 
                                 <!-- Observaciones si existen -->
                                 @if ($reserva->observaciones)
-                                    <p class="reservaCardObs">💬 {{ $reserva->observaciones }}</p>
+                                    <p class="reservaCardObs">{{ $reserva->observaciones }}</p>
                                 @endif
                             </div>
 

@@ -34,6 +34,10 @@
                         <div class="gestionGrupoFormulario">
                             <label for="imagen">Imagen del Slide:</label>
                             <input type="file" id="imagen" name="imagen" accept="image/*" {{ $slideEditar ? '' : 'required' }}>
+                            <small class="gestionAyudaCampo">
+                                Dimensión recomendada: <strong>680 × 420 px</strong> (horizontal).
+                                La imagen se recortará automáticamente al centro si excede ese tamaño.
+                            </small>
                         </div>
                         <div class="gestionGrupoFormulario">
                             <label for="posicion">Posición del slide:</label>

@@ -41,19 +41,19 @@
                             </div>
 
                             <h3 class="reservaCardTitulo">{{ $reserva->libro->titulo ?? 'Libro eliminado' }}</h3>
-                            <p class="reservaCardUsuario">👤 {{ $reserva->usuario->name ?? 'Usuario eliminado' }}
+                            <p class="reservaCardUsuario">{{ $reserva->usuario->name ?? 'Usuario eliminado' }}
                                 @if ($reserva->usuario && $reserva->usuario->nSocio)
                                     <span class="reservaCardSocio">({{ $reserva->usuario->nSocio }})</span>
                                 @endif
                             </p>
 
                             <div class="reservaCardMeta">
-                                <span class="reservaCardMetaItem">📅 Reserva: {{ $reserva->fecha_reserva->format('d/m/Y') }}</span>
-                                <span class="reservaCardMetaItem">⏰ Límite: {{ $reserva->fecha_devolucion_prevista->format('d/m/Y') }}</span>
+                                <span class="reservaCardMetaItem">Reserva: {{ $reserva->fecha_reserva->format('d/m/Y') }}</span>
+                                <span class="reservaCardMetaItem">Límite: {{ $reserva->fecha_devolucion_prevista->format('d/m/Y') }}</span>
                             </div>
 
                             @if ($reserva->observaciones)
-                                <p class="reservaCardObs">💬 {{ $reserva->observaciones }}</p>
+                                <p class="reservaCardObs">{{ $reserva->observaciones }}</p>
                             @endif
                         </div>
 
