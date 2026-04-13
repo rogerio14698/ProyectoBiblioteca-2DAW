@@ -19,6 +19,30 @@
     box-shadow: var(--sombra-media);
 }
 
+.publicarMensaje {
+    padding: calc(var(--unidad-espaciado) * 1.5);
+    border-radius: var(--radio-pequeno);
+    border: 1px solid var(--color-borde);
+    background-color: var(--color-blanco);
+}
+
+.publicarMensaje p {
+    margin: 0;
+}
+
+.publicarMensaje ul {
+    margin: calc(var(--unidad-espaciado) * 1) 0 0 0;
+    padding-left: calc(var(--unidad-espaciado) * 2);
+}
+
+.publicarMensajeExito {
+    border-color: var(--color-exito);
+}
+
+.publicarMensajeError {
+    border-color: var(--color-error);
+}
+
 .publicarHeader h1,
 .publicarIntro h2,
 .publicarCard h2 {
@@ -84,6 +108,51 @@
 .publicarGrid {
     display: grid;
     gap: calc(var(--unidad-espaciado) * 2);
+}
+
+.publicacionesListado {
+    display: grid;
+    gap: calc(var(--unidad-espaciado) * 1.25);
+}
+
+.publicacionItem {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 0.8);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-pequeno);
+    padding: calc(var(--unidad-espaciado) * 1.25);
+    background-color: var(--color-fondo-global);
+}
+
+.publicacionItem h3,
+.publicacionItem p {
+    margin: 0;
+}
+
+.publicacionItem h3 {
+    font-size: 1.05rem;
+    color: var(--color-primario-oscuro);
+}
+
+.publicacionesPaginacion {
+    display: flex;
+    justify-content: center;
+    margin-top: calc(var(--unidad-espaciado) * 1.5);
+}
+
+.publicarCardMantenimiento {
+    border-left: 4px solid var(--color-alerta);
+}
+
+.estadoMantenimientoPublicar {
+    width: fit-content;
+    border-radius: 999px;
+    border: 1px solid var(--color-alerta);
+    color: var(--color-alertaTexto);
+    background-color: var(--color-alerta);
+    padding: 6px 12px;
+    font-weight: 700;
 }
 
 .accionesPublicar,

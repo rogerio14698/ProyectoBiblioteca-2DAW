@@ -329,6 +329,18 @@
     border: 1px solid var(--color-borde);
 }
 
+.eventoInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.eventoInfo .tituloCard {
+    font-size: 1.4rem;
+    line-height: 1.25;
+    color: var(--colorTexto);
+}
+
 /* Hover solo en dispositivos con ratón (evita problemas en touch) */
 @media (hover: hover) {
     .eventoCard:hover {
@@ -372,9 +384,15 @@
 }
 
 .eventoDetalles p {
-    line-height: 1.1;
-    font-size: 0.7rem;
+    line-height: 1.35;
+    font-size: 0.95rem;
     font-weight: 600;
+}
+
+.eventoDetalles strong {
+    display: inline-block;
+    margin-top: 2px;
+    font-size: 1.05rem;
 }
 
 /* Estilos básicos para la paginación */

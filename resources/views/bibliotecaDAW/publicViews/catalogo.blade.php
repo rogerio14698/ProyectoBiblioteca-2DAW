@@ -19,6 +19,9 @@
                 <a href="{{ url('/catalogo') }}" class="btn-base btn-limpiar"
                     aria-label="Limpiar filtros de búsqueda">Limpiar filtros</a>
             </form>
+            <a href="{{ route('publicaciones.index') }}" class="btn-base btn-ver catalogoEnlacePublicaciones">
+                Ver publicaciones de usuarios
+            </a>
         </div>
 
         <div class="catalogoBody separador">

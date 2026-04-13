@@ -16,6 +16,9 @@ use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\PublicacionController;
 use App\Http\Controllers\InventarioController;
 use App\Http\Controllers\PrestamosController;
+use App\Http\Controllers\PrestamosUsuarioController;
+use App\Http\Controllers\AlquilerController;
+use App\Http\Controllers\PublicarUsuarioController;
 use App\Http\Controllers\PerfilController;
 use App\Models\Contacto;
 
@@ -51,6 +54,8 @@ Route::get('/actividades', function () {
 Route::get('/contacto', [ContactoController::class, 'create'])->name('contacto.create');
 Route::post('/contacto', [ContactoController::class, 'store'])->name('contacto.store');
 Route::get('/catalogo', [LibroController::class, 'catalogo']);
+Route::get('/publicaciones', [PublicarUsuarioController::class, 'communityIndex'])->name('publicaciones.index');
+Route::get('/publicaciones/{id}/ver', [PublicarUsuarioController::class, 'view'])->name('publicaciones.ver');
 // Ruta para aviso legal:
 Route::get('/avisoLegal', function () {
     return view('bibliotecaDAW.publicViews.avisoLegal');
@@ -99,13 +104,10 @@ Route::middleware(['auth:web', 'bloquear.demo'])->group(function () {
     Route::get('/mis-consultas', [ContactoController::class, 'misConsultas'])->name('usuario.consultas');
 
 
-    Route::get('/alquilar', function () {
-        return view('bibliotecaDAW.userViews.alquilar');
-    })->name('usuario.alquilar');
+    Route::get('/alquilar', [AlquilerController::class, 'index'])->name('usuario.alquilar');
+    Route::post('/alquilar', [AlquilerController::class, 'store'])->name('usuario.alquilar.store');
 
-    Route::get('/prestamos', function () {
-        return view('bibliotecaDAW.userViews.prestamos');
-    })->name('usuario.prestamos');
+    Route::get('/prestamos', [PrestamosUsuarioController::class, 'index'])->name('usuario.prestamos');
 
     Route::get('/comprar', function () {
         return view('bibliotecaDAW.userViews.comprar');
@@ -119,9 +121,9 @@ Route::middleware(['auth:web', 'bloquear.demo'])->group(function () {
         return view('bibliotecaDAW.userViews.vender');
     })->name('usuario.vender');
 
-    Route::get('/publicar', function () {
-        return view('bibliotecaDAW.userViews.publicar');
-    })->name('usuario.publicar');
+    Route::get('/publicar', [PublicarUsuarioController::class, 'index'])->name('usuario.publicar');
+    Route::post('/publicar', [PublicarUsuarioController::class, 'store'])->name('usuario.publicar.store');
+    Route::get('/publicar/{id}/archivo', [PublicarUsuarioController::class, 'download'])->name('usuario.publicar.archivo');
 
     // Logout de usuario
     Route::post('/logout', [LoginControllerUsuario::class, 'logout'])->name('usuario.logout');

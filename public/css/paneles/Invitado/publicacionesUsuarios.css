@@ -1,0 +1,114 @@
+.catalogoEnlacePublicaciones {
+    margin-top: calc(var(--unidad-espaciado) * 1.5);
+}
+
+.publicacionesAcademicasPage {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 2);
+}
+
+.publicacionesAcademicasFiltros {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 1);
+    width: 100%;
+    margin-top: calc(var(--unidad-espaciado) * 1);
+}
+
+.publicacionesAcademicasListaWrap {
+    background: var(--color-blanco);
+    border: 1px solid var(--color-borde);
+    box-shadow: var(--sombra-media);
+    padding: calc(var(--unidad-espaciado) * 2);
+}
+
+.publicacionesAcademicasLista {
+    display: flex;
+    flex-direction: column;
+}
+
+.publicacionesAcademicasHeader,
+.publicacionesAcademicasItem {
+    display: grid;
+    grid-template-columns: 1.4fr 2fr 0.8fr 0.8fr;
+    gap: calc(var(--unidad-espaciado) * 1);
+    align-items: center;
+    padding: calc(var(--unidad-espaciado) * 1.25) 0;
+}
+
+.publicacionesAcademicasHeader {
+    border-bottom: 2px solid var(--color-borde);
+    font-weight: 700;
+    color: var(--color-primario-oscuro);
+}
+
+.publicacionesAcademicasItem {
+    border-bottom: 1px solid var(--color-borde);
+}
+
+.publicacionesAcademicasItem:last-child {
+    border-bottom: none;
+}
+
+.publicacionesCampoNombre {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.publicacionesCampoNombre small {
+    color: var(--color-texto-mutado);
+}
+
+.publicacionesCampoTitulo,
+.publicacionesCampoFecha {
+    color: var(--color-texto-principal);
+}
+
+.publicacionesCampoAccion {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.publicacionesCampoAccion .btn-base {
+    width: auto;
+    min-width: 120px;
+}
+
+.publicacionesAcademicasVacio {
+    margin: 0;
+    padding: calc(var(--unidad-espaciado) * 2) 0;
+    color: var(--color-texto-mutado);
+}
+
+.paginacionPublicacionesAcademicas {
+    margin-top: calc(var(--unidad-espaciado) * 2);
+}
+
+@media (max-width: 767px) {
+    .publicacionesAcademicasHeader {
+        display: none;
+    }
+
+    .publicacionesAcademicasItem {
+        grid-template-columns: 1fr;
+        gap: calc(var(--unidad-espaciado) * 0.75);
+        border: 1px solid var(--color-borde);
+        border-radius: var(--radio-pequeno);
+        margin-bottom: calc(var(--unidad-espaciado) * 1);
+        padding: calc(var(--unidad-espaciado) * 1.25);
+    }
+
+    .publicacionesCampoAccion {
+        justify-content: flex-start;
+    }
+}
+
+@media (min-width: 768px) {
+    .publicacionesAcademicasFiltros {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr auto auto;
+        align-items: center;
+    }
+}

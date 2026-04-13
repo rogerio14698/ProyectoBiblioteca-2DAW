@@ -119,7 +119,7 @@
     </section>
     <!-- Fin de la sección de novedades del catálogo -->
     <!-- Agenda de eventos -->
-    <section class="agenda separador separador">
+    <section id="agenda" class="agenda separador separador">
         <div class="headerContenido">
             <h2 class="tituloContenido">Agenda de Eventos</h2>
             <p class="parrafoContenido">Agenda de eventos programados</p>
@@ -148,11 +148,11 @@
             @endforeach
         </div>
         <div class="paginacionBase paginacionAgenda">
-            {{ $eventos->appends(['noticias_page' => $noticias->currentPage()])->links('vendor.pagination.bootstrap-5') }}
+            {{ $eventos->appends(['noticias_page' => $noticias->currentPage()])->fragment('agenda')->links('vendor.pagination.bootstrap-5') }}
         </div>
     </section>
 
-    <section class="noticias separador">
+    <section id="noticias" class="noticias separador">
         <div class="headerContenido">
             <h2 class="tituloContenido">Noticias</h2>
             <p class="parrafoContenido">Noticias relacionadas con la biblioteca y el mundo académico</p>
@@ -182,7 +182,7 @@
             @endforeach
         </div>
         <div class="paginacionBase paginacionNoticias">
-            {{ $noticias->appends(['eventos_page' => $eventos->currentPage()])->links('vendor.pagination.bootstrap-5') }}
+            {{ $noticias->appends(['eventos_page' => $eventos->currentPage()])->fragment('noticias')->links('vendor.pagination.bootstrap-5') }}
         </div>
     </section>
 @endsection

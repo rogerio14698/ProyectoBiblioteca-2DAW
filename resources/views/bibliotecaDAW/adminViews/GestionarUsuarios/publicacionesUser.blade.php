@@ -6,7 +6,7 @@
     <main class="contenedor gestionPublicacionesPage">
         <header class="publicacionesEncabezado">
             <h1>Gestionar Publicaciones</h1>
-            <p>Gestiona publicaciones de usuarios escritores y del administrador. Solo se admiten archivos: PDF, DOC, DOCX, ODT y RTF.</p>
+            <p>Gestiona publicaciones de usuarios escritores y del administrador. Solo se admiten archivos en formato PDF.</p>
         </header>
 
         @if (session('success'))
@@ -97,7 +97,7 @@
 
                     <div class="publicacionesCampo">
                         <label for="archivo_publicacion">Archivo de publicación</label>
-                        <input type="file" id="archivo_publicacion" name="archivo_publicacion" accept=".pdf,.doc,.docx,.odt,.rtf" required>
+                        <input type="file" id="archivo_publicacion" name="archivo_publicacion" accept=".pdf" required>
                         <p class="publicacionesHint">No se permite publicar texto plano en web. Máximo 10MB.</p>
                         @error('archivo_publicacion')
                             <span class="errorCampo">{{ $message }}</span>

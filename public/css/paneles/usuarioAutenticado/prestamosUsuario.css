@@ -11,75 +11,220 @@
     flex-direction: column;
     gap: calc(var(--unidad-espaciado) * 1.5);
     padding: calc(var(--unidad-espaciado) * 2);
-    border: 1px solid var(--colorBorde);
-    border-radius: var(--radio-medio);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-pequeno);
     background-color: var(--color-blanco);
     box-shadow: var(--sombra-suave);
 }
 
-.prestamosHeader h1,
-.prestamosCard h2 {
+.prestamosHeader h1 {
     margin: 0;
     color: var(--color-primario-oscuro);
+    font-size: 2rem;
     text-decoration: underline;
 }
 
+.prestamosHeader p {
+    margin: 0;
+    color: var(--color-texto-principal);
+    font-size: 1.05rem;
+}
+
 .prestamosHeader span {
-    color: var(--color-primario);
+    color: var(--color-primario-oscuro);
     font-weight: 700;
 }
 
-.prestamosHeader p,
-.prestamosCard p {
-    margin: 0;
-    color: var(--color-texto-principal);
-    line-height: var(--fuente-altura-linea);
+.prestamosResumenCards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: calc(var(--unidad-espaciado) * 1.5);
 }
 
-.prestamosResumen,
-.prestamosGrid {
+.prestamosCardResumen {
+    padding: calc(var(--unidad-espaciado) * 1.5);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-pequeno);
+    background-color: var(--color-blanco);
+    box-shadow: var(--sombra-suave);
+}
+
+.prestamosCardResumenAlerta {
+    border-color: var(--color-alerta);
+}
+
+.prestamosResumenEtiqueta {
+    margin: 0;
+    color: var(--color-texto-mutado);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.prestamosResumenNumero {
+    margin: 0;
+    margin-top: calc(var(--unidad-espaciado) * 0.75);
+    color: var(--color-primario-oscuro);
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.prestamosPanelFiltros {
+    padding: calc(var(--unidad-espaciado) * 2);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-pequeno);
+    background-color: var(--color-blanco);
+    box-shadow: var(--sombra-suave);
+}
+
+.prestamosFormularioFiltros {
     display: grid;
+    grid-template-columns: 1fr;
+    gap: calc(var(--unidad-espaciado) * 1.5);
+    margin-top: calc(var(--unidad-espaciado) * 1.5);
+}
+
+.prestamosCampoFiltro {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--unidad-espaciado) * 0.75);
+}
+
+.prestamosCampoFiltro label {
+    font-weight: 700;
+    color: var(--color-texto-principal);
+}
+
+.prestamosCampoFiltro input,
+.prestamosCampoFiltro select {
+    height: var(--altura-boton-movil);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-pequeno);
+    padding: 0 calc(var(--unidad-espaciado) * 1.25);
+    font-size: 1rem;
+    color: var(--color-texto-principal);
+    background-color: var(--color-blanco);
+}
+
+.prestamosAccionesFiltro {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--unidad-espaciado) * 1);
+    align-items: center;
+}
+
+.prestamosBtnLimpiar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--altura-boton-movil);
+    padding: 0 calc(var(--unidad-espaciado) * 1.5);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-pequeno);
+    color: var(--color-texto-principal);
+    background-color: var(--color-fondo-global);
+    font-weight: 700;
+}
+
+.prestamosListadoCards {
+    display: grid;
+    grid-template-columns: 1fr;
     gap: calc(var(--unidad-espaciado) * 2);
 }
 
-.prestamosCard {
+.prestamoCardItem {
     display: flex;
     flex-direction: column;
     gap: calc(var(--unidad-espaciado) * 1.5);
     padding: calc(var(--unidad-espaciado) * 2);
-    border: 1px solid var(--colorBorde);
-    border-radius: var(--radio-medio);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-pequeno);
     background-color: var(--color-blanco);
     box-shadow: var(--sombra-media);
 }
 
-.prestamosCardDestacada {
-    border-left: 6px solid var(--color-primario);
-    background: linear-gradient(180deg, var(--color-blanco) 0%, var(--color-fondo-global) 100%);
+.prestamoCardCabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: calc(var(--unidad-espaciado) * 1.5);
 }
 
-.prestamosEtiqueta {
-    width: fit-content;
+.prestamoCardCabecera h3 {
     margin: 0;
-    padding: 6px 12px;
+    color: var(--color-primario-oscuro);
+    font-size: 1.3rem;
+    line-height: 1.3;
+}
+
+.prestamoEstado {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 999px;
-    background-color: var(--color-fondo-tag);
-    color: var(--color-texto-tag);
+    padding: 4px 12px;
     font-size: 0.85rem;
     font-weight: 700;
-    text-transform: uppercase;
+    white-space: nowrap;
 }
 
-.prestamosLista {
+.prestamoEstadoActivo {
+    background-color: var(--color-secundario);
+    color: var(--color-texto-principal);
+}
+
+.prestamoEstadoDevuelto {
+    background-color: var(--color-exito);
+    color: var(--color-blanco);
+}
+
+.prestamoEstadoVencido {
+    background-color: var(--color-error);
+    color: var(--color-blanco);
+}
+
+.prestamoDatosGrid {
     display: grid;
-    gap: var(--unidad-espaciado);
+    grid-template-columns: 1fr;
+    gap: calc(var(--unidad-espaciado) * 1);
 }
 
-.prestamosLista p {
+.prestamoDatosGrid p {
+    margin: 0;
     padding: calc(var(--unidad-espaciado) * 1.25);
-    border: 1px solid var(--colorBorde);
+    border: 1px solid var(--color-borde);
     border-radius: var(--radio-pequeno);
     background-color: var(--color-fondo-global);
+    color: var(--color-texto-principal);
+    font-size: 0.98rem;
+    line-height: 1.45;
+}
+
+.prestamoCardAcciones {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.prestamoSinResultados {
+    padding: calc(var(--unidad-espaciado) * 2);
+    border: 1px dashed var(--color-borde);
+    border-radius: var(--radio-pequeno);
+    background-color: var(--color-blanco);
+}
+
+.prestamoSinResultados h3,
+.prestamoSinResultados p {
+    margin: 0;
+}
+
+.prestamoSinResultados p {
+    margin-top: calc(var(--unidad-espaciado) * 1);
+    color: var(--color-texto-mutado);
+}
+
+.prestamosPaginacion {
+    display: flex;
+    justify-content: center;
 }
 
 @media (min-width: 768px) {
@@ -88,11 +233,23 @@
         padding: calc(var(--unidad-espaciado) * 3);
     }
 
-    .prestamosResumen {
-        grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    .prestamosResumenCards {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
-    .prestamosGrid {
+    .prestamosFormularioFiltros {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .prestamosAccionesFiltro {
+        grid-column: 1 / -1;
+    }
+
+    .prestamosListadoCards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .prestamoDatosGrid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }

@@ -2,23 +2,26 @@
 
 namespace Database\Seeders;
 
+use App\Models\Admin;
 use App\Models\Publicacion;
 use App\Models\Usuario;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class PublicacionSeeder extends Seeder
 {
     /**
-     * Seed de publicaciones de arranque para pruebas del panel admin.
+     * Seed de publicaciones de arranque para pruebas de catálogo y panel admin.
      *
-     * Crea 5 publicaciones distribuidas entre 2 usuarios existentes,
-     * ambos marcados como escritores verificados.
+     * Crea publicaciones con archivos PDF reales de ejemplo,
+     * distribuidas entre usuarios verificados y administrador.
      */
     public function run(): void
     {
         $usuarios = Usuario::whereIn('email', ['usuario@test.com', 'maria@test.com'])->get();
+        $admin = Admin::where('email', 'admin@test.com')->first();
 
-        if ($usuarios->count() < 2) {
+        if ($usuarios->count() < 2 || $admin === null) {
             return;
         }
 
@@ -30,77 +33,118 @@ class PublicacionSeeder extends Seeder
             ]);
         });
 
+        // Creamos PDFs sencillos de ejemplo para que la vista de publicaciones tenga contenido real.
+        $archivosSeed = [
+            [
+                'ruta' => 'publicaciones/seed/metodologia_estudio_daw.pdf',
+                'titulo' => 'Metodologia de estudio DAW',
+            ],
+            [
+                'ruta' => 'publicaciones/seed/introduccion_laravel_12.pdf',
+                'titulo' => 'Introduccion practica a Laravel 12',
+            ],
+            [
+                'ruta' => 'publicaciones/seed/guia_php_moderna.pdf',
+                'titulo' => 'Guia de PHP moderna',
+            ],
+            [
+                'ruta' => 'publicaciones/seed/manual_editorial_admin.pdf',
+                'titulo' => 'Manual editorial institucional',
+            ],
+        ];
+
+        foreach ($archivosSeed as $archivoSeed) {
+            Storage::disk('public')->put($archivoSeed['ruta'], $this->buildSimplePdf($archivoSeed['titulo']));
+        }
+
         $publicacionesData = [
             [
-                'titulo_publicacion' => 'Ensayo sobre narrativa contemporánea',
-                'resumen_publicacion' => 'Análisis breve de tendencias narrativas actuales en novela y relato corto.',
+                'titulo_publicacion' => 'Metodologia de estudio DAW',
+                'resumen_publicacion' => 'Documento academico con pautas de organizacion del estudio y recomendaciones bibliograficas.',
                 'usuario_id' => $usuarios[0]->id,
-                'nombre_libro' => 'Narrativa del siglo XXI: Nuevas voces',
-                'archivo_original' => 'ensayo_narrativa_contemporanea.pdf',
-                'archivo_ruta' => 'publicaciones/seed/ensayo_narrativa_contemporanea.pdf',
+                'admin_id' => null,
+                'publicado_por' => 'usuario',
+                'nombre_libro' => 'Planificacion de estudio y aprendizaje autonomo',
+                'archivo_original' => 'metodologia_estudio_daw.pdf',
+                'archivo_ruta' => 'publicaciones/seed/metodologia_estudio_daw.pdf',
                 'archivo_extension' => 'pdf',
-                'archivo_size_bytes' => 350000,
             ],
             [
-                'titulo_publicacion' => 'Guía de lectura para clubes juveniles',
-                'resumen_publicacion' => 'Documento Word con dinámicas y recomendaciones para sesiones de lectura juvenil.',
-                'usuario_id' => $usuarios[0]->id,
-                'nombre_libro' => 'Dinámicas de lectura en grupo',
-                'archivo_original' => 'guia_lectura_juvenil.docx',
-                'archivo_ruta' => 'publicaciones/seed/guia_lectura_juvenil.docx',
-                'archivo_extension' => 'docx',
-                'archivo_size_bytes' => 290000,
-            ],
-            [
-                'titulo_publicacion' => 'Compendio de reseñas literarias',
-                'resumen_publicacion' => 'Recopilación de reseñas de obras clásicas y contemporáneas.',
+                'titulo_publicacion' => 'Introduccion practica a Laravel 12',
+                'resumen_publicacion' => 'Apuntes iniciales para comprender rutas, controladores y vistas en proyectos Laravel.',
                 'usuario_id' => $usuarios[1]->id,
-                'nombre_libro' => 'Reseñas literarias: Clásicos y modernos',
-                'archivo_original' => 'compendio_resenas.doc',
-                'archivo_ruta' => 'publicaciones/seed/compendio_resenas.doc',
-                'archivo_extension' => 'doc',
-                'archivo_size_bytes' => 270000,
+                'admin_id' => null,
+                'publicado_por' => 'usuario',
+                'nombre_libro' => 'Laravel aplicado a proyectos reales',
+                'archivo_original' => 'introduccion_laravel_12.pdf',
+                'archivo_ruta' => 'publicaciones/seed/introduccion_laravel_12.pdf',
+                'archivo_extension' => 'pdf',
             ],
             [
-                'titulo_publicacion' => 'Proyecto de escritura creativa para principiantes',
-                'resumen_publicacion' => 'Material de apoyo para personas que empiezan a escribir por afición.',
-                'usuario_id' => $usuarios[1]->id,
-                'nombre_libro' => 'El arte de empezar a escribir',
-                'archivo_original' => 'escritura_creativa_aficion.odt',
-                'archivo_ruta' => 'publicaciones/seed/escritura_creativa_aficion.odt',
-                'archivo_extension' => 'odt',
-                'archivo_size_bytes' => 240000,
-            ],
-            [
-                'titulo_publicacion' => 'Manual breve de estilo editorial',
-                'resumen_publicacion' => 'Buenas prácticas de corrección y consistencia editorial para manuscritos.',
+                'titulo_publicacion' => 'Guia de PHP moderna',
+                'resumen_publicacion' => 'Resumen de buenas practicas de tipado, validacion y estructura en aplicaciones web con PHP.',
                 'usuario_id' => $usuarios[0]->id,
-                'nombre_libro' => 'Corrección editorial profesional',
-                'archivo_original' => 'manual_estilo_editorial.rtf',
-                'archivo_ruta' => 'publicaciones/seed/manual_estilo_editorial.rtf',
-                'archivo_extension' => 'rtf',
-                'archivo_size_bytes' => 210000,
+                'admin_id' => null,
+                'publicado_por' => 'usuario',
+                'nombre_libro' => 'PHP moderno y arquitectura web',
+                'archivo_original' => 'guia_php_moderna.pdf',
+                'archivo_ruta' => 'publicaciones/seed/guia_php_moderna.pdf',
+                'archivo_extension' => 'pdf',
+            ],
+            [
+                'titulo_publicacion' => 'Manual editorial institucional',
+                'resumen_publicacion' => 'Documento del equipo administrador con criterios de revision y publicacion de contenidos.',
+                'usuario_id' => null,
+                'admin_id' => $admin->id,
+                'publicado_por' => 'admin',
+                'nombre_libro' => 'Normativa editorial Biblioteca DAW',
+                'archivo_original' => 'manual_editorial_admin.pdf',
+                'archivo_ruta' => 'publicaciones/seed/manual_editorial_admin.pdf',
+                'archivo_extension' => 'pdf',
             ],
         ];
 
         foreach ($publicacionesData as $item) {
+            $size = Storage::disk('public')->size($item['archivo_ruta']);
+
             Publicacion::updateOrCreate(
                 [
                     'titulo_publicacion' => $item['titulo_publicacion'],
-                    'usuario_id' => $item['usuario_id'],
+                    'publicado_por' => $item['publicado_por'],
                 ],
                 [
                     'resumen_publicacion' => $item['resumen_publicacion'],
                     'nombre_libro' => $item['nombre_libro'],
-                    'admin_id' => null,
-                    'publicado_por' => 'usuario',
+                    'usuario_id' => $item['usuario_id'],
+                    'admin_id' => $item['admin_id'],
+                    'publicado_por' => $item['publicado_por'],
                     'archivo_original' => $item['archivo_original'],
                     'archivo_ruta' => $item['archivo_ruta'],
                     'archivo_extension' => $item['archivo_extension'],
-                    'archivo_size_bytes' => $item['archivo_size_bytes'],
+                    'archivo_size_bytes' => $size,
                     'fecha_publicacion' => now(),
                 ]
             );
         }
+    }
+
+    /**
+     * Genera un PDF minimo en memoria para datos de prueba.
+     *
+     * @param string $title Titulo visible en el documento.
+     * @return string Contenido binario del PDF.
+     */
+    private function buildSimplePdf(string $title): string
+    {
+        $safeTitle = str_replace(['(', ')'], '', $title);
+
+        return "%PDF-1.4\n"
+            . "1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n"
+            . "2 0 obj\n<< /Type /Pages /Count 1 /Kids [3 0 R] >>\nendobj\n"
+            . "3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>\nendobj\n"
+            . "4 0 obj\n<< /Length 83 >>\nstream\nBT\n/F1 18 Tf\n72 740 Td\n(" . $safeTitle . ") Tj\n0 -28 Td\n/F1 12 Tf\n(Documento de prueba generado por seeder.) Tj\nET\nendstream\nendobj\n"
+            . "5 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>\nendobj\n"
+            . "xref\n0 6\n0000000000 65535 f \n0000000010 00000 n \n0000000063 00000 n \n0000000122 00000 n \n0000000248 00000 n \n0000000381 00000 n \n"
+            . "trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n451\n%%EOF";
     }
 }

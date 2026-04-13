@@ -3,105 +3,128 @@
 @section('title', 'Publicar')
 
 @section('content')
-   <main class="contenedor publicarUsuario">
-     <section class="publicarHeader">
-        <h1>Publicar Libros</h1>
-        <p>En esta sección puedes proponer nuevas publicaciones, gestionar tus libros y consultar información relacionada con su actividad.</p>
-     </section>
+    <main class="contenedor publicarUsuario">
+        <section class="publicarHeader">
+            <h1>Publicar contenido digital</h1>
+            <p>Sube documentos y libros digitales para que otros usuarios de la biblioteca puedan acceder a ellos.</p>
+        </section>
 
-     <section class="publicarBloque">
-        <div class="publicarIntro">
-            <h2>Nueva publicación</h2>
-            <p>Completa la información principal del libro para enviar una nueva propuesta de publicación dentro de la biblioteca.</p>
-        </div>
+        @if (session('success'))
+            <section class="publicarMensaje publicarMensajeExito">
+                <p>{{ session('success') }}</p>
+            </section>
+        @endif
 
-        <form action="" class="publicarForm">
-            <div class="campoPublicar">
-                <label for="titulo">Título del libro</label>
-                <input type="text" id="titulo" name="titulo">
+        @if (session('error'))
+            <section class="publicarMensaje publicarMensajeError">
+                <p>{{ session('error') }}</p>
+            </section>
+        @endif
+
+        @if ($errors->any())
+            <section class="publicarMensaje publicarMensajeError">
+                <p>Se encontraron errores en el formulario:</p>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </section>
+        @endif
+
+        <section class="publicarBloque">
+            <div class="publicarIntro">
+                <h2>Nueva publicación</h2>
+                <p>Formato permitido: PDF (máx. 20MB).</p>
             </div>
 
-            <div class="campoPublicar">
-                <label for="autor">Autor del libro</label>
-                <input type="text" id="autor" name="autor">
-            </div>
+            <form action="{{ route('usuario.publicar.store') }}" method="POST" enctype="multipart/form-data" class="publicarForm">
+                @csrf
 
-            <div class="campoPublicar campoCompletoPublicar">
-                <label for="descripcion">Descripción del libro</label>
-                <textarea id="descripcion" name="descripcion"></textarea>
-            </div>
-
-            <div class="accionesPublicar campoCompletoPublicar">
-                <div class="campoArchivoPublicar">
-                    <label for="archivoLibro" class="labelArchivoPublicar">
-                        <i class="bi bi-cloud-arrow-up"></i>
-                        <span class="labelArchivoTexto">Añade el libro en formato digital</span>
-                        <span class="labelArchivoFormatos">PDF, EPUB, MOBI (máx. 50MB)</span>
-                    </label>
-                    <input type="file" id="archivoLibro" name="archivoLibro" class="inputArchivoPublicar" accept=".pdf,.epub,.mobi">
+                <div class="campoPublicar">
+                    <label for="nombre_libro">Nombre del libro</label>
+                    <input type="text" id="nombre_libro" name="nombre_libro" value="{{ old('nombre_libro') }}" required>
                 </div>
-                <button type="submit" class="btn-base btn-verde">Publicar Libro</button>
-            </div>
-        </form>
-     </section>
 
-     <section class="publicarGrid">
-        <article class="publicarCard">
-            <h2>Libros publicados por el usuario</h2>
-            <p>Aquí se mostrarán los libros que has publicado en la biblioteca, junto con opciones para editar o eliminar cada publicación.</p>
-            <form action="" class="publicarMiniForm">
-                <label for="buscar">Buscar libros publicados</label>
-                <input type="text" id="buscar" name="buscar">
-                <button type="submit" class="btn-base btn-azul">Buscar</button>
+                <div class="campoPublicar">
+                    <label for="titulo_publicacion">Título de la publicación</label>
+                    <input type="text" id="titulo_publicacion" name="titulo_publicacion"
+                        value="{{ old('titulo_publicacion') }}" required>
+                </div>
+
+                <div class="campoPublicar campoCompletoPublicar">
+                    <label for="resumen_publicacion">Resumen</label>
+                    <textarea id="resumen_publicacion" name="resumen_publicacion" required>{{ old('resumen_publicacion') }}</textarea>
+                </div>
+
+                <div class="accionesPublicar campoCompletoPublicar">
+                    <div class="campoArchivoPublicar">
+                        <label for="archivo_publicacion" class="labelArchivoPublicar">
+                            <i class="bi bi-cloud-arrow-up"></i>
+                            <span class="labelArchivoTexto">Añade tu archivo digital</span>
+                            <span class="labelArchivoFormatos">PDF</span>
+                        </label>
+                        <input type="file" id="archivo_publicacion" name="archivo_publicacion" class="inputArchivoPublicar"
+                            accept=".pdf" required>
+                    </div>
+                    <button type="submit" class="btn-base btn-verde">Publicar contenido</button>
+                </div>
             </form>
-        </article>
+        </section>
 
-        <article class="publicarCard">
-            <h2>Estadísticas de publicaciones</h2>
-            <p>Aquí podrás ver estadísticas relacionadas con tus publicaciones, como el número de veces que tus libros han sido alquilados o reservados por otros usuarios.</p>
-            <form action="" class="publicarMiniForm">
-                <label for="estadisticas">Selecciona una estadística para visualizar</label>
-                <select id="estadisticas" name="estadisticas">
-                    <option value="alquileres">Número de alquileres</option>
-                    <option value="reservas">Número de reservas</option>
-                    <option value="comentarios">Número de comentarios</option>
-                </select>
-                <button type="submit" class="btn-base btn-azul">Ver Estadística</button>
-            </form>
-        </article>
+        <section class="publicarGrid">
+            <article class="publicarCard">
+                <h2>Mis publicaciones</h2>
+                <form action="{{ route('usuario.publicar') }}" method="GET" class="publicarMiniForm">
+                    <label for="buscar">Buscar en mis publicaciones</label>
+                    <input type="text" id="buscar" name="buscar" value="{{ $buscarPublicacion }}"
+                        placeholder="Título, libro o resumen">
+                    <button type="submit" class="btn-base btn-azul">Buscar</button>
+                </form>
 
-        <article class="publicarCard">
-            <h2>Comentarios y valoraciones</h2>
-            <p>Aquí podrás ver los comentarios y valoraciones que otros usuarios han dejado sobre tus publicaciones, así como la opción de responder a esos comentarios.</p>
-            <form action="" class="publicarMiniForm">
-                <label for="comentarios">Selecciona un libro para ver comentarios</label>
-                <select id="comentarios" name="comentarios">
-                    <option value="libro1">Libro 1</option>
-                    <option value="libro2">Libro 2</option>
-                    <option value="libro3">Libro 3</option>
-                </select>
-                <button type="submit" class="btn-base btn-azul">Ver Comentarios</button>
-            </form>
-        </article>
+                <div class="publicacionesListado">
+                    @forelse($misPublicaciones as $publicacion)
+                        <article class="publicacionItem">
+                            <h3>{{ $publicacion->titulo_publicacion }}</h3>
+                            <p><strong>Libro:</strong> {{ $publicacion->nombre_libro }}</p>
+                            <p><strong>Formato:</strong> {{ strtoupper($publicacion->archivo_extension) }}</p>
+                            <p><strong>Fecha:</strong> {{ $publicacion->fecha_publicacion?->format('d/m/Y') ?? 'N/A' }}</p>
+                            <a href="{{ route('usuario.publicar.archivo', $publicacion->id) }}" class="btn-base btn-verde">Ver archivo</a>
+                        </article>
+                    @empty
+                        <p>No tienes publicaciones registradas.</p>
+                    @endforelse
+                </div>
 
-        <article class="publicarCard">
-            <h2>Soporte para publicaciones</h2>
-            <p>Si tienes alguna pregunta o necesitas ayuda con el proceso de publicación, no dudes en contactarnos a través de nuestro soporte vía mail.</p>
-            <form action="" class="publicarMiniForm">
-                <label for="soporte">Enviar una consulta al soporte</label>
-                <textarea id="soporte" name="soporte"></textarea>
-                <button type="submit" class="btn-base btn-azul">Enviar Consulta</button>
-            </form>
-        </article>
+                <div class="publicacionesPaginacion">
+                    {{ $misPublicaciones->links('vendor.pagination.bootstrap-5') }}
+                </div>
+            </article>
 
-        <article class="publicarCard">
-            <h2>Políticas de publicación</h2>
-            <p>Asegúrate de revisar nuestras políticas de publicación antes de publicar un libro en la biblioteca. Esto incluye contenido permitido, derechos de autor y responsabilidades del usuario.</p>
-            <div class="accionesPublicarCard">
-                <button type="button" class="btn-base btn-verde">Revisar Políticas</button>
-            </div>
-        </article>
-     </section>
-   </main>
+            <article class="publicarCard">
+                <h2>Contenido reciente de la comunidad</h2>
+                <p>Estos archivos ya están visibles para otros usuarios autenticados de la plataforma.</p>
+
+                <div class="publicacionesListado">
+                    @forelse($publicacionesRecientes as $publicacion)
+                        <article class="publicacionItem">
+                            <h3>{{ $publicacion->titulo_publicacion }}</h3>
+                            <p><strong>Libro:</strong> {{ $publicacion->nombre_libro }}</p>
+                            <p><strong>Autor:</strong> {{ $publicacion->usuario?->name ?? 'Usuario biblioteca' }}</p>
+                            <a href="{{ route('usuario.publicar.archivo', $publicacion->id) }}" class="btn-base btn-verde">Ver archivo</a>
+                        </article>
+                    @empty
+                        <p>Todavía no hay contenido publicado por usuarios.</p>
+                    @endforelse
+                </div>
+            </article>
+
+            <article class="publicarCard publicarCardMantenimiento">
+                <h2>Compra de contenido digital</h2>
+                <p>Esta funcionalidad está en mantenimiento. Próximamente habilitaremos opciones de compra en la biblioteca.</p>
+                <div class="estadoMantenimientoPublicar">Mantenimiento</div>
+            </article>
+        </section>
+    </main>
 
 @endsection

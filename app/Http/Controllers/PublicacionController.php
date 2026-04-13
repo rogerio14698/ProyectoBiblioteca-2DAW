@@ -14,7 +14,7 @@ use Illuminate\View\View;
  * Controlador de gestión de publicaciones de usuarios y administradores.
  *
  * Reglas principales:
- * - Solo se aceptan archivos (PDF/DOC/DOCX/ODT/RTF).
+ * - Solo se aceptan archivos en formato PDF.
  * - Los usuarios deben estar verificados como escritores.
  * - Los administradores siempre pueden publicar.
  */
@@ -74,7 +74,7 @@ class PublicacionController extends Controller
             'nombre_libro' => 'required|string|max:255',
             'titulo_publicacion' => 'required|string|max:255',
             'resumen_publicacion' => 'required|string|max:500',
-            'archivo_publicacion' => 'required|file|mimes:pdf,doc,docx,odt,rtf|max:10240',
+            'archivo_publicacion' => 'required|file|mimes:pdf|max:10240',
         ]);
 
         try {
