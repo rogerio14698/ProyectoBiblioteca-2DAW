@@ -3,6 +3,7 @@
 
 .catalogoBuscador {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
@@ -54,12 +55,6 @@
     border-color: var(--bgBtnRojo);
 }
 
-
-/* =========================================
-   CUERPO DEL CATÁLOGO (Contenedor de tarjetas)
-   =========================================
-   En móvil: columna única. En desktop: rejilla de 3 columnas.
-   ========================================= */
 .catalogoBody {
     display: flex;
     flex-direction: column;
@@ -67,28 +62,22 @@
     padding: var(--relleno-movil);
     padding: 20px;
     gap: calc(var(--unidad-espaciado) * 2.5);
+    background-color: var(--bgBlanco);
 }
 
-.catalogoBody > .alinearCentro {
+.catalogoBody>.alinearCentro {
     width: 100%;
 }
-
-/* =========================================
-   TARJETA DEL CATÁLOGO — Mobile First (columna)
-   =========================================
-   Diseño mobile-first: en móvil es columna vertical centrada.
-   En desktop (≥768px) se transforma en fila con tres zonas:
-   [Imagen fija 160px] | [Contenido fluido] | [Acciones fija 160px]
-   ========================================= */
 .catalogoCard {
-    display: grid;
-    grid-template-columns: 0.3fr 1fr auto;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     background: var(--color-blanco);
     border: 1px solid var(--color-borde);
     border-radius: var(--radio-borde);
     box-shadow: var(--sombra-suave);
     transition: box-shadow 0.2s;
+    padding: 10px;
 }
 
 .catalogoCard:hover {
@@ -96,15 +85,9 @@
     box-shadow: var(--sombra);
 }
 
-/* =========================================
-   IMAGEN DE PORTADA — Contenedor
-   =========================================
-   flex: 0 0 auto → en móvil, no crece ni encoge; toma el
-   tamaño natural del contenido (la img hija).
-   En desktop se sobreescribe a flex: 0 0 160px (ancho sagrado).
-   ========================================= */
 .cardImagen {
-    flex: 0 0 auto;                       /* No crece, no encoge              */
+    flex: 0 0 auto;
+    /* No crece, no encoge              */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -137,12 +120,15 @@
    largo haga wrap en vez de empujar a los hermanos flex.
    ========================================= */
 .cardContenido {
-    flex: 1 1 0%;                         /* Fluido: absorbe el espacio libre */
-    min-width: 0;                         /* Permite word-wrap dentro de flex */
+    flex: 1 1 0%;
+    /* Fluido: absorbe el espacio libre */
+    min-width: 0;
+    /* Permite word-wrap dentro de flex */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 0 var(--unidad-espaciado);   /* 8px lateral en móvil            */
+    padding: 0 var(--unidad-espaciado);
+    /* 8px lateral en móvil            */
 }
 
 /* Título del libro — aseguramos que títulos largos bajen de línea
@@ -169,9 +155,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;              /* Centrado vertical en fila        */
-    width: 100%;                          /* Ocupa todo el ancho en móvil     */
-    gap: var(--unidad-espaciado);         /* 8px entre botones                */
+    justify-content: center;
+    /* Centrado vertical en fila        */
+    width: 100%;
+    /* Ocupa todo el ancho en móvil     */
+    gap: var(--unidad-espaciado);
+    /* 8px entre botones                */
 }
 
 /* Botones del catálogo con hover suave */
@@ -223,7 +212,8 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: calc(var(--unidad-espaciado) / 2); /* 4px entre filas de info       */
+    gap: calc(var(--unidad-espaciado) / 2);
+    /* 4px entre filas de info       */
     font-size: 0.8rem;
 }
 
@@ -233,8 +223,8 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-        justify-content: space-between;
-        display: flex;
+    justify-content: space-between;
+    display: flex;
 }
 
 .infoLabel {
@@ -250,6 +240,7 @@
     font-weight: 500;
     color: var(--color-texto-principal);
 }
+
 .stock-disponible {
     color: var(--blanco);
     border-radius: 20px;
@@ -273,6 +264,7 @@
     background-color: var(--bgNoDisponible);
     letter-spacing: 0.5px;
 }
+
 .formato-digital {
     background-color: var(--bgFormatoDigital);
     color: var(--color-blanco);
@@ -314,28 +306,29 @@
     /* Rejilla de 3 columnas para las tarjetas */
     .catalogoBody {
         display: grid;
-        gap: 16px; 
+        gap: 16px;
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .catalogoBody > .alinearCentro {
+    .catalogoBody>.alinearCentro {
         grid-column: 1 / -1;
         justify-content: center;
     }
 
     /* Tarjeta en modo fila horizontal con aire generoso */
     .catalogoCard {
-        flex-direction: row;              
-        align-items: center;              
-        padding: 24px; 
+        display: grid;
+        grid-template-columns: 0.3fr 1fr auto;
+        align-items: center;
+        padding: 24px;
     }
 
     /* ===== CLAVE DE LA SOLUCIÓN =====
-       flex: 0 0 160px significa:
-         - flex-grow:   0 → NO crece si sobra espacio
-         - flex-shrink: 0 → NO encoge si falta espacio
-         - flex-basis:  160px → ancho inicial fijo
-       Esto hace que Flexbox trate el ancho como SAGRADO e
+    flex: 0 0 160px significa:
+        - flex-grow:   0 → NO crece si sobra espacio
+        - flex-shrink: 0 → NO encoge si falta espacio
+        - flex-basis:  160px → ancho inicial fijo
+    Esto hace que Flexbox trate el ancho como SAGRADO e
        INTOCABLE, sin importar cuánto texto haya al lado.     */
     .cardImagen {
         flex: 0 0 160px;
@@ -345,16 +338,21 @@
        El padding lateral más generoso crea "aire" visual.     */
     .cardContenido {
         flex: 1 1 0%;
-        padding: 0 calc(var(--unidad-espaciado) * 2); /* 16px lateral */
+        padding: 0 calc(var(--unidad-espaciado) * 2);
+        /* 16px lateral */
     }
 
     /* Botones: anclados a 100px, centrados verticalmente.
        Reducidos para dejar más espacio al contenido central. */
     .accionesCatalogo {
-        flex: 0 0 100px;                 /* Ancho fijo compacto              */
-        width: auto;                     /* Sobreescribe el 100% de móvil    */
-        gap: calc(var(--unidad-espaciado) * 1.5); /* 12px entre botones      */
-        align-self: center;              /* Centrado vertical en la tarjeta  */
+        flex: 0 0 100px;
+        /* Ancho fijo compacto              */
+        width: auto;
+        /* Sobreescribe el 100% de móvil    */
+        gap: calc(var(--unidad-espaciado) * 1.5);
+        /* 12px entre botones      */
+        align-self: center;
+        /* Centrado vertical en la tarjeta  */
     }
 
     /* Botones desktop: más compactos y limpios */
@@ -362,7 +360,8 @@
         font-size: 0.7rem;
         padding: 4px 6px;
         max-width: 100px;
-        white-space: nowrap;             /* Evita salto de línea en texto    */
+        white-space: nowrap;
+        /* Evita salto de línea en texto    */
     }
 
     /* Columna de etiqueta un poco más ancha en desktop */
@@ -371,4 +370,14 @@
         justify-content: space-between;
         display: flex;
     }
+    .catalogoBuscador {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--unidad-espaciado);
+    width: 100%;
+    margin-top: var(--unidad-espaciado);
+}
 }
