@@ -99,6 +99,38 @@ class EventosController extends Controller
     }
 
     /**
+     * Dar de baja a un usuario autenticado de un evento.
+     * Elimina el registro de la tabla pivote 'evento_usuario' y decrementa asistentes.
+     * La columna 'plazas_libres' se recalcula automáticamente (storedAs en la migración).
+     *
+     * @param int $id ID del evento del que darse de baja.
+     * @return \Illuminate\Http\RedirectResponse Redirección con mensaje de éxito o error.
+     * @sideEffect Elimina registro en tabla pivote 'evento_usuario'.
+     * @sideEffect Decrementa el campo 'asistentes' del evento.
+     */
+    public function darseDeBaja(int $id): \Illuminate\Http\RedirectResponse
+    {
+        // Buscamos el evento o lanzamos 404.
+        $evento = Evento::findOrFail($id);
+
+        // Obtenemos el ID del usuario autenticado.
+        $usuarioId = \Illuminate\Support\Facades\Auth::id();
+
+        // Verificamos que el usuario esté inscrito antes de intentar desvincularlo.
+        if (!$evento->usuariosInscritos()->where('usuario_id', $usuarioId)->exists()) {
+            return redirect()->back()->with('error', 'No estás inscrito en este evento.');
+        }
+
+        // Eliminamos la inscripción de la tabla pivote.
+        $evento->usuariosInscritos()->detach($usuarioId);
+
+        // Decrementamos el contador de asistentes (plazas_libres se recalcula solo).
+        $evento->decrement('asistentes');
+
+        return redirect()->back()->with('success', 'Te has dado de baja del evento «' . $evento->titulo . '».');
+    }
+
+    /**
      * Display a listing of the resource.
      */
 

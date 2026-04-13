@@ -1,4 +1,8 @@
-/* Botón Base */
+/* ============================================
+   BOTONES - Sistema modular de botones
+   ============================================ */
+
+/* ---- 1. BASE: Estilos comunes a TODOS los botones ---- */
 .btn-base {
     display: inline-flex;
     align-items: center;
@@ -13,99 +17,147 @@
     text-decoration: none;
 }
 
-/* Botón Primario (Azul DAW) */
+/* ---- 2. GRUPO: Botones de color de ancho completo ---- */
+/* Estilos compartidos por verde, azul, amarillo, rojo, ver, carrito, alquilar */
+.btn-verde,
+.btn-azul,
+.btn-amarillo,
+.btn-rojo,
+.btn-ver,
+.btn-carrito,
+.btn-alquilar {
+    width: 100%;
+    color: var(--color-blanco);
+}
+
+/* Hover compartido: sombra */
+.btn-verde:hover,
+.btn-azul:hover,
+.btn-amarillo:hover,
+.btn-rojo:hover,
+.btn-ver:hover,
+.btn-carrito:hover,
+.btn-alquilar:hover {
+    box-shadow: var(--sombra);
+}
+
+/* Active compartido: elevación */
+.btn-verde:active,
+.btn-azul:active,
+.btn-amarillo:active,
+.btn-rojo:active {
+    transform: translateY(-2px);
+}
+
+/* Active compartido: elevación suave (catálogo) */
+.btn-ver:active,
+.btn-carrito:active,
+.btn-alquilar:active {
+    transform: translateY(-1px);
+}
+
+/* ---- 3. VARIANTES DE COLOR: solo background ---- */
+
+/* Verde (Acción principal / Confirmar) */
+.btn-verde {
+    background-color: var(--bgBtnVerde);
+}
+.btn-verde:hover {
+    background-color: var(--bgBtnVerdeHover);
+}
+
+/* Azul (Información / Ver más) */
+.btn-azul {
+    background-color: var(--bgBtnAzul);
+}
+.btn-azul:hover {
+    background-color: var(--bgBtnAzulHover);
+}
+
+/* Amarillo (Aviso / Atención) */
+.btn-amarillo {
+    background-color: var(--colorComplementarioTerciario);
+}
+.btn-amarillo:hover {
+    background-color: var(--colorComplementarioTerciarioHover);
+}
+
+/* Rojo (Peligro / Eliminar) */
+.btn-rojo {
+    background-color: var(--bgBtnRojo);
+}
+.btn-rojo:hover {
+    background-color: var(--bgBtnRojoHover);
+}
+
+/* ---- 4. VARIANTES CATÁLOGO ---- */
+
+/* Ver detalles */
+.btn-ver {
+    background-color: var(--color-primario-oscuro);
+}
+.btn-ver:hover {
+    background-color: var(--color-primario);
+}
+
+/* Añadir al carrito */
+.btn-carrito {
+    background-color: var(--color-carrito-anadir);
+}
+
+/* Alquilar */
+.btn-alquilar {
+    background-color: var(--color-alquilar);
+}
+
+/* ---- 5. BOTONES ESPECIALES (Primario, Turquesa, Admin) ---- */
+
+/* Primario (Azul institucional) */
 .btn-primario {
     background-color: var(--color-primario);
     color: var(--color-blanco);
 }
-.btn-verde{
-    width: 100%;
-    background-color: var(--bgBtnVerde);
-    color: var(--color-blanco);
-}
-.btn-verde:hover{
-    cursor: pointer;
-    background-color: var(--bgBtnVerdeHover);
-    box-shadow: var(--sombra);
-}
-.btn-verde:active{
-    transform: translateY(-2px);
-    transition: all 0.3s ease;
-}
-.btn-azul{
-    width: 100%;
-    background-color: var(--bgBtnAzul);
-    color: var(--color-blanco);
-}
-.btn-azul:hover{
-    cursor: pointer;
-    background-color: var(--bgBtnAzulHover);
-    box-shadow: var(--sombra);
-}
-.btn-azul:active{
-    transform: translateY(-2px);
-    transition: all 0.3s ease;
-}
-.btn-amarillo{
-    width: 100%;
-    background-color: var(--colorComplementarioTerciario);
-    color: var(--blanco);
-}
-.btn-amarillo:hover{
-    cursor: pointer;
-    background-color: var(--colorComplementarioTerciarioHover);
-    box-shadow: var(--sombra);
-}
-.btn-amarillo:active{
-    transform: translateY(-2px);
-    transition: all 0.3s ease;
-}
-
-.btn-rojo{
-    width: 100%;
-    background-color: var(--bgBtnRojo);
-    color: var(--color-blanco);
-}
-.btn-rojo:hover{
-    cursor: pointer;
-    background-color: var(--bgBtnRojoHover);
-    box-shadow: var(--sombra);
-}
-.btn-rojo:active{
-    transform: translateY(-2px);
-    transition: all 0.3s ease;
-}
-
 .btn-primario:hover {
     background-color: var(--color-primario-oscuro);
     transform: translateY(-1px);
     box-shadow: var(--sombra);
 }
 
-/* Botón Secundario (Turquesa / Acento) */
+/* Turquesa (Acento secundario) */
 .btn-turquesa {
     background-color: var(--color-secundario);
     color: var(--color-texto-principal);
 }
-.btn-novedad{
-    
-}
-/* Botón Admin (Para acciones administrativas) */
+
+/* Admin (Outline / borde) */
 .btn-admin {
     background-color: transparent;
     border: 2px solid var(--color-primario);
     color: var(--color-primario);
 }
-
 .btn-admin:hover {
     background-color: var(--color-primario);
     color: var(--color-blanco);
 }
 
-/*btn menu*/
+/* ---- 6. BOTÓN LOGOUT ---- */
+.btn-logout {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    border: none;
+    padding: 5px 10px;
+    border-radius: var(--radio-medio);
+    cursor: pointer;
+}
+.btn-logout:hover {
+    background-color: var(--color-primario-oscuro);
+    transform: translateY(-1px);
+    box-shadow: var(--sombra);
+}
 
-.btnMenu{
-    display:block;
+/* ---- 7. BOTÓN MENÚ HAMBURGUESA ---- */
+.btnMenu {
+    display: block;
     background: none;
     border: none;
     font-size: 2rem;
@@ -116,54 +168,7 @@
 
 /* Los estilos de .btn-slider están centralizados en btnSlider.css */
 
-.btn-logout {
-    background-color: var(--color-primario);
-    color: var(--color-blanco);
-    border: none;
-    padding: 5px 10px;
-    border-radius: var(--radio-medio);
-    cursor: pointer;
-}
-
-.btn-logout:hover {
-    background-color: var(--color-primario-oscuro);
-    transform: translateY(-1px);
-    box-shadow: var(--sombra);
-}
-
-.btn-ver{
-    background-color: var(--color-primario-oscuro);
-    color: var(--color-blanco);
-    width: 100%;
-}
-.btn-ver:hover{
-    background-color: var(--color-primario);
-    box-shadow: var(--sombra);
-    transform: translateY(-1px);
-}
-.btn-carrito{
-    background-color: var(--color-carrito-anadir);
-    color: var(--color-blanco);
-    width: 100%;
-}
-.btn-carrito:hover{
-    background-color: var(--color-carrito-anadir);
-    box-shadow: var(--sombra);
-    transform: translateY(-1px);
-}
-.btn-alquilar{
-    background-color: var(--color-alquilar);
-    color: var(--color-blanco);
-    width: 100%;
-}
-.btn-alquilar:hover{
-    background-color: var(--color-alquilar);
-    box-shadow: var(--sombra);
-    transform: translateY(-1px);
-}
-
-/*Btn Buscador Catálogo*/
-
+/* ---- 8. BOTONES BUSCADOR CATÁLOGO ---- */
 .btn-buscar,
 .btn-limpiar {
     min-height: var(--altura-boton-movil);
@@ -174,7 +179,6 @@
     background-color: var(--color-primario);
     color: var(--color-blanco);
 }
-
 .btn-buscar:hover {
     background-color: var(--color-primario-oscuro);
 }
@@ -185,16 +189,15 @@
     border: 1px solid var(--color-primario-oscuro);
     text-decoration: none;
 }
-
 .btn-limpiar:hover {
     background-color: var(--color-fondo-global);
 }
 
-/*Botones mail admin*/
-
-/* Botón Eliminar - rojo peligro */
-.btnEliminarMail {
-    background-color: #e74c3c;
+/* ---- 9. GRUPO: Botones Mail Admin ---- */
+/* Estilos compartidos por eliminar, cambiar estado y responder */
+.btnEliminarMail,
+.btnCambiarEstadoMail,
+.btnResponderMail {
     color: var(--color-blanco);
     font-size: 0.78rem;
     padding: 6px 12px;
@@ -203,39 +206,30 @@
     width: 100%;
 }
 
-.btnEliminarMail:hover {
-    background-color: #c0392b;
+.btnEliminarMail:hover,
+.btnCambiarEstadoMail:hover,
+.btnResponderMail:hover {
     box-shadow: var(--sombra-suave);
 }
 
-/* Botón Cambiar Estado - primario */
+/* Variantes de color mail */
+.btnEliminarMail {
+    background-color: var(--bgBtnRojo);
+}
+.btnEliminarMail:hover {
+    background-color: var(--bgBtnRojoHover);
+}
+
 .btnCambiarEstadoMail {
     background-color: var(--color-primario);
-    color: var(--color-blanco);
-    font-size: 0.78rem;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-weight: 600;
-    width: 100%;
 }
-
 .btnCambiarEstadoMail:hover {
     filter: brightness(0.9);
-    box-shadow: var(--sombra-suave);
 }
 
-/* Botón Responder - verde acento */
 .btnResponderMail {
-    background-color: #27ae60;
-    color: var(--color-blanco);
-    font-size: 0.78rem;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-weight: 600;
-    width: 100%;
+    background-color: var(--bgBtnVerde);
 }
-
 .btnResponderMail:hover {
-    background-color: #1e8449;
-    box-shadow: var(--sombra-suave);
+    background-color: var(--bgBtnVerdeHover);
 }

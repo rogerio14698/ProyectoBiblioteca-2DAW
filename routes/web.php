@@ -119,6 +119,7 @@ Route::middleware(['auth:web', 'bloquear.demo'])->group(function () {
 
     Route::get('/organizarEvento', [OrganizarEventoController::class, 'index'])->name('usuario.organizarEvento');
     Route::post('/organizarEvento', [OrganizarEventoController::class, 'store'])->name('usuario.organizarEvento.store');
+    Route::delete('/evento/{id}/darse-de-baja', [EventosController::class, 'darseDeBaja'])->name('evento.darseDeBaja');
 
     Route::get('/vender', function () {
         return view('bibliotecaDAW.userViews.vender');

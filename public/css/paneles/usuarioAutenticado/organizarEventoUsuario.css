@@ -169,35 +169,108 @@
     font-style: italic;
 }
 
-/* Contenedor con scroll horizontal para tablas en móvil */
-.tablaDesbordamiento {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+/* ============================================
+   LISTADO DE INSCRIPCIONES (grid imitando tabla)
+   ============================================ */
+
+/* Cabecera visible solo en desktop */
+.inscripcionCabecera {
+    display: none;
 }
 
-/* Tabla de eventos inscritos */
-.tablaEventosInscritos {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.95rem;
+/* Cada fila/card de inscripción */
+.inscripcionFila {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: calc(var(--unidad-espaciado) * 1.5);
+    border: 1px solid var(--colorBorde, #e0e0e0);
+    border-radius: var(--radio-medio, 8px);
+    background-color: var(--color-blanco, #fff);
+    margin-bottom: calc(var(--unidad-espaciado) * 1);
+    transition: box-shadow var(--transicion-rapida, 0.2s);
 }
 
-.tablaEventosInscritos th,
-.tablaEventosInscritos td {
-    padding: calc(var(--unidad-espaciado) * 1) calc(var(--unidad-espaciado) * 1.5);
-    text-align: left;
-    border-bottom: 1px solid var(--colorBorde, #e0e0e0);
+.inscripcionFila:hover {
+    box-shadow: var(--sombra-media, 0 2px 8px rgba(0,0,0,0.12));
 }
 
-.tablaEventosInscritos th {
-    background-color: var(--color-primario-oscuro, #1a3a5c);
-    color: var(--color-blanco, #fff);
+/* En móvil: etiqueta visible antes del valor */
+.inscripcionCol::before {
+    content: attr(data-label) ": ";
     font-weight: 600;
-    white-space: nowrap;
+    color: var(--color-primario-oscuro, #1a3a5c);
 }
 
-.tablaEventosInscritos tbody tr:hover {
-    background-color: var(--color-fondo-hover, #f5f5f5);
+/* La cabecera no lleva data-label, ocultamos su ::before */
+.inscripcionCabecera .inscripcionCol::before {
+    content: none;
+}
+
+/* Acciones: botones en fila */
+.inscripcionCol--acciones {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--unidad-espaciado, 8px);
+}
+
+/* En móvil la etiqueta "Acciones:" no ocupa toda la fila */
+.inscripcionCol--acciones::before {
+    flex-basis: auto;
+    margin-right: 4px;
+}
+
+/* Form darse de baja inline, al lado del botón Ver */
+.formDarseDeBaja {
+    display: inline-flex;
+    width: 100%;
+}
+
+/* ---- Desktop: grid imitando tabla ---- */
+@media (min-width: 768px) {
+    .inscripcionCabecera {
+        display: grid;
+        grid-template-columns: 2fr 1fr 0.7fr 1.5fr 1fr 1.5fr;
+        gap: calc(var(--unidad-espaciado) * 1);
+        padding: calc(var(--unidad-espaciado) * 1) calc(var(--unidad-espaciado) * 1.5);
+        background-color: var(--color-primario-oscuro, #1a3a5c);
+        color: var(--color-blanco, #fff);
+        font-weight: 600;
+        font-size: 0.9rem;
+        border-radius: var(--radio-medio, 8px) var(--radio-medio, 8px) 0 0;
+    }
+
+    .inscripcionFila {
+        display: grid;
+        grid-template-columns: 2fr 1fr 0.7fr 1.5fr 1fr 1.5fr;
+        gap: calc(var(--unidad-espaciado) * 1);
+        align-items: center;
+        flex-direction: row;
+        border-radius: 0;
+        margin-bottom: 0;
+        border-top: none;
+        border-left: 1px solid var(--colorBorde, #e0e0e0);
+        border-right: 1px solid var(--colorBorde, #e0e0e0);
+        border-bottom: 1px solid var(--colorBorde, #e0e0e0);
+    }
+
+    .inscripcionFila:last-child {
+        border-radius: 0 0 var(--radio-medio, 8px) var(--radio-medio, 8px);
+    }
+
+    /* En desktop no mostramos la etiqueta data-label */
+    .inscripcionCol::before {
+        content: none;
+    }
+
+    .inscripcionCol--acciones::before {
+        display: none;
+    }
+
+    .inscripcionCol--acciones {
+        flex-basis: auto;
+    }
 }
 
 /* Badges de estado de inscripción */

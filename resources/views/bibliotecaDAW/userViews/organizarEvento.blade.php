@@ -130,38 +130,48 @@
             @if ($eventosInscritos->isEmpty())
                 <p class="textoVacio">Aún no te has inscrito en ningún evento.</p>
             @else
-                <div class="tablaDesbordamiento">
-                    <table class="tablaEventosInscritos">
-                        <thead>
-                            <tr>
-                                <th>Evento</th>
-                                <th>Fecha</th>
-                                <th>Hora</th>
-                                <th>Ubicación</th>
-                                <th>Estado</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($eventosInscritos as $evento)
-                                <tr>
-                                    <td>{{ $evento->titulo }}</td>
-                                    <td>{{ date('d/m/Y', strtotime($evento->fecha_hora)) }}</td>
-                                    <td>{{ date('H:i', strtotime($evento->fecha_hora)) }}h</td>
-                                    <td>{{ $evento->ubicacion }}</td>
-                                    <td>
-                                        <span class="estadoInscripcion estadoInscripcion--{{ $evento->pivot->estado }}">
-                                            {{ ucfirst(str_replace('_', ' ', $evento->pivot->estado)) }}
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('evento.paginaInterna', ['id' => $evento->id]) }}" class="btn-base btn-azul">Ver</a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                {{-- Cabecera visual que imita una tabla (solo desktop) --}}
+                <div class="inscripcionCabecera">
+                    <span class="inscripcionCol inscripcionCol--titulo">Evento</span>
+                    <span class="inscripcionCol inscripcionCol--fecha">Fecha</span>
+                    <span class="inscripcionCol inscripcionCol--hora">Hora</span>
+                    <span class="inscripcionCol inscripcionCol--ubicacion">Ubicación</span>
+                    <span class="inscripcionCol inscripcionCol--estado">Estado</span>
+                    <span class="inscripcionCol inscripcionCol--acciones">Acciones</span>
                 </div>
+
+                {{-- Filas/cards de cada inscripción --}}
+                @foreach ($eventosInscritos as $evento)
+                    <div class="inscripcionFila">
+                        <span class="inscripcionCol inscripcionCol--titulo" data-label="Evento">
+                            {{ $evento->titulo }}
+                        </span>
+                        <span class="inscripcionCol inscripcionCol--fecha" data-label="Fecha">
+                            {{ date('d/m/Y', strtotime($evento->fecha_hora)) }}
+                        </span>
+                        <span class="inscripcionCol inscripcionCol--hora" data-label="Hora">
+                            {{ date('H:i', strtotime($evento->fecha_hora)) }}h
+                        </span>
+                        <span class="inscripcionCol inscripcionCol--ubicacion" data-label="Ubicación">
+                            {{ $evento->ubicacion }}
+                        </span>
+                        <span class="inscripcionCol inscripcionCol--estado" data-label="Estado">
+                            <span class="estadoInscripcion estadoInscripcion--{{ $evento->pivot->estado }}">
+                                {{ ucfirst(str_replace('_', ' ', $evento->pivot->estado)) }}
+                            </span>
+                        </span>
+                        <span class="inscripcionCol inscripcionCol--acciones" data-label="Acciones">
+                            <a href="{{ route('evento.paginaInterna', ['id' => $evento->id]) }}" class="btn-base btn-azul">Ver</a>
+                            {{-- Solo se puede dar de baja si el estado es 'inscrito' --}}
+                                <form action="{{ route('evento.darseDeBaja', ['id' => $evento->id]) }}" method="POST" class="formDarseDeBaja">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn-base btn-rojo"onclick="return confirm('¿Seguro que quieres darte de baja de este evento?')">Darse de baja</button>
+                                </form>
+    
+                        </span>
+                    </div>
+                @endforeach
             @endif
         </section>
     </main>

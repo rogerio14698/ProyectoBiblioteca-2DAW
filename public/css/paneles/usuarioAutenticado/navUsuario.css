@@ -3,100 +3,111 @@
 .nav-usuarioAutenticado {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    gap: 10px;
-    padding: 10px 20px;
-        background-color: var(--color-primario);
+    gap: calc(var(--unidad-espaciado) * 1.5);
+    padding: calc(var(--unidad-espaciado) * 1.5) calc(var(--unidad-espaciado) * 2);
+    background-color: var(--color-primario);
 }
 
+/* ---- Logo + foto de perfil ---- */
 .logoYperfil {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: calc(var(--unidad-espaciado) * 1.5);
 }
 
 .foto-logoDAW {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     object-fit: cover;
 }
 
 .foto-perfilNavUsuario {
     display: none;
-    width: 80px;
-    height: 80px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
     object-fit: cover;
+    border: 2px solid var(--color-blanco);
 }
 
+/* ---- Contenedor de enlaces ---- */
 .nav-perfil {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    width: 100%;
 }
 
-.nav-perfil a {
-    display: block;
-    padding: 5px 10px;
-    background-color: var(--color-alerta);
-    border-radius: var(--radio-pequeno);
-    color: var(--color-texto-principal);
-}
-
+/* ---- Lista de navegación ---- */
 .nav-links {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 6px;
-}
-
-.nav-perfil ul li {
-    margin-right: 0;
+    align-items: stretch;
+    gap: 4px;
+    list-style: none;
+    margin: 0;
     padding: 0;
     width: 100%;
-    font-size: 1rem;
-    font-weight: 800;
-    color: var(--colorTexto);
 }
 
-.nav-perfil ul li a:hover {
-    color: var(--blanco);
+/* ---- Items de la lista ---- */
+.nav-links li {
+    margin: 0;
+    padding: 0;
 }
 
+/* ---- Enlaces ---- */
+.nav-perfil a {
+    display: block;
+    padding: 8px 14px;
+    background-color: rgba(255, 255, 255, 0.12);
+    border-radius: var(--radio-pequeno);
+    color: var(--color-blanco);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+}
+
+.nav-perfil a:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    color: var(--color-blanco);
+}
+
+/* ---- DESKTOP (≥768px) ---- */
 @media (min-width: 768px) {
-    .foto-perfilNavUsuario {
-        display: block;
-    }
     .nav-usuarioAutenticado {
         flex-direction: row;
         justify-content: space-between;
+        padding: calc(var(--unidad-espaciado) * 1) calc(var(--unidad-espaciado) * 3);
+    }
+
+    .foto-perfilNavUsuario {
+        display: block;
     }
 
     .nav-perfil {
-        display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
-        min-width: fit-content;
+        width: auto;
     }
 
     .nav-links {
-        display: flex;
-        flex-direction: row; /* Esto los pone en fila */
-        flex-wrap: nowrap;    /* Evita que salten de línea si hay muchos */
+        flex-direction: row;
+        flex-wrap: wrap;
         justify-content: flex-end;
         align-items: center;
-        gap: 12px;
-        list-style: none;    /* Quita los puntos de la lista */
-        margin: 0;
-        padding: 0;
+        gap: 8px;
+        width: auto;
     }
-   .nav-links li {
-        width: 100%;
-        display: inline-block;
 
+    .nav-perfil a {
+        padding: 6px 12px;
+        font-size: 0.85rem;
     }
 }
