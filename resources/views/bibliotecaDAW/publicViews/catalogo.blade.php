@@ -28,11 +28,8 @@
             @forelse ($libros as $libro)
                 <div class="catalogoCard">
                     <div class="cardImagen">
-                        <picture>
-                            <source media="(min-width: 1200px)" srcset="{{ $libro->portada_url }}">
-                            <source media="(min-width: 768px)" srcset="{{ $libro->portada_url }}">
-                            <img src="{{ $libro->portada_url }}" alt="Portada de {{ $libro->titulo }}">
-                        </picture>
+                        <img src="{{ $libro->portada_url }}" alt="Portada de {{ $libro->titulo }}"
+                            loading="lazy" width="200" height="300">
                     </div>
                     <div class="cardContenido">
                         <h2 class="libroTitulo">{{ $libro->titulo }}</h2>

@@ -21,16 +21,14 @@
                     <p class="parrafoContenido">{{ $evento->descripcion }}</p>
                 </div>
                 <div class="eventoImagen">
-                    <picture>
-                        @php
-                        // Comprobamos si la URL ya es un enlace externo.
-                        $url = Str::startsWith($evento->imagen_url, ['http://', 'https://'])
-                        ? $evento->imagen_url
-                        : asset('storage/' . $evento->imagen_url);
-                        @endphp    
-                        <source srcset="{{ $url }}" type="image/jpeg">
-                        <img src="{{ $url }}" alt="Imagen del evento {{ $evento->titulo }}" class="imgEvento">
-                    </picture>
+                    @php
+                    // Comprobamos si la URL ya es un enlace externo.
+                    $url = Str::startsWith($evento->imagen_url, ['http://', 'https://'])
+                    ? $evento->imagen_url
+                    : asset('storage/' . $evento->imagen_url);
+                    @endphp    
+                    <img src="{{ $url }}" alt="Imagen del evento {{ $evento->titulo }}" class="imgEvento"
+                        loading="lazy" width="400" height="250">
                 </div>
                 <div class="eventosFecha">
                     <p class="fechaEvento">Fecha: <strong>{{ date('d/m', strtotime($evento->fecha_hora)) }}</strong></p>

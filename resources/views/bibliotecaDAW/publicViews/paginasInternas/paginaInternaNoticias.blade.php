@@ -31,7 +31,8 @@
                         ? $noticia->imagen_url
                         : asset('storage/' . $noticia->imagen_url);
                 @endphp
-                <img src="{{ $url }}" alt="Imagen de {{ $noticia->titulo }}" class="noticiaInternaImg">
+                <img src="{{ $url }}" alt="Imagen de {{ $noticia->titulo }}" class="noticiaInternaImg"
+                    loading="lazy" width="800" height="400">
             </figure>
         @endif
 

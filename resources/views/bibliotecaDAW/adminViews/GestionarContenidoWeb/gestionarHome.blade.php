@@ -74,7 +74,7 @@
                                 <div class="slideCardImagen">
                                     @if ($slide->imagen)
                                         <img src="{{ \Illuminate\Support\Str::startsWith($slide->imagen, ['http://', 'https://']) ? $slide->imagen : asset($slide->imagen) }}"
-                                            alt="Imagen del slide {{ $slide->titulo }}">
+                                            alt="Imagen del slide {{ $slide->titulo }}" loading="lazy" width="680" height="420">
                                     @else
                                         <span class="slideCardSinImagen">Sin imagen</span>
                                     @endif

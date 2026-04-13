@@ -12,7 +12,8 @@
             {{-- Columna izquierda: ficha del libro que se va a alquilar --}}
             <article class="alquilarInternoFicha">
                 <div class="alquilarInternoPortada">
-                    <img src="{{ $libro->portada_url }}" alt="Portada de {{ $libro->titulo }}" class="alquilarInternoImg">
+                    <img src="{{ $libro->portada_url }}" alt="Portada de {{ $libro->titulo }}" class="alquilarInternoImg"
+                        width="200" height="300">
                 </div>
                 <div class="alquilarInternoDetalles">
                     <h1 class="alquilarInternoTitulo">{{ $libro->titulo }}</h1>

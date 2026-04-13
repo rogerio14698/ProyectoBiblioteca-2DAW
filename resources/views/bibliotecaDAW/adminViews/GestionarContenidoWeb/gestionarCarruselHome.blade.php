@@ -75,7 +75,8 @@
                                             ? $evento->imagen_url
                                             : asset('storage/' . $evento->imagen_url);
                                     @endphp
-                                    <img src="{{ $urlImagen }}" alt="Imagen de {{ $evento->titulo }}">
+                                    <img src="{{ $urlImagen }}" alt="Imagen de {{ $evento->titulo }}"
+                                        loading="lazy" width="400" height="250">
                                 @else
                                     <span class="eventoCardSinImagen">Sin imagen</span>
                                 @endif

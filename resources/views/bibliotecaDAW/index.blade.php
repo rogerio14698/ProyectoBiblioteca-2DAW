@@ -29,14 +29,17 @@
                             @else
                                 <button class="btn-base btn-verde" type="button" disabled>Explorar Biblioteca</button>
                             @endif
-                            <picture class="bienvenida-imagen">
-                                <source media="(min-width: 1200px)"
-                                    srcset="{{ \Illuminate\Support\Str::startsWith($slideBienvenida->imagen, ['http://', 'https://']) ? $slideBienvenida->imagen : asset($slideBienvenida->imagen) }}">
-                                <source media="(min-width: 768px)"
-                                    srcset="{{ \Illuminate\Support\Str::startsWith($slideBienvenida->imagen, ['http://', 'https://']) ? $slideBienvenida->imagen : asset($slideBienvenida->imagen) }}">
-                                <img src="{{ \Illuminate\Support\Str::startsWith($slideBienvenida->imagen, ['http://', 'https://']) ? $slideBienvenida->imagen : asset($slideBienvenida->imagen) }}"
-                                    class="imgPaginaBienvenida" loading="lazy" alt="Imagen de {{ $slideBienvenida->titulo }}">
-                            </picture>
+                            @php
+                                $slideUrl = \Illuminate\Support\Str::startsWith($slideBienvenida->imagen, ['http://', 'https://'])
+                                    ? $slideBienvenida->imagen
+                                    : asset($slideBienvenida->imagen);
+                            @endphp
+                            <div class="bienvenida-imagen">
+                                <img src="{{ $slideUrl }}"
+                                    class="imgPaginaBienvenida" loading="eager" fetchpriority="high"
+                                    width="680" height="420"
+                                    alt="Imagen de {{ $slideBienvenida->titulo }}">
+                            </div>
                         </div>
                     </div>
                 @empty
@@ -46,12 +49,11 @@
                             <h1 class="bienvenidaTitulo">Bienvenido a la Biblioteca DAW</h1>
                             <p class="bienvenidaParrafo">Tu portal al conocimiento digital y académico.</p>
                             <button class="btn-base btn-primario" type="button" disabled>Explorar Biblioteca</button>
-                            <picture class="bienvenida-imagen">
-                                <source media="(min-width: 1200px)" srcset="{{ asset('img/img-landingPage.png') }}">
-                                <source media="(min-width: 768px)" srcset="{{ asset('img/img-landingPage.png') }}">
-                                <img src="{{ asset('img/img-landingPage.png') }}" class="imgPaginaBienvenida" loading="lazy"
+                            <div class="bienvenida-imagen">
+                                <img src="{{ asset('img/img-landingPage.png') }}" class="imgPaginaBienvenida"
+                                    loading="eager" fetchpriority="high" width="680" height="420"
                                     alt="Imagen de bienvenida">
-                            </picture>
+                            </div>
                         </div>
                     </div>
                 @endforelse
@@ -95,11 +97,8 @@
                             <div class="novedadCatalogoCard">
                                 <!-- Imagen del libro -->
                                 <div class="novedadImagen">
-                                    <picture>
-                                        <source media="(min-width: 1200px)" srcset="{{ $libro->portada_url }}">
-                                        <source media="(min-width: 768px)" srcset="{{ $libro->portada_url }}">
-                                        <img src="{{ $libro->portada_url }}" alt="Portada de {{ $libro->titulo }}">
-                                    </picture>
+                                    <img src="{{ $libro->portada_url }}" alt="Portada de {{ $libro->titulo }}"
+                                        loading="lazy" width="200" height="300">
                                 </div>
                                 <!-- Título y enlace -->
                                 <div class="novedadInfo">
@@ -129,11 +128,8 @@
             @foreach ($eventos as $evento)
                 <div class="eventoCard">
                     <div class="eventoImg">
-                        <picture>
-                            <source media="(min-width: 1200px)" srcset="{{ $evento->imagen_url }}">
-                            <source media="(min-width: 768px)" srcset="{{ $evento->imagen_url }}">
-                            <img src="{{ $evento->imagen_url }}" alt="Imagen de {{ $evento->titulo }}">
-                        </picture>
+                        <img src="{{ $evento->imagen_url }}" alt="Imagen de {{ $evento->titulo }}"
+                            loading="lazy" width="400" height="250">
                     </div>
 
                     <div class="eventoInfo">
@@ -161,11 +157,8 @@
             @foreach ($noticias as $noticia)
                 <div class="noticiasCard">
                     <div class="noticiasImg">
-                        <picture>
-                            <source media="(min-width: 1200px)" srcset="{{ asset($noticia->imagen_url) }}">
-                            <source media="(min-width: 768px)" srcset="{{ asset($noticia->imagen_url) }}">
-                            <img src="{{ $noticia->imagen_url }}" alt="Imagen de {{ $noticia->titulo }}">
-                        </picture>
+                        <img src="{{ $noticia->imagen_url }}" alt="Imagen de {{ $noticia->titulo }}"
+                            loading="lazy" width="400" height="250">
                     </div>
                     <div class="noticiasInfo">
                         <h2 class="tituloCard">{{ $noticia->titulo }}</h2>

@@ -12,7 +12,8 @@
                 ? $evento->imagen_url
                 : asset('storage/' . $evento->imagen_url);
         @endphp
-        <img src="{{ $url }}" alt="Imagen del evento {{ $evento->titulo }}" class="eventoInternoHeroImg">
+        <img src="{{ $url }}" alt="Imagen del evento {{ $evento->titulo }}" class="eventoInternoHeroImg"
+            width="1200" height="500">
         {{-- Capa oscura para mejorar la legibilidad del texto sobre la imagen --}}
         <div class="eventoInternoHeroOverlay">
             <h1 class="eventoInternoTitulo">{{ $evento->titulo }}</h1>

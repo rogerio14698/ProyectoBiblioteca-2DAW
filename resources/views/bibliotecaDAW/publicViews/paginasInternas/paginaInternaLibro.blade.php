@@ -10,7 +10,8 @@
             <div class="book-container">
                 <div class="book" title="Portada del libro {{ $libro->titulo }}">
                     <div class="front">
-                        <img src="{{ $portadaUrl }}" alt="Portada del libro {{ $libro->titulo }}">
+                        <img src="{{ $portadaUrl }}" alt="Portada del libro {{ $libro->titulo }}"
+                            width="200" height="300">
                     </div>
                     <div class="back"></div>
                     <div class="spine"></div>

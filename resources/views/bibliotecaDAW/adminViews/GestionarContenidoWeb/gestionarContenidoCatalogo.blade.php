@@ -98,7 +98,8 @@
                         @error('portada_img') <span class="errorCampoAdmin">{{ $message }}</span> @enderror
                         <!--Si estamos editando y ya tiene portada, mostramos la miniatura actual -->
                         @if (isset($libroEditar) && $libroEditar->portada_img)
-                            <img src="{{ $libroEditar->portada_url }}" alt="Portada actual" class="catalogoPortadaPreviewAdmin">
+                            <img src="{{ $libroEditar->portada_url }}" alt="Portada actual" class="catalogoPortadaPreviewAdmin"
+                                loading="lazy" width="200" height="300">
                         @endif
                     </div>
 
@@ -139,7 +140,8 @@
                         <div class="catalogoCardAdmin">
                             <!--Imagen de portada del libro -->
                             <div class="catalogoCardImgAdmin">
-                                <img src="{{ $libro->portada_url }}" alt="Portada de {{ $libro->titulo }}">
+                                <img src="{{ $libro->portada_url }}" alt="Portada de {{ $libro->titulo }}"
+                                    loading="lazy" width="200" height="300">
                             </div>
                             <!--Información del libro -->
                             <div class="catalogoCardInfoAdmin">

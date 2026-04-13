@@ -92,7 +92,8 @@
                 @forelse($libros as $libro)
                     <article class="alquilarCardLibro">
                         <div class="alquilarCardImagen">
-                            <img src="{{ $libro->portada_url }}" alt="Portada del libro: {{ $libro->titulo }}">
+                            <img src="{{ $libro->portada_url }}" alt="Portada del libro: {{ $libro->titulo }}"
+                                loading="lazy" width="200" height="300">
                         </div>
 
                         <div class="alquilarCardContenido">

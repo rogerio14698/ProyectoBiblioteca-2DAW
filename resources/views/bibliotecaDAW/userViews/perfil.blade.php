@@ -10,7 +10,8 @@
                 <p>Bienvenido: {{ Auth::user()->name }}</p>
                 <a href="#">Editar</a>
                 <div class="info-personalFoto">
-                    <img src="{{ Auth::user()->profile_photo_url }}" alt="Foto de perfil" class="foto-perfil">
+                    <img src="{{ Auth::user()->profile_photo_url }}" alt="Foto de perfil" class="foto-perfil"
+                        loading="lazy" width="150" height="150">
 
                 </div>
             </div>

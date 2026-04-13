@@ -7,9 +7,13 @@
     <!-- Esto es el Watch de npm para que se actualice el css cada vez que se haga un cambio -->
 
     <title>@yield('title', 'Biblioteca DAW')</title>
+    <meta name="description" content="Biblioteca Digital DAW: catalogo de libros, eventos culturales, prestamos y recursos academicos para la comunidad educativa.">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('img/logoDAW-conTransparencia.png') }}" type="image/png">
+    <!-- Preconexion al CDN de Bootstrap para acelerar la descarga -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
     <!-- Bootstrap CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -46,8 +50,8 @@
 
     @include('layouts.footer')
 
-    <!-- Bootstrap Bundle JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap Bundle JS (defer para no bloquear el renderizado) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
     @stack('scripts')
 </body>
 
