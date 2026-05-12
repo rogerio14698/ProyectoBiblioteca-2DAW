@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Evento;
 use App\Models\Usuario;
+use Faker\Factory as FakerFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,14 +24,18 @@ class EventosFactory extends Factory
         $usuarioId = Usuario::query()->inRandomOrder()->value('id')
             ?? Usuario::factory()->create()->id;
 
+        $faker = function_exists('fake')
+            ? fake()
+            : FakerFactory::create(config('app.faker_locale', 'en_US'));
+
         return [
-            'titulo' => fake()->sentence(4),
-            'descripcion' => fake()->paragraph(),
-            'fecha_hora' => fake()->dateTimeBetween('now', '+1 year'),
-            'ubicacion' => fake()->address(),
+            'titulo' => $faker->sentence(4),
+            'descripcion' => $faker->paragraph(),
+            'fecha_hora' => $faker->dateTimeBetween('now', '+1 year'),
+            'ubicacion' => $faker->address(),
             'usuario_id' => $usuarioId,
-            'prioridad' => fake()->numberBetween(1, 3),
-            'url_paginaInterna' => fake()->url(),
+            'prioridad' => $faker->numberBetween(1, 3),
+            'url_paginaInterna' => $faker->url(),
         ];
     }
 }
