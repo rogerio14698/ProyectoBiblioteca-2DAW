@@ -24,13 +24,13 @@ class EventosFactory extends Factory
             ?? Usuario::factory()->create()->id;
 
         return [
-            'titulo' => $this->faker->sentence(4),
-            'descripcion' => $this->faker->paragraph(),
-            'fecha_hora' => $this->faker->dateTimeBetween('now', '+1 year'),
-            'ubicacion' => $this->faker->address(),
+            'titulo' => fake()->sentence(4),
+            'descripcion' => fake()->paragraph(),
+            'fecha_hora' => fake()->dateTimeBetween('now', '+1 year'),
+            'ubicacion' => fake()->address(),
             'usuario_id' => $usuarioId,
-            'prioridad' => $this->faker->numberBetween(1, 3),
-            'url_paginaInterna' => $this->faker->url(),
+            'prioridad' => fake()->numberBetween(1, 3),
+            'url_paginaInterna' => fake()->url(),
         ];
     }
 }
