@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Evento;
+use App\Models\Usuario;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -18,19 +19,18 @@ class EventosSeeder extends Seeder
      */
     public function run(): void
     {
-        if (!DB::table('usuarios')->where('id', 4)->exists()) {
-            DB::table('usuarios')->insert([
-                'id' => 4,
+        Usuario::query()->updateOrCreate(
+            ['email' => 'usuario4@test.com'],
+            [
                 'name' => 'Roger Developer',
-                'email' => 'usuario4@test.com',
                 'dni' => '40000004A',
                 'movil' => '600000004',
                 'password' => Hash::make('password123'),
                 'nSocio' => '40004US',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
-        }
+            ]
+        );
+
+        $usuarioId = Usuario::query()->where('email', 'usuario4@test.com')->value('id');
 
         // URLs directas de Unsplash con imágenes temáticas (800x600, recortadas)
         $evento1 = 'https://images.unsplash.com/photo-1531243269054-5ebf6f34081e?w=800&h=600&fit=crop'; // Arte/exposición
@@ -48,7 +48,7 @@ class EventosSeeder extends Seeder
                     'asistentes' => 10,
                     // plazas_libres se calcula automáticamente (columna generada: aforo - asistentes).
                     'imagen_url' => $evento1,
-                    'usuario_id' => 4,
+                    'usuario_id' => $usuarioId,
                     'prioridad' => 2,
                 ],
                 [
@@ -59,7 +59,7 @@ class EventosSeeder extends Seeder
                     'aforo' => 30,
                     'asistentes' => 5,
                     'imagen_url' => $evento2,
-                    'usuario_id' => 4,
+                    'usuario_id' => $usuarioId,
                     'prioridad' => 3,
                 ],
                 [
@@ -70,7 +70,7 @@ class EventosSeeder extends Seeder
                     'aforo' => 100,
                     'asistentes' => 0,
                     'imagen_url' => $evento3,
-                    'usuario_id' => 4,
+                    'usuario_id' => $usuarioId,
                     'prioridad' => 1,
                 ],
             ))

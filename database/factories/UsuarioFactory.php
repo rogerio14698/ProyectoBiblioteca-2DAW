@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,11 +18,15 @@ class UsuarioFactory extends Factory
     public function definition(): array
     {
         return [
-            'titulo' => $this->faker->sentence(20),
-            'descripcion' => $this->faker->paragraph(),
-            'fecha_hora' => $this->faker->dateTimeBetween('now', '+1 year'),
-            'ubicacion' => $this->faker->address(),
-            'usuario_id' => 4,
+            'name' => $this->faker->name(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'dni' => strtoupper(Str::random(8)) . $this->faker->randomLetter(),
+            'movil' => $this->faker->numerify('6########'),
+            'password' => 'password123',
+            'nSocio' => null,
+            'es_escritor_verificado' => $this->faker->boolean(30),
+            'tipo_escritor' => $this->faker->optional()->randomElement(['profesional', 'aficion']),
+            'is_demo' => false,
         ];
     }
 }
