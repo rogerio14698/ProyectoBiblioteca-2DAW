@@ -1,15 +1,17 @@
+/* ==========================================================================
+   NAV DEL ADMIN — barra minimalista clara (antes bloque azul sólido)
+   ========================================================================== */
 .navAdmin {
     display: none;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    /* Antes var(--color-primario): solo 3.3:1 de contraste con el texto blanco. Con el azul
-       oscurecido del admin llegamos a 6.7:1 (cumple WCAG AA para texto normal). */
-    background-color: var(--admin-color-primario);
-    gap: 10px;
+    background-color: var(--admin-color-fondo-tarjeta);
+    border: 1px solid var(--admin-color-borde);
+    gap: 8px;
     overflow: visible;
     padding: 10px;
-    box-shadow: var(--sombra-media);
+    box-shadow: var(--sombra-suave);
     border-radius: 8px;
 }
 
@@ -21,13 +23,22 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color: var(--color-blanco);
     position: relative;
     width: fit-content;
-        position: relative; /* IMPORTANTE: Crea el punto de anclaje para su propio menú */
-    display: flex;
-    flex-direction: column;
-    box-shadow: var(--sombra);
+}
+
+/* Enlace "Dashboard": único punto de acento de color en la barra, para marcarlo como inicio */
+.irADashboard {
+    background-color: var(--admin-color-primario);
+    color: var(--color-blanco);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.irADashboard:hover {
+    background-color: var(--admin-color-primario-hover);
 }
 
 .btnDesplegableAdmin{
@@ -35,20 +46,22 @@
     border: none;
 }
 
+/* Botones desplegables: estilo "texto" (ghost), no bloques de color sólido */
 .btnDesplegableAdmin button {
     cursor: pointer;
-    padding: 10px 20px;
-    /* Antes var(--color-secundario) (turquesa): apenas 1.6:1 de contraste con blanco.
-       El verde azulado accesible del admin sube el contraste a 5.5:1. */
-    background-color: var(--admin-color-secundario);
-    color: var(--color-blanco);
-    border-radius: 5px;
+    padding: 8px 16px;
+    background-color: transparent;
+    color: var(--admin-color-texto);
+    font-weight: 500;
+    border-radius: 6px;
     width: 100%;
     text-align: left;
+    transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 .btnDesplegableAdmin button:hover {
-    background-color: var(--admin-color-secundario-hover);
+    background-color: var(--admin-color-fondo);
+    color: var(--admin-color-primario);
 }
 
 /* Foco visible para navegación por teclado (accesibilidad) */
@@ -61,17 +74,20 @@
     outline-offset: 2px;
 }
 
+/* Panel desplegable: tarjeta blanca con sombra, en vez de bloque azul */
 .menu-items {
     display: none;
     list-style: none;
-    padding: 10px;
+    padding: 8px;
     position: absolute;
     z-index: 110;
     top: 100%;
     left: 0;
     width: max-content;
     min-width: 250px;
-    background-color: var(--admin-color-primario);
+    background-color: var(--admin-color-fondo-tarjeta);
+    border: 1px solid var(--admin-color-borde);
+    border-radius: 8px;
     box-shadow: var(--sombra-media);
 }
 
@@ -89,48 +105,66 @@
 }
 
 
-/*Estilos extra para que se vea bien*/
+/* Botón de menú hamburguesa (móvil): estilo ghost consistente con el resto de la barra */
+#btnMenuPrincipal {
+    background-color: var(--admin-color-fondo-tarjeta);
+    color: var(--admin-color-texto);
+    border: 1px solid var(--admin-color-borde);
+}
 
 .menu-button {
     cursor: pointer;
-    padding: 10px 20px;
-    background-color: var(--admin-color-secundario);
-    color: var(--color-blanco);
-    border-radius: 5px;
+    padding: 8px 16px;
+    background-color: transparent;
+    color: var(--admin-color-texto);
+    border-radius: 6px;
     display: inline-block;
 }
 
 .menu-button:hover {
-    background-color: var(--admin-color-secundario-hover);
+    background-color: var(--admin-color-fondo);
+    color: var(--admin-color-primario);
 }
 
+/* Botón de cerrar sesión: acento en rojo (acción destructiva/salida), estilo outline */
 .logout-button {
     cursor: pointer;
-    padding: 10px 20px;
-    background-color: var(--admin-color-secundario);
-    color: var(--color-blanco);
-    border: 1px solid var(--admin-color-secundario);
-    border-radius: 5px;
+    padding: 8px 16px;
+    background-color: transparent;
+    color: var(--bgBtnRojo);
+    border: 1px solid var(--bgBtnRojo);
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 .logout-button:hover {
-    background-color: var(--admin-color-secundario-hover);
-    border-color: var(--admin-color-secundario-hover);
+    background-color: var(--bgBtnRojo);
+    color: var(--color-blanco);
 }
 
 .menu-items li {
-    margin: 5px 0;
+    margin: 2px 0;
 }
 
 .menu-items li a {
-    color: var(--color-blanco);
+    display: block;
+    padding: 6px 10px;
+    border-radius: 6px;
+    color: var(--admin-color-texto);
     text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.menu-items li a:hover {
+    background-color: var(--admin-color-fondo);
+    color: var(--admin-color-primario);
 }
 
 .sub-menu-items {
     list-style: none;
-    margin-top: 8px;
-    padding-left: 16px;
+    margin-top: 4px;
+    padding-left: 12px;
 }
 
 @media (min-width: 768px) {
@@ -138,8 +172,9 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: space-evenly;
-        padding: 10px;
+        justify-content: flex-start;
+        gap: 6px;
+        padding: 10px 16px;
         width: 100%;
         position: static;
         top: auto;
@@ -147,6 +182,13 @@
         z-index: 20;
         box-shadow: none;
         border-radius: 0;
+        border: none;
+        border-bottom: 1px solid var(--admin-color-borde);
+    }
+
+    /* El botón de cerrar sesión se separa a la derecha del todo */
+    .navContenidoSesion {
+        margin-left: auto;
     }
 
     .menu-items {

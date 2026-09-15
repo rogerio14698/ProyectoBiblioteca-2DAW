@@ -1,72 +1,156 @@
-
+/* ==========================================================================
+   DASHBOARD DEL ADMIN — rediseño minimalista
+   Paleta y espaciados centralizados en variables.css (sección "PANEL DE
+   ADMINISTRACIÓN"), así evitamos colores sueltos y mantenemos coherencia
+   con el resto del panel.
+   ========================================================================== */
 
 .dashboard {
-    padding: 20px;
-    color: var(--color-blanco);
-    position: relative;
-    /* Fondo sobrio y consistente con el resto del panel en vez de un gris plano suelto */
-    background-color: var(--admin-color-texto);
-}
-.dashboard h1 {
-    color: var(--colorTexto);
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    text-decoration: underline double;
+    padding: 24px;
+    /* Fondo neutro y claro: más profesional que un bloque de color plano */
+    background-color: var(--admin-color-fondo);
+    color: var(--admin-color-texto);
 }
 
+.dashboardIntro {
+    margin-bottom: 24px;
+}
+
+.dashboard h1 {
+    color: var(--admin-color-texto);
+    font-size: 1.9rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.dashboardSubtitulo {
+    color: var(--admin-color-texto-mutado);
+    font-size: 0.95rem;
+    margin-top: 4px;
+}
+
+/* ==== Sección: Tarjetas de resumen (KPIs) ==== */
 .dashboard-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 20px;
-    position: relative;
-    z-index: 3;
-    margin-bottom: -40px;
-
 }
 
 .cardElementosDashboard {
-    padding: 10px;
-    /* Antes var(--color-secundario) (turquesa de 1.6:1): el verde azulado accesible
-       del admin da suficiente contraste al texto oscuro de la tarjeta. */
-    background-color: var(--admin-color-secundario);
-    border-radius: 5px;
-       box-shadow: var(--sombra);
-    border: var(--admin-color-borde) 1px solid;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 20px;
+    background-color: var(--admin-color-fondo-tarjeta);
+    border: 1px solid var(--admin-color-borde);
+    border-radius: 10px;
+    box-shadow: var(--sombra-suave);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
-.cardElementosDashboard h2 {
-    margin-bottom: 20px;
+
+.cardElementosDashboard:hover {
+    box-shadow: var(--sombra-media);
+    transform: translateY(-2px);
+}
+
+/* Círculo de icono: el color distingue cada KPI sin depender solo del texto */
+.cardIcono {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 1.2rem;
     color: var(--color-blanco);
-    text-decoration: underline double;
-    font-weight: bold;
-    font-size: 1.5rem;
 }
 
+.cardIcono--azul { background-color: var(--admin-color-primario); }
+.cardIcono--verde { background-color: var(--admin-color-secundario); }
+.cardIcono--morado { background-color: #6D28D9; }
+.cardIcono--naranja { background-color: #B45309; }
 
-/*parte principal del dashboard*/
+.cardTexto {
+    display: flex;
+    flex-direction: column;
+}
+
+.cardValor {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--admin-color-texto);
+}
+
+.cardElementosDashboard h2 {
+    margin: 4px 0 0;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--admin-color-texto);
+}
+
+.cardElementosDashboard p {
+    margin: 2px 0 0;
+    font-size: 0.82rem;
+    color: var(--admin-color-texto-mutado);
+}
+
+/* Enlace de texto en vez de botón sólido: más ligero y minimalista */
+.cardEnlace {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--admin-color-primario);
+    text-decoration: none;
+}
+
+.cardEnlace:hover {
+    text-decoration: underline;
+}
+
+.cardEnlace:focus-visible {
+    outline: 3px solid var(--admin-color-foco);
+    outline-offset: 2px;
+    border-radius: 3px;
+}
+
+/* ==== Sección: Listado de mensajes de contacto ==== */
 .bodyDashboard {
-    gap: 20px;
-    position: relative;
-    z-index: 1;
-    padding-top: 40px;
+    margin-top: 28px;
 }
 
 .dashboardListadoMail {
     width: auto;
-    margin-top: 20px;
+    background-color: var(--admin-color-fondo-tarjeta);
+    border: 1px solid var(--admin-color-borde);
+    border-radius: 10px;
     box-shadow: var(--sombra-suave);
-    background-color: var(--color-fondo-global);
-    border-radius: var(--radio-borde);
+    overflow: hidden;
 }
 
 .cardHeaderMail {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
-    padding: 12px 16px;
-    background-color: var(--admin-color-primario);
-    color: var(--color-blanco);
-    border-radius: var(--radio-borde);
+    padding: 14px 18px;
+    background-color: var(--admin-color-fondo-tarjeta);
+    border-bottom: 1px solid var(--admin-color-borde);
+}
+
+.cardHeaderMail h5 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--admin-color-texto);
+}
+
+.cardHeaderMail h5 i {
+    color: var(--admin-color-primario);
+    margin-right: 6px;
 }
 
 /* Contenedor principal para permitir scroll horizontal si la pantalla es muy pequeña */
@@ -86,37 +170,37 @@
     display: grid;
     /* Columnas 100% fluidas en fr para adaptarse a cualquier ancho */
     /* Nombre | Email | Asunto | Mensaje | Fecha | Estado | Acciones */
-    grid-template-columns: 0.7fr 0.8fr 1.1fr 1.5fr 0.5fr 0.4fr 0.5fr;
+    grid-template-columns: 0.7fr 0.8fr 1.1fr 1.5fr 0.5fr 0.4fr 0.9fr;
     align-items: center;
-    padding: 12px 16px;
+    padding: 12px 18px;
     gap: 12px;
 }
 
-/* Estilo de la cabecera */
+/* Estilo de la cabecera: fondo claro con texto oscuro, más sobrio que un bloque de color */
 .titulosListados {
-    background-color: var(--admin-color-primario);
-    color: white;
-    font-weight: bold;
+    background-color: var(--admin-color-fondo);
+    color: var(--admin-color-texto-mutado);
+    font-weight: 700;
     text-transform: uppercase;
-    font-size: 0.8rem;
+    font-size: 0.72rem;
     letter-spacing: 0.5px;
-    border-radius: var(--radio-borde) var(--radio-borde) 0 0;
+    border-bottom: 1px solid var(--admin-color-borde);
 }
 
 /* Estilo de las filas de datos - alternancia de color (zebra) para legibilidad */
 .dataListadoMail {
-    color: var(--negro);
-    background-color: var(--color-blanco);
-    border-bottom: 1px solid #e2e8f0;
+    color: var(--admin-color-texto);
+    background-color: var(--admin-color-fondo-tarjeta);
+    border-bottom: 1px solid var(--admin-color-borde);
     transition: background 0.2s;
 }
 
 .dataListadoMail:hover {
-    background-color: #e2e8f0;
+    background-color: var(--admin-color-fondo);
 }
 
 .dataListadoMail:last-child {
-    border-radius: 0 0 var(--radio-borde) var(--radio-borde);
+    border-bottom: none;
 }
 
 /* --- EL MENSAJE CON SCROLL --- */
@@ -124,14 +208,14 @@
     max-height: 60px; /* Altura máxima antes de hacer scroll */
     overflow-y: auto; /* Scroll vertical si el texto es largo */
     padding-right: 5px;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     line-height: 1.4;
-    color: #444;
+    color: var(--admin-color-texto);
     /* Estilo barra de scroll fina */
     scrollbar-width: thin;
 }
 
-/* Estilo de los botones de acciones */
+/* Estilo de los botones de acciones: fila compacta tipo "toolbar" */
 .dataListadoMail span:last-child {
     display: flex;
     gap: 6px;
@@ -143,12 +227,12 @@
 
 /* Select de estado estilizado */
 .selectEstadoMail {
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     padding: 5px 8px;
-    border: 1px solid #cbd5e1;
+    border: 1px solid var(--admin-color-borde);
     border-radius: 6px;
-    background-color: var(--color-blanco);
-    color: #334155;
+    background-color: var(--admin-color-fondo-tarjeta);
+    color: var(--admin-color-texto);
     cursor: pointer;
     outline: none;
 }
@@ -165,8 +249,8 @@
 .estadoMail {
     padding: 4px 10px;
     border-radius: 12px;
-    font-size: 0.78rem;
-    font-weight: bold;
+    font-size: 0.76rem;
+    font-weight: 700;
     text-align: center;
     white-space: nowrap;
 }
@@ -198,21 +282,22 @@
 /* Contenedor del formulario de respuesta dentro de cada fila */
 .formResponderMail {
     grid-column: 1 / -1;
-    padding: 12px 16px;
-    background-color: #f8fafc;
-    border-top: 1px solid #e2e8f0;
+    padding: 12px 18px;
+    background-color: var(--admin-color-fondo);
+    border-top: 1px solid var(--admin-color-borde);
 }
 
 .formResponderMail label {
     display: block;
     font-size: 0.85rem;
-    color: #334155;
+    color: var(--admin-color-texto-mutado);
     margin-bottom: 6px;
 }
 .btnsAccionesDashboard{
     display: flex;
-    gap: 10px;
-    flex-direction: column;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 
@@ -221,7 +306,7 @@
     width: 100%;
     padding: 10px;
     font-size: 0.88rem;
-    border: 1px solid #cbd5e1;
+    border: 1px solid var(--admin-color-borde);
     border-radius: 6px;
     resize: vertical;
     font-family: var(--fuente-familia);
@@ -282,7 +367,7 @@
         font-size: 0.75rem;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        color: var(--color-primario);
+        color: var(--admin-color-primario);
         margin-bottom: 2px;
     }
 
@@ -304,6 +389,6 @@
         flex-direction: column;
         gap: 8px;
         padding-top: 8px;
-        border-top: 1px solid #e2e8f0;
+        border-top: 1px solid var(--admin-color-borde);
     }
 }

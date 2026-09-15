@@ -184,7 +184,11 @@
     .actividadesEventos {
         display: flex;
         flex-direction: row;
+        /* Sin flex-wrap las tarjetas (300px fijos cada una) no bajaban de línea:
+           con más de 3-4 eventos se desbordaban horizontalmente fuera del contenedor. */
+        flex-wrap: wrap;
         align-items: center;
+        align-content: center;
         justify-content: center;
          min-height: 80vh;
     }

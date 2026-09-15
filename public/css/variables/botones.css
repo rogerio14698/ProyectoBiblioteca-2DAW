@@ -194,16 +194,18 @@
 }
 
 /* ---- 9. GRUPO: Botones Mail Admin ---- */
-/* Estilos compartidos por eliminar, cambiar estado y responder */
+/* Estilos compartidos por eliminar, cambiar estado y responder: chips compactos
+   en fila (no width:100%) para el diseño de tarjeta de mensaje minimalista */
 .btnEliminarMail,
 .btnCambiarEstadoMail,
 .btnResponderMail {
     color: var(--color-blanco);
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     padding: 6px 12px;
     border-radius: 6px;
     font-weight: 600;
-    width: 100%;
+    border: none;
+    cursor: pointer;
 }
 
 .btnEliminarMail:hover,
@@ -221,7 +223,7 @@
 }
 
 .btnCambiarEstadoMail {
-    /* Antes var(--color-primario): 3.3:1 con texto blanco, no llega al m\u00ednimo AA (4.5:1) */
+    /* Antes var(--color-primario): 3.3:1 con texto blanco, no llega al mínimo AA (4.5:1) */
     background-color: var(--admin-color-primario);
 }
 .btnCambiarEstadoMail:hover {

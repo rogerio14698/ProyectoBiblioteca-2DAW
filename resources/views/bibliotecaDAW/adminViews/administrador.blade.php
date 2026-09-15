@@ -6,37 +6,56 @@
 
 
     <div class="contenedor dashboard">
-        <h1>Dashboard</h1>
+        <div class="dashboardIntro">
+            <h1>Dashboard</h1>
+            <p class="dashboardSubtitulo">Resumen general de la actividad de la biblioteca</p>
+        </div>
         <!-- Aquí puedes agregar más secciones o funcionalidades específicas para el administrador -->
 
         <!-- Aqui la idea ahora es poner varios cards tipo un panel de control                                  con diferentes secciones -->
         <div class="dashboard-cards">
             <div class="cardElementosDashboard">
-                <h2>Libros disponibles: {{ $librosDisponibles }}</h2>
-                <p>Contenidos Totales (publicaciones)</p>
-                <a href="{{ route('admin.gestionCatalogo') }}" class="btn-base btn-verde">Más info</a>
+                <span class="cardIcono cardIcono--azul"><i class="bi bi-book"></i></span>
+                <div class="cardTexto">
+                    <span class="cardValor">{{ $librosDisponibles }}</span>
+                    <h2>Libros disponibles</h2>
+                    <p>Contenidos totales (publicaciones)</p>
+                </div>
+                <a href="{{ route('admin.gestionCatalogo') }}" class="cardEnlace">Más info <i class="bi bi-arrow-right"></i></a>
             </div>
             <div class="cardElementosDashboard">
-                <h2>Eventos próximos: {{ $eventosProximos }}</h2>
-                <p>Próximos eventos en la biblioteca</p>
-                <a href="{{ route('admin.gestionCarrusel') }}" class="btn-base btn-verde">Más info</a>
+                <span class="cardIcono cardIcono--verde"><i class="bi bi-calendar-event"></i></span>
+                <div class="cardTexto">
+                    <span class="cardValor">{{ $eventosProximos }}</span>
+                    <h2>Eventos próximos</h2>
+                    <p>Próximos eventos en la biblioteca</p>
+                </div>
+                <a href="{{ route('admin.gestionCarrusel') }}" class="cardEnlace">Más info <i class="bi bi-arrow-right"></i></a>
             </div>
             <div class="cardElementosDashboard">
-                <h2>Usuarios registrados: {{ $usuariosRegistrados }}</h2>
-                <p>Total de usuarios registrados en el sistema</p>
-                <a href="{{ route('admin.gestionUsuarios') }}" class="btn-base btn-verde">Más info</a>
+                <span class="cardIcono cardIcono--morado"><i class="bi bi-people"></i></span>
+                <div class="cardTexto">
+                    <span class="cardValor">{{ $usuariosRegistrados }}</span>
+                    <h2>Usuarios registrados</h2>
+                    <p>Total de usuarios registrados en el sistema</p>
+                </div>
+                <a href="{{ route('admin.gestionUsuarios') }}" class="cardEnlace">Más info <i class="bi bi-arrow-right"></i></a>
             </div>
             <div class="cardElementosDashboard">
-                <h2>Noticias o Destacados: <span>{{ $totalNoticias }}</span></h2>
-                <p>Contenidos de Noticias o Destacados</p>
-                <a href="{{ route('admin.gestionNoticias') }}" class="btn-base btn-verde">Más info</a>
+                <span class="cardIcono cardIcono--naranja"><i class="bi bi-newspaper"></i></span>
+                <div class="cardTexto">
+                    <span class="cardValor">{{ $totalNoticias }}</span>
+                    <h2>Noticias o Destacados</h2>
+                    <p>Contenidos de Noticias o Destacados</p>
+                </div>
+                <a href="{{ route('admin.gestionNoticias') }}" class="cardEnlace">Más info <i class="bi bi-arrow-right"></i></a>
             </div>
 
         </div>
         <div class="bodyDashboard">
             <div class="dashboardListadoMail ">
                 <div class="cardHeaderMail">
-                    <h5>Listado Mails</h5>
+                    <h5><i class="bi bi-envelope"></i> Listado Mails</h5>
                 </div>
                 <div class="bodyListadoMail">
                     <div class="tablaListadoMail">
