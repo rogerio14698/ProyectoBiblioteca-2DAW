@@ -1,8 +1,18 @@
 @extends('layouts.app')
 
-@section('title', 'Home')
+{{-- SEO: título y descripción específicos de la landing, más útiles para buscadores que "Home" --}}
+@section('title', 'Biblioteca Digital DAW | Catálogo, Eventos y Noticias')
+@section('meta_description', 'Descubre el catálogo digital de la Biblioteca DAW: libros disponibles para préstamo y compra, agenda de eventos culturales y las últimas noticias de la comunidad educativa.')
+@section('og_image', asset('img/img-landingPage.png'))
 
 @section('content')
+    {{--
+        Único <h1> real de la página (necesario para el SEO y la jerarquía semántica correcta).
+        Se usa "visually-hidden" (clase ya provista por Bootstrap) para no alterar el diseño visual:
+        el texto grande que se ve en el carrusel sigue siendo el de cada slide, ahora como <h2>.
+    --}}
+    <h1 class="visually-hidden">Bienvenido a la Biblioteca Digital DAW</h1>
+
     <!--Slides de carrusel bienvenida -->
 
     <section class="bienvenida separador">
@@ -21,7 +31,7 @@
                 @forelse ($slideBienvenidas as $slideBienvenida)
                     <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                         <div class="bienvenidaSlideContenido">
-                            <h1 class="tituloPagina">{{ $slideBienvenida->titulo }}</h1>
+                            <h2 class="tituloPagina">{{ $slideBienvenida->titulo }}</h2>
                             <p class="bienvenidaParrafo parrafoTitulo">{!! nl2br(e($slideBienvenida->descripcion)) !!}</p>
                             @if ($slideBienvenida->url)
                                 <a href="{{ $slideBienvenida->url }}" class="btn-base btn-verde">Explorar
@@ -38,7 +48,7 @@
                                 <img src="{{ $slideUrl }}"
                                     class="imgPaginaBienvenida" loading="eager" fetchpriority="high"
                                     width="680" height="420"
-                                    alt="Imagen de {{ $slideBienvenida->titulo }}">
+                                    alt="Imagen del slide de bienvenida: {{ $slideBienvenida->titulo }}">
                             </div>
                         </div>
                     </div>
@@ -46,13 +56,13 @@
                     <!--Slide por defecto de inicio-->
                     <div class="carousel-item active">
                         <div class="bienvenidaSlideContenido">
-                            <h1 class="bienvenidaTitulo">Bienvenido a la Biblioteca DAW</h1>
+                            <h2 class="bienvenidaTitulo">Bienvenido a la Biblioteca DAW</h2>
                             <p class="bienvenidaParrafo">Tu portal al conocimiento digital y académico.</p>
                             <button class="btn-base btn-primario" type="button" disabled>Explorar Biblioteca</button>
                             <div class="bienvenida-imagen">
                                 <img src="{{ asset('img/img-landingPage.png') }}" class="imgPaginaBienvenida"
                                     loading="eager" fetchpriority="high" width="680" height="420"
-                                    alt="Imagen de bienvenida">
+                                    alt="Imagen de bienvenida a la Biblioteca DAW">
                             </div>
                         </div>
                     </div>
@@ -128,7 +138,7 @@
             @foreach ($eventos as $evento)
                 <div class="eventoCard">
                     <div class="eventoImg">
-                        <img src="{{ $evento->imagen_url }}" alt="Imagen de {{ $evento->titulo }}"
+                        <img src="{{ $evento->imagen_url }}" alt="Cartel del evento: {{ $evento->titulo }}"
                             loading="lazy" width="400" height="250">
                     </div>
 
@@ -157,11 +167,12 @@
             @foreach ($noticias as $noticia)
                 <div class="noticiasCard">
                     <div class="noticiasImg">
-                        <img src="{{ $noticia->imagen_url }}" alt="Imagen de {{ $noticia->titulo }}"
+                        <img src="{{ $noticia->imagen_url }}" alt="Imagen de la noticia: {{ $noticia->titulo }}"
                             loading="lazy" width="400" height="250">
                     </div>
                     <div class="noticiasInfo">
-                        <h2 class="tituloCard">{{ $noticia->titulo }}</h2>
+                        {{-- h3 y no h2: es el título de una tarjeta individual, dentro de la sección "Noticias" (h2) --}}
+                        <h3 class="tituloCard">{{ $noticia->titulo }}</h3>
                         <div class="noticias-detalles">
                             <strong>
                                 <p class="parrafoContenido">{{ $noticia->autor }}</p>
@@ -178,4 +189,58 @@
             {{ $noticias->appends(['eventos_page' => $eventos->currentPage()])->fragment('noticias')->links('vendor.pagination.bootstrap-5') }}
         </div>
     </section>
+
+    {{--
+        Datos estructurados JSON-LD (schema.org): ayudan a los buscadores a entender qué es la página
+        (una biblioteca) y qué eventos organiza, sin afectar nada visual. No se toca el diseño ni la lógica.
+    --}}
+    @push('head')
+        <script type="application/ld+json">
+            {!! json_encode([
+                '@context' => 'https://schema.org',
+                '@type' => 'Library',
+                'name' => $footerConfig->titulo ?: 'Biblioteca Digital DAW',
+                'url' => url('/biblioteca'),
+                'image' => asset('img/logoDAW-conTransparencia.png'),
+                'telephone' => $footerConfig->telefono,
+                'email' => $footerConfig->email_contacto,
+                'address' => [
+                    '@type' => 'PostalAddress',
+                    'streetAddress' => $footerConfig->direccion,
+                ],
+                'sameAs' => array_values(array_filter([
+                    $footerConfig->instagram_url,
+                    $footerConfig->linkedin_url,
+                    $footerConfig->twitter_url,
+                    $footerConfig->youtube_url,
+                ])),
+            ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+        </script>
+
+        {{-- Un bloque JSON-LD de tipo Event por cada evento mostrado en la agenda de la página actual --}}
+        @foreach ($eventos as $evento)
+            <script type="application/ld+json">
+                {!! json_encode([
+                    '@context' => 'https://schema.org',
+                    '@type' => 'Event',
+                    'name' => $evento->titulo,
+                    'description' => $evento->descripcion,
+                    'startDate' => \Illuminate\Support\Carbon::parse($evento->fecha_hora)->toIso8601String(),
+                    'eventAttendanceMode' => 'https://schema.org/OfflineEventAttendanceMode',
+                    'eventStatus' => 'https://schema.org/EventScheduled',
+                    'image' => $evento->imagen_url,
+                    'url' => route('evento.paginaInterna', $evento->id),
+                    'location' => [
+                        '@type' => 'Place',
+                        'name' => $evento->ubicacion,
+                        'address' => $evento->ubicacion,
+                    ],
+                    'organizer' => [
+                        '@type' => 'Organization',
+                        'name' => $footerConfig->titulo ?: 'Biblioteca Digital DAW',
+                    ],
+                ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
+            </script>
+        @endforeach
+    @endpush
 @endsection

@@ -126,7 +126,8 @@
 .noticiasBotonEnvio {
     width: 100%;
     padding: calc(var(--unidad-espaciado) * 1.5);
-    background: var(--color-primario);
+    /* Antes var(--color-primario): 3.3:1 con texto blanco */
+    background: var(--admin-color-primario);
     color: var(--blanco);
     border: none;
     border-radius: 6px;
@@ -138,9 +139,14 @@
 
 /* Hover del botón de envío */
 .noticiasBotonEnvio:hover {
-    background: var(--color-primario-oscuro);
+    background: var(--admin-color-primario-hover);
     box-shadow: var(--sombra-media);
     transform: translateY(-2px);
+}
+
+.noticiasBotonEnvio:focus-visible {
+    outline: 3px solid var(--admin-color-foco);
+    outline-offset: 2px;
 }
 
 /* ==============================================
@@ -219,7 +225,8 @@
 
 /* Variantes de categoría por color */
 .noticiaCardCategoria--general {
-    background: var(--color-primario);
+    /* Antes var(--color-primario): 3.3:1 con texto blanco */
+    background: var(--admin-color-primario);
 }
 
 .noticiaCardCategoria--eventos {
@@ -232,14 +239,16 @@
 }
 
 .noticiaCardCategoria--avisos {
-    background: var(--colorComplementarioTerciario);
+    /* Antes var(--colorComplementarioTerciario) (#FFA200): 2:1 con texto blanco */
+    background: #B45309;
 }
 
 /* Badge de noticia destacada */
 .noticiaCardDestacado {
     font-size: 0.72rem;
     font-weight: 600;
-    color: var(--colorComplementarioTerciario);
+    /* Antes var(--colorComplementarioTerciario) (#FFA200) sobre blanco: 2:1 */
+    color: #B45309;
 }
 
 /* Título de la noticia en la tarjeta */

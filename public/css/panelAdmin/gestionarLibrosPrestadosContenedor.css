@@ -140,7 +140,8 @@
 
 /* Nombre del usuario que tiene el prestamo */
 .prestamoCardUsuario {
-    color: var(--color-primario);
+    /* var(--color-primario) da 3.3:1 sobre blanco; el tono oscuro ya definido cumple AA */
+    color: var(--color-primario-oscuro);
     font-size: 0.88rem;
     font-weight: 500;
     margin: 0;

@@ -4,8 +4,8 @@
     padding: 20px;
     color: var(--color-blanco);
     position: relative;
-    background-color: var(--grisClaro);
-    background-color: #777;
+    /* Fondo sobrio y consistente con el resto del panel en vez de un gris plano suelto */
+    background-color: var(--admin-color-texto);
 }
 .dashboard h1 {
     color: var(--colorTexto);
@@ -26,14 +26,16 @@
 
 .cardElementosDashboard {
     padding: 10px;
-    background-color: var(--color-secundario);
+    /* Antes var(--color-secundario) (turquesa de 1.6:1): el verde azulado accesible
+       del admin da suficiente contraste al texto oscuro de la tarjeta. */
+    background-color: var(--admin-color-secundario);
     border-radius: 5px;
        box-shadow: var(--sombra);
-    border: var(--colorBorde) 1px solid;
+    border: var(--admin-color-borde) 1px solid;
 }
 .cardElementosDashboard h2 {
     margin-bottom: 20px;
-    color: var(--colorTexto);
+    color: var(--color-blanco);
     text-decoration: underline double;
     font-weight: bold;
     font-size: 1.5rem;
@@ -62,7 +64,7 @@
     align-items: center;
     margin-bottom: 15px;
     padding: 12px 16px;
-    background-color: var(--color-primario);
+    background-color: var(--admin-color-primario);
     color: var(--color-blanco);
     border-radius: var(--radio-borde);
 }
@@ -92,7 +94,7 @@
 
 /* Estilo de la cabecera */
 .titulosListados {
-    background-color: var(--color-primario);
+    background-color: var(--admin-color-primario);
     color: white;
     font-weight: bold;
     text-transform: uppercase;
@@ -152,8 +154,11 @@
 }
 
 .selectEstadoMail:focus {
-    border-color: var(--color-primario);
-    box-shadow: 0 0 0 2px rgba(var(--color-primario-rgb, 74, 144, 226), 0.2);
+    border-color: var(--admin-color-primario);
+    /* Foco visible con anillo de color, necesario para navegación por teclado (WCAG) */
+    outline: 3px solid var(--admin-color-foco);
+    outline-offset: 1px;
+    box-shadow: 0 0 0 2px rgba(29, 78, 216, 0.2);
 }
 
 /* Estados */
@@ -167,18 +172,20 @@
 }
 
 .estadoPendiente {
-    background-color: #ffeaa7;
-    color: #d35400;
+    /* Antes #ffeaa7/#d35400 (3.5:1, no llega al 4.5:1 exigido para texto normal) */
+    background-color: var(--admin-badge-advertencia-bg);
+    color: var(--admin-badge-advertencia-texto);
 }
 
 .estadoProceso {
-    background-color: #dfe6e9;
-    color: #2d3436;
+    background-color: var(--admin-badge-neutro-bg);
+    color: var(--admin-badge-neutro-texto);
 }
 
 .estadoLeido {
-    background-color: #55efc4;
-    color: #00b894;
+    /* Antes #55efc4/#00b894 (1.8:1, muy por debajo del mínimo accesible) */
+    background-color: var(--admin-badge-exito-bg);
+    color: var(--admin-badge-exito-texto);
 }
 
 /* --- Formulario de respuesta al mail --- */
@@ -223,8 +230,9 @@
 }
 
 .textareaResponderMail:focus {
-    border-color: var(--color-primario);
-    box-shadow: 0 0 0 2px rgba(var(--color-primario-rgb, 74, 144, 226), 0.2);
+    border-color: var(--admin-color-primario);
+    outline: 2px solid var(--admin-color-foco);
+    outline-offset: 1px;
 }
 
 

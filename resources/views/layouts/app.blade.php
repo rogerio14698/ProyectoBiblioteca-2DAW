@@ -6,8 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Esto es el Watch de npm para que se actualice el css cada vez que se haga un cambio -->
 
-    <title>@yield('title', 'Biblioteca DAW')</title>
-    <meta name="description" content="Biblioteca Digital DAW: catalogo de libros, eventos culturales, prestamos y recursos academicos para la comunidad educativa.">
+    {{--
+        Título y descripción de la página: cada vista puede sobreescribirlos con @section('title', ...)
+        y @section('meta_description', ...). Si no lo hacen, se usan estos valores por defecto.
+        Los guardamos en variables PHP porque se reutilizan también en las etiquetas Open Graph y Twitter Card.
+    --}}
+    @php
+        $tituloPagina = trim($__env->yieldContent('title', 'Biblioteca DAW'));
+        $descripcionPagina = trim($__env->yieldContent(
+            'meta_description',
+            'Biblioteca Digital DAW: catálogo de libros, eventos culturales, préstamos y recursos académicos para la comunidad educativa.'
+        ));
+        $imagenPagina = trim($__env->yieldContent('og_image', asset('img/logoDAW-conTransparencia.png')));
+    @endphp
+    <title>{{ $tituloPagina }}</title>
+    <meta name="description" content="{{ $descripcionPagina }}">
+
+    <!-- Enlace canónico: evita contenido duplicado indexado por buscadores -->
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    <!-- Open Graph: controla cómo se ve la página al compartirla en redes sociales (Facebook, LinkedIn, WhatsApp...) -->
+    <meta property="og:type" content="@yield('og_type', 'website')">
+    <meta property="og:site_name" content="Biblioteca Digital DAW">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:title" content="{{ $tituloPagina }}">
+    <meta property="og:description" content="{{ $descripcionPagina }}">
+    <meta property="og:image" content="{{ $imagenPagina }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+
+    <!-- Twitter Card: vista previa equivalente para X/Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $tituloPagina }}">
+    <meta name="twitter:description" content="{{ $descripcionPagina }}">
+    <meta name="twitter:image" content="{{ $imagenPagina }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('img/logoDAW-conTransparencia.png') }}" type="image/png">

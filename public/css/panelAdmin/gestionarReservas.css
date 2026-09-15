@@ -210,7 +210,8 @@
 .reservasBotonEnvio {
     width: 100%;
     padding: calc(var(--unidad-espaciado) * 1.5);
-    background: var(--color-primario);
+    /* Antes var(--color-primario): 3.3:1 con texto blanco */
+    background: var(--admin-color-primario);
     color: var(--blanco);
     border: none;
     border-radius: 6px;
@@ -221,9 +222,14 @@
 }
 
 .reservasBotonEnvio:hover {
-    background: var(--color-primario-oscuro);
+    background: var(--admin-color-primario-hover);
     box-shadow: var(--sombra-media);
     transform: translateY(-2px);
+}
+
+.reservasBotonEnvio:focus-visible {
+    outline: 3px solid var(--admin-color-foco);
+    outline-offset: 2px;
 }
 
 /* Botón cancelar edición */
@@ -323,7 +329,8 @@
 
 /* Badge del ID de la reserva */
 .reservaCardId {
-    background: var(--color-primario);
+    /* Antes var(--color-primario): 3.3:1 con texto blanco */
+    background: var(--admin-color-primario);
     color: var(--blanco);
     font-size: 0.72rem;
     font-weight: 700;
@@ -343,7 +350,8 @@
 }
 
 .reservaCardEstado--activa {
-    background: var(--color-primario);
+    /* Antes var(--color-primario): 3.3:1 con texto blanco */
+    background: var(--admin-color-primario);
 }
 
 .reservaCardEstado--devuelta {

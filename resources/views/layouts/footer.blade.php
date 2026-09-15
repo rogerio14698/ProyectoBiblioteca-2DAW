@@ -3,7 +3,8 @@
     <!--Columna 1: Información general y redes sociales -->
     <div class="footerDireccion">
         <div class="footerInfo">
-            <h1>{{ $footerConfig->titulo }} &copy; {{ date('Y') }}</h1>
+            {{-- h2 y no h1: el h1 de la página ya se usa en el contenido principal, el footer no debe duplicarlo --}}
+            <h2>{{ $footerConfig->titulo }} &copy; {{ date('Y') }}</h2>
             <p>tel: {{ $footerConfig->telefono }}</p>
             <p>{{ $footerConfig->direccion }}</p>
         </div>
@@ -25,7 +26,7 @@
 
     <!--Columna 2: Horarios -->
     <div class="footerHorarios">
-        <h1>Horarios</h1>
+        <h2>Horarios</h2>
         <p>Lunes a Viernes: {{ $footerConfig->horario_semana }}</p>
         <p>Sábado: {{ $footerConfig->horario_sabado }}</p>
         <p>Domingo: {{ $footerConfig->horario_domingo }}</p>
@@ -33,7 +34,7 @@
 
     <!--Columna 3: Contacto y legal -->
     <div class="footerContacto">
-        <h1>Contacto</h1>
+        <h2>Contacto</h2>
         <p>Contacto: {{ $footerConfig->email_contacto }}</p>
         @if ($footerConfig->aviso_legal_url)
             <p>aviso legal: <a href="{{ url($footerConfig->aviso_legal_url) }}" class="text-decoration-none">Ver aviso legal</a></p>

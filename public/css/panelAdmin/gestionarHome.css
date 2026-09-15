@@ -82,7 +82,7 @@
     background-color: #e2e8f0;
     border-radius: var(--radio-borde);
     font-size: 0.75rem;
-    color: #94a3b8;
+    color: var(--admin-color-texto-mutado);
 }
 
 /* Información del slide */
@@ -128,7 +128,7 @@
 
 .slideCardFecha {
     font-size: 0.72rem;
-    color: #94a3b8;
+    color: var(--admin-color-texto-mutado);
 }
 
 /* Acciones de la tarjeta */
@@ -139,7 +139,8 @@
 }
 
 .btnEditarSlide {
-    background-color: var(--color-primario);
+    /* Antes var(--color-primario): 3.3:1 con texto blanco */
+    background-color: var(--admin-color-primario);
     color: var(--color-blanco);
     font-size: 0.78rem;
     padding: 6px 12px;
@@ -149,11 +150,12 @@
 }
 
 .btnEditarSlide:hover {
-    filter: brightness(0.9);
+    background-color: var(--admin-color-primario-hover);
 }
 
 .btnEliminarSlide {
-    background-color: #e74c3c;
+    /* Antes #e74c3c: 3.8:1 con texto blanco */
+    background-color: var(--bgBtnRojo);
     color: var(--color-blanco);
     font-size: 0.78rem;
     padding: 6px 12px;
@@ -162,12 +164,18 @@
 }
 
 .btnEliminarSlide:hover {
-    background-color: #c0392b;
+    background-color: var(--bgBtnRojoHover);
+}
+
+.btnEditarSlide:focus-visible,
+.btnEliminarSlide:focus-visible {
+    outline: 3px solid var(--admin-color-foco);
+    outline-offset: 2px;
 }
 
 .slideCardVacio {
     text-align: center;
-    color: #94a3b8;
+    color: var(--admin-color-texto-mutado);
     padding: 40px 20px;
     font-style: italic;
 }

@@ -12,7 +12,7 @@
 }
 
 /* Títulos de cada columna del footer */
-.footer h1 {
+.footer h2 {
     color: var(--color-blanco);
     font-size: 0.95rem;
     margin-bottom: 10px;

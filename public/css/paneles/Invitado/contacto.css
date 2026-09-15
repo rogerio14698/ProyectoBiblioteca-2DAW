@@ -44,6 +44,9 @@
     max-width: 400px;
     padding: 10px;
     box-shadow: var(--sombra);
+    /* Más padding vertical para dar peso visual a la columna ahora que solo tiene 3 bloques cortos */
+    padding-top: 24px;
+    padding-bottom: 24px;
 }
 
 .contactoDirecion,
@@ -61,21 +64,7 @@
     border-bottom: 1px solid var(--colorBordeSeparacionCards);
 }
 
-
-.pdf {
-    padding: 15px;
-    border: 1px solid var(--colorBorde);
-    background-color: var(--bgBlanco);
-    box-shadow: var(--sombra);
-    display: flex;
-    flex-direction: column;
-
-}
-.cvs-botones {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
+/* Sin regla .pdf / .cvs-botones: bloque de descarga de CV eliminado (ya no se usa) */
 
 /*Fin de columna Izquierda*/
 
@@ -167,7 +156,10 @@
     .contenedor-columnas {
         display: grid;
         grid-template-columns: minmax(0, 1fr) minmax(0, 400px);
-        align-items: start;
+        /* align-items: center (antes "start") para reequilibrar el layout:
+           al quitar el bloque del CV la columna izquierda es más corta que el formulario,
+           así ambas quedan centradas verticalmente una junto a la otra en vez de desalineadas arriba. */
+        align-items: center;
         column-gap: calc(var(--unidad-espaciado) * 4);
         width: 100%;
         max-width: 1100px;
@@ -180,12 +172,5 @@
 }
 
 @media (max-width: 767px) {
-    .pdf {
-        padding: var(--relleno-movil);
-    }
-
-    .pdf a {
-        width: 100%;
-        min-height: var(--altura-boton-movil);
-    }
+    /* Sin reglas: el bloque .pdf que se ajustaba aquí para móvil ya no existe */
 }

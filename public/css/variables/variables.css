@@ -110,7 +110,42 @@
    --input-borde: var(--color-borde-input);
    --input-relleno: 10px 12px;
 
+   /* =========================================
+      5. PANEL DE ADMINISTRACIÓN (paleta accesible, WCAG AA)
+      -----------------------------------------
+      Variables dedicadas SOLO al panel /admin. No reutilizamos --color-primario ni
+      --color-secundario (usadas en el resto del sitio) porque con texto blanco encima
+      no llegan al contraste mínimo 4.5:1 exigido por WCAG AA. Centralizamos aquí todos
+      los colores del admin para no repetir hexadecimales sueltos en cada fichero.
+      ========================================= */
+   /* Azul principal: mismo tono de familia que --color-primario pero oscurecido
+      para pasar de 3.3:1 a 6.7:1 de contraste con texto/iconos blancos. */
+   --admin-color-primario: #1D4ED8;
+   --admin-color-primario-hover: #1E40AF;
+   /* Verde azulado (sustituye al turquesa --color-secundario, que solo daba 1.6:1). */
+   --admin-color-secundario: #0F766E;
+   --admin-color-secundario-hover: #115E59;
 
+   /* Texto y fondos neutros del panel, pensados para dar un aspecto sobrio y profesional */
+   --admin-color-texto: #1E293B;
+   --admin-color-texto-mutado: #475569;
+   --admin-color-fondo: #F1F5F9;
+   --admin-color-fondo-tarjeta: #FFFFFF;
+   --admin-color-borde: #CBD5E1;
+
+   /* Color de foco: visible con teclado (accesibilidad), se usa en :focus-visible */
+   --admin-color-foco: #1D4ED8;
+
+   /* Estados (badges de éxito/error/advertencia) en formato "fondo claro + texto oscuro
+      del mismo tono": este patrón da contrastes de 5:1 a 7:1 sin perder el código de color. */
+   --admin-badge-exito-bg: #DCFCE7;
+   --admin-badge-exito-texto: #166534;
+   --admin-badge-error-bg: #FEE2E2;
+   --admin-badge-error-texto: #991B1B;
+   --admin-badge-advertencia-bg: #FEF3C7;
+   --admin-badge-advertencia-texto: #92400E;
+   --admin-badge-neutro-bg: #E2E8F0;
+   --admin-badge-neutro-texto: #334155;
 }
 
 

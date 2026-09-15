@@ -116,7 +116,8 @@
 
 /* Botón Envío Formulario */
 .gestionBotonEnvio {
-    background-color: var(--color-primario);
+    /* Antes var(--color-primario): 3.3:1 con texto blanco */
+    background-color: var(--admin-color-primario);
     color: var(--color-blanco);
     border: none;
     padding: calc(var(--unidad-espaciado) * 1.5) calc(var(--unidad-espaciado) * 2);
@@ -129,9 +130,14 @@
 }
 
 .gestionBotonEnvio:hover {
-    background-color: var(--color-primario-oscuro);
+    background-color: var(--admin-color-primario-hover);
     box-shadow: var(--sombra-media);
     transform: translateY(-2px);
+}
+
+.gestionBotonEnvio:focus-visible {
+    outline: 3px solid var(--admin-color-foco);
+    outline-offset: 2px;
 }
 
 .gestionBotonEnvio:active {
@@ -190,7 +196,8 @@
     background-color: #e2e8f0;
     border-radius: var(--radio-borde);
     font-size: 0.75rem;
-    color: #94a3b8;
+    /* Antes #94a3b8 sobre #e2e8f0 (2.1:1): muy por debajo del mínimo AA */
+    color: var(--admin-color-texto-mutado);
 }
 
 /* Información del evento */
@@ -228,18 +235,20 @@
 }
 
 .eventoCardPrioridad--1 {
-    background-color: #dfe6e9;
-    color: #636e72;
+    background-color: var(--admin-badge-neutro-bg);
+    color: var(--admin-badge-neutro-texto);
 }
 
 .eventoCardPrioridad--2 {
-    background-color: #ffeaa7;
-    color: #d35400;
+    /* Antes #ffeaa7/#d35400 (3.5:1) */
+    background-color: var(--admin-badge-advertencia-bg);
+    color: var(--admin-badge-advertencia-texto);
 }
 
 .eventoCardPrioridad--3 {
-    background-color: #fab1a0;
-    color: #d63031;
+    /* Antes #fab1a0/#d63031 (2.7:1) */
+    background-color: var(--admin-badge-error-bg);
+    color: var(--admin-badge-error-texto);
 }
 
 .eventoCardDescripcion {
@@ -258,7 +267,7 @@
     flex-wrap: wrap;
     gap: 10px;
     font-size: 0.75rem;
-    color: #94a3b8;
+    color: var(--admin-color-texto-mutado);
 }
 
 /* Acciones de la tarjeta */
@@ -269,7 +278,8 @@
 }
 
 .btnEditarEvento {
-    background-color: var(--color-primario);
+    /* Antes var(--color-primario): 3.3:1 con texto blanco */
+    background-color: var(--admin-color-primario);
     color: var(--color-blanco);
     font-size: 0.78rem;
     padding: 6px 12px;
@@ -279,11 +289,12 @@
 }
 
 .btnEditarEvento:hover {
-    filter: brightness(0.9);
+    background-color: var(--admin-color-primario-hover);
 }
 
 .btnEliminarEvento {
-    background-color: #e74c3c;
+    /* Antes #e74c3c: 3.8:1 con texto blanco, no llega al mínimo AA */
+    background-color: var(--bgBtnRojo);
     color: var(--color-blanco);
     font-size: 0.78rem;
     padding: 6px 12px;
@@ -292,12 +303,18 @@
 }
 
 .btnEliminarEvento:hover {
-    background-color: #c0392b;
+    background-color: var(--bgBtnRojoHover);
+}
+
+.btnEditarEvento:focus-visible,
+.btnEliminarEvento:focus-visible {
+    outline: 3px solid var(--admin-color-foco);
+    outline-offset: 2px;
 }
 
 .eventoCardVacio {
     text-align: center;
-    color: #94a3b8;
+    color: var(--admin-color-texto-mutado);
     padding: 40px 20px;
     font-style: italic;
 }

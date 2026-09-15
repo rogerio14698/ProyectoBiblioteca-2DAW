@@ -176,7 +176,8 @@
     align-items: flex-start;
     gap: calc(var(--unidad-espaciado) * 1);
     padding: calc(var(--unidad-espaciado) * 1.5);
-    background: var(--color-primario);
+    /* Antes var(--color-primario): 3.3:1 con texto blanco */
+    background: var(--admin-color-primario);
     color: var(--color-blanco);
 }
 
@@ -229,7 +230,8 @@
 
 .publicacionCardArchivo {
     font-size: 0.8rem;
-    color: var(--color-primario);
+    /* var(--color-primario) da 3.3:1 sobre blanco; el tono oscuro ya definido cumple AA */
+    color: var(--color-primario-oscuro);
     text-decoration: none;
     font-weight: 600;
     white-space: nowrap;
@@ -253,7 +255,8 @@
 }
 
 .publicacionesBadge--profesional {
-    background: var(--bgBtnAzul);
+    /* Antes var(--bgBtnAzul) (#17a2b8): 3.1:1 con texto blanco */
+    background: var(--admin-color-primario);
     color: var(--color-blanco);
 }
 

@@ -26,25 +26,6 @@
                     <h2 class="tituloFormulario">Email: </h2>
                     <p class="textoFormulario">rogeriolucas14698@gmail.com</p>
                 </div>
-
-                <div class="pdf">
-                    <h2 class="tituloFormulario">Descarga mi CV</h2>
-                    <h3 class="tituloLabel">Resumen mi perfil:</h3>
-                    <p class="textoFormulario">Desarrollador Full Stack finalizando el Grado Superior (DAW), con un enfoque
-                        pragmático y orientado a la resolución de problemas. Aporto experiencia práctica en el mantenimiento
-                        de aplicaciones en producción, despliegue de entornos con Docker y desarrollo backend con Laravel
-                        12. Destaco por mi capacidad para analizar proyectos complejos, refactorizar código heredado y
-                        solucionar bugs, aportando valor y estabilidad al software desde el primer día.</p>
-                    <div class="cvs-botones">
-                        <a class="btn-base btn-verde" href="{{ asset('docs/CV-RogerioLucas-DAW-Spanish.pdf') }}"
-                            target="_blank" rel="noopener noreferrer">Spanish CV</a>
-                        <a class="btn-base btn-verde" href="{{ asset('docs/CV-RogerioLucas-DAW-English.pdf') }}"
-                            target="_blank" rel="noopener noreferrer">English CV</a>
-                    </div>
-                </div>
-
-
-
             </div>
 
 

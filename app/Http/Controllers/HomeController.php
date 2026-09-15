@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Evento;
+use App\Models\FooterConfig;
 use App\Models\Libro;
 use App\Models\Noticias;
 use App\Models\SlideBienvenida;
@@ -20,12 +21,15 @@ class HomeController extends Controller
         $eventos = Evento::with('usuario:id,name')->orderBy('fecha_hora')->paginate(6, ['*'], 'eventos_page');
         $libros = Libro::all();
         $noticias = Noticias::orderBy('created_at', 'desc')->paginate(4, ['*'], 'noticias_page');
+        // Necesitamos los datos de contacto de la biblioteca para generar el JSON-LD (schema.org) de la vista.
+        $footerConfig = FooterConfig::firstOrCreate([]);
 
         return view('bibliotecaDAW.index', [
             'slideBienvenidas' => $slideBienvenidas,
             'eventos' => $eventos,
             'libros' => $libros,
             'noticias' => $noticias,
+            'footerConfig' => $footerConfig,
         ]);
 
         //Aqui se pondría mas informacion para la pagina principal.

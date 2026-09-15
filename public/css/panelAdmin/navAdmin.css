@@ -3,7 +3,9 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    background-color: var(--color-primario);
+    /* Antes var(--color-primario): solo 3.3:1 de contraste con el texto blanco. Con el azul
+       oscurecido del admin llegamos a 6.7:1 (cumple WCAG AA para texto normal). */
+    background-color: var(--admin-color-primario);
     gap: 10px;
     overflow: visible;
     padding: 10px;
@@ -36,11 +38,27 @@
 .btnDesplegableAdmin button {
     cursor: pointer;
     padding: 10px 20px;
-    background-color: var(--color-secundario);
+    /* Antes var(--color-secundario) (turquesa): apenas 1.6:1 de contraste con blanco.
+       El verde azulado accesible del admin sube el contraste a 5.5:1. */
+    background-color: var(--admin-color-secundario);
     color: var(--color-blanco);
     border-radius: 5px;
     width: 100%;
     text-align: left;
+}
+
+.btnDesplegableAdmin button:hover {
+    background-color: var(--admin-color-secundario-hover);
+}
+
+/* Foco visible para navegación por teclado (accesibilidad) */
+.btnDesplegableAdmin button:focus-visible,
+.menu-button:focus-visible,
+.logout-button:focus-visible,
+.irADashboard:focus-visible,
+.menu-items li a:focus-visible {
+    outline: 3px solid var(--admin-color-foco);
+    outline-offset: 2px;
 }
 
 .menu-items {
@@ -53,7 +71,7 @@
     left: 0;
     width: max-content;
     min-width: 250px;
-    background-color: var(--color-primario);
+    background-color: var(--admin-color-primario);
     box-shadow: var(--sombra-media);
 }
 
@@ -76,19 +94,28 @@
 .menu-button {
     cursor: pointer;
     padding: 10px 20px;
-    background-color: var(--color-secundario);
+    background-color: var(--admin-color-secundario);
     color: var(--color-blanco);
     border-radius: 5px;
     display: inline-block;
 }
 
+.menu-button:hover {
+    background-color: var(--admin-color-secundario-hover);
+}
+
 .logout-button {
     cursor: pointer;
     padding: 10px 20px;
-    background-color: var(--color-secundario);
+    background-color: var(--admin-color-secundario);
     color: var(--color-blanco);
-    border: 1px solid var(--color-secundario);
+    border: 1px solid var(--admin-color-secundario);
     border-radius: 5px;
+}
+
+.logout-button:hover {
+    background-color: var(--admin-color-secundario-hover);
+    border-color: var(--admin-color-secundario-hover);
 }
 
 .menu-items li {

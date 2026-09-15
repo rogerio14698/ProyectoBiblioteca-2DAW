@@ -221,10 +221,17 @@
 }
 
 .btnCambiarEstadoMail {
-    background-color: var(--color-primario);
+    /* Antes var(--color-primario): 3.3:1 con texto blanco, no llega al m\u00ednimo AA (4.5:1) */
+    background-color: var(--admin-color-primario);
 }
 .btnCambiarEstadoMail:hover {
-    filter: brightness(0.9);
+    background-color: var(--admin-color-primario-hover);
+}
+.btnCambiarEstadoMail:focus-visible,
+.btnEliminarMail:focus-visible,
+.btnResponderMail:focus-visible {
+    outline: 3px solid var(--admin-color-foco);
+    outline-offset: 2px;
 }
 
 .btnResponderMail {
