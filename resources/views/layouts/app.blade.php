@@ -50,7 +50,21 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <!-- Dar estilos personalizados-->
-    <link rel="stylesheet" href="{{ asset('css/main.css') }}?v={{ filemtime(public_path('css/main.css')) }}">
+    @php
+        // main.css solo @importa el resto de ficheros de public/css, no los incluye inline.
+        // Si solo cambia un parcial (p.ej. actividadesYEventos.css) el mtime de main.css NO
+        // cambia, la query ?v= se queda igual y el navegador/CDN puede seguir sirviendo esa
+        // hoja de estilo en caché para siempre. Usamos el mtime más reciente de TODO css/
+        // para que cualquier cambio, esté en el fichero que esté, rompa la caché.
+        $cssDir = public_path('css');
+        $cssVersion = 0;
+        foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($cssDir, \FilesystemIterator::SKIP_DOTS)) as $archivoCss) {
+            if ($archivoCss->getExtension() === 'css') {
+                $cssVersion = max($cssVersion, $archivoCss->getMTime());
+            }
+        }
+    @endphp
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}?v={{ $cssVersion }}">
     @stack('head')
 </head>
 
