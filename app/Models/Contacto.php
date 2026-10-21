@@ -16,5 +16,19 @@ class Contacto extends Model
         'mensaje',
         'respuesta',
         'estado',
+        'token_verificacion',
+        'email_verificado_at',
     ];
+
+    protected $casts = [
+        'email_verificado_at' => 'datetime',
+    ];
+
+    /**
+     * Solo los mensajes con el email confirmado son visibles para el admin.
+     */
+    public function scopeVerificados($query)
+    {
+        return $query->whereNotNull('email_verificado_at');
+    }
 }

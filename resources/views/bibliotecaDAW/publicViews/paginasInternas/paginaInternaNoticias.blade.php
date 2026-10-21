@@ -1,59 +1,38 @@
 @extends('layouts.app')
 
-@section('title', $noticia->titulo . ' - Biblioteca DAW')
+@section('title', $noticia->titulo . ' | Biblioteca DAW')
+@section('og_type', 'article')
 
 @section('content')
-
-    <article class="noticiaInterna separador">
-
-        {{-- Cabecera del artículo: categoría, título, autor y fecha --}}
-        <header class="noticiaInternaHeader">
-            @if ($noticia->categoria)
-                <span class="noticiaInternaCategoria">{{ $noticia->categoria }}</span>
-            @endif
-            <h1 class="noticiaInternaTitulo">{{ $noticia->titulo }}</h1>
-            <div class="noticiaInternaMeta">
-                <span class="noticiaInternaAutor">
-                    <i class="bi bi-person-circle"></i> {{ $noticia->autor }}
-                </span>
-                <time class="noticiaInternaFecha" datetime="{{ $noticia->fecha_publicacion->format('Y-m-d') }}">
-                    <i class="bi bi-calendar3"></i> {{ $noticia->fecha_publicacion->translatedFormat('d \d\e F, Y') }}
-                </time>
-            </div>
-        </header>
-
-        {{-- Imagen principal del artículo --}}
-        @if ($noticia->imagen_url)
-            <figure class="noticiaInternaFigura">
-                @php
-                    // Comprobamos si la URL ya es un enlace externo.
-                    $url = Str::startsWith($noticia->imagen_url, ['http://', 'https://'])
-                        ? $noticia->imagen_url
-                        : asset('storage/' . $noticia->imagen_url);
-                @endphp
-                <img src="{{ $url }}" alt="Imagen de {{ $noticia->titulo }}" class="noticiaInternaImg"
-                    loading="lazy" width="800" height="400">
-            </figure>
-        @endif
-
-        {{-- Cuerpo del artículo --}}
-        <div class="noticiaInternaCuerpo">
-            {{-- Primera letra grande estilo periódico (drop cap aplicado por CSS) --}}
-            <p class="noticiaInternaTexto">{{ $noticia->contenido }}</p>
+    @php
+        $imagenNoticia = null;
+        if ($noticia->imagen_url) {
+            $imagenNoticia = \Illuminate\Support\Str::startsWith($noticia->imagen_url, ['http://', 'https://'])
+                ? $noticia->imagen_url
+                : asset('storage/' . $noticia->imagen_url);
+        }
+    @endphp
+    <section class="capitulo capitulo--tinta">
+        <div class="envoltura envoltura--estrecha">
+            <article>
+                <header class="portadilla">
+                    <ol class="migas"><li><a href="{{ url('/biblioteca') }}">Biblioteca</a></li><li aria-current="page">Noticias</li></ol>
+                    <h1>{{ $noticia->titulo }}</h1>
+                    @if ($noticia->categoria)<p class="entradilla">{{ $noticia->categoria }}</p>@endif
+                    <div class="lectura__meta">
+                        @if ($noticia->autor)<span>Por {{ $noticia->autor }}</span>@endif
+                        @if ($noticia->fecha_publicacion)<time datetime="{{ $noticia->fecha_publicacion->format('Y-m-d') }}">{{ \Illuminate\Support\Str::ucfirst($noticia->fecha_publicacion->translatedFormat('d \d\e F, Y')) }}</time>@endif
+                    </div>
+                </header>
+                @if ($noticia->imagen_url)
+                    <figure class="lamina articulo__figura"><img src="{{ $imagenNoticia }}" alt="Imagen de {{ $noticia->titulo }}" width="1200" height="700"><figcaption>{{ $noticia->titulo }}</figcaption></figure>
+                @endif
+                <div class="lectura articulo__cuerpo">{!! nl2br(e($noticia->contenido)) !!}</div>
+                <footer class="articulo__pie">
+                    @if ($noticia->enlace_externo)<a href="{{ $noticia->enlace_externo }}" class="boton" target="_blank" rel="noopener noreferrer">Leer la fuente original</a>@endif
+                    <a href="{{ url('/biblioteca') }}#noticias" class="boton boton--linea">Volver a noticias</a>
+                </footer>
+            </article>
         </div>
-
-        {{-- Pie del artículo: enlace externo y navegación --}}
-        <footer class="noticiaInternaFooter">
-            @if ($noticia->enlace_externo)
-                <a href="{{ $noticia->enlace_externo }}" target="_blank" rel="noopener noreferrer" class="btn-base btn-verde noticiaInternaEnlace">
-                    <i class="bi bi-box-arrow-up-right"></i> Leer fuente original
-                </a>
-            @endif
-            <a href="{{ url('/biblioteca') }}" class="btn-base btn-azul noticiaInternaVolver">
-                <i class="bi bi-arrow-left"></i> Volver al inicio
-            </a>
-        </footer>
-
-    </article>
-
+    </section>
 @endsection

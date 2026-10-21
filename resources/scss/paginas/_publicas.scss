@@ -1,0 +1,144 @@
+@use "../abstracts/tokens" as *;
+
+// Catálogo y filtros
+.catalogo__filtros {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: clamp(2rem, 1rem + 3vw, 4rem);
+    padding-block: 1.5rem;
+    border-block: 1px solid var(--linea);
+
+    form {
+        display: grid;
+        gap: 1rem;
+    }
+
+    .campo { min-width: 0; }
+
+    @include desde($bp-sm) {
+        form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .catalogo__acciones { grid-column: 1 / -1; }
+    }
+
+    @include desde($bp-md) {
+        form { grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: end; }
+        .catalogo__acciones { grid-column: auto; }
+    }
+}
+
+.catalogo__cabecera,
+.publicaciones__cabecera {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.catalogo__acciones { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.catalogo__resultados { margin-bottom: 1.5rem; color: var(--texto-suave); font-size: var(--paso-small); }
+.catalogo__paginacion { margin-top: clamp(2rem, 1rem + 2vw, 3rem); }
+
+// Agenda editorial
+.agenda__precio { margin-block: 0; }
+.agenda__meta { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; color: var(--texto-suave); font-size: var(--paso-small); }
+
+// Formularios públicos
+.formulario__errores { margin-bottom: 1.5rem; }
+.formulario__nota { max-width: 55ch; color: var(--texto-suave); font-size: var(--paso-small); }
+.formulario__acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
+
+.contacto__datos { display: grid; gap: 1.5rem; }
+.contacto__dato { padding-bottom: 1rem; border-bottom: 1px solid var(--linea); }
+.contacto__dato dt { color: var(--texto-suave); font-size: var(--paso-small); }
+.contacto__dato dd { margin: 0.25rem 0 0; overflow-wrap: anywhere; }
+.contacto__formulario { padding: clamp(1.25rem, 1rem + 2vw, 2rem); border: 1px solid var(--linea); background: var(--superficie); }
+
+.acceso { display: grid; gap: clamp(2rem, 1rem + 4vw, 4rem); }
+.acceso__formulario { width: min(100%, 38rem); }
+.acceso__enlaces { display: grid; gap: 0.6rem; margin-top: 1.5rem; font-size: var(--paso-small); }
+.acceso__demo { margin-top: 1rem; }
+.acceso__demo form { margin: 0; }
+
+// Publicaciones compartidas
+.publicaciones__filtros { display: grid; gap: 1rem; margin-block: 2rem; }
+.publicaciones__tabla { width: 100%; border-collapse: collapse; }
+.publicaciones__tabla th,
+.publicaciones__tabla td { padding: 1rem; border-bottom: 1px solid var(--linea); text-align: left; vertical-align: top; }
+.publicaciones__tabla th { color: var(--texto-suave); font-size: var(--paso-small); font-weight: 500; }
+.publicaciones__tabla tbody tr:hover { background: var(--superficie); }
+.publicaciones__tabla small { display: block; color: var(--texto-suave); }
+.publicaciones__paginacion { margin-top: 2rem; }
+
+// Lectura legal y artículos
+.lectura { max-width: 68ch; }
+.lectura h2 { margin-top: 2.2em; font-size: clamp(1.65rem, 1.2rem + 1.5vw, 2.5rem); line-height: 1.05; }
+.lectura h3 { margin-top: 1.8em; }
+.lectura p,
+.lectura li { line-height: 1.75; }
+.lectura ul,
+.lectura ol { padding-left: 1.4em; }
+.lectura__meta { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; color: var(--texto-suave); font-size: var(--paso-small); }
+.articulo__figura { margin: 2.5rem 0; }
+.articulo__figura img { width: 100%; max-height: 42rem; object-fit: cover; }
+.articulo__cuerpo { white-space: pre-line; font-size: var(--paso-lead); line-height: 1.65; }
+.articulo__pie { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 3rem; }
+
+// Ficha de libros y eventos
+.ficha-libro,
+.ficha-evento,
+.inscripcion-evento { display: grid; gap: clamp(2rem, 1rem + 4vw, 5rem); align-items: start; }
+.ficha-libro__portada { max-width: 28rem; }
+.ficha-libro__portada img { width: 100%; aspect-ratio: 2 / 3; object-fit: cover; }
+.ficha-libro__autor { color: var(--texto-suave); font-size: var(--paso-lead); }
+.ficha-libro__acciones,
+.evento__acciones { display: grid; gap: 1rem; margin-top: 2rem; }
+.ficha-libro__compra,
+.evento__compra { display: grid; justify-items: start; gap: 0.8rem; padding: 1.25rem; border: 1px solid var(--linea); background: var(--superficie); }
+.ficha-evento__imagen img { width: 100%; max-height: 42rem; object-fit: cover; }
+.ficha-evento__datos { display: grid; gap: 1rem; margin-top: 2rem; }
+.ficha-evento__dato { padding-top: 0.75rem; border-top: 1px solid var(--linea); }
+.ficha-evento__dato dt { color: var(--texto-suave); font-size: var(--paso-small); }
+.ficha-evento__dato dd { margin: 0.2rem 0 0; }
+.evento__acciones .boton { width: 100%; }
+.evento__aforo { margin-block: 1.5rem; }
+.evento__aforo-label { display: flex; justify-content: space-between; gap: 1rem; font-size: var(--paso-small); }
+.evento__aforo-barra { display: block; width: 100%; height: 0.45rem; margin-top: 0.5rem; border: 0; background: var(--linea); accent-color: var(--acento); }
+.evento__aforo-barra span { display: block; height: 100%; background: var(--acento); }
+
+.inscripcion-evento__formulario { min-width: 0; }
+.inscripcion-evento__preview { padding: clamp(1.25rem, 1rem + 2vw, 2rem); border: 1px solid var(--linea); background: var(--superficie); }
+.inscripcion-evento__preview p { margin-bottom: 0.55rem; }
+.inscripcion-evento__botones { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.feedbackEmail { display: none; margin-top: 1rem; padding: 1rem 1.25rem; border: 1px solid var(--linea); background: var(--superficie); }
+.feedbackEmail.feedbackExito { color: var(--exito); border-color: var(--exito); }
+.feedbackEmail.feedbackError { color: var(--error); border-color: var(--error); }
+
+// Errores HTTP autónomos
+.error-page { display: grid; min-height: 100svh; align-content: center; justify-items: start; gap: 1rem; padding: var(--margen); background: var(--tinta); color: var(--pergamino); }
+.error-page__codigo { margin: 0; color: var(--oro); font-family: var(--fuente-display); font-size: clamp(7rem, 20vw, 18rem); line-height: 0.75; letter-spacing: -0.055em; }
+.error-page h2 { margin: 1rem 0 0; font-size: clamp(1.75rem, 1rem + 3vw, 3rem); }
+.error-page p { max-width: 45ch; color: #d0bea3; }
+
+@include desde($bp-md) {
+    .acceso { grid-template-columns: minmax(0, 1.3fr) minmax(15rem, 0.7fr); align-items: start; }
+    .publicaciones__filtros { grid-template-columns: minmax(0, 1fr) 14rem auto auto; align-items: end; }
+    .ficha-libro { grid-template-columns: minmax(15rem, 0.8fr) minmax(0, 1.2fr); }
+    .ficha-evento { grid-template-columns: minmax(0, 1.4fr) minmax(18rem, 0.6fr); }
+    .ficha-evento__datos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .inscripcion-evento { grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr); }
+}
+
+@media (max-width: 599.98px) {
+    .publicaciones__tabla thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); }
+    .publicaciones__tabla,
+    .publicaciones__tabla tbody,
+    .publicaciones__tabla tr,
+    .publicaciones__tabla td { display: block; width: 100%; }
+    .publicaciones__tabla tr { padding-block: 0.75rem; border-bottom: 1px solid var(--linea); }
+    .publicaciones__tabla td { display: grid; grid-template-columns: minmax(6rem, 0.45fr) minmax(0, 1fr); gap: 1rem; padding: 0.4rem 0; border: 0; }
+    .publicaciones__tabla td::before { content: attr(data-label); color: var(--texto-suave); font-size: var(--paso-small); }
+}
+.ticket__formulario-oculto,
+.ticket__datos { display: none; }

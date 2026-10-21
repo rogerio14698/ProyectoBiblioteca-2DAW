@@ -1,0 +1,225 @@
+@use "../abstracts/tokens" as *;
+
+// =============================================================================
+// Pie de página: un tablero de baldosas
+// =============================================================================
+
+.pie {
+    background: var(--tinta);
+    color: var(--pergamino);
+    padding: 0.5rem;
+}
+
+.pie__tablero {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    @include desde($bp-md) {
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+}
+
+.baldosa {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-height: 13.75rem;
+    padding: clamp(1.25rem, 1rem + 1vw, 2rem);
+    background: var(--tinta-2);
+    color: var(--pergamino);
+
+    h2 {
+        margin: 0 0 0.5rem;
+        font-family: var(--fuente-texto);
+        font-size: var(--paso-small);
+        font-weight: 500;
+        letter-spacing: 0;
+        color: #b9a88e;
+    }
+
+    p,
+    ul {
+        margin: 0;
+        font-size: 1rem;
+    }
+
+    ul {
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 0.35rem;
+    }
+
+    a {
+        text-decoration: none;
+
+        &:hover {
+            color: var(--oro-claro);
+            text-decoration: underline;
+        }
+    }
+}
+
+.baldosa--declaracion {
+    grid-column: 1 / -1;
+    justify-content: space-between;
+
+    .baldosa__frase {
+        font-family: var(--fuente-display);
+        font-size: clamp(1.5rem, 1.2rem + 0.8vw, 1.875rem);
+        line-height: 1.15;
+        max-width: 24ch;
+    }
+
+    @include desde($bp-md) {
+        grid-column: 1 / span 4;
+    }
+}
+
+.baldosa--nav {
+    @include desde($bp-md) {
+        grid-column: 5 / span 3;
+    }
+}
+
+.baldosa--horario {
+    @include desde($bp-md) {
+        grid-column: 8 / span 2;
+    }
+
+    dl {
+        margin: 0;
+        display: grid;
+        gap: 0.35rem;
+        font-size: 1rem;
+    }
+
+    dt {
+        color: #b9a88e;
+        font-size: var(--paso-small);
+    }
+
+    dd {
+        margin: 0 0 0.35rem;
+    }
+}
+
+.baldosa--contacto {
+    grid-column: 1 / -1;
+    justify-content: space-between;
+
+    .baldosa__correo {
+        font-family: var(--fuente-display);
+        font-size: clamp(1.125rem, 0.95rem + 0.5vw, 1.375rem);
+        overflow-wrap: anywhere;
+    }
+
+    @include desde($bp-md) {
+        grid-column: 10 / span 3;
+    }
+}
+
+.redes {
+    display: flex;
+    gap: 0.25rem;
+
+    a {
+        display: grid;
+        place-items: center;
+        width: 2.75rem;
+        height: 2.75rem;
+        font-size: 1.125rem;
+        border: 1px solid rgb(241 230 210 / 0.2);
+
+        &:hover {
+            border-color: var(--oro);
+            text-decoration: none;
+        }
+    }
+}
+
+.baldosa--marca {
+    grid-column: 1 / -1;
+    order: -2;
+    min-height: 10rem;
+    justify-content: center;
+    background: var(--burdeos);
+
+    span {
+        font-family: var(--fuente-display);
+        font-size: clamp(3.25rem, 1rem + 9vw, 9.5rem);
+        line-height: 0.9;
+        letter-spacing: -0.04em;
+
+        em {
+            color: var(--oro-claro);
+            font-weight: 400;
+        }
+    }
+
+    @include desde($bp-md) {
+        order: 0;
+        grid-column: 1 / span 8;
+        min-height: 20rem;
+    }
+}
+
+.baldosa--accion {
+    grid-column: 1 / -1;
+    order: -1;
+    min-height: 10rem;
+    justify-content: space-between;
+    background: var(--oro);
+    color: var(--tinta);
+    font-family: var(--fuente-display);
+    font-size: clamp(1.75rem, 1.4rem + 1vw, 2.25rem);
+    line-height: 1.05;
+    text-decoration: none;
+    transition: background var(--medio) var(--ease-salida);
+
+    svg {
+        align-self: flex-end;
+        width: 3.5rem;
+        height: 3.5rem;
+        transition: transform var(--medio) var(--ease-salida);
+    }
+
+    &:hover {
+        background: var(--oro-claro);
+        color: var(--tinta);
+
+        svg {
+            transform: translate(0.35rem, -0.35rem);
+        }
+    }
+
+    @include desde($bp-md) {
+        order: 0;
+        grid-column: 9 / span 4;
+        min-height: 20rem;
+    }
+}
+
+.pie__legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    padding: 1.25rem clamp(1.25rem, 1rem + 1vw, 2rem) 1rem;
+    font-size: var(--paso-small);
+    color: #b9a88e;
+
+    p {
+        margin: 0;
+        max-width: none;
+    }
+
+    a {
+        text-decoration: underline;
+
+        &:hover {
+            color: var(--oro-claro);
+        }
+    }
+}

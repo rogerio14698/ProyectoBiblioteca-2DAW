@@ -76,6 +76,20 @@ class PrestamosSeeder extends Seeder
             }
         }
 
+        // Un préstamo vencido con multa pendiente, para probar el pago de multas con Stripe.
+        if ($usuarios->isNotEmpty() && $libros->count() > 10) {
+            $fechaPrestamo = $hoy->copy()->subDays(30);
+            Prestamos::create([
+                'libro_id'                  => $libros->get(10)->id,
+                'usuario_id'                => $usuarios->first()->id,
+                'fecha_prestamo'            => $fechaPrestamo,
+                'fecha_devolucion_esperada' => $fechaPrestamo->copy()->addDays(14),
+                'fecha_devolucion_real'     => $hoy->copy()->subDays(2),
+                'multa'                     => 4.50,
+                'multa_pagada'              => false,
+            ]);
+        }
+
         // Mensaje informativo en la consola al finalizar.
         $this->command->info('Préstamos de ejemplo creados correctamente.');
     }

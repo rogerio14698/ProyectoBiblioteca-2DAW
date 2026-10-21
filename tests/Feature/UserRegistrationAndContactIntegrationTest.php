@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
+use App\Mail\ConfirmarContacto;
 use App\Mail\ContactoRecibido;
 use App\Models\Contacto;
 use App\Models\Usuario;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\URL;
 use Tests\TestCase;
 
 class UserRegistrationAndContactIntegrationTest extends TestCase
@@ -104,13 +107,14 @@ class UserRegistrationAndContactIntegrationTest extends TestCase
         ]);
     }
 
-    public function test_it09_contact_form_stores_data_and_sends_mail(): void
+    public function test_it09_contact_form_stores_pending_message_and_sends_confirmation(): void
     {
         Mail::fake();
+        config(['services.turnstile.secret_key' => null]);
 
         $response = $this->from('/contacto')->post('/contacto', [
             'nombre' => 'Carlos',
-            'email' => 'carlos@example.com',
+            'email' => 'carlos@gmail.com',
             'asunto' => 'Consulta',
             'mensaje' => 'Necesito informacion sobre horarios.',
         ]);
@@ -118,33 +122,87 @@ class UserRegistrationAndContactIntegrationTest extends TestCase
         $response->assertRedirect('/contacto');
         $response->assertSessionHas('success');
 
-        $this->assertDatabaseHas('contactos', [
-            'nombre' => 'Carlos',
-            'email' => 'carlos@example.com',
-            'asunto' => 'Consulta',
-            'mensaje' => 'Necesito informacion sobre horarios.',
-        ]);
+        $contacto = Contacto::query()->where('email', 'carlos@gmail.com')->first();
+        $this->assertNotNull($contacto);
+        $this->assertNull($contacto->email_verificado_at);
+        $this->assertNotNull($contacto->token_verificacion);
 
-        Mail::assertSent(ContactoRecibido::class);
+        Mail::assertSent(ConfirmarContacto::class);
+        Mail::assertNotSent(ContactoRecibido::class);
     }
 
     public function test_it10_contact_form_sanitizes_html_tags_in_message(): void
     {
         Mail::fake();
+        config(['services.turnstile.secret_key' => null]);
 
         $rawMessage = '<script>alert("x")</script><b>Hola</b> <i>Mundo</i>';
         $expectedCleanMessage = 'alert("x")Hola Mundo';
 
         $this->from('/contacto')->post('/contacto', [
             'nombre' => 'Lucia',
-            'email' => 'lucia@example.com',
+            'email' => 'lucia@gmail.com',
             'asunto' => 'Prueba de seguridad',
             'mensaje' => $rawMessage,
         ])->assertRedirect('/contacto');
 
-        $contacto = Contacto::query()->where('email', 'lucia@example.com')->first();
+        $contacto = Contacto::query()->where('email', 'lucia@gmail.com')->first();
 
         $this->assertNotNull($contacto);
         $this->assertSame($expectedCleanMessage, $contacto->mensaje);
+    }
+
+    public function test_it11_contact_form_rejects_disposable_email(): void
+    {
+        Mail::fake();
+        config(['services.turnstile.secret_key' => null]);
+
+        $this->from('/contacto')->post('/contacto', [
+            'nombre' => 'Bot',
+            'email' => 'alguien@mailinator.com',
+            'asunto' => 'Spam',
+            'mensaje' => 'Mensaje de prueba suficientemente largo.',
+        ])->assertRedirect('/contacto')->assertSessionHasErrors('email');
+
+        $this->assertDatabaseCount('contactos', 0);
+    }
+
+    public function test_it12_confirmation_link_verifies_and_notifies_admin(): void
+    {
+        Mail::fake();
+
+        $contacto = Contacto::create([
+            'nombre' => 'Eva',
+            'email' => 'eva@gmail.com',
+            'asunto' => 'Horarios',
+            'mensaje' => 'Mensaje pendiente de confirmar.',
+            'token_verificacion' => str_repeat('a', 64),
+        ]);
+
+        $url = URL::temporarySignedRoute('contacto.confirmar', now()->addHour(), ['token' => $contacto->token_verificacion]);
+
+        $this->get($url)->assertRedirect(route('contacto.create'));
+
+        $contacto->refresh();
+        $this->assertNotNull($contacto->email_verificado_at);
+        $this->assertNull($contacto->token_verificacion);
+        Mail::assertSent(ContactoRecibido::class);
+    }
+
+    public function test_it13_contact_form_requires_turnstile_when_configured(): void
+    {
+        Mail::fake();
+        config(['services.turnstile.secret_key' => 'secreto']);
+        Http::fake(['challenges.cloudflare.com/*' => Http::response(['success' => false])]);
+
+        $this->from('/contacto')->post('/contacto', [
+            'nombre' => 'Carlos',
+            'email' => 'carlos@gmail.com',
+            'asunto' => 'Consulta',
+            'mensaje' => 'Necesito informacion sobre horarios.',
+            'cf-turnstile-response' => 'token-falso',
+        ])->assertSessionHasErrors('cf-turnstile-response');
+
+        $this->assertDatabaseCount('contactos', 0);
     }
 }

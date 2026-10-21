@@ -1,37 +1,10 @@
 @extends('layouts.app')
-
-@section('title', 'Inicio Login')
-
+@section('title', 'Inicio de socio')
 @section('content')
-    <main class="contenedor inicioLoginUsuario">
-        <section class="inicioLoginHeader">
-            <h1>Bienvenido <span>{{ Auth::user()->name }}</span> a la Biblioteca DAW</h1>
-            <p>
-                En esta sección podrás acceder a los servicios exclusivos para usuarios registrados. Desde aquí tendrás
-                una visión general de tu actividad y accesos directos a las funcionalidades más importantes.
-            </p>
-        </section>
-
-        <section class="inicioLoginResumen">
-            <article class="inicioLoginCard ">
-                <p class="inicioLoginEtiqueta">Tu espacio personal</p>
-                <h2>Panel de usuario</h2>
-                <p>
-                    Consulta tus préstamos, revisa próximos eventos, gestiona tus compras y mantén organizada tu
-                    actividad dentro de la biblioteca desde un único lugar.
-                </p>
-                <a href="{{ route('usuario.prestamos') }}" class="btn-base btn-azul">Ver mis préstamos</a>
-                <a href="{{ route('usuario.organizarEvento') }}" class="btn-base btn-verde">Ver eventos</a>
-            </article>
-
-            <article class="inicioLoginCard">
-                <h2>Qué puedes hacer aquí</h2>
-                <div class="inicioLoginLista">
-                    <a class="btn-base btn-verde" href="{{ route('usuario.alquilar') }}">Alquilar libros físicos o digitales.</a>
-                    <a class="btn-base btn-azul" href="{{ route('usuario.comprar') }}">Consultar tus compras y futuras reservas.</a>
-                    <a class="btn-base btn-amarillo" href="{{ route('usuario.organizarEvento') }}">Organizar y seguir eventos de la comunidad.</a>
-                </div>
-            </article>
-        </section>
-    </main>
+@include('bibliotecaDAW.userViews._cabeceraSocio', ['titulo' => 'Tu espacio de', 'enfasis' => 'socio', 'entradilla' => 'Hola, ' . auth('web')->user()->name . '. Consulta tu actividad y continúa con los servicios de la biblioteca.'])
+@php($usuario = auth('web')->user())
+<section class="capitulo capitulo--tinta-2 capitulo--compacto"><div class="envoltura"><div class="socio-inicio">
+<section class="panel socio-resumen" aria-labelledby="resumen-socio"><h2 class="panel__titulo" id="resumen-socio">Estado de tu cuenta</h2><dl class="ficha"><dt>Préstamos activos</dt><dd><strong class="socio-cifra">{{ $usuario->prestamos()->whereNull('fecha_devolucion_real')->count() }}</strong></dd><dt>Cuota de socio</dt><dd>@if ($usuario->cuotaSocioAlDia())<span class="insignia insignia--verde">Al día</span> hasta {{ $usuario->socio_hasta->format('d/m/Y') }}@else<span class="insignia insignia--burdeos">No activa</span>@endif</dd><dt>Número de socio</dt><dd>{{ $usuario->nSocio }}</dd></dl><div class="acciones"><a class="boton boton--pequeno" href="{{ route('usuario.pagos') }}">Gestionar cuota y pagos</a></div></section>
+<section class="panel" aria-labelledby="accesos-socio"><h2 class="panel__titulo" id="accesos-socio">Accesos rápidos</h2><nav class="socio-enlaces" aria-label="Servicios para socios"><a href="{{ route('usuario.prestamos') }}"><span>Préstamos</span><span>Plazos y devoluciones <i class="bi bi-arrow-up-right" aria-hidden="true"></i></span></a><a href="{{ route('usuario.alquilar') }}"><span>Explorar libros</span><span>Encuentra tu próxima lectura <i class="bi bi-arrow-up-right" aria-hidden="true"></i></span></a><a href="{{ route('usuario.publicar') }}"><span>Publicar</span><span>Comparte contenido digital <i class="bi bi-arrow-up-right" aria-hidden="true"></i></span></a><a href="{{ route('usuario.organizarEvento') }}"><span>Eventos</span><span>Propón una actividad o consulta tus inscripciones <i class="bi bi-arrow-up-right" aria-hidden="true"></i></span></a><a href="{{ route('usuario.consultas') }}"><span>Mis consultas</span><span>Respuestas de la biblioteca <i class="bi bi-arrow-up-right" aria-hidden="true"></i></span></a></nav></section>
+</div></div></section>
 @endsection

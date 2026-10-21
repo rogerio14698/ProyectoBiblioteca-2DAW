@@ -1,60 +1,42 @@
 @extends('layouts.app')
 
-@section('title', 'Publicaciones de Usuarios')
+@section('title', 'Publicaciones de la comunidad | Biblioteca DAW')
 
 @section('content')
-    <main class="contenedor publicacionesAcademicasPage">
-        <section class="headerContenido">
-            <h1 class="tituloPagina">Publicaciones de Usuarios</h1>
-            <p class="parrafoContenido">Listado académico de documentos y libros digitales compartidos por la comunidad.</p>
-
-            <form method="GET" action="{{ route('publicaciones.index') }}" class="publicacionesAcademicasFiltros">
-                <input type="text" name="query" value="{{ $searchQuery }}" class="buscadorInput"
-                    placeholder="Buscar por libro, título o resumen" aria-label="Buscar publicaciones">
-
-                <!-- Solo se permite formato PDF, eliminamos el selector de extensión -->
-                <input type="hidden" name="extension" value="todos">
-
-                <select name="orden" class="buscadorInput" aria-label="Orden de publicaciones">
-                    <option value="reciente" {{ $searchOrden === 'reciente' ? 'selected' : '' }}>Más recientes</option>
-                    <option value="antiguo" {{ $searchOrden === 'antiguo' ? 'selected' : '' }}>Más antiguas</option>
-                </select>
-
-                <button type="submit" class="btn-base btn-buscar">Filtrar</button>
-                <a href="{{ route('publicaciones.index') }}" class="btn-base btn-limpiar">Limpiar</a>
+    <section class="capitulo capitulo--tinta">
+        <div class="envoltura">
+            <header class="portadilla">
+                <ol class="migas"><li><a href="{{ url('/biblioteca') }}">Biblioteca</a></li><li aria-current="page">Publicaciones</li></ol>
+                <h1>Lecturas <em>compartidas</em></h1>
+                <p class="entradilla">Documentos y publicaciones digitales aportados por la comunidad.</p>
+            </header>
+            <form class="publicaciones__filtros" method="GET" action="{{ route('publicaciones.index') }}">
+                <div class="campo"><label for="query">Buscar en las publicaciones</label><input type="search" id="query" name="query" value="{{ $searchQuery ?? '' }}" placeholder="Libro, título o resumen"></div>
+                <input type="hidden" name="extension" value="{{ $searchExtension ?? 'todos' }}">
+                <div class="campo"><label for="orden">Orden</label><select name="orden" id="orden"><option value="reciente" @selected(($searchOrden ?? 'reciente') === 'reciente')>Más recientes</option><option value="antiguo" @selected(($searchOrden ?? '') === 'antiguo')>Más antiguas</option></select></div>
+                <button type="submit" class="boton">Filtrar</button>
+                <a href="{{ route('publicaciones.index') }}" class="boton boton--texto">Limpiar</a>
             </form>
-        </section>
-
-        <section class="publicacionesAcademicasListaWrap separador">
-            <div class="publicacionesAcademicasLista">
-                <div class="publicacionesAcademicasHeader" role="row">
-                    <span>Nombre</span>
-                    <span>Título del archivo</span>
-                    <span>Fecha</span>
-                    <span>Acción</span>
+            @if ($publicaciones->isEmpty())
+                <p class="vacio">No hay publicaciones que coincidan con la búsqueda.</p>
+            @else
+                <div class="tabla-envoltura">
+                    <table class="publicaciones__tabla">
+                        <thead><tr><th scope="col">Libro</th><th scope="col">Publicación</th><th scope="col">Fecha</th><th scope="col">Archivo</th></tr></thead>
+                        <tbody>
+                            @foreach ($publicaciones as $publicacion)
+                                <tr>
+                                    <td data-label="Libro"><strong>{{ $publicacion->nombre_libro }}</strong><small>{{ strtoupper($publicacion->archivo_extension) }}</small></td>
+                                    <td data-label="Publicación">{{ $publicacion->titulo_publicacion }}@if ($publicacion->resumen_publicacion)<small>{{ $publicacion->resumen_publicacion }}</small>@endif</td>
+                                    <td data-label="Fecha">{{ $publicacion->fecha_publicacion?->format('d/m/Y') ?? '—' }}</td>
+                                    <td data-label="Archivo"><a class="boton boton--pequeno boton--linea" href="{{ route('publicaciones.ver', $publicacion->id) }}" target="_blank" rel="noopener">Abrir documento</a></td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-
-                @forelse($publicaciones as $publicacion)
-                    <article class="publicacionesAcademicasItem" role="row">
-                        <div class="publicacionesCampoNombre">
-                            <strong>{{ $publicacion->nombre_libro }}</strong>
-                            <small>{{ strtoupper($publicacion->archivo_extension) }}</small>
-                        </div>
-                        <div class="publicacionesCampoTitulo">{{ $publicacion->titulo_publicacion }}</div>
-                        <div class="publicacionesCampoFecha">{{ $publicacion->fecha_publicacion?->format('d/m/Y') ?? 'N/A' }}</div>
-                        <div class="publicacionesCampoAccion">
-                            <a href="{{ route('publicaciones.ver', $publicacion->id) }}" target="_blank" rel="noopener"
-                                class="btn-base btn-verde">Ver archivo</a>
-                        </div>
-                    </article>
-                @empty
-                    <p class="publicacionesAcademicasVacio">No se encontraron publicaciones con los filtros seleccionados.</p>
-                @endforelse
-            </div>
-
-            <div class="paginacionBase paginacionPublicacionesAcademicas">
-                {{ $publicaciones->links('vendor.pagination.bootstrap-5') }}
-            </div>
-        </section>
-    </main>
+                <nav class="publicaciones__paginacion" aria-label="Páginas de publicaciones">{{ $publicaciones->links() }}</nav>
+            @endif
+        </div>
+    </section>
 @endsection

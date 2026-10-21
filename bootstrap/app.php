@@ -16,6 +16,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'bloquear.demo' => \App\Http\Middleware\BloquearUsuarioDemo::class,
         ]);
 
+        // Stripe firma sus webhooks; no llevan token CSRF.
+        $middleware->validateCsrfTokens(except: ['stripe/webhook']);
+
         // Redirigir a la ruta de login correcta según el guard que falle.
         // Si el guard es 'admin', redirige al login de admin; si no, al de usuario.
         $middleware->redirectGuestsTo(function ($request) {

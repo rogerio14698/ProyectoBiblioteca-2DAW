@@ -1,17 +1,101 @@
 {
-  "resources/css/app.css": {
-    "file": "assets/app-tn0RQdqM.css",
-    "src": "resources/css/app.css",
+  "node_modules/@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-ext-opsz-italic.woff2": {
+    "file": "assets/bodoni-moda-latin-ext-opsz-italic-QSGu6YSm.woff2",
+    "src": "node_modules/@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-ext-opsz-italic.woff2"
+  },
+  "node_modules/@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-ext-opsz-normal.woff2": {
+    "file": "assets/bodoni-moda-latin-ext-opsz-normal-CoJBavOu.woff2",
+    "src": "node_modules/@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-ext-opsz-normal.woff2"
+  },
+  "node_modules/@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-opsz-italic.woff2": {
+    "file": "assets/bodoni-moda-latin-opsz-italic-BCRrlh7t.woff2",
+    "src": "node_modules/@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-opsz-italic.woff2"
+  },
+  "node_modules/@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-opsz-normal.woff2": {
+    "file": "assets/bodoni-moda-latin-opsz-normal-X2BzlAjV.woff2",
+    "src": "node_modules/@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-opsz-normal.woff2"
+  },
+  "node_modules/@fontsource-variable/bodoni-moda/files/bodoni-moda-math-opsz-italic.woff2": {
+    "file": "assets/bodoni-moda-math-opsz-italic-CGdm0Lr_.woff2",
+    "src": "node_modules/@fontsource-variable/bodoni-moda/files/bodoni-moda-math-opsz-italic.woff2"
+  },
+  "node_modules/@fontsource-variable/bodoni-moda/files/bodoni-moda-math-opsz-normal.woff2": {
+    "file": "assets/bodoni-moda-math-opsz-normal-CbZAXtrh.woff2",
+    "src": "node_modules/@fontsource-variable/bodoni-moda/files/bodoni-moda-math-opsz-normal.woff2"
+  },
+  "node_modules/@fontsource-variable/bodoni-moda/files/bodoni-moda-symbols-opsz-italic.woff2": {
+    "file": "assets/bodoni-moda-symbols-opsz-italic-cRdvdvM-.woff2",
+    "src": "node_modules/@fontsource-variable/bodoni-moda/files/bodoni-moda-symbols-opsz-italic.woff2"
+  },
+  "node_modules/@fontsource-variable/bodoni-moda/files/bodoni-moda-symbols-opsz-normal.woff2": {
+    "file": "assets/bodoni-moda-symbols-opsz-normal-d21etpfE.woff2",
+    "src": "node_modules/@fontsource-variable/bodoni-moda/files/bodoni-moda-symbols-opsz-normal.woff2"
+  },
+  "node_modules/@fontsource-variable/hanken-grotesk/files/hanken-grotesk-cyrillic-ext-wght-normal.woff2": {
+    "file": "assets/hanken-grotesk-cyrillic-ext-wght-normal-D_UHSL_T.woff2",
+    "src": "node_modules/@fontsource-variable/hanken-grotesk/files/hanken-grotesk-cyrillic-ext-wght-normal.woff2"
+  },
+  "node_modules/@fontsource-variable/hanken-grotesk/files/hanken-grotesk-latin-ext-wght-normal.woff2": {
+    "file": "assets/hanken-grotesk-latin-ext-wght-normal-Dg-wlmqe.woff2",
+    "src": "node_modules/@fontsource-variable/hanken-grotesk/files/hanken-grotesk-latin-ext-wght-normal.woff2"
+  },
+  "node_modules/@fontsource-variable/hanken-grotesk/files/hanken-grotesk-latin-wght-normal.woff2": {
+    "file": "assets/hanken-grotesk-latin-wght-normal-CaVRRdDk.woff2",
+    "src": "node_modules/@fontsource-variable/hanken-grotesk/files/hanken-grotesk-latin-wght-normal.woff2"
+  },
+  "node_modules/@fontsource-variable/hanken-grotesk/files/hanken-grotesk-vietnamese-wght-normal.woff2": {
+    "file": "assets/hanken-grotesk-vietnamese-wght-normal-CHiFlh_0.woff2",
+    "src": "node_modules/@fontsource-variable/hanken-grotesk/files/hanken-grotesk-vietnamese-wght-normal.woff2"
+  },
+  "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff": {
+    "file": "assets/bootstrap-icons-BHUGvtHM.woff",
+    "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff"
+  },
+  "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2": {
+    "file": "assets/bootstrap-icons-DJdhg9lH.woff2",
+    "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-BODMZm_6.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "css": [
+      "assets/app-DWvd10LJ.css"
+    ],
+    "assets": [
+      "assets/bodoni-moda-math-opsz-normal-CbZAXtrh.woff2",
+      "assets/bodoni-moda-symbols-opsz-normal-d21etpfE.woff2",
+      "assets/bodoni-moda-latin-ext-opsz-normal-CoJBavOu.woff2",
+      "assets/bodoni-moda-latin-opsz-normal-X2BzlAjV.woff2",
+      "assets/bodoni-moda-math-opsz-italic-CGdm0Lr_.woff2",
+      "assets/bodoni-moda-symbols-opsz-italic-cRdvdvM-.woff2",
+      "assets/bodoni-moda-latin-ext-opsz-italic-QSGu6YSm.woff2",
+      "assets/bodoni-moda-latin-opsz-italic-BCRrlh7t.woff2",
+      "assets/hanken-grotesk-cyrillic-ext-wght-normal-D_UHSL_T.woff2",
+      "assets/hanken-grotesk-vietnamese-wght-normal-CHiFlh_0.woff2",
+      "assets/hanken-grotesk-latin-ext-wght-normal-Dg-wlmqe.woff2",
+      "assets/hanken-grotesk-latin-wght-normal-CaVRRdDk.woff2",
+      "assets/bootstrap-icons-DJdhg9lH.woff2",
+      "assets/bootstrap-icons-BHUGvtHM.woff"
+    ]
+  },
+  "resources/scss/admin.scss": {
+    "file": "assets/admin-Bix7yLHS.css",
+    "src": "resources/scss/admin.scss",
+    "isEntry": true,
+    "name": "admin",
+    "names": [
+      "admin.css"
+    ]
+  },
+  "resources/scss/app.scss": {
+    "file": "assets/app-Ch18MUGW.css",
+    "src": "resources/scss/app.scss",
     "isEntry": true,
     "name": "app",
     "names": [
       "app.css"
     ]
-  },
-  "resources/js/app.js": {
-    "file": "assets/app-MKeRp-IY.js",
-    "name": "app",
-    "src": "resources/js/app.js",
-    "isEntry": true
   }
 }

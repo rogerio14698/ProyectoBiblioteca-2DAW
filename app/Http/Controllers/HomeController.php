@@ -8,53 +8,46 @@ use App\Models\FooterConfig;
 use App\Models\Libro;
 use App\Models\Noticias;
 use App\Models\SlideBienvenida;
+use App\Models\Usuario;
 
 class HomeController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Portada: novedades, agenda, noticias y cifras reales de la biblioteca.
      */
     public function index()
     {
-        //Obtener eventos ordenados por fecha
-        $slideBienvenidas = SlideBienvenida::orderBy('posicion')->orderBy('created_at', 'desc')->get();
-        $eventos = Evento::with('usuario:id,name')->orderBy('fecha_hora')->paginate(6, ['*'], 'eventos_page');
-        $libros = Libro::all();
-        $noticias = Noticias::orderBy('created_at', 'desc')->paginate(4, ['*'], 'noticias_page');
-        // Necesitamos los datos de contacto de la biblioteca para generar el JSON-LD (schema.org) de la vista.
-        $footerConfig = FooterConfig::firstOrCreate([]);
-
-        return view('bibliotecaDAW.index', [
-            'slideBienvenidas' => $slideBienvenidas,
-            'eventos' => $eventos,
-            'libros' => $libros,
-            'noticias' => $noticias,
-            'footerConfig' => $footerConfig,
-        ]);
-
-        //Aqui se pondría mas informacion para la pagina principal.
-        //Los controladores como EventosController y LibroController se encargan de gestionar la lógica específica de cada sección, mientras que HomeController se encarga de la lógica de SU PROPIA sección
-        //Es decir. url/eventos; url/libros
+        return view('bibliotecaDAW.index', $this->datosPortada(Libro::latest()->take(12)->get()));
     }
-
 
     /**
-     * Show the form for creating a new resource.
+     * Misma portada, pero el carrusel muestra solo los libros destacados.
      */
-    public function create() {}
-
     public function destacados()
     {
-        $eventos = Evento::with('usuario:id,name')->orderBy('fecha_hora')->paginate(6, ['*'], 'eventos_page');
-        $libros = Libro::where('destacado', true)->get();
-        $noticias = Noticias::orderBy('created_at', 'desc')->paginate(4, ['*'], 'noticias_page');
-        return view('bibliotecaDAW.index', [
-            'eventos' => $eventos,
-            'libros' => $libros,
-            'noticias' => $noticias,
-        ]);
+        return view('bibliotecaDAW.index', $this->datosPortada(Libro::where('destacado', true)->latest()->get()));
     }
 
+    /**
+     * Datos comunes de la portada. Las cifras se calculan en vivo para que el
+     * capítulo de presentación nunca muestre números inventados.
+     */
+    private function datosPortada($libros): array
+    {
+        return [
+            'slideBienvenidas' => SlideBienvenida::orderBy('posicion')->orderBy('created_at', 'desc')->get(),
+            'eventos' => Evento::with('usuario:id,name')->orderBy('fecha_hora')->paginate(6, ['*'], 'eventos_page'),
+            'libros' => $libros,
+            'noticias' => Noticias::orderBy('created_at', 'desc')->paginate(4, ['*'], 'noticias_page'),
+            // Necesitamos los datos de contacto de la biblioteca para generar el JSON-LD (schema.org) de la vista.
+            'footerConfig' => FooterConfig::firstOrCreate([]),
+            'cifras' => [
+                'libros' => Libro::count(),
+                'eventos' => Evento::where('fecha_hora', '>=', now())->count(),
+                'socios' => Usuario::count(),
+            ],
+        ];
+    }
     /**
      * Store a newly created resource in storage.
      */

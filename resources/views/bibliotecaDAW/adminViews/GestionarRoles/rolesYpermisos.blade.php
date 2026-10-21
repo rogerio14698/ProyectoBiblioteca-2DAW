@@ -1,13 +1,5 @@
-@extends('layouts.app')
-
-@section('title', 'Gestionar Roles y Permisos')
-
+@extends('layouts.admin')
+@section('title', 'Roles y permisos')
 @section('content')
-    <main class="contenedor paginaEnObras">
-        <div class="enObrasContenido">
-            <h1>Gestionar Roles y Permisos</h1>
-            <p>Estamos trabajando en esta sección. Por el momento no se encuentra disponible.</p>
-        </div>
-    </main>
-
+    <main class="a-vista-admin"><header class="a-titulo"><div><h1>Roles y permisos</h1><p class="a-subtitulo">Administración de accesos al panel.</p></div></header><section class="a-tarjeta"><p class="a-vacio">Próximamente</p></section></main>
 @endsection

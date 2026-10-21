@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventosController;
 use App\Http\Controllers\LibroController;
 use App\Http\Controllers\ContactoController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\SlideBienvenidaController;
 use App\Http\Controllers\NoticiasController;
 use App\Http\Controllers\FooterConfigController;
@@ -22,6 +23,7 @@ use App\Http\Controllers\PublicarUsuarioController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\OrganizarEventoController;
 use App\Http\Controllers\TicketEventoController;
+use App\Http\Controllers\PagoController;
 use App\Models\Contacto;
 
 //Redirección a la página de inicio
@@ -56,7 +58,8 @@ Route::get('/actividades', function () {
 });
 
 Route::get('/contacto', [ContactoController::class, 'create'])->name('contacto.create');
-Route::post('/contacto', [ContactoController::class, 'store'])->name('contacto.store');
+Route::post('/contacto', [ContactoController::class, 'store'])->middleware('throttle:contacto')->name('contacto.store');
+Route::get('/contacto/confirmar/{token}', [ContactoController::class, 'confirmar'])->middleware('signed')->name('contacto.confirmar');
 Route::get('/catalogo', [LibroController::class, 'catalogo'])->name('catalogo');
 Route::get('/publicaciones', [PublicarUsuarioController::class, 'communityIndex'])->name('publicaciones.index');
 Route::get('/publicaciones/{id}/ver', [PublicarUsuarioController::class, 'view'])->name('publicaciones.ver');
@@ -135,7 +138,23 @@ Route::middleware(['auth:web', 'bloquear.demo'])->group(function () {
 
     // Logout de usuario
     Route::post('/logout', [LoginControllerUsuario::class, 'logout'])->name('usuario.logout');
+
+    // Pagos con Stripe Checkout
+    Route::get('/pagos', [PagoController::class, 'index'])->name('usuario.pagos');
+    Route::post('/pagos/libro/{id}', [PagoController::class, 'comprarLibro'])->name('pagos.libro');
+    Route::post('/pagos/evento/{id}', [PagoController::class, 'entradaEvento'])->name('pagos.evento');
+    Route::post('/pagos/multa/{id}', [PagoController::class, 'pagarMulta'])->name('pagos.multa');
+    Route::post('/pagos/cuota-socio', [PagoController::class, 'cuotaSocio'])->name('pagos.cuota');
+    Route::get('/pagos/exito', [PagoController::class, 'exito'])->name('pagos.exito');
+    Route::get('/pagos/cancelado', [PagoController::class, 'cancelado'])->name('pagos.cancelado');
+    Route::post('/pagos/tarjetas', [PagoController::class, 'agregarTarjeta'])->name('metodosPago.agregar');
+    Route::get('/pagos/tarjetas/exito', [PagoController::class, 'tarjetaGuardada'])->name('metodosPago.exito');
+    Route::patch('/pagos/tarjetas/{id}', [PagoController::class, 'predeterminarTarjeta'])->name('metodosPago.predeterminar');
+    Route::delete('/pagos/tarjetas/{id}', [PagoController::class, 'eliminarTarjeta'])->name('metodosPago.eliminar');
 });
+
+// Webhook de Stripe (sin sesión ni CSRF; se valida la firma)
+Route::post('/stripe/webhook', [PagoController::class, 'webhook'])->name('stripe.webhook');
 
 // ===============================================
 // RUTAS DE ADMINISTRADOR (Requiere auth:admin)
@@ -143,30 +162,7 @@ Route::middleware(['auth:web', 'bloquear.demo'])->group(function () {
 
 Route::middleware(['auth:admin', 'bloquear.demo'])->group(function () {
     // Dashboard admin
-    Route::get('/admin', function () {
-        $mensajes = Contacto::orderBy('created_at', 'desc')->paginate(10);
-        $totalPublicaciones = \App\Models\Publicacion::count();
-        $totalNoticias = \App\Models\Noticias::count();
-        $totalPaginas = 0; // Si tienes modelo de páginas, reemplaza aquí
-        $totalMenu = 0; // Si tienes modelo de menú, reemplaza aquí
-        $librosDisponibles = \App\Models\Libro::where('disponibilidad', true)->count();
-        $usuariosRegistrados = \App\Models\Usuario::count();
-        $prestamosActivos = \App\Models\Prestamos::whereNull('fecha_devolucion_real')->count();
-        $reservasActivas = \App\Models\Reserva::where('estado', 'activa')->count();
-        $eventosProximos = \App\Models\Evento::where('fecha_hora', '>', now())->count();
-        return view('bibliotecaDAW.adminViews.administrador', compact(
-            'mensajes',
-            'totalPublicaciones',
-            'totalNoticias',
-            'totalPaginas',
-            'totalMenu',
-            'librosDisponibles',
-            'usuariosRegistrados',
-            'prestamosActivos',
-            'reservasActivas',
-            'eventosProximos'
-        ));
-    })->name('admin.dashboard');
+    Route::get('/admin', DashboardController::class)->name('admin.dashboard');
     //Gestion de roles y permisos
     Route::get('/admin/gestionRoles', function () {
         return view('bibliotecaDAW.adminViews.GestionarRoles.rolesYpermisos');

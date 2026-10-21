@@ -30,6 +30,7 @@ class Libro extends Model
         'formato',
         'opcion_compra',
         'cantidad_ejemplares',
+        'precio',
         'isbn',
         'portada_img',
         'perdido',
@@ -38,7 +39,13 @@ class Libro extends Model
 
     protected $casts = [
         'perdido' => 'boolean',
+        'precio' => 'decimal:2',
     ];
+
+    public function seVende(): bool
+    {
+        return $this->opcion_compra === 'compra' && (float) $this->precio > 0;
+    }
 
     /**
      * Accessor que devuelve la URL correcta de la portada,

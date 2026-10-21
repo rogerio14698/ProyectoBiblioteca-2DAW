@@ -16,6 +16,8 @@ class LibroFactory extends Factory
      */
     public function definition(): array
     {
+        $opcionCompra = $this->faker->randomElement(['compra', 'prestamo']);
+
         return [ 
             'titulo' => $this->faker->sentence(3),
             'autor' => $this->faker->name(),
@@ -24,7 +26,8 @@ class LibroFactory extends Factory
             'editorial' => $this->faker->company(),
             'disponibilidad' => $this->faker->randomElement(['disponible', 'prestado']),
             'formato' => $this->faker->randomElement(['fisico', 'digital', 'ambos']),
-            'opcion_compra' => $this->faker->randomElement(['compra', 'prestamo']),
+            'opcion_compra' => $opcionCompra,
+            'precio' => $opcionCompra === 'compra' ? $this->faker->randomFloat(2, 6, 35) : null,
             'cantidad_ejemplares' => $this->faker->numberBetween(1, 10),
             'isbn' => $this->faker->isbn13(),
             // Cada libro recibe una portada única usando un ID aleatorio como seed.

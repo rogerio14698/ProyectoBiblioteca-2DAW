@@ -25,10 +25,20 @@ class Evento extends Model
         'aforo',
         'asistentes',
         'imagen_url',
+        'precio',
         'usuario_id',
         'prioridad',
         'url_paginaInterna'
     ];
+
+    protected $casts = [
+        'precio' => 'decimal:2',
+    ];
+
+    public function esDePago(): bool
+    {
+        return (float) $this->precio > 0;
+    }
     //Validamos el formulario.
 
     /*Este codigo le dice que el dueño está en el modelo de Usuario*/

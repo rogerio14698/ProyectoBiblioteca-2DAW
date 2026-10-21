@@ -1,0 +1,80 @@
+// =============================================================================
+// Tokens del sistema "Barroco contemporáneo" — Biblioteca DAW
+// -----------------------------------------------------------------------------
+// Paleta: tinta (fondo), pergamino (texto), burdeos, oro y verde botella.
+// Cada "capítulo" (sección a sangre) define sus propias variables de rol
+// (--fondo, --texto, --texto-suave, --acento, --acento-texto) y los
+// componentes las heredan: un botón funciona en cualquier color de fondo.
+// =============================================================================
+
+// Breakpoints (mobile-first). Probar siempre en 375 / 768 / 1024 / 1440.
+$bp-sm: 600px;
+$bp-md: 900px;
+$bp-lg: 1200px;
+
+@mixin desde($bp) {
+    @media (min-width: $bp) {
+        @content;
+    }
+}
+
+@mixin hasta($bp) {
+    @media (max-width: ($bp - 0.02px)) {
+        @content;
+    }
+}
+
+@mixin movimiento {
+    @media (prefers-reduced-motion: no-preference) {
+        @content;
+    }
+}
+
+:root {
+    // Colores base
+    --tinta: #120d0c;
+    --tinta-2: #1a1312;
+    --tinta-3: #251c1a;
+    --pergamino: #f1e6d2;
+    --pergamino-2: #e6d7bd;
+    --burdeos: #6f1120;
+    --burdeos-vivo: #a51c30;
+    --oro: #c99a2e;
+    --oro-claro: #e2bd5e;
+    --verde: #143a30;
+    --error: #ff8a80;
+    --exito: #8fd0a0;
+
+    // Roles por defecto (capítulo tinta)
+    --fondo: var(--tinta);
+    --texto: var(--pergamino);
+    --texto-suave: #b9a88e;
+    --acento: var(--oro);
+    --acento-texto: var(--tinta);
+    --linea: rgb(241 230 210 / 0.22);
+    --superficie: rgb(241 230 210 / 0.05);
+
+    // Tipografía
+    --fuente-display: "Bodoni Moda Variable", "Bodoni Moda", "Didot", "Bodoni 72", "Times New Roman", serif;
+    --fuente-texto: "Hanken Grotesk Variable", "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+    // Cinco pasos de tamaño (nada por debajo de 13px; cuerpo >= 17px)
+    --paso-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+    --paso-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+    --paso-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+    --paso-head: clamp(2.25rem, 1.2rem + 3.8vw, 4.75rem);
+    --paso-display: clamp(3.75rem, 0.5rem + 12.5vw, 13.5rem);
+
+    // Espaciado y estructura
+    --margen: clamp(1rem, 0.4rem + 2.6vw, 2.5rem);
+    --hueco: clamp(1rem, 0.6rem + 1.4vw, 2rem);
+    --ancho-max: 1440px;
+    --ancho-texto: 68ch;
+    --alto-cabecera: 4.5rem;
+    --radio: 2px;
+
+    // Movimiento
+    --ease-salida: cubic-bezier(0.16, 1, 0.3, 1);
+    --rapido: 180ms;
+    --medio: 420ms;
+}

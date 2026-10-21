@@ -1,0 +1,66 @@
+[
+    {
+        "archivo":  "duke-humfrey.webp",
+        "titulo":  "Engraving of Arts End, Duke Humfrey\u0027s Library",
+        "autor":  "David Loggan",
+        "fecha":  "1675",
+        "licencia":  "public domain",
+        "fuente":  "https://commons.wikimedia.org/wiki/File:Engraving_of_Arts_End,_Duke_Humfrey%27s_Library.jpg"
+    },
+    {
+        "archivo":  "fleures-baroque.webp",
+        "titulo":  "Trompetvormige bloemen Fleures Baroque (serietitel op object), RP-P-1887-A-12369",
+        "autor":  "Rijksmuseum",
+        "fecha":  "between 1755 and 1775",
+        "licencia":  "CC0",
+        "fuente":  "https://commons.wikimedia.org/wiki/File:Trompetvormige_bloemen_Fleures_Baroque_(serietitel_op_object),_RP-P-1887-A-12369.jpg"
+    },
+    {
+        "archivo":  "lectora.webp",
+        "titulo":  "Woman Reading",
+        "autor":  "Édouard Manet",
+        "fecha":  "1880–82",
+        "licencia":  "public domain (CC0)",
+        "fuente":  "https://www.artic.edu/artworks/14591"
+    },
+    {
+        "archivo":  "clerigo-leyendo.webp",
+        "titulo":  "Young Clergyman Reading",
+        "autor":  "Martinus Rørbye",
+        "fecha":  "1836",
+        "licencia":  "public domain (CC0)",
+        "fuente":  "https://www.artic.edu/artworks/216794"
+    },
+    {
+        "archivo":  "biblioteca-barroca.webp",
+        "titulo":  "Interior of a Library, from Nouveaux Liure da Partements, part of Œuvres du Sr. D. Marot",
+        "autor":  "Daniel Marot the Elder",
+        "fecha":  "published 1703 or 1712",
+        "licencia":  "public domain (CC0)",
+        "fuente":  "https://www.metmuseum.org/art/collection/search/426446"
+    },
+    {
+        "archivo":  "manuscrito.webp",
+        "titulo":  "An illuminated manuscript leaf, the opening page of the second part of Firdausi\u0027s Shahnama (the reign of Luhrasb), Persia, 16th - 17th Century",
+        "autor":  "Bonhams",
+        "fecha":  "16th century - 17th century",
+        "licencia":  "public domain",
+        "fuente":  "https://commons.wikimedia.org/wiki/File:An_illuminated_manuscript_leaf,_the_opening_page_of_the_second_part_of_Firdausi%27s_Shahnama_(the_reign_of_Luhrasb),_Persia,_16th_-_17th_Century.jpg"
+    },
+    {
+        "archivo":  "arabescos.webp",
+        "titulo":  "Ornament with Arabesques",
+        "autor":  "Daniel Hopfer, I",
+        "fecha":  "1526/30, printed 1684",
+        "licencia":  "public domain (CC0)",
+        "fuente":  "https://www.artic.edu/artworks/23366"
+    },
+    {
+        "archivo":  "biblioteca-1700.webp",
+        "titulo":  "Boxbarth after Feuillet Library interior c1700",
+        "autor":  "Johann Boxbarth nach G. Feuillet",
+        "fecha":  "between 1691 and 1723",
+        "licencia":  "public domain",
+        "fuente":  "https://commons.wikimedia.org/wiki/File:Boxbarth_after_Feuillet_Library_interior_c1700.jpg"
+    }
+]

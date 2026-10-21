@@ -1,0 +1,1 @@
+<section class="capitulo capitulo--tinta capitulo--compacto" aria-labelledby="titulo-socio"><div class="envoltura"><header class="portadilla portadilla--socio"><h1 id="titulo-socio">{{ $titulo }} <em>{{ $enfasis }}</em></h1><p class="entradilla">{{ $entradilla }}</p></header></div></section>

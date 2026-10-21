@@ -1,78 +1,46 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
-@section('title', 'Libros Prestados')
+@section('title', 'Libros prestados')
 
 @section('content')
-
-    <main class="contenedor gestionPrestamos">
-
-        <!-- Encabezado con titulo y enlace a libros perdidos -->
-        <div class="prestamosEncabezado">
-            <div>
-                <h1>Prestamos Activos</h1>
-                <p>Libros actualmente en manos de usuarios. Registra devoluciones o marca como perdidos.</p>
-            </div>
-            <div class="prestamosNav">
-                <a href="{{ route('admin.librosPerdidos') }}" class="btn-base btn-primario">Ver Libros Perdidos</a>
-            </div>
-        </div>
-
-        <!-- Mensajes flash de feedback -->
-        @if (session('success'))
-            <div class="alertaExito">{{ session('success') }}</div>
-        @endif
-        @if (session('error'))
-            <div class="alertaError">{{ session('error') }}</div>
-        @endif
-
-        <!-- Listado de prestamos activos -->
-        <section class="prestamosListado">
-            <h2>Pendientes de devolucion ({{ $prestamosActivos->count() }})</h2>
-
-            <div class="prestamosListadoCards">
-                @forelse($prestamosActivos as $prestamo)
-                    <article class="prestamoCard">
-                        <!-- Informacion del prestamo -->
-                        <div class="prestamoCardInfo">
-                            <div class="prestamoCardCabecera">
-                                <span class="prestamoCardId">#{{ $prestamo->id }}</span>
-                                <h3 class="prestamoCardTitulo">{{ $prestamo->libro->titulo }}</h3>
-                            </div>
-                            <span class="prestamoCardIsbn">ISBN: {{ $prestamo->libro->isbn }}</span>
-                            <p class="prestamoCardUsuario">{{ $prestamo->usuario->name ?? 'Usuario eliminado' }}</p>
-                            <div class="prestamoCardMeta">
-                                <span class="prestamoCardMetaItem">Prestamo: {{ $prestamo->fecha_prestamo->format('d/m/Y') }}</span>
-                                @if ($prestamo->fecha_devolucion_esperada)
-                                    <span class="prestamoCardMetaItem">Limite: {{ $prestamo->fecha_devolucion_esperada->format('d/m/Y') }}</span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <!-- Acciones: devolver o marcar como perdido -->
-                        <div class="prestamoCardAcciones">
-                            <form action="{{ route('admin.librosPrestados.devolver', $prestamo->id) }}" method="POST">
+<div class="a-vista-admin">
+    <header class="a-titulo"><div><h1>Libros prestados</h1><p class="a-subtitulo">Registra devoluciones o marca un préstamo como perdido.</p></div><div class="a-titulo__acciones"><a href="{{ route('admin.librosPerdidos') }}" class="a-boton">Ver libros perdidos</a></div></header>
+<section class="a-tarjeta"><header class="a-tarjeta__cabecera"><div><h2>Pendientes de devolución ({{ $prestamosActivos->count() }})</h2></div></header>
+<div class="a-tabla-envoltura" tabindex="0" role="region" aria-label="Reservas"><table class="a-tabla a-tabla--gestion"><thead>
+<tr><th scope="col" class="a-num">ID</th>
+    <th scope="col">Libro</th>
+    <th scope="col">ISBN</th>
+    <th scope="col">Usuario</th>
+    <th scope="col">Préstamo</th>
+    <th scope="col">Devolución prevista</th>
+    <th scope="col">Acciones</th></tr></thead><tbody>
+@forelse ($prestamosActivos as $prestamo)<tr><td class="a-num">{{ $prestamo->id }}</td>
+    <td><div class="a-tabla__identidad"><strong>{{ $prestamo->libro->titulo }}</strong></div></td>
+    <td>{{ $prestamo->libro->isbn }}</td>
+    <td>{{ $prestamo->usuario->name ?? 'Usuario eliminado' }}</td>
+    <td class="a-fecha">{{ $prestamo->fecha_prestamo->format('d/m/Y') }}</td>
+    <td class="a-fecha">{{ $prestamo->fecha_devolucion_esperada?->format('d/m/Y') ?? '—' }}</td>
+    <td><div class="a-acciones-fila">
+                            <form class="a-form" action="{{ route('admin.librosPrestados.devolver', $prestamo->id) }}" method="POST">
                                 @csrf
                                 @method('PATCH')
-                                <button type="submit" class="btn-base btn-verde btnDevolverPrestamo"
-                                    onclick="return confirm('¿Registrar la devolucion de este libro?')">
+                                <button type="submit" class="a-boton a-boton--primario btnDevolverPréstamo"
+                                    onclick="return confirm('¿Registrar la devolución de este libro?')">
                                     Devolver
                                 </button>
                             </form>
-                            <form action="{{ route('admin.librosPrestados.perdido', $prestamo->id) }}" method="POST">
+                            <form class="a-form" action="{{ route('admin.librosPrestados.perdido', $prestamo->id) }}" method="POST">
                                 @csrf
                                 @method('PATCH')
-                                <button type="submit" class="btn-base btn-rojo btnPerdidoPrestamo"
-                                    onclick="return confirm('¿Marcar este libro como perdido? Se cerrara el prestamo y aparecera en Libros Perdidos.')">
+                                <button type="submit" class="a-boton a-boton--peligro btnPerdidoPréstamo"
+                                    onclick="return confirm('¿Marcar este libro como perdido? Se cerrará el prestamo y aparecera en Libros Perdidos.')">
                                     Marcar Perdido
                                 </button>
                             </form>
-                        </div>
-                    </article>
-                @empty
-                    <p class="prestamoCardVacio">No hay prestamos activos en este momento.</p>
-                @endforelse
-            </div>
-        </section>
-    </main>
-
+                        </div></td></tr>
+@empty<tr><td colspan="7"><p class="a-vacio">No hay préstamos activos en este momento.</p></td></tr>
+@endforelse
+</tbody></table></div>
+</section>
+</div>
 @endsection

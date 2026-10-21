@@ -18,6 +18,9 @@ return new class extends Migration
         $table->timestamp('fecha_prestamo')->useCurrent();
         $table->timestamp('fecha_devolucion_esperada')->nullable();
         $table->timestamp('fecha_devolucion_real')->nullable(); 
+        // Multa por retraso en euros y si ya se ha pagado vía Stripe.
+        $table->decimal('multa', 8, 2)->default(0);
+        $table->boolean('multa_pagada')->default(false);
         $table->timestamps();
     });
 }

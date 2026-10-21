@@ -115,4 +115,7 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
+    // Buzón de la biblioteca que recibe los mensajes del formulario de contacto.
+    'admin_address' => env('MAIL_ADMIN_ADDRESS', 'rogeriolucas14698@gmail.com'),
+
 ];

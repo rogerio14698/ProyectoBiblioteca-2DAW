@@ -71,8 +71,8 @@ class ContactoSeeder extends Seeder
                     'email'  => $contacto['email'],
                     'asunto' => $contacto['asunto'],
                 ],
-                // Datos completos a insertar o actualizar.
-                $contacto
+                // Datos completos a insertar o actualizar. Los mensajes de ejemplo se consideran ya confirmados.
+                $contacto + ['email_verificado_at' => now()]
             );
         }
     }

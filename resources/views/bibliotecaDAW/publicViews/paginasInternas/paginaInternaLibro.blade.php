@@ -1,88 +1,47 @@
 @extends('layouts.app')
 
-@section('title', $libro->titulo . ' - Detalle del Libro')
+@section('title', $libro->titulo . ' | Biblioteca DAW')
 
 @section('content')
-    <section class="paginaInternaLibro separador">
-
-        <div class="cardPaginaInterna">
-            {{-- Columna izquierda: libro 3D interactivo --}}
-            <div class="book-container">
-                <div class="book" title="Portada del libro {{ $libro->titulo }}">
-                    <div class="front">
-                        <img src="{{ $portadaUrl }}" alt="Portada del libro {{ $libro->titulo }}"
-                            width="200" height="300">
-                    </div>
-                    <div class="back"></div>
-                    <div class="spine"></div>
-                    <div class="left"></div>
-                    <div class="right"></div>
-                    <div class="top"></div>
-                    <div class="bottom"></div>
-                </div>
-            </div>
-
-            {{-- Columna derecha: información del libro --}}
-            <div class="contenidoPaginaInterna">
-                <h1 class="libroInternoTitulo">{{ $libro->titulo }}</h1>
-                <p class="libroInternoAutor">{{ $libro->autor }}</p>
-
-                {{-- Datos principales organizados en grid --}}
-                <div class="libroInternoDatos">
-                    <div class="libroInternoDato">
-                        <span class="libroInternoDatoLabel">Género</span>
-                        <span class="libroInternoDatoValor">{{ $libro->genero }}</span>
-                    </div>
-                    <div class="libroInternoDato">
-                        <span class="libroInternoDatoLabel">Editorial</span>
-                        <span class="libroInternoDatoValor">{{ $libro->editorial }}</span>
-                    </div>
-                    <div class="libroInternoDato">
-                        <span class="libroInternoDatoLabel">ISBN</span>
-                        <span class="libroInternoDatoValor">{{ $libro->isbn }}</span>
-                    </div>
-                    <div class="libroInternoDato">
-                        <span class="libroInternoDatoLabel">Año</span>
-                        <span class="libroInternoDatoValor">{{ $libro->anio }}</span>
-                    </div>
-                </div>
-
-                {{-- Badges de formato y disponibilidad --}}
-                <div class="libroInternoBadges">
-                    <div class="infoItem">
-                        <span class="infoLabel">Formato:</span>
-                        @if ($libro->formato === 'digital')
-                            <span class="infoValue formato-digital">Digital</span>
-                        @elseif ($libro->formato === 'fisico')
-                            <span class="infoValue formato-fisico">Físico</span>
-                        @elseif ($libro->formato === 'ambos')
-                            <span class="infoValue formato-digital">Digital</span>
-                            <span class="infoValue formato-fisico">Físico</span>
+    <section class="capitulo capitulo--tinta">
+        <div class="envoltura">
+            <header class="portadilla">
+                <ol class="migas"><li><a href="{{ url('/biblioteca') }}">Biblioteca</a></li><li><a href="{{ route('catalogo') }}">Catálogo</a></li><li aria-current="page">{{ $libro->titulo }}</li></ol>
+            </header>
+            <div class="dos-columnas ficha-libro">
+                <figure class="lamina ficha-libro__portada">
+                    <img src="{{ $portadaUrl }}" alt="Portada de {{ $libro->titulo }}" width="600" height="900">
+                    <figcaption>Edición de {{ $libro->editorial }}</figcaption>
+                </figure>
+                <article>
+                    <h1>{{ $libro->titulo }}</h1>
+                    <p class="ficha-libro__autor">{{ $libro->autor }}</p>
+                    <dl class="ficha">
+                        <div><dt>Género</dt><dd>{{ $libro->genero }}</dd></div>
+                        <div><dt>Editorial</dt><dd>{{ $libro->editorial }}</dd></div>
+                        <div><dt>ISBN</dt><dd>{{ $libro->isbn }}</dd></div>
+                        <div><dt>Año</dt><dd>{{ $libro->anio }}</dd></div>
+                        <div><dt>Formato</dt><dd>{{ $libro->formato === 'ambos' ? 'Físico y digital' : ucfirst($libro->formato) }}</dd></div>
+                        <div><dt>Disponibilidad</dt><dd>@if ($libro->disponibilidad === 'disponible')<span class="insignia insignia--verde">Disponible</span>@else<span class="insignia insignia--neutra">{{ ucfirst($libro->disponibilidad) }}</span>@endif</dd></div>
+                    </dl>
+                    <div class="ficha-libro__acciones">
+                        @if ($libro->seVende())
+                            <div class="ficha-libro__compra">
+                                <p class="precio">{{ number_format($libro->precio, 2, ',', '.') }} €</p>
+                                @auth('web')
+                                    <form action="{{ route('pagos.libro', $libro->id) }}" method="POST">@csrf<button type="submit" class="boton">Comprar con tarjeta</button></form>
+                                @else
+                                    <a href="{{ route('usuario.login.mostrar') }}" class="boton">Inicia sesión para comprar</a>
+                                @endauth
+                            </div>
                         @endif
-                    </div>
-                    <div class="infoItem">
-                        <span class="infoLabel">Disponibilidad:</span>
-                        @if ($libro->disponibilidad === 'disponible')
-                            <span class="infoValue stock-disponible">{{ $libro->disponibilidad }}</span>
-                        @else
-                            <span class="infoValue stock-no-disponible">{{ $libro->disponibilidad }}</span>
+                        @if ($libro->opcion_compra === 'prestamo')
+                            <a href="{{ route('libro.paginaInternaAlquilar', $libro->id) }}" class="boton boton--linea">Solicitar préstamo</a>
                         @endif
+                        <a href="{{ route('catalogo') }}" class="boton boton--texto">Volver al catálogo</a>
                     </div>
-                </div>
-
-                {{-- Botones de acción --}}
-                <div class="accionesCatalogo">
-                    <a href="#" class="btn-base btn-carrito" id="alertaMantenimiento"
-                            onclick="mostrarAlertaMantenimiento()">Añadir al carrito</a>
-                    <a href="{{ route('libro.paginaInternaAlquilar', $libro->id) }}" class="btn-base btn-alquilar">Alquilar ahora</a>
-                </div>
-
-                {{-- Enlace para volver al catálogo --}}
-                <a href="{{ url('/catalogo') }}" class="btn-base btn-azul libroInternoVolver">
-                    <i class="bi bi-arrow-left"></i> Volver al catálogo
-                </a>
+                </article>
             </div>
         </div>
-
     </section>
 @endsection

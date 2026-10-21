@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contacto;
+use App\Mail\ConfirmarContacto;
 use App\Mail\ContactoRecibido;
 use App\Mail\RespuestaDeAdminAContacto;
+use App\Rules\EmailNoDesechable;
+use App\Rules\Turnstile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
 
 class ContactoController extends Controller
 {
@@ -17,7 +22,7 @@ class ContactoController extends Controller
     public function index()
     {
         //Vista para el admin para ver todos los mensajes de contacto recibidos.
-        $mensajes = Contacto::orderBy('created_at', 'desc')->paginate(10);
+        $mensajes = Contacto::latest()->paginate(10);
         return view('bibliotecaDAW.adminViews.mensajes.index', compact('mensajes'));
     }
     public function misConsultas()
@@ -46,52 +51,85 @@ class ContactoController extends Controller
      * Store a newly created resource in storage.
      */
     /**
-     * Validar los datos del formulario, guardarlos en BD y enviar correo al admin.
+     * Validar el formulario y guardar el mensaje pendiente de confirmación.
+     * Capas: honeypot + Cloudflare Turnstile + RFC/DNS (MX) + dominios desechables + throttle (ruta).
+     * El admin solo recibe el mensaje cuando el remitente pulsa el enlace enviado a su correo.
      * @param Request $request Datos del formulario de contacto.
      * @return \Illuminate\Http\RedirectResponse Redirección con mensaje de éxito o error.
-     * @effect Crea un registro en la tabla 'contactos' y envía un email SMTP.
      */
     public function store(Request $request)
     {
-        //Validamos los datos del formulario antes de procesarlos.
-        $request->validate([
-            'nombre' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
+        // Campo trampa invisible: los bots lo rellenan, las personas no.
+        if (filled($request->input('web'))) {
+            return redirect()->back()->with('success', 'Revisa tu correo para confirmar el mensaje.');
+        }
+
+        $validated = $request->validate([
+            'nombre' => 'required|string|min:2|max:255',
+            'email' => ['required', 'string', 'max:255', 'email:rfc,dns', new EmailNoDesechable()],
             'asunto' => 'required|string|max:255',
-            'mensaje' => 'required|string',
+            'mensaje' => 'required|string|min:10|max:5000',
+            'cf-turnstile-response' => [new Turnstile()],
+        ], [
+            'email.email' => 'Ese correo no existe o su dominio no puede recibir emails. Revísalo.',
+            'mensaje.min' => 'Cuéntanos un poco más (mínimo 10 caracteres).',
         ]);
 
-        //Limpiamos el mensaje de etiquetas HTML por seguridad.
-        $mensajeLimpio = strip_tags($request->input('mensaje'));
+        $token = Str::random(64);
 
-        //Guardamos el mensaje de contacto en la base de datos.
-        $contacto = new Contacto();
-        $contacto->nombre = $request->input('nombre');
-        $contacto->email = $request->input('email');
-        $contacto->asunto = $request->input('asunto');
-        $contacto->mensaje = $mensajeLimpio;
-        $contacto->save();
+        $contacto = Contacto::create([
+            'nombre' => strip_tags($validated['nombre']),
+            'email' => Str::lower($validated['email']),
+            'asunto' => strip_tags($validated['asunto']),
+            'mensaje' => strip_tags($validated['mensaje']),
+            'token_verificacion' => $token,
+        ]);
 
-        //Enviamos el correo electrónico al admin de la biblioteca.
-        //Usamos try-catch para que, si el envío falla, el usuario no pierda su mensaje.
+        $url = URL::temporarySignedRoute('contacto.confirmar', now()->addHours(48), ['token' => $token]);
+
         try {
-            Mail::to('rogeriolucas14698@gmail.com')->send(
+            Mail::to($contacto->email)->send(new ConfirmarContacto($contacto->nombre, $contacto->asunto, $url));
+        } catch (\Exception $e) {
+            Log::error('Error al enviar confirmación de contacto: ' . $e->getMessage());
+            $contacto->delete();
+
+            return redirect()->back()->withInput()->with('error', 'No hemos podido enviar el correo de confirmación a esa dirección. Comprueba que es correcta.');
+        }
+
+        return redirect()->back()->with('success', 'Te hemos enviado un correo a ' . $contacto->email . '. Pulsa el enlace para que tu mensaje nos llegue.');
+    }
+
+    /**
+     * Enlace de la doble confirmación: marca el email como verificado y avisa al admin.
+     */
+    public function confirmar(Request $request, string $token)
+    {
+        $contacto = Contacto::where('token_verificacion', $token)->first();
+
+        if (! $contacto) {
+            return redirect()->route('contacto.create')->with('error', 'Este enlace ya se ha usado o no es válido.');
+        }
+
+        $contacto->update([
+            'email_verificado_at' => now(),
+            'token_verificacion' => null,
+        ]);
+
+        try {
+            Mail::to(config('mail.admin_address', 'rogeriolucas14698@gmail.com'))->send(
                 new ContactoRecibido(
-                    nombre: $request->input('nombre'),
-                    email: $request->input('email'),
-                    asunto: $request->input('asunto'),
-                    mensaje: $mensajeLimpio,
+                    nombre: $contacto->nombre,
+                    email: $contacto->email,
+                    asunto: $contacto->asunto,
+                    mensaje: $contacto->mensaje,
                 )
             );
         } catch (\Exception $e) {
-            //Si el correo falla, lo registramos en el log pero no bloqueamos al usuario.
-            Log::error('Error al enviar correo de contacto: ' . $e->getMessage());
-
-            //Le indicamos al usuario que su mensaje se guardó aunque el correo fallara.
-            return redirect()->back()->with('success', 'Tu mensaje ha sido guardado. Te responderemos pronto.');
+            // El mensaje queda visible en el panel aunque falle el aviso por correo.
+            Log::error('Error al enviar correo de contacto al admin: ' . $e->getMessage());
         }
 
-        return redirect()->back()->with('success', 'Tu mensaje ha sido enviado exitosamente.');
+        return redirect()->route('contacto.create')->with('success', '¡Correo confirmado! Tu mensaje ya está en manos de la biblioteca.');
     }
 
     /**

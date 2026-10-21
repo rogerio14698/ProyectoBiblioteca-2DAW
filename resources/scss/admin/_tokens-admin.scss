@@ -1,0 +1,71 @@
+// =============================================================================
+// Tokens del panel de administración — "Hoja enmarcada" en modo oscuro
+// -----------------------------------------------------------------------------
+// Un marco tintado en L (lateral + barra superior) y una hoja con borde fino
+// de 1px y esquinas de 16px. Sin sombras en reposo. La marca se limita al
+// logotipo, al subrayado de la pestaña activa y a la acción primaria.
+// =============================================================================
+
+$a-bp-md: 900px;
+$a-bp-lg: 1280px;
+
+@mixin a-desde($bp) {
+    @media (min-width: $bp) {
+        @content;
+    }
+}
+
+@mixin a-hasta($bp) {
+    @media (max-width: ($bp - 0.02px)) {
+        @content;
+    }
+}
+
+:root {
+    --a-marco: #14100f;
+    --a-hoja: #1c1716;
+    --a-elevado: #231c1a;
+    --a-activo: #2e2523;
+    --a-borde: #352b28;
+    --a-regla: #2a2220;
+    --a-control: #52453f;
+    --a-texto: #efe6d8;
+    --a-suave: #a99a8a;
+    --a-acento: #d9ad48;
+    --a-acento-texto: #14100f;
+    --a-positivo: #6cc28e;
+    --a-negativo: #ef7b76;
+    --a-aviso: #e5b54a;
+    --a-grafico-1: #d65468;
+    --a-grafico-2: #d9ad48;
+    --a-grafico-3: #6aa58f;
+
+    --a-pill-positivo-bg: rgb(108 194 142 / 0.14);
+    --a-pill-positivo-ink: #9adbb2;
+    --a-pill-negativo-bg: rgb(239 123 118 / 0.14);
+    --a-pill-negativo-ink: #f6aaa5;
+    --a-pill-aviso-bg: rgb(229 181 74 / 0.14);
+    --a-pill-aviso-ink: #efcb7a;
+    --a-pill-neutro-bg: #2e2523;
+    --a-pill-neutro-ink: #d8ccbd;
+
+    --a-radio-tarjeta: 8px;
+    --a-radio-control: 6px;
+    --a-radio-hoja: 16px;
+    --a-inset: 8px;
+    --a-fila: 48px;
+    --a-lateral: 236px;
+    --a-hueco: 24px;
+    --a-relleno: 24px;
+    --a-control-alto: 36px;
+
+    --a-fs-titulo: 22px;
+    --a-fs-seccion: 16px;
+    --a-fs-kpi: 28px;
+    --a-fs-cuerpo: 14px;
+    --a-fs-small: 13px;
+
+    --a-fuente: "Hanken Grotesk Variable", "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --a-fuente-marca: "Bodoni Moda Variable", "Bodoni Moda", "Didot", serif;
+    --a-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}

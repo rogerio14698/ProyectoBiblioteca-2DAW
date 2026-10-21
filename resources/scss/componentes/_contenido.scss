@@ -1,0 +1,365 @@
+@use "../abstracts/tokens" as *;
+
+// =============================================================================
+// Piezas de contenido: libros, agenda de eventos, noticias y carrusel
+// -----------------------------------------------------------------------------
+// .rejilla-libros > article.libro
+//     a.libro__enlace > .libro__portada > img ; h3.libro__titulo
+//     p.libro__autor ; p.libro__meta (insignias, precio)
+// ol.agenda > li.agenda__fila
+//     time.agenda__fecha (span.agenda__dia + span.agenda__mes) ;
+//     .agenda__cuerpo (h3 > a, p.agenda__lugar) ; .agenda__accion
+// .noticias > article.noticia (img, h3 > a, p.noticia__autor)
+// [data-carrusel] > .carrusel__pista > .carrusel__item ; botones [data-carrusel-anterior|siguiente]
+// =============================================================================
+
+// ---------- Libros ----------
+.rejilla-libros {
+    display: grid;
+    gap: clamp(1.5rem, 1rem + 1.5vw, 2.5rem) clamp(1rem, 0.5rem + 1.5vw, 2rem);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    @include desde($bp-sm) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @include desde($bp-md) {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    @include desde($bp-lg) {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+}
+
+.libro {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 0;
+}
+
+.libro__enlace {
+    display: grid;
+    gap: 0.9rem;
+    text-decoration: none;
+
+    &:hover {
+        color: var(--texto);
+
+        .libro__portada {
+            transform: translateY(-0.35rem);
+            box-shadow: 0 0 0 1px var(--acento), 0 18px 32px rgb(0 0 0 / 0.35);
+        }
+
+        .libro__titulo {
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 0.18em;
+        }
+    }
+}
+
+.libro__portada {
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+    background: var(--superficie);
+    box-shadow: 0 0 0 1px var(--linea);
+    transition: transform var(--medio) var(--ease-salida), box-shadow var(--medio) var(--ease-salida);
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.libro__titulo {
+    margin: 0;
+    font-size: clamp(1.125rem, 1rem + 0.4vw, 1.375rem);
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+}
+
+.libro__autor {
+    margin: 0;
+    color: var(--texto-suave);
+    font-size: 0.9375rem;
+}
+
+.libro__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0.25rem 0 0;
+    font-size: var(--paso-small);
+    font-variant-numeric: tabular-nums;
+}
+
+.precio {
+    font-family: var(--fuente-display);
+    font-size: var(--paso-lead);
+    font-variant-numeric: lining-nums;
+    white-space: nowrap;
+}
+
+// ---------- Agenda de eventos (filas editoriales) ----------
+.agenda {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--linea);
+}
+
+.agenda__fila {
+    display: grid;
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    gap: 1rem 1.5rem;
+    align-items: center;
+    padding-block: clamp(1.25rem, 1rem + 1vw, 2rem);
+    border-bottom: 1px solid var(--linea);
+    transition: background var(--medio) var(--ease-salida);
+
+    @include desde($bp-md) {
+        grid-template-columns: 8rem minmax(0, 1fr) 11rem auto;
+        gap: 2rem;
+    }
+
+    &:hover {
+        background: var(--superficie);
+    }
+}
+
+.agenda__fecha {
+    display: grid;
+    line-height: 0.9;
+    font-variant-numeric: lining-nums;
+}
+
+.agenda__dia {
+    font-family: var(--fuente-display);
+    font-size: clamp(2.75rem, 2rem + 2.5vw, 4.5rem);
+    letter-spacing: -0.04em;
+}
+
+.agenda__mes {
+    margin-top: 0.35rem;
+    font-size: var(--paso-small);
+    color: var(--texto-suave);
+}
+
+.agenda__cuerpo {
+    min-width: 0;
+
+    h3 {
+        margin: 0 0 0.35rem;
+        font-size: clamp(1.375rem, 1.1rem + 1vw, 2.25rem);
+        line-height: 1.05;
+    }
+
+    a {
+        text-decoration: none;
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+        }
+
+        &:hover {
+            color: var(--acento);
+        }
+    }
+}
+
+.agenda__fila {
+    position: relative;
+}
+
+.agenda__lugar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    margin: 0;
+    color: var(--texto-suave);
+    font-size: 0.9375rem;
+}
+
+.agenda__precio {
+    grid-column: 2;
+    margin: 0;
+
+    @include desde($bp-md) {
+        grid-column: auto;
+        justify-self: end;
+    }
+}
+
+.agenda__accion {
+    display: none;
+
+    @include desde($bp-md) {
+        display: grid;
+        place-items: center;
+        width: 3.25rem;
+        height: 3.25rem;
+        border: 1px solid var(--linea);
+        border-radius: 50%;
+        font-size: 1.25rem;
+        transition: background var(--rapido), color var(--rapido), transform var(--medio) var(--ease-salida);
+
+        .agenda__fila:hover & {
+            background: var(--acento);
+            color: var(--acento-texto);
+            border-color: var(--acento);
+            transform: rotate(-45deg);
+        }
+    }
+}
+
+// ---------- Noticias ----------
+.noticias {
+    display: grid;
+    gap: clamp(2rem, 1rem + 2vw, 3rem) var(--hueco);
+
+    @include desde($bp-sm) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include desde($bp-lg) {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+.noticia {
+    position: relative;
+    display: grid;
+    align-content: start;
+    gap: 0.9rem;
+
+    img {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        filter: grayscale(0.25) contrast(1.05);
+        transition: filter var(--medio) var(--ease-salida);
+    }
+
+    h3 {
+        margin: 0;
+        font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+        line-height: 1.15;
+    }
+
+    a {
+        text-decoration: none;
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+        }
+    }
+
+    &:hover {
+        img {
+            filter: none;
+        }
+
+        h3 {
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 0.18em;
+        }
+    }
+}
+
+.noticia__autor {
+    margin: 0;
+    color: var(--texto-suave);
+    font-size: 0.9375rem;
+}
+
+// La primera noticia ocupa dos columnas en pantallas grandes
+.noticias--destacada .noticia:first-child {
+    @include desde($bp-lg) {
+        grid-column: span 2;
+        grid-row: span 2;
+
+        h3 {
+            font-size: clamp(2rem, 1rem + 1.6vw, 3rem);
+            line-height: 1.05;
+        }
+    }
+}
+
+// ---------- Carrusel con scroll-snap (táctil nativo) ----------
+.carrusel {
+    position: relative;
+}
+
+.carrusel__pista {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(10.5rem, 46%);
+    gap: clamp(1rem, 0.5rem + 1.5vw, 2rem);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding-bottom: 0.5rem;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    @include desde($bp-sm) {
+        grid-auto-columns: minmax(12rem, 30%);
+    }
+
+    @include desde($bp-md) {
+        grid-auto-columns: minmax(12rem, calc((100% - 4 * 2rem) / 5));
+    }
+
+    @include movimiento {
+        scroll-behavior: smooth;
+    }
+}
+
+.carrusel__item {
+    scroll-snap-align: start;
+    min-width: 0;
+}
+
+.carrusel__controles {
+    display: flex;
+    gap: 0.5rem;
+
+    button {
+        display: grid;
+        place-items: center;
+        width: 3.25rem;
+        height: 3.25rem;
+        background: transparent;
+        border: 1px solid var(--linea);
+        border-radius: 50%;
+        color: var(--texto);
+        font-size: 1.25rem;
+        transition: background var(--rapido), color var(--rapido), border-color var(--rapido);
+
+        &:hover:not(:disabled) {
+            background: var(--acento);
+            border-color: var(--acento);
+            color: var(--acento-texto);
+        }
+
+        &:disabled {
+            opacity: 0.35;
+            cursor: default;
+        }
+    }
+}

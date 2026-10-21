@@ -1,130 +1,15 @@
 @extends('layouts.app')
-
-@section('title', 'Publicar')
-
+@section('title', 'Publicar contenido')
 @section('content')
-    <main class="contenedor publicarUsuario">
-        <section class="publicarHeader">
-            <h1>Publicar contenido digital</h1>
-            <p>Sube documentos y libros digitales para que otros usuarios de la biblioteca puedan acceder a ellos.</p>
-        </section>
-
-        @if (session('success'))
-            <section class="publicarMensaje publicarMensajeExito">
-                <p>{{ session('success') }}</p>
-            </section>
-        @endif
-
-        @if (session('error'))
-            <section class="publicarMensaje publicarMensajeError">
-                <p>{{ session('error') }}</p>
-            </section>
-        @endif
-
-        @if ($errors->any())
-            <section class="publicarMensaje publicarMensajeError">
-                <p>Se encontraron errores en el formulario:</p>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </section>
-        @endif
-
-        <section class="publicarBloque">
-            <div class="publicarIntro">
-                <h2>Nueva publicación</h2>
-                <p>Formato permitido: PDF (máx. 20MB).</p>
-            </div>
-
-            <form action="{{ route('usuario.publicar.store') }}" method="POST" enctype="multipart/form-data" class="publicarForm">
-                @csrf
-
-                <div class="campoPublicar">
-                    <label for="nombre_libro">Nombre del libro</label>
-                    <input type="text" id="nombre_libro" name="nombre_libro" value="{{ old('nombre_libro') }}" required>
-                </div>
-
-                <div class="campoPublicar">
-                    <label for="titulo_publicacion">Título de la publicación</label>
-                    <input type="text" id="titulo_publicacion" name="titulo_publicacion"
-                        value="{{ old('titulo_publicacion') }}" required>
-                </div>
-
-                <div class="campoPublicar campoCompletoPublicar">
-                    <label for="resumen_publicacion">Resumen</label>
-                    <textarea id="resumen_publicacion" name="resumen_publicacion" required>{{ old('resumen_publicacion') }}</textarea>
-                </div>
-
-                <div class="accionesPublicar campoCompletoPublicar">
-                    <div class="campoArchivoPublicar">
-                        <label for="archivo_publicacion" class="labelArchivoPublicar">
-                            <i class="bi bi-cloud-arrow-up"></i>
-                            <span class="labelArchivoTexto">Añade tu archivo digital</span>
-                            <span class="labelArchivoFormatos">PDF</span>
-                        </label>
-                        <input type="file" id="archivo_publicacion" name="archivo_publicacion" class="inputArchivoPublicar"
-                            accept=".pdf" required>
-                    </div>
-                    <button type="submit" class="btn-base btn-verde">Publicar contenido</button>
-                </div>
-            </form>
-        </section>
-
-        <section class="publicarGrid">
-            <article class="publicarCard">
-                <h2>Mis publicaciones</h2>
-                <form action="{{ route('usuario.publicar') }}" method="GET" class="publicarMiniForm">
-                    <label for="buscar">Buscar en mis publicaciones</label>
-                    <input type="text" id="buscar" name="buscar" value="{{ $buscarPublicacion }}"
-                        placeholder="Título, libro o resumen">
-                    <button type="submit" class="btn-base btn-azul">Buscar</button>
-                </form>
-
-                <div class="publicacionesListado">
-                    @forelse($misPublicaciones as $publicacion)
-                        <article class="publicacionItem">
-                            <h3>{{ $publicacion->titulo_publicacion }}</h3>
-                            <p><strong>Libro:</strong> {{ $publicacion->nombre_libro }}</p>
-                            <p><strong>Formato:</strong> {{ strtoupper($publicacion->archivo_extension) }}</p>
-                            <p><strong>Fecha:</strong> {{ $publicacion->fecha_publicacion?->format('d/m/Y') ?? 'N/A' }}</p>
-                            <a href="{{ route('usuario.publicar.archivo', $publicacion->id) }}" class="btn-base btn-verde">Ver archivo</a>
-                        </article>
-                    @empty
-                        <p>No tienes publicaciones registradas.</p>
-                    @endforelse
-                </div>
-
-                <div class="publicacionesPaginacion">
-                    {{ $misPublicaciones->links('vendor.pagination.bootstrap-5') }}
-                </div>
-            </article>
-
-            <article class="publicarCard">
-                <h2>Contenido reciente de la comunidad</h2>
-                <p>Estos archivos ya están visibles para otros usuarios autenticados de la plataforma.</p>
-
-                <div class="publicacionesListado">
-                    @forelse($publicacionesRecientes as $publicacion)
-                        <article class="publicacionItem">
-                            <h3>{{ $publicacion->titulo_publicacion }}</h3>
-                            <p><strong>Libro:</strong> {{ $publicacion->nombre_libro }}</p>
-                            <p><strong>Autor:</strong> {{ $publicacion->usuario?->name ?? 'Usuario biblioteca' }}</p>
-                            <a href="{{ route('usuario.publicar.archivo', $publicacion->id) }}" class="btn-base btn-verde">Ver archivo</a>
-                        </article>
-                    @empty
-                        <p>Todavía no hay contenido publicado por usuarios.</p>
-                    @endforelse
-                </div>
-            </article>
-
-            <article class="publicarCard publicarCardMantenimiento">
-                <h2>Compra de contenido digital</h2>
-                <p>Esta funcionalidad está en mantenimiento. Próximamente habilitaremos opciones de compra en la biblioteca.</p>
-                <div class="estadoMantenimientoPublicar">Mantenimiento</div>
-            </article>
-        </section>
-    </main>
-
+@include('bibliotecaDAW.userViews._cabeceraSocio', ['titulo' => 'Comparte una', 'enfasis' => 'publicación', 'entradilla' => 'Sube documentos PDF relacionados con libros y recursos para la comunidad.'])
+<section class="capitulo capitulo--tinta-2 capitulo--compacto"><div class="envoltura">
+@if ($errors->any())<div class="aviso aviso--error" role="alert"><i class="bi bi-exclamation-triangle" aria-hidden="true"></i><div><strong>Revisa los datos antes de publicar.</strong><ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div></div>@endif
+<section class="panel socio-publicar-form" aria-labelledby="titulo-nueva-publicacion"><h2 class="panel__titulo" id="titulo-nueva-publicacion">Nueva publicación</h2><p>Formato PDF, máximo 20 MB.</p><form action="{{ route('usuario.publicar.store') }}" method="POST" enctype="multipart/form-data" class="formulario">@csrf
+<div class="campo--doble"><div class="campo"><label for="nombre_libro">Nombre del libro</label><input type="text" id="nombre_libro" name="nombre_libro" value="{{ old('nombre_libro') }}" required @if ($errors->has('nombre_libro')) aria-invalid="true" aria-describedby="error-nombre-libro" @endif>@error('nombre_libro')<p class="campo__error" id="error-nombre-libro">{{ $message }}</p>@enderror</div><div class="campo"><label for="titulo_publicacion">Título de la publicación</label><input type="text" id="titulo_publicacion" name="titulo_publicacion" value="{{ old('titulo_publicacion') }}" required @if ($errors->has('titulo_publicacion')) aria-invalid="true" aria-describedby="error-titulo-publicacion" @endif>@error('titulo_publicacion')<p class="campo__error" id="error-titulo-publicacion">{{ $message }}</p>@enderror</div></div>
+<div class="campo"><label for="resumen_publicacion">Resumen</label><textarea id="resumen_publicacion" name="resumen_publicacion" maxlength="500" required @if ($errors->has('resumen_publicacion')) aria-invalid="true" aria-describedby="error-resumen" @endif>{{ old('resumen_publicacion') }}</textarea>@error('resumen_publicacion')<p class="campo__error" id="error-resumen">{{ $message }}</p>@enderror</div>
+<div class="campo"><label for="archivo_publicacion">Archivo PDF</label><input type="file" id="archivo_publicacion" name="archivo_publicacion" accept=".pdf,application/pdf" required @if ($errors->has('archivo_publicacion')) aria-invalid="true" aria-describedby="error-archivo" @endif><p class="campo__ayuda">Tamaño máximo: 20 MB.</p>@error('archivo_publicacion')<p class="campo__error" id="error-archivo">{{ $message }}</p>@enderror</div><div class="acciones"><button type="submit" class="boton">Enviar publicación</button></div></form></section>
+<div class="socio-publicaciones"><section class="panel" aria-labelledby="mis-publicaciones"><h2 class="panel__titulo" id="mis-publicaciones">Mis publicaciones</h2><form action="{{ route('usuario.publicar') }}" method="GET" class="formulario socio-busqueda-publicacion"><div class="campo"><label for="buscar">Buscar en mis publicaciones</label><input type="search" id="buscar" name="buscar" value="{{ $buscarPublicacion }}" placeholder="Título, libro o resumen"></div><button class="boton boton--pequeno" type="submit">Buscar</button></form>
+@forelse ($misPublicaciones as $publicacion)<article class="socio-fila socio-publicacion-fila"><div><h3>{{ $publicacion->titulo_publicacion }}</h3><p>{{ $publicacion->nombre_libro }} ? {{ strtoupper($publicacion->archivo_extension) }} ? {{ $publicacion->fecha_publicacion?->format('d/m/Y') ?? 'Fecha no disponible' }}</p></div><a class="boton boton--linea boton--pequeno" href="{{ route('usuario.publicar.archivo', $publicacion->id) }}">Abrir archivo</a></article>@empty<p class="texto-suave">No tienes publicaciones{{ $buscarPublicacion !== '' ? ' que coincidan con la búsqueda' : ' registradas' }}.</p>@endforelse{{ $misPublicaciones->links() }}</section>
+<section class="panel" aria-labelledby="publicaciones-comunidad"><h2 class="panel__titulo" id="publicaciones-comunidad">Publicaciones recientes de la comunidad</h2>@forelse ($publicacionesRecientes as $publicacion)<article class="socio-fila socio-publicacion-fila"><div><h3>{{ $publicacion->titulo_publicacion }}</h3><p>{{ $publicacion->nombre_libro }} ? {{ $publicacion->usuario?->name ?? 'Socio de la biblioteca' }}</p></div><a class="boton boton--linea boton--pequeno" href="{{ route('usuario.publicar.archivo', $publicacion->id) }}">Abrir archivo</a></article>@empty<p class="texto-suave">Todavía no hay publicaciones de socios visibles.</p>@endforelse</section></div>
+</div></section>
 @endsection

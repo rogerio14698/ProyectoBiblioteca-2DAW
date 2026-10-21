@@ -1,0 +1,187 @@
+@use "../abstracts/tokens" as *;
+
+// =============================================================================
+// Base: reset, tipografía y accesibilidad
+// =============================================================================
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: calc(var(--alto-cabecera) + 1rem);
+
+    @include movimiento {
+        scroll-behavior: smooth;
+    }
+}
+
+body {
+    margin: 0;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: var(--fuente-texto);
+    font-size: var(--paso-body);
+    line-height: 1.5;
+    letter-spacing: -0.005em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+img,
+svg,
+video,
+picture {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    margin: 0 0 0.5em;
+    font-family: var(--fuente-display);
+    font-weight: 500;
+    font-optical-sizing: auto;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+}
+
+h1 {
+    font-size: var(--paso-head);
+}
+
+h2 {
+    font-size: var(--paso-head);
+}
+
+h3 {
+    font-size: var(--paso-lead);
+    line-height: 1.15;
+}
+
+h4 {
+    font-size: var(--paso-body);
+    line-height: 1.25;
+}
+
+p,
+ul,
+ol,
+dl {
+    margin: 0 0 1em;
+}
+
+p {
+    max-width: var(--ancho-texto);
+    text-wrap: pretty;
+}
+
+em,
+i {
+    font-style: italic;
+}
+
+strong,
+b {
+    font-weight: 600;
+}
+
+a {
+    color: inherit;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.22em;
+    transition: color var(--rapido) ease;
+
+    &:hover {
+        color: var(--acento);
+    }
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: var(--linea);
+    margin: var(--hueco) 0;
+}
+
+:focus-visible {
+    outline: 2px solid var(--oro-claro);
+    outline-offset: 3px;
+}
+
+::selection {
+    background: var(--oro);
+    color: var(--tinta);
+}
+
+// Utilidades de accesibilidad
+.visually-hidden,
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+.salto {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    z-index: 1000;
+    padding: 0.75rem 1rem;
+    background: var(--oro);
+    color: var(--tinta);
+    font-weight: 600;
+    transform: translateY(-200%);
+
+    &:focus {
+        transform: none;
+    }
+}
+
+// Cifras alineadas en tablas, precios y fechas
+.cifras {
+    font-variant-numeric: tabular-nums lining-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

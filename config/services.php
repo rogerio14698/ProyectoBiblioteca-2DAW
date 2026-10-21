@@ -35,4 +35,21 @@ return [
         ],
     ],
 
+    'stripe' => [
+        'key' => env('STRIPE_KEY'),
+        'secret' => env('STRIPE_SECRET'),
+        'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
+        'moneda' => env('STRIPE_MONEDA', 'eur'),
+        // Cuota anual de socio en euros.
+        'cuota_socio' => (float) env('STRIPE_CUOTA_SOCIO', 20),
+        // Multa por día de retraso en la devolución de préstamos, en euros.
+        'multa_dia' => (float) env('MULTA_POR_DIA', 0.5),
+    ],
+
+    // Cloudflare Turnstile (anti-bot). Sin claves configuradas la verificación se omite.
+    'turnstile' => [
+        'site_key' => env('TURNSTILE_SITE_KEY'),
+        'secret_key' => env('TURNSTILE_SECRET_KEY'),
+    ],
+
 ];

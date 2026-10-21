@@ -1,0 +1,647 @@
+@use "../abstracts/tokens" as *;
+
+// =============================================================================
+// Componentes compartidos del sitio público y del área de socio
+// -----------------------------------------------------------------------------
+// Botones ........ .boton  .boton--linea  .boton--texto  .boton--pequeno  .boton--peligro  .boton--bloque
+// Formularios .... .formulario > .campo (label, input|select|textarea, .campo__ayuda, .campo__error)
+//                  .campo--doble (fila de 2 en desktop)  .casilla (checkbox/radio)
+// Avisos ......... .aviso .aviso--exito|--error|--info
+// Insignias ...... .insignia .insignia--oro|--burdeos|--verde|--neutra
+// Tablas ......... .tabla-envoltura > table.tabla
+// Paginación ..... vista vendor/pagination/biblioteca (.paginacion)
+// Ficha .......... dl.ficha (pares término/valor)
+// Panel .......... .panel (bloque con fondo sutil, para formularios y resúmenes)
+// Vacío .......... .vacio (estado sin resultados)
+// Lámina ......... .lamina (imagen enmarcada como un grabado; --inclinada)
+// Grabado ........ .grabado (aclara grabados en negro para fondos oscuros)
+// Ornamento ...... <svg class="ornamento"><use href="#ornamento"/></svg>
+// Animación ...... [data-revelar] aparece al entrar en pantalla
+// =============================================================================
+
+// ---------- Botones (una forma, una esquina) ----------
+.boton {
+    --boton-fondo: var(--acento);
+    --boton-texto: var(--acento-texto);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6em;
+    min-height: 3rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--boton-fondo);
+    color: var(--boton-texto);
+    border: 1.5px solid var(--boton-fondo);
+    border-radius: var(--radio);
+    font-family: var(--fuente-texto);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background var(--rapido) ease, color var(--rapido) ease, border-color var(--rapido) ease,
+        transform var(--rapido) ease;
+
+    i {
+        transition: transform var(--medio) var(--ease-salida);
+    }
+
+    &:hover {
+        background: transparent;
+        color: var(--texto);
+        border-color: var(--texto);
+
+        i.bi-arrow-right,
+        i.bi-arrow-up-right {
+            transform: translateX(0.2rem);
+        }
+    }
+
+    &:active {
+        transform: translateY(1px);
+    }
+
+    &:disabled,
+    &[aria-disabled="true"] {
+        opacity: 0.45;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+}
+
+.boton--linea {
+    background: transparent;
+    color: var(--texto);
+    border-color: currentColor;
+
+    &:hover {
+        background: var(--texto);
+        color: var(--fondo);
+        border-color: var(--texto);
+    }
+}
+
+.boton--texto {
+    min-height: 2.75rem;
+    padding-inline: 0;
+    background: none;
+    border-color: transparent;
+    color: var(--texto);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3em;
+
+    &:hover {
+        background: none;
+        border-color: transparent;
+        color: var(--acento);
+    }
+}
+
+.boton--pequeno {
+    min-height: 2.75rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.9375rem;
+}
+
+.boton--peligro {
+    --boton-fondo: #b3261e;
+    --boton-texto: #fff;
+
+    &:hover {
+        color: var(--error);
+        border-color: var(--error);
+    }
+}
+
+.boton--bloque {
+    width: 100%;
+}
+
+.acciones {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+}
+
+// ---------- Formularios ----------
+.formulario {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.campo {
+    display: grid;
+    gap: 0.5rem;
+
+    > label,
+    .campo__etiqueta {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    input:not([type="checkbox"], [type="radio"], [type="file"]),
+    select,
+    textarea {
+        width: 100%;
+        min-height: 3rem;
+        padding: 0.75rem 1rem;
+        background: var(--superficie);
+        border: 1px solid var(--linea);
+        border-radius: var(--radio);
+        color: var(--texto);
+        font-size: 1rem;
+        transition: border-color var(--rapido) ease, background var(--rapido) ease;
+
+        &::placeholder {
+            color: var(--texto-suave);
+            opacity: 0.75;
+        }
+
+        &:hover {
+            border-color: color-mix(in srgb, var(--texto) 45%, transparent);
+        }
+
+        &:focus {
+            outline: 2px solid var(--acento);
+            outline-offset: 1px;
+            border-color: var(--acento);
+        }
+
+        &[aria-invalid="true"] {
+            border-color: var(--error);
+        }
+    }
+
+    select {
+        appearance: none;
+        padding-right: 2.75rem;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%23c99a2e' stroke-width='1.5'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+
+        option {
+            background: var(--tinta-2);
+            color: var(--pergamino);
+        }
+    }
+
+    textarea {
+        min-height: 9rem;
+        resize: vertical;
+        line-height: 1.5;
+    }
+
+    input[type="file"] {
+        font-size: 0.9375rem;
+        color: var(--texto-suave);
+
+        &::file-selector-button {
+            margin-right: 1rem;
+            min-height: 2.75rem;
+            padding: 0 1rem;
+            background: transparent;
+            color: var(--texto);
+            border: 1.5px solid currentColor;
+            border-radius: var(--radio);
+            font-weight: 600;
+            cursor: pointer;
+        }
+    }
+}
+
+.campo__ayuda {
+    margin: 0;
+    font-size: var(--paso-small);
+    color: var(--texto-suave);
+}
+
+.campo__error {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.4rem;
+    margin: 0;
+    font-size: var(--paso-small);
+    color: var(--error);
+
+    .capitulo--pergamino &,
+    .capitulo--oro & {
+        color: #9b1c1c;
+    }
+}
+
+.campo--doble {
+    display: grid;
+    gap: 1.5rem;
+
+    @include desde($bp-sm) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.casilla {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 1rem;
+    cursor: pointer;
+
+    input {
+        flex: none;
+        width: 1.25rem;
+        height: 1.25rem;
+        margin-top: 0.15rem;
+        accent-color: var(--acento);
+    }
+}
+
+// Campo trampa anti-spam: oculto a personas, visible a bots
+.campo-trampa {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+// ---------- Avisos ----------
+.aviso {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    border-left: 3px solid var(--acento);
+    background: var(--superficie);
+    font-size: 1rem;
+
+    > i {
+        flex: none;
+        font-size: 1.25rem;
+        line-height: 1.2;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    ul {
+        margin: 0.25rem 0 0;
+        padding-left: 1.1rem;
+    }
+}
+
+.aviso--exito {
+    border-color: var(--exito);
+
+    > i {
+        color: var(--exito);
+    }
+}
+
+.aviso--error {
+    border-color: var(--error);
+
+    > i {
+        color: var(--error);
+    }
+}
+
+.aviso--info > i {
+    color: var(--acento);
+}
+
+.capitulo--pergamino,
+.capitulo--oro {
+    .aviso--exito {
+        border-color: #1f6b3a;
+
+        > i {
+            color: #1f6b3a;
+        }
+    }
+
+    .aviso--error {
+        border-color: #9b1c1c;
+
+        > i {
+            color: #9b1c1c;
+        }
+    }
+}
+
+// ---------- Insignias ----------
+.insignia {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid var(--linea);
+    border-radius: 999px;
+    font-size: var(--paso-small);
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
+.insignia--oro {
+    background: var(--oro);
+    border-color: var(--oro);
+    color: var(--tinta);
+}
+
+.insignia--burdeos {
+    background: var(--burdeos-vivo);
+    border-color: var(--burdeos-vivo);
+    color: var(--pergamino);
+}
+
+.insignia--verde {
+    background: #2c6b55;
+    border-color: #2c6b55;
+    color: var(--pergamino);
+}
+
+.insignia--neutra {
+    background: var(--superficie);
+}
+
+// ---------- Tablas ----------
+.tabla-envoltura {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+    font-variant-numeric: tabular-nums;
+
+    th {
+        padding: 0.75rem 1rem 0.75rem 0;
+        font-size: var(--paso-small);
+        font-weight: 500;
+        color: var(--texto-suave);
+        text-align: left;
+        white-space: nowrap;
+    }
+
+    td {
+        padding: 1rem 1rem 1rem 0;
+        border-top: 1px solid var(--linea);
+        vertical-align: middle;
+    }
+
+    .numero {
+        text-align: right;
+    }
+}
+
+// En móvil, las tablas marcadas con .tabla--apilada se convierten en fichas
+@include hasta($bp-sm) {
+    .tabla--apilada {
+        thead {
+            display: none;
+        }
+
+        tr {
+            display: grid;
+            gap: 0.25rem;
+            padding: 1rem 0;
+            border-top: 1px solid var(--linea);
+        }
+
+        td {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.15rem 0;
+            border: 0;
+
+            &::before {
+                content: attr(data-label);
+                color: var(--texto-suave);
+                font-size: var(--paso-small);
+            }
+        }
+    }
+}
+
+// ---------- Paginación ----------
+.paginacion {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: clamp(2rem, 1rem + 2vw, 3rem);
+    font-size: 1rem;
+
+    ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.25rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    a,
+    span[aria-current],
+    span[aria-disabled] {
+        display: grid;
+        place-items: center;
+        min-width: 2.75rem;
+        height: 2.75rem;
+        padding: 0 0.75rem;
+        border: 1px solid var(--linea);
+        border-radius: var(--radio);
+        text-decoration: none;
+        font-variant-numeric: tabular-nums;
+    }
+
+    a:hover {
+        border-color: var(--acento);
+        color: var(--acento);
+    }
+
+    span[aria-current] {
+        background: var(--acento);
+        border-color: var(--acento);
+        color: var(--acento-texto);
+        font-weight: 600;
+    }
+
+    span[aria-disabled] {
+        opacity: 0.4;
+    }
+
+    .paginacion__resumen {
+        margin: 0;
+        color: var(--texto-suave);
+        font-size: var(--paso-small);
+    }
+}
+
+// ---------- Ficha (pares término / valor) ----------
+.ficha {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.75rem 2rem;
+    margin: 0;
+
+    dt {
+        color: var(--texto-suave);
+        font-size: var(--paso-small);
+        padding-top: 0.15rem;
+    }
+
+    dd {
+        margin: 0;
+    }
+}
+
+// ---------- Panel ----------
+.panel {
+    padding: clamp(1.25rem, 1rem + 1.5vw, 2.5rem);
+    background: var(--superficie);
+    border: 1px solid var(--linea);
+}
+
+.panel__titulo {
+    margin-bottom: 1.25rem;
+    font-size: var(--paso-lead);
+}
+
+// ---------- Estado vacío ----------
+.vacio {
+    display: grid;
+    justify-items: start;
+    gap: 1rem;
+    padding: clamp(2rem, 1rem + 4vw, 4rem) 0;
+
+    p {
+        margin: 0;
+        font-family: var(--fuente-display);
+        font-size: var(--paso-lead);
+        color: var(--texto-suave);
+    }
+}
+
+// ---------- Lámina: imagen enmarcada como un grabado ----------
+.lamina {
+    position: relative;
+    margin: 0;
+    padding: clamp(0.5rem, 0.3rem + 0.6vw, 0.875rem);
+    background: var(--pergamino);
+    box-shadow: inset 0 0 0 1px rgb(18 13 12 / 0.25);
+    transition: transform var(--medio) var(--ease-salida);
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    figcaption {
+        padding-top: 0.6rem;
+        color: #5b4a38;
+        font-size: var(--paso-small);
+        line-height: 1.35;
+    }
+}
+
+.lamina--inclinada {
+    transform: rotate(var(--giro, -3deg));
+
+    @include movimiento {
+        &:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+    }
+}
+
+.lamina--oro {
+    background: var(--oro);
+}
+
+// Grabado: invierte un grabado en negro sobre papel para que brille en oro sobre tinta
+.grabado {
+    filter: invert(1) sepia(1) saturate(2.4) hue-rotate(-12deg) brightness(0.92) contrast(1.15);
+    mix-blend-mode: screen;
+}
+
+.grabado--tinta {
+    mix-blend-mode: multiply;
+    filter: sepia(0.35) contrast(1.1);
+}
+
+// ---------- Ornamento barroco ----------
+.ornamento {
+    width: 7.5rem;
+    height: 1.5rem;
+    color: var(--acento);
+}
+
+// ---------- Animaciones de entrada ----------
+@include movimiento {
+    [data-revelar] {
+        opacity: 0;
+        transform: translateY(1.5rem);
+        transition: opacity 900ms var(--ease-salida), transform 900ms var(--ease-salida);
+        transition-delay: var(--retraso, 0ms);
+    }
+
+    [data-revelar].es-visible {
+        opacity: 1;
+        transform: none;
+    }
+
+    // Titular enmascarado: cada línea sube desde su línea base
+    .linea-mascara {
+        display: block;
+        overflow: hidden;
+        padding-bottom: 0.06em;
+
+        > span {
+            display: block;
+            animation: subir-linea 900ms var(--ease-salida) both;
+            animation-delay: var(--retraso, 0ms);
+        }
+    }
+
+    .aparecer {
+        animation: aparecer 700ms var(--ease-salida) both;
+        animation-delay: var(--retraso, 600ms);
+    }
+}
+
+@keyframes subir-linea {
+    from {
+        transform: translateY(105%);
+    }
+
+    to {
+        transform: none;
+    }
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(0.75rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+// Sin JavaScript, todo visible
+.no-js [data-revelar] {
+    opacity: 1;
+    transform: none;
+}

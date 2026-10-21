@@ -6,7 +6,6 @@ namespace Tests\Unit;
 
 use App\Models\Admin;
 use App\Models\Evento;
-use App\Models\User;
 use App\Models\Usuario;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
@@ -18,9 +17,10 @@ class ModelBehaviorTest extends TestCase
 
     public function test_ut01_user_password_is_hashed_automatically(): void
     {
-        $user = User::create([
+        $user = Usuario::create([
             'name' => 'Test User',
             'email' => 'user@example.com',
+            'dni' => '00000000T',
             'password' => 'Secret123!',
         ]);
 

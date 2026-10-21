@@ -24,6 +24,10 @@ return new class extends Migration
             $table->boolean('is_demo')->default(false); // Para marcar si el usuario es de demostración
             // Ruta de la foto de perfil (hasheada por Storage, puede superar 255 chars).
             $table->string('profile_photo_path', 500)->nullable();
+            // Cliente de Stripe asociado (cus_...). Se crea al primer pago.
+            $table->string('stripe_customer_id')->nullable()->unique();
+            // Fecha hasta la que la cuota de socio está pagada.
+            $table->date('socio_hasta')->nullable();
             //Deberia de poner el last_login, pero esto más adelante 
             $table->timestamps();
         });

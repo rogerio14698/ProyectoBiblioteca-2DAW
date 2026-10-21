@@ -1,45 +1,8 @@
 @extends('layouts.app')
-
-@section('title', 'Perfil')
-
+@section('title', 'Mi perfil')
 @section('content')
-    <main class="contenedor perfilUsuario">
-        <section class="contenidoHeader">
-            <div class="texto-bienvenidaUsuario">
-                <h1>Perfil</h1>
-                <p>Bienvenido: {{ Auth::user()->name }}</p>
-                <a href="#">Editar</a>
-                <div class="info-personalFoto">
-                    <img src="{{ Auth::user()->profile_photo_url }}" alt="Foto de perfil" class="foto-perfil"
-                        loading="lazy" width="150" height="150">
-
-                </div>
-            </div>
-            <div class="info-personalUsuario">
-
-                <div class="info-personalDatos">
-                    <h2>Información Personal</h2>
-                    <p>Nombre de usuario: <strong>{{ Auth::user()->name }}</strong></p>
-                    <p>Correo electrónico: <strong>{{ Auth::user()->email }}</strong></p>
-                    <p>Numero de socio: <strong>{{ Auth::user()->nSocio }}</strong></p>
-                </div>
-            </div>
-            <button class="btn-base btn-verde" id="btnConfigUsuario" aria-expanded="false">Config</button>
-            <div class="configCuentaUsuario">
-                <button type="button" class="btn-base btn-verde"
-                    onclick="location.href='{{ route('usuario.perfilEditar') }}'">Editar Perfil</button>
-                <button type="button" class="btn-base btn-azul" onclick="location.href='#contenidosHistorial'">Historial de
-                    Actividad</button>
-            </div>
-        </section>
-
-        <!-- Historial de actividad -->
-        <button id="contenidosHistorial" class="btn-base btn-verde">Ver historial</button>
-        <div class="historialVersionDesktop">
-            @include('layouts.historialVersionDesktop')
-        </div>
-    </main>
-
-    <hr>
-
+@php($usuario = auth('web')->user())
+@include('bibliotecaDAW.userViews._cabeceraSocio', ['titulo' => 'Tu perfil de', 'enfasis' => 'socio', 'entradilla' => 'Consulta tus datos personales y la actividad que compartes con la biblioteca.'])
+<section class="capitulo capitulo--tinta-2 capitulo--compacto"><div class="envoltura"><section class="panel socio-identidad" aria-labelledby="datos-personales"><img class="socio-avatar" src="{{ $usuario->profile_photo_url }}" alt="Foto de perfil de {{ $usuario->name }}" width="144" height="144"><div><h2 class="panel__titulo" id="datos-personales">Información personal</h2><dl class="ficha"><dt>Nombre</dt><dd>{{ $usuario->name }}</dd><dt>Correo</dt><dd>{{ $usuario->email }}</dd><dt>Número de socio</dt><dd>{{ $usuario->nSocio }}</dd><dt>Cuota</dt><dd>@if ($usuario->cuotaSocioAlDia())<span class="insignia insignia--verde">Al día hasta {{ $usuario->socio_hasta->format('d/m/Y') }}</span>@else<span class="insignia insignia--neutra">No activa</span>@endif</dd></dl><div class="acciones"><a href="{{ route('usuario.perfilEditar') }}" class="boton">Editar perfil</a><a href="#contenidosHistorial" class="boton boton--linea">Ir a mi actividad</a></div></div></section></div></section>
+<section class="capitulo capitulo--tinta capitulo--compacto" id="contenidosHistorial"><div class="envoltura">@include('layouts.historialVersionDesktop')</div></section>
 @endsection

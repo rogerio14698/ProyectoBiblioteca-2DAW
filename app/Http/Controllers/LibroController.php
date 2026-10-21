@@ -235,6 +235,7 @@ class LibroController extends Controller
             'formato' => ['required', 'in:fisico,digital,ambos'],
             'opcion_compra' => ['required', 'in:compra,prestamo'],
             'cantidad_ejemplares' => ['required', 'integer', 'min:0'],
+            'precio' => ['nullable', 'required_if:opcion_compra,compra', 'numeric', 'min:0', 'max:9999.99'],
             'isbn' => ['required', 'string', 'max:20', 'unique:libros,isbn'],
             'portada_img' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
         ]);
@@ -263,6 +264,7 @@ class LibroController extends Controller
             'formato' => ['required', 'in:fisico,digital,ambos'],
             'opcion_compra' => ['required', 'in:compra,prestamo'],
             'cantidad_ejemplares' => ['required', 'integer', 'min:0'],
+            'precio' => ['nullable', 'required_if:opcion_compra,compra', 'numeric', 'min:0', 'max:9999.99'],
             'isbn' => ['required', 'string', 'max:20', 'unique:libros,isbn,' . $id],
             'portada_img' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
         ]);

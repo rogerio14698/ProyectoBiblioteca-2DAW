@@ -1,19 +1,5 @@
-@extends('layouts.app')
-
-@section('title', 'BASE de Gestión de Contenido Web')
-
+@extends('layouts.admin')
+@section('title', 'Contenido web')
 @section('content')
-
-    {{-- Pegar el codigo aqui --}}
-    <main class="contenedor">
-        <section>
-            <h1>Plantilla base</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nemo atque nesciunt similique rem ad facere!
-                Impedit, sapiente aperiam nam facere similique consequatur accusantium culpa enim optio quam cumque
-                laudantium.
-            </p>
-        </section>
-    </main>
-
-
+    <main class="a-vista-admin"><header class="a-titulo"><div><h1>Contenido web</h1><p class="a-subtitulo">Gestiona los apartados públicos de la biblioteca.</p></div></header><section class="a-tarjeta"><p class="a-vacio">Selecciona una sección en el menú de administración.</p></section></main>
 @endsection

@@ -1,113 +1,78 @@
 @extends('layouts.app')
 
-@section('title', 'Catálogo')
+@section('title', 'Catálogo | Biblioteca DAW')
+@section('meta_description', 'Explora y filtra los libros disponibles para préstamo o compra en la Biblioteca DAW.')
 
 @section('content')
-    <div class="catalogoContenedor">
-        <div class="headerContenido">
-            <h1 class="tituloPagina">Catálogo de la Biblioteca</h1>
-            <form class="catalogoBuscador" method="GET" action="{{ url('/catalogo') }}">
-                <input type="text" name="titulo" value="{{ $searchTitulo ?? ($searchQuery ?? '') }}"
-                    placeholder="Buscar por titulo" class="buscadorInput"
-                    aria-label="Buscar libros por título, autor o género">
-                <input type="text" name="autor" value="{{ $searchAutor ?? '' }}" placeholder="Buscar por autor"
-                    class="buscadorInput" aria-label="Buscar libros por autor">
-                <input type="text" name="genero" value="{{ $searchGenero ?? '' }}" placeholder="Buscar por género"
-                    class="buscadorInput" aria-label="Buscar libros por género">
+    <section class="capitulo capitulo--tinta">
+        <div class="envoltura">
+            <header class="portadilla">
+                <ol class="migas"><li><a href="{{ url('/biblioteca') }}">Biblioteca</a></li><li aria-current="page">Catálogo</li></ol>
+                <h1>El <em>catálogo</em></h1>
+                <p class="entradilla">Libros para consultar, llevar en préstamo o incorporar a tu biblioteca.</p>
+            </header>
 
-                {{-- Filtro por tipo de operación: compra o préstamo --}}
-                <select name="opcion" class="buscadorInput" aria-label="Filtrar por tipo de operación">
-                    <option value="">Todos (compra y préstamo)</option>
-                    <option value="compra" {{ ($searchOpcion ?? '') === 'compra' ? 'selected' : '' }}>Solo compra</option>
-                    <option value="prestamo" {{ ($searchOpcion ?? '') === 'prestamo' ? 'selected' : '' }}>Solo préstamo</option>
-                </select>
-
-                <button type="submit" class="btn-base btn-buscar">Buscar</button>
-                <a href="{{ url('/catalogo') }}" class="btn-base btn-limpiar"
-                    aria-label="Limpiar filtros de búsqueda">Limpiar filtros</a>
-            </form>
-            <a href="{{ route('publicaciones.index') }}" class="btn-base btn-ver catalogoEnlacePublicaciones">
-                Ver publicaciones de usuarios
-            </a>
-        </div>
-
-        <div class="catalogoBody separador">
-            @forelse ($libros as $libro)
-                <div class="catalogoCard">
-                    <div class="cardImagen">
-                        <img src="{{ $libro->portada_url }}" alt="Portada de {{ $libro->titulo }}"
-                            loading="lazy" width="200" height="300">
-                    </div>
-                    <div class="cardContenido">
-                        <h2 class="libroTitulo">{{ $libro->titulo }}</h2>
-
-                        <div class="infoGrid">
-                            <div class="infoItem">
-                                <span class="infoLabel">Autor:</span>
-                                <span class="infoValue">{{ $libro->autor }}</span>
-                            </div>
-                            <div class="infoItem">
-                                <span class="infoLabel">Género:</span>
-                                <span class="infoValue">{{ $libro->genero }}</span>
-                            </div>
-                            <div class="infoItem">
-                                <span class="infoLabel">Editorial:</span>
-                                <span class="infoValue">{{ $libro->editorial }}</span>
-                            </div>
-                            <div class="infoItem">
-                                <span class="infoLabel">ISBN:</span>
-                                <span class="infoValue">{{ $libro->isbn }}</span>
-                            </div>
-                            <div class="infoItem">
-                                <span class="infoLabel">Año:</span>
-                                <span class="infoValue">{{ $libro->anio }}</span>
-                            </div>
-                            <div class="infoItem">
-                                <span class="infoLabel">Formatos:</span>
-                                @if ($libro->formato === 'digital')
-                                    <span class="infoValue formato-digital">{{ $libro->formato }}</span>
-                                @elseif ($libro->formato === 'fisico')
-                                    <span class="infoValue formato-fisico">{{ $libro->formato }}</span>
-                                @elseif ($libro->formato === 'ambos')
-                                    <span class="infoValue formato-digital">{{ 'digital' }}</span>
-                                    <span class="infoValue formato-fisico">{{ 'físico' }}</span>
-                                @endif
-                            </div>
-                            <div class="infoItem">
-                                <span class="infoLabel">Disponibilidad:</span>
-                                <!--Aqui evaluo el contennido de disponibilidad para dar estilos a la etiqueta
-                                                        Entonces, si esta disponible se muestra en verde, si esta prestado en rojo -->
-                                @if ($libro->disponibilidad === 'disponible')
-                                    <span class="infoValue stock-disponible">{{ $libro->disponibilidad }}</span>
-                                @else
-                                    <span class="infoValue stock-no-disponible">{{ $libro->disponibilidad }}</span>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="accionesCatalogo">
-                        <a href="{{ route('libro.paginaInterna', $libro->id) }}" class="btn-base btn-ver">Ver detalles</a>
-                        @if ($libro->opcion_compra === 'compra')
-                            {{-- Solo los libros de compra muestran el botón de carrito --}}
-                            <a href="#" class="btn-base btn-carrito" id="alertaMantenimiento"
-                                onclick="mostrarAlertaMantenimiento()">Añadir al carrito</a>
-                        @endif
-                        @if ($libro->opcion_compra === 'prestamo')
-                            {{-- Solo los libros de préstamo muestran el botón de alquilar --}}
-                            <a href="{{ route('libro.paginaInternaAlquilar', $libro->id) }}" class="btn-base btn-alquilar">Alquilar ahora</a>
-                        @endif
-                    </div>
-                </div>
-            @empty
-                <p>No se encontraron libros que coincidan con tu búsqueda.</p>
-            @endforelse
-            <div class="alinearCentro">
-                <div class="paginacionBase paginacionCatalogo">
-                    {{ $libros->links('vendor.pagination.bootstrap-5') }} <!-- Paginación de 10 libros por página -->
-                </div>
+            <div class="catalogo__cabecera">
+                <p>Busca por título, autor o género y encuentra tu próxima lectura.</p>
+                <a href="{{ route('publicaciones.index') }}" class="boton boton--linea">Publicaciones de la comunidad</a>
             </div>
-        </div>
 
-    </div>
+            <div class="catalogo__filtros">
+                <form method="GET" action="{{ route('catalogo') }}" aria-label="Filtrar catálogo">
+                    <div class="campo">
+                        <label for="titulo">Título</label>
+                        <input type="search" id="titulo" name="titulo" value="{{ $searchTitulo ?? '' }}" placeholder="Buscar título">
+                    </div>
+                    <div class="campo">
+                        <label for="autor">Autor</label>
+                        <input type="search" id="autor" name="autor" value="{{ $searchAutor ?? '' }}" placeholder="Buscar autor">
+                    </div>
+                    <div class="campo">
+                        <label for="genero">Género</label>
+                        <input type="search" id="genero" name="genero" value="{{ $searchGenero ?? '' }}" placeholder="Buscar género">
+                    </div>
+                    <div class="campo">
+                        <label for="opcion">Modalidad</label>
+                        <select id="opcion" name="opcion">
+                            <option value="">Compra y préstamo</option>
+                            <option value="compra" @selected(($searchOpcion ?? '') === 'compra')>Solo compra</option>
+                            <option value="prestamo" @selected(($searchOpcion ?? '') === 'prestamo')>Solo préstamo</option>
+                        </select>
+                    </div>
+                    <div class="catalogo__acciones">
+                        <button type="submit" class="boton">Aplicar filtros</button>
+                        <a href="{{ route('catalogo') }}" class="boton boton--texto">Limpiar</a>
+                    </div>
+                </form>
+            </div>
+
+            <p class="catalogo__resultados" aria-live="polite">{{ $libros->total() }} {{ $libros->total() === 1 ? 'libro encontrado' : 'libros encontrados' }}</p>
+            @if ($libros->isEmpty())
+                <p class="vacio">No encontramos libros con estos filtros. Prueba con otro término.</p>
+            @else
+                <div class="rejilla-libros">
+                    @foreach ($libros as $libro)
+                        <article class="libro">
+                            <a class="libro__enlace" href="{{ route('libro.paginaInterna', $libro->id) }}">
+                                <div class="libro__portada"><img src="{{ $libro->portada_url }}" alt="Portada de {{ $libro->titulo }}" loading="lazy" width="200" height="300"></div>
+                                <h2 class="libro__titulo">{{ $libro->titulo }}</h2>
+                            </a>
+                            <p class="libro__autor">{{ $libro->autor }}</p>
+                            <p class="libro__meta">
+                                @if ($libro->seVende())
+                                    <span class="precio">{{ number_format($libro->precio, 2, ',', '.') }} €</span>
+                                @endif
+                                @if ($libro->disponibilidad === 'disponible')
+                                    <span class="insignia insignia--verde">Disponible</span>
+                                @else
+                                    <span class="insignia insignia--neutra">{{ ucfirst($libro->disponibilidad) }}</span>
+                                @endif
+                            </p>
+                        </article>
+                    @endforeach
+                </div>
+                <nav class="catalogo__paginacion" aria-label="Páginas del catálogo">{{ $libros->links() }}</nav>
+            @endif
+        </div>
+    </section>
 @endsection

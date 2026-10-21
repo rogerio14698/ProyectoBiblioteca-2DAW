@@ -1,176 +1,54 @@
 @extends('layouts.app')
 
-@section('title', 'Alquilar: ' . $libro->titulo)
+@section('title', 'Solicitar préstamo: ' . $libro->titulo)
 
 @section('content')
-
-    <section class="alquilarInterno separador">
-
-        {{-- Dos columnas: resumen del libro (izq) + formulario o aviso (der) --}}
-        <div class="alquilarInternoGrid">
-
-            {{-- Columna izquierda: ficha del libro que se va a alquilar --}}
-            <article class="alquilarInternoFicha">
-                <div class="alquilarInternoPortada">
-                    <img src="{{ $libro->portada_url }}" alt="Portada de {{ $libro->titulo }}" class="alquilarInternoImg"
-                        width="200" height="300">
-                </div>
-                <div class="alquilarInternoDetalles">
-                    <h1 class="alquilarInternoTitulo">{{ $libro->titulo }}</h1>
-                    <p class="alquilarInternoAutor">{{ $libro->autor }}</p>
-
-                    <div class="alquilarInternoDatos">
-                        <div class="alquilarInternoDato">
-                            <span class="alquilarInternoDatoLabel">Editorial</span>
-                            <span class="alquilarInternoDatoValor">{{ $libro->editorial }}</span>
-                        </div>
-                        <div class="alquilarInternoDato">
-                            <span class="alquilarInternoDatoLabel">ISBN</span>
-                            <span class="alquilarInternoDatoValor">{{ $libro->isbn }}</span>
-                        </div>
-                        <div class="alquilarInternoDato">
-                            <span class="alquilarInternoDatoLabel">Género</span>
-                            <span class="alquilarInternoDatoValor">{{ $libro->genero }}</span>
-                        </div>
-                        <div class="alquilarInternoDato">
-                            <span class="alquilarInternoDatoLabel">Año</span>
-                            <span class="alquilarInternoDatoValor">{{ $libro->anio }}</span>
-                        </div>
-                    </div>
-
-                    {{-- Estado del libro --}}
-                    <div class="alquilarInternoEstado">
-                        @if ($libro->disponibilidad === 'disponible')
-                            <span class="alquilarInternoBadge alquilarInternoDisponible">
-                                <i class="bi bi-check-circle-fill"></i> Disponible
-                            </span>
-                        @else
-                            <span class="alquilarInternoBadge alquilarInternoNoDisponible">
-                                <i class="bi bi-x-circle-fill"></i> Prestado
-                            </span>
-                        @endif
-                        <span class="alquilarInternoEjemplares">
-                            {{ $libro->cantidad_ejemplares }} {{ $libro->cantidad_ejemplares === 1 ? 'ejemplar' : 'ejemplares' }}
-                        </span>
-                    </div>
-                </div>
-            </article>
-
-            {{-- Columna derecha: formulario de alquiler o aviso de login --}}
-            <aside class="alquilarInternoAccion">
-
-                @auth('web')
-                    {{-- Usuario autenticado: formulario de alquiler --}}
-                    <div class="alquilarInternoFormCard">
-                        <div class="alquilarInternoFormHeader">
-                            <i class="bi bi-shield-check"></i>
-                            <h2 class="alquilarInternoFormTitulo">Solicitud de alquiler</h2>
-                        </div>
-
-                        <p class="alquilarInternoSaludo">
-                            Hola, <strong>{{ Auth::user()->name }}</strong>. Confirma los datos para tu solicitud.
-                        </p>
-
-                        <form action="{{ route('usuario.alquilar.store') }}" method="POST" class="alquilarInternoForm">
-                            @csrf
-                            <input type="hidden" name="libro_id" value="{{ $libro->id }}">
-
-                            <div class="alquilarInternoCampo">
-                                <label for="diasPrestamo">Dias de prestamo (1-60)</label>
-                                <input type="number" id="diasPrestamo" name="dias_prestamo"
-                                       min="1" max="60" value="14" required>
-                            </div>
-
-                            <div class="alquilarInternoCampo">
-                                <label for="formatoAlquiler">Formato preferido</label>
-                                <select id="formatoAlquiler" name="formato">
-                                    @if ($libro->formato === 'fisico' || $libro->formato === 'ambos')
-                                        <option value="fisico">Físico</option>
-                                    @endif
-                                    @if ($libro->formato === 'digital' || $libro->formato === 'ambos')
-                                        <option value="digital">Digital</option>
-                                    @endif
-                                </select>
-                            </div>
-
-                            {{-- Resumen visual: genera confianza al usuario --}}
-                            <div class="alquilarInternoResumen">
-                                <div class="alquilarInternoResumenItem">
-                                    <i class="bi bi-book"></i>
-                                    <span>{{ $libro->titulo }}</span>
-                                </div>
-                                <div class="alquilarInternoResumenItem">
-                                    <i class="bi bi-currency-euro"></i>
-                                    <span>Gratuito (préstamo bibliotecario)</span>
-                                </div>
-                                <div class="alquilarInternoResumenItem">
-                                    <i class="bi bi-arrow-repeat"></i>
-                                    <span>Renovable hasta 2 veces</span>
-                                </div>
-                            </div>
-
+    <section class="capitulo capitulo--tinta">
+        <div class="envoltura">
+            <header class="portadilla">
+                <ol class="migas"><li><a href="{{ url('/biblioteca') }}">Biblioteca</a></li><li><a href="{{ route('catalogo') }}">Catálogo</a></li><li><a href="{{ route('libro.paginaInterna', $libro->id) }}">{{ $libro->titulo }}</a></li><li aria-current="page">Préstamo</li></ol>
+                <h1>Llevarlo <em>en préstamo</em></h1>
+                <p class="entradilla">Confirma las condiciones del préstamo de este ejemplar.</p>
+            </header>
+            <div class="dos-columnas ficha-libro">
+                <figure class="lamina ficha-libro__portada"><img src="{{ $libro->portada_url }}" alt="Portada de {{ $libro->titulo }}" width="600" height="900"><figcaption>{{ $libro->titulo }} · {{ $libro->autor }}</figcaption></figure>
+                <div>
+                    <h2>{{ $libro->titulo }}</h2>
+                    <p class="ficha-libro__autor">{{ $libro->autor }}</p>
+                    <dl class="ficha">
+                        <div><dt>Editorial</dt><dd>{{ $libro->editorial }}</dd></div>
+                        <div><dt>ISBN</dt><dd>{{ $libro->isbn }}</dd></div>
+                        <div><dt>Género</dt><dd>{{ $libro->genero }}</dd></div>
+                        <div><dt>Año</dt><dd>{{ $libro->anio }}</dd></div>
+                        <div><dt>Formato</dt><dd>{{ $libro->formato === 'ambos' ? 'Físico y digital' : ucfirst($libro->formato) }}</dd></div>
+                        <div><dt>Ejemplares</dt><dd>{{ $libro->cantidad_ejemplares }}</dd></div>
+                    </dl>
+                    @auth('web')
+                        <section class="panel">
+                            <h2 class="panel__titulo">Solicitud de préstamo</h2>
+                            <p>Hola, {{ Auth::guard('web')->user()->name }}. El préstamo bibliotecario es gratuito.</p>
                             @if ($libro->disponibilidad === 'disponible')
-                                <button type="submit" class="btn-base btn-verde alquilarInternoBtn">
-                                    <i class="bi bi-check2-circle"></i> Confirmar alquiler
-                                </button>
+                                <form action="{{ route('usuario.alquilar.store') }}" method="POST" class="formulario">
+                                    @csrf
+                                    <input type="hidden" name="libro_id" value="{{ $libro->id }}">
+                                    <div class="campo"><label for="diasPrestamo">Duración del préstamo (1–60 días)</label><input type="number" id="diasPrestamo" name="dias_prestamo" min="1" max="60" value="{{ old('dias_prestamo', 14) }}" required></div>
+                                    <div class="campo"><label for="formatoAlquiler">Formato preferido</label><select id="formatoAlquiler" name="formato">@if ($libro->formato === 'fisico' || $libro->formato === 'ambos')<option value="fisico">Físico</option>@endif @if ($libro->formato === 'digital' || $libro->formato === 'ambos')<option value="digital">Digital</option>@endif</select></div>
+                                    <button type="submit" class="boton">Confirmar alquiler</button>
+                                </form>
                             @else
-                                <p class="alquilarInternoNoDisponibleMsg">
-                                    <i class="bi bi-info-circle"></i>
-                                    Este libro no está disponible actualmente. Puedes añadirlo a tu lista de espera.
-                                </p>
-                                <button type="button" class="btn-base btn-azul alquilarInternoBtn">
-                                    <i class="bi bi-bell"></i> Notificarme cuando esté disponible
-                                </button>
+                                <p class="aviso aviso--info">Este libro no está disponible actualmente.</p>
                             @endif
-                        </form>
-                    </div>
-
-                @else
-                    {{-- Usuario no autenticado: invitación a iniciar sesión --}}
-                    <div class="alquilarInternoLoginCard">
-                        <i class="bi bi-lock alquilarInternoLockIcon"></i>
-                        <h2 class="alquilarInternoLoginTitulo">Inicia sesión para alquilar</h2>
-                        <p class="alquilarInternoLoginTexto">
-                            Para solicitar el alquiler de este libro necesitas una cuenta de socio de la biblioteca.
-                            El registro es gratuito y en menos de un minuto.
-                        </p>
-                        <div class="alquilarInternoLoginBotones">
-                            <a href="{{ route('usuario.login.mostrar') }}" class="btn-base btn-verde alquilarInternoBtn">
-                                <i class="bi bi-box-arrow-in-right"></i> Iniciar sesión
-                            </a>
-                            <a href="{{ route('usuario.show') }}" class="btn-base btn-azul alquilarInternoBtn">
-                                <i class="bi bi-person-plus"></i> Registrarse
-                            </a>
+                        </section>
+                    @else
+                        <div class="panel">
+                            <h2 class="panel__titulo">Acceso de socio</h2>
+                            <p>Inicia sesión para solicitar el préstamo. El registro es gratuito.</p>
+                            <div class="acciones"><a href="{{ route('usuario.login.mostrar') }}" class="boton">Iniciar sesión</a><a href="{{ route('usuario.show') }}" class="boton boton--linea">Crear una cuenta</a></div>
                         </div>
-
-                        {{-- Garantías para generar confianza --}}
-                        <div class="alquilarInternoGarantias">
-                            <div class="alquilarInternoGarantia">
-                                <i class="bi bi-shield-lock"></i>
-                                <span>Datos protegidos</span>
-                            </div>
-                            <div class="alquilarInternoGarantia">
-                                <i class="bi bi-clock-history"></i>
-                                <span>Proceso en 1 minuto</span>
-                            </div>
-                            <div class="alquilarInternoGarantia">
-                                <i class="bi bi-gift"></i>
-                                <span>100% gratuito</span>
-                            </div>
-                        </div>
-                    </div>
-                @endauth
-
-            </aside>
+                    @endauth
+                    <p class="articulo__pie"><a href="{{ route('libro.paginaInterna', $libro->id) }}">Volver a la ficha del libro</a></p>
+                </div>
+            </div>
         </div>
-
-        {{-- Enlace para volver al catálogo --}}
-        <div class="alquilarInternoVolver">
-            <a href="{{ route('libro.paginaInterna', $libro->id) }}" class="btn-base btn-azul">
-                <i class="bi bi-arrow-left"></i> Volver al libro
-            </a>
-        </div>
-
     </section>
-
 @endsection

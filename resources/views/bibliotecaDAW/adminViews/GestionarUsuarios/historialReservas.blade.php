@@ -1,36 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
-@section('title', 'Historial de Reservas')
+@section('title', 'Historial de reservas')
 
 @section('content')
-    <!-- Contenedor principal de la página de historial de reservas -->
-    <main class="contenedor gestionReservas">
-
-        <!-- Encabezado con título y navegación entre vistas -->
-        <div class="reservasEncabezado">
-            <div>
-                <h1>Historial de Reservas</h1>
-                <p>Gestiona todos los préstamos de libros de la Biblioteca DAW.</p>
-            </div>
-            <div class="reservasNav">
-                <a href="{{ route('admin.reservasActivas') }}" class="btn-base btn-primario">Ver Reservas Activas</a>
-            </div>
-        </div>
-
-        <!-- Mensajes flash de éxito o error -->
-        @if (session('success'))
-            <div class="alertaExito">{{ session('success') }}</div>
-        @endif
-        @if (session('error'))
-            <div class="alertaError">{{ session('error') }}</div>
-        @endif
-
-        <!-- ========== BUSCADOR / FILTROS ========== -->
-        <form action="{{ route('admin.historialReservas') }}" method="GET" class="reservasBuscador">
-            <h2>Filtrar Reservas</h2>
-            <div class="reservasFiltros">
-                <!-- Filtro por estado -->
-                <div class="reservasGrupoFiltro">
+<div class="a-vista-admin">
+    <header class="a-titulo"><div><h1>Historial de reservas</h1><p class="a-subtitulo">Gestiona las reservas y sus devoluciones.</p></div><div class="a-titulo__acciones"><a href="{{ route('admin.reservasActivas') }}" class="a-boton">Ver reservas activas</a></div></header>
+<section class="a-tarjeta"><header class="a-tarjeta__cabecera"><div><h2>Filtrar reservas</h2></div></header>
+<form action="{{ route('admin.historialReservas') }}" method="GET" class="a-form">
+            <div class="a-form__fila a-form__fila--3">
+                <div class="a-campo">
                     <label for="estado">Estado</label>
                     <select id="estado" name="estado">
                         <option value="">Todos</option>
@@ -40,52 +18,41 @@
                         <option value="cancelada" {{ request('estado') === 'cancelada' ? 'selected' : '' }}>Cancelada</option>
                     </select>
                 </div>
-                <!-- Filtro por usuario -->
-                <div class="reservasGrupoFiltro">
+                <div class="a-campo">
                     <label for="filtroUsuario">Usuario</label>
                     <input type="text" id="filtroUsuario" name="usuario" value="{{ request('usuario') }}" placeholder="Nombre del usuario">
                 </div>
-                <!-- Filtro por libro -->
-                <div class="reservasGrupoFiltro">
+                <div class="a-campo">
                     <label for="filtroLibro">Libro</label>
                     <input type="text" id="filtroLibro" name="libro" value="{{ request('libro') }}" placeholder="Título del libro">
                 </div>
             </div>
-            <div class="reservasBotonesFiltro">
-                <button class="btn-base btn-primario" type="submit">Filtrar</button>
-                <a href="{{ route('admin.historialReservas') }}" class="btn-base btn-amarillo">Limpiar</a>
+            <div class="a-form__acciones">
+                <button class="a-boton a-boton--primario" type="submit">Filtrar</button>
+                <a href="{{ route('admin.historialReservas') }}" class="a-boton a-boton--fantasma">Limpiar</a>
             </div>
         </form>
-
-        <!-- ========== LAYOUT: FORMULARIO + LISTADO ========== -->
-        <div class="reservasLayout">
-
-            <!-- ========== COLUMNA IZQUIERDA: FORMULARIO ========== -->
-            <div class="reservasFormulario">
-                @if (isset($reservaEditar) && $reservaEditar)
-                    <!-- Formulario de EDICIÓN -->
-                    <form action="{{ route('admin.reservas.update', $reservaEditar->id) }}" method="POST" class="reservasFormInner">
+</section>
+<section class="a-tarjeta"><header class="a-tarjeta__cabecera"><div><h2>{{ isset($reservaEditar) && $reservaEditar ? 'Editar reserva #' . $reservaEditar->id : 'Nueva reserva' }}</h2></div></header>
+@if (isset($reservaEditar) && $reservaEditar)
+                    <form action="{{ route('admin.reservas.update', $reservaEditar->id) }}" method="POST" class="a-form">
                         @csrf
                         @method('PUT')
-                        <h2>Editar Reserva #{{ $reservaEditar->id }}</h2>
                 @else
-                    <!-- Formulario de CREACIÓN -->
-                    <form action="{{ route('admin.reservas.store') }}" method="POST" class="reservasFormInner">
+                    <form action="{{ route('admin.reservas.store') }}" method="POST" class="a-form">
                         @csrf
-                        <h2>Nueva Reserva</h2>
                 @endif
 
-                    <!-- Campo: Usuario -->
-                    <div class="reservasGrupoForm">
+                    <div class="a-form__fila a-form__fila--3">
+<div class="a-campo">
                         <label for="usuario_id">Usuario (Nombre o N. de socio)</label>
                         <input type="text" id="usuario_id" name="usuario_id" value="{{ old('usuario_id', $reservaEditar->usuario->name ?? '') }}" placeholder="Ej: Ana Pérez o 12345AB" required>
                         @error('usuario_id')
-                            <span class="errorCampo">{{ $message }}</span>
+                            <span class="a-campo__error">{{ $message }}</span>
                         @enderror
                     </div>
 
-                    <!-- Campo: Libro -->
-                    <div class="reservasGrupoForm">
+                    <div class="a-campo">
                         <label for="libro_id">Libro</label>
                         <select id="libro_id" name="libro_id" required>
                             <option value="">Seleccionar libro</option>
@@ -98,31 +65,26 @@
                         </select>
                     </div>
 
-                    <!-- Campo: Fecha de reserva -->
-                    <div class="reservasGrupoForm">
-                        <label for="fecha_reserva">Fecha de Reserva</label>
+                    <div class="a-campo">
+                        <label for="fecha_reserva">Fecha de reserva</label>
                         <input type="date" id="fecha_reserva" name="fecha_reserva"
                             value="{{ old('fecha_reserva', isset($reservaEditar) && $reservaEditar->fecha_reserva ? $reservaEditar->fecha_reserva->format('Y-m-d') : now()->format('Y-m-d')) }}" required>
                     </div>
 
-                    <!-- Campo: Fecha devolución prevista -->
-                    <div class="reservasGrupoForm">
-                        <label for="fecha_devolucion_prevista">Devolución Prevista</label>
+                    <div class="a-campo">
+                        <label for="fecha_devolucion_prevista">Devolución prevista</label>
                         <input type="date" id="fecha_devolucion_prevista" name="fecha_devolucion_prevista"
                             value="{{ old('fecha_devolucion_prevista', isset($reservaEditar) && $reservaEditar->fecha_devolucion_prevista ? $reservaEditar->fecha_devolucion_prevista->format('Y-m-d') : '') }}" required>
                     </div>
 
-                    <!-- Campos adicionales solo en modo edición -->
                     @if (isset($reservaEditar) && $reservaEditar)
-                        <!-- Campo: Fecha devolución real -->
-                        <div class="reservasGrupoForm">
-                            <label for="fecha_devolucion_real">Devolución Real</label>
+                        <div class="a-campo">
+                            <label for="fecha_devolucion_real">Devolución real</label>
                             <input type="date" id="fecha_devolucion_real" name="fecha_devolucion_real"
                                 value="{{ old('fecha_devolucion_real', $reservaEditar->fecha_devolucion_real ? $reservaEditar->fecha_devolucion_real->format('Y-m-d') : '') }}">
                         </div>
 
-                        <!-- Campo: Estado -->
-                        <div class="reservasGrupoForm">
+                        <div class="a-campo">
                             <label for="estadoEdit">Estado</label>
                             <select id="estadoEdit" name="estado" required>
                                 <option value="activa" {{ old('estado', $reservaEditar->estado) === 'activa' ? 'selected' : '' }}>Activa</option>
@@ -133,99 +95,71 @@
                         </div>
                     @endif
 
-                    <!-- Campo: Observaciones -->
-                    <div class="reservasGrupoForm">
+                    <div class="a-campo">
                         <label for="observaciones">Observaciones</label>
                         <textarea id="observaciones" name="observaciones" rows="3"
                             placeholder="Notas opcionales...">{{ old('observaciones', $reservaEditar->observaciones ?? '') }}</textarea>
                     </div>
 
-                    <!-- Botón de envío -->
-                    <button class="reservasBotonEnvio" type="submit">
-                        {{ isset($reservaEditar) && $reservaEditar ? 'Actualizar Reserva' : 'Crear Reserva' }}
+
+</div>
+<div class="a-form__acciones"><button class="a-boton a-boton--primario" type="submit">
+                        {{ isset($reservaEditar) && $reservaEditar ? 'Actualizar reserva' : 'Crear reserva' }}
                     </button>
 
                     @if (isset($reservaEditar) && $reservaEditar)
-                        <a href="{{ route('admin.historialReservas') }}" class="btn-base btn-amarillo reservasBtnCancelar">Cancelar Edición</a>
+                        <a href="{{ route('admin.historialReservas') }}" class="a-boton a-boton--fantasma reservasBtnCancelar">Cancelar edición</a>
                     @endif
-                </form>
-            </div>
 
-            <!-- ========== COLUMNA DERECHA: LISTADO DE RESERVAS ========== -->
-            <div class="reservasListado">
-                <h2>Todas las Reservas ({{ $reservas->count() }})</h2>
-
-                <div class="reservasListadoCards">
-                    @forelse ($reservas as $reserva)
-                        <!-- Tarjeta individual de reserva -->
-                        <article class="reservaCard reservaCard--{{ $reserva->estado }}">
-                            <div class="reservaCardInfo">
-                                <!-- Cabecera: ID + estado -->
-                                <div class="reservaCardCabecera">
-                                    <span class="reservaCardId">#{{ $reserva->id }}</span>
-                                    <span class="reservaCardEstado reservaCardEstado--{{ $reserva->estado }}">
-                                        {{ ucfirst($reserva->estado) }}
-                                    </span>
-                                </div>
-
-                                <!-- Libro y usuario -->
-                                <h3 class="reservaCardTitulo">{{ $reserva->libro->titulo ?? 'Libro eliminado' }}</h3>
-                                <p class="reservaCardUsuario">{{ $reserva->usuario->name ?? 'Usuario eliminado' }}
-                                    @if ($reserva->usuario && $reserva->usuario->nSocio)
-                                        <span class="reservaCardSocio">({{ $reserva->usuario->nSocio }})</span>
-                                    @endif
-                                </p>
-
-                                <!-- Fechas -->
-                                <div class="reservaCardMeta">
-                                    <span class="reservaCardMetaItem">Reserva: {{ $reserva->fecha_reserva->format('d/m/Y') }}</span>
-                                    <span class="reservaCardMetaItem">Límite: {{ $reserva->fecha_devolucion_prevista->format('d/m/Y') }}</span>
-                                    @if ($reserva->fecha_devolucion_real)
-                                        <span class="reservaCardMetaItem">Devuelto: {{ $reserva->fecha_devolucion_real->format('d/m/Y') }}</span>
-                                    @endif
-                                </div>
-
-                                <!-- Observaciones si existen -->
-                                @if ($reserva->observaciones)
-                                    <p class="reservaCardObs">{{ $reserva->observaciones }}</p>
-                                @endif
-                            </div>
-
-                            <!-- Acciones -->
-                            <div class="reservaCardAcciones">
-                                <!-- Editar -->
+</div>
+</form>
+</section>
+<section class="a-tarjeta"><header class="a-tarjeta__cabecera"><div><h2>Todas las reservas ({{ $reservas->count() }})</h2></div></header>
+<div class="a-tabla-envoltura" tabindex="0" role="region" aria-label="Reservas"><table class="a-tabla a-tabla--gestion"><thead>
+<tr><th scope="col" class="a-num">ID</th>
+    <th scope="col">Libro</th>
+    <th scope="col">Usuario</th>
+    <th scope="col">Reserva</th>
+    <th scope="col">Devolución prevista</th>
+    <th scope="col">Devolución real</th>
+    <th scope="col">Estado</th>
+    <th scope="col">Observaciones</th>
+    <th scope="col">Acciones</th></tr></thead><tbody>
+@forelse ($reservas as $reserva)<tr><td class="a-num">{{ $reserva->id }}</td>
+    <td><div class="a-tabla__identidad"><strong>{{ $reserva->libro->titulo ?? 'Libro eliminado' }}</strong></div></td>
+    <td><div class="a-tabla__identidad"><div><strong>{{ $reserva->usuario->name ?? 'Usuario eliminado' }}</strong>@if ($reserva->usuario && $reserva->usuario->nSocio)<span>Socio {{ $reserva->usuario->nSocio }}</span>@endif</div></div></td>
+    <td class="a-fecha">{{ $reserva->fecha_reserva->format('d/m/Y') }}</td>
+    <td class="a-fecha">{{ $reserva->fecha_devolucion_prevista->format('d/m/Y') }}</td>
+    <td class="a-fecha">{{ $reserva->fecha_devolucion_real?->format('d/m/Y') ?? '—' }}</td>
+    <td><span class="a-pill {{ $reserva->estado === 'vencida' ? 'a-pill--negativo' : ($reserva->estado === 'devuelta' ? 'a-pill--positivo' : 'a-pill--aviso') }}">{{ ucfirst($reserva->estado) }}</span></td>
+    <td class="a-texto-tabla"><div>{{ $reserva->observaciones ?: '—' }}</div></td>
+    <td><div class="a-acciones-fila">
                                 <a href="{{ route('admin.historialReservas', ['edit' => $reserva->id]) }}"
-                                    class="btn-base btn-azul btnEditarReserva">Editar</a>
+                                    class="a-boton btnEditarReserva">Editar</a>
 
-                                <!-- Marcar como devuelto (solo si está activa o vencida) -->
                                 @if (in_array($reserva->estado, ['activa', 'vencida']))
-                                    <form action="{{ route('admin.reservas.devolver', $reserva->id) }}" method="POST">
+                                    <form class="a-form" action="{{ route('admin.reservas.devolver', $reserva->id) }}" method="POST">
                                         @csrf
                                         @method('PATCH')
-                                        <button class="btn-base btn-verde btnDevolverReserva" type="submit"
+                                        <button class="a-boton a-boton--primario btnDevolverReserva" type="submit"
                                             onclick="return confirm('¿Marcar este libro como devuelto?')">
                                             Devolver
                                         </button>
                                     </form>
                                 @endif
 
-                                <!-- Eliminar -->
-                                <form action="{{ route('admin.reservas.destroy', $reserva->id) }}" method="POST">
+                                <form class="a-form" action="{{ route('admin.reservas.destroy', $reserva->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn-base btn-rojo btnEliminarReserva" type="submit"
+                                    <button class="a-boton a-boton--peligro btnEliminarReserva" type="submit"
                                         onclick="return confirm('¿Eliminar esta reserva del historial?')">
                                         Eliminar
                                     </button>
                                 </form>
-                            </div>
-                        </article>
-                    @empty
-                        <p class="reservaCardVacio">No se encontraron reservas con los filtros aplicados.</p>
-                    @endforelse
-                </div>
-            </div>
-
-        </div>
-    </main>
+                            </div></td></tr>
+@empty<tr><td colspan="9"><p class="a-vacio">No se encontraron reservas con los filtros aplicados.</p></td></tr>
+@endforelse
+</tbody></table></div>
+</section>
+</div>
 @endsection

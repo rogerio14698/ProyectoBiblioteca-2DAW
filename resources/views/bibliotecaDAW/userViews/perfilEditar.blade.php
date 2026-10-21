@@ -1,154 +1,20 @@
 @extends('layouts.app')
-
-@section('title', 'Perfil')
-
+@section('title', 'Editar perfil')
 @section('content')
-    <main class="contenedor perfilEditarUsuario">
-        {{-- Cabecera de la sección --}}
-        <section class="perfilEditarHeader">
-            <h1>Editar Perfil</h1>
-            <p>Aquí puedes actualizar la información principal de tu cuenta y mantener tus datos personales al día.</p>
-        </section>
-
-        {{-- Mensaje de éxito al actualizar datos --}}
-        @if (session('success'))
-            <div class="alertaExito" role="alert">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        {{-- Mensaje de éxito al cambiar contraseña --}}
-        @if (session('password_success'))
-            <div class="alertaExito" role="alert">
-                {{ session('password_success') }}
-            </div>
-        @endif
-
-        {{-- ========================================= --}}
-        {{-- BLOQUE 1: Datos personales y foto --}}
-        {{-- ========================================= --}}
-        <section class="perfilEditarBloque">
-            <div class="perfilEditarIntro">
-                <h2>Datos de usuario</h2>
-                <p>Revisa cuidadosamente tus datos antes de guardar los cambios para evitar errores en préstamos, compras o
-                    comunicaciones.</p>
-            </div>
-
-            <form action="{{ route('usuario.perfilActualizar') }}" method="POST" class="perfilEditarForm"
-                enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-
-                {{-- Campo: Nombre --}}
-                <div class="campoPerfilEditar">
-                    <label for="name">Nombre de usuario</label>
-                    <input type="text" id="name" name="name" value="{{ old('name', Auth::user()->name) }}" required>
-                    @error('name')
-                        <span class="errorCampo">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                {{-- Campo: Email (solo lectura, se usa para login) --}}
-                <div class="campoPerfilEditar">
-                    <label for="email">Correo electrónico</label>
-                    <input type="email" id="email" value="{{ Auth::user()->email }}" disabled>
-                    <span class="infoEstatico">El correo no se puede modificar porque se usa para iniciar sesión.</span>
-                </div>
-
-                {{-- Campo: DNI --}}
-                <div class="campoPerfilEditar">
-                    <label for="dni">DNI</label>
-                    <input type="text" id="dni" name="dni" value="{{ old('dni', Auth::user()->dni) }}" required>
-                    @error('dni')
-                        <span class="errorCampo">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                {{-- Campo: Teléfono --}}
-                <div class="campoPerfilEditar">
-                    <label for="movil">Teléfono</label>
-                    <input type="text" id="movil" name="movil" value="{{ old('movil', Auth::user()->movil) }}">
-                    @error('movil')
-                        <span class="errorCampo">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                {{-- Campo: Foto de perfil con previsualización --}}
-                <div class="campoPerfilEditar campoCompletoPerfilEditar campoFotoPerfil">
-                    <label for="profile_photo">Foto de perfil</label>
-                    <div class="fotoPerfilPreview">
-                        <img src="{{ Auth::user()->profile_photo_url }}" alt="Foto de perfil actual" class="fotoPerfilImg"
-                            id="previewFoto" loading="lazy" width="80" height="80">
-                        <input type="file" id="profile_photo" name="profile_photo" accept="image/jpeg,image/png,image/webp">
-                    </div>
-                    @error('profile_photo')
-                        <span class="errorCampo">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                {{-- Botones de acción --}}
-                <div class="accionesPerfilEditar campoCompletoPerfilEditar">
-                    <button type="submit" class="btn-base btn-verde">Guardar Cambios</button>
-                    <button type="button" class="btn-base btn-azul" id="btnMostrarPassword">Cambiar Contraseña</button>
-                </div>
-            </form>
-
-            {{-- Formulario de logout separado (HTML no permite formularios anidados) --}}
-            <form action="{{ route('logout') }}" method="POST" class="formLogoutEditar">
-                @csrf
-                <button type="submit" class="btn-base btn-rojo">Cerrar Sesión</button>
-            </form>
-        </section>
-
-        {{-- ========================================= --}}
-        {{-- BLOQUE 2: Cambio de contraseña --}}
-        {{-- ========================================= --}}
-        <section class="perfilEditarBloque seccionPassword" id="seccionPassword"
-            data-password-errors="{{ $errors->has('current_password') || $errors->has('new_password') ? 'true' : 'false' }}">
-            <div class="perfilEditarIntro">
-                <h2>Cambiar Contraseña</h2>
-                <p>Introduce tu contraseña actual para verificar tu identidad y luego escribe la nueva contraseña dos veces.
-                </p>
-            </div>
-
-            <form action="{{ route('usuario.cambiarPassword') }}" method="POST" class="perfilEditarForm formPassword">
-                @csrf
-                @method('PUT')
-
-                {{-- Campo: Contraseña actual --}}
-                <div class="campoPerfilEditar campoCompletoPerfilEditar">
-                    <label for="current_password">Contraseña actual</label>
-                    <input type="password" id="current_password" name="current_password" required
-                        autocomplete="current-password">
-                    @error('current_password')
-                        <span class="errorCampo">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                {{-- Campo: Nueva contraseña --}}
-                <div class="campoPerfilEditar">
-                    <label for="new_password">Nueva contraseña</label>
-                    <input type="password" id="new_password" name="new_password" required minlength="8"
-                        autocomplete="new-password">
-                    @error('new_password')
-                        <span class="errorCampo">{{ $message }}</span>
-                    @enderror
-                </div>
-
-                {{-- Campo: Confirmar nueva contraseña --}}
-                <div class="campoPerfilEditar">
-                    <label for="new_password_confirmation">Confirmar nueva contraseña</label>
-                    <input type="password" id="new_password_confirmation" name="new_password_confirmation" required
-                        minlength="8" autocomplete="new-password">
-                </div>
-
-                {{-- Botón de guardar contraseña --}}
-                <div class="accionesPerfilEditar campoCompletoPerfilEditar">
-                    <button type="submit" class="btn-base btn-verde">Actualizar Contraseña</button>
-                    <button type="button" class="btn-base btn-rojo" id="btnOcultarPassword">Cancelar</button>
-                </div>
-            </form>
-        </section>
-    </main>
-
+@include('bibliotecaDAW.userViews._cabeceraSocio', ['titulo' => 'Editar tu', 'enfasis' => 'perfil', 'entradilla' => 'Mantén tus datos actualizados. El correo de acceso no se puede cambiar desde aquí.'])
+<section class="capitulo capitulo--tinta-2 capitulo--compacto"><div class="envoltura envoltura--estrecha socio-edicion">
+@if (session('password_success'))<p class="aviso aviso--exito" role="status"><i class="bi bi-check2-circle" aria-hidden="true"></i><span>{{ session('password_success') }}</span></p>@endif
+@if ($errors->any())<div class="aviso aviso--error" role="alert"><i class="bi bi-exclamation-triangle" aria-hidden="true"></i><div><strong>Revisa los campos indicados.</strong><ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div></div>@endif
+<section class="panel" aria-labelledby="titulo-datos-cuenta"><h2 class="panel__titulo" id="titulo-datos-cuenta">Datos personales</h2><form action="{{ route('usuario.perfilActualizar') }}" method="POST" class="formulario" enctype="multipart/form-data">@csrf @method('PUT')
+<div class="campo"><label for="name">Nombre de usuario</label><input type="text" id="name" name="name" value="{{ old('name', auth('web')->user()->name) }}" required @if ($errors->has('name')) aria-invalid="true" aria-describedby="error-name" @endif>@error('name')<p class="campo__error" id="error-name">{{ $message }}</p>@enderror</div>
+<div class="campo"><label for="email">Correo electrónico</label><input type="email" id="email" value="{{ auth('web')->user()->email }}" disabled><p class="campo__ayuda">Se utiliza para iniciar sesión y no se puede modificar.</p></div>
+<div class="campo--doble"><div class="campo"><label for="dni">DNI</label><input type="text" id="dni" name="dni" value="{{ old('dni', auth('web')->user()->dni) }}" required @if ($errors->has('dni')) aria-invalid="true" aria-describedby="error-dni" @endif>@error('dni')<p class="campo__error" id="error-dni">{{ $message }}</p>@enderror</div><div class="campo"><label for="movil">Teléfono</label><input type="tel" id="movil" name="movil" value="{{ old('movil', auth('web')->user()->movil) }}" @if ($errors->has('movil')) aria-invalid="true" aria-describedby="error-movil" @endif>@error('movil')<p class="campo__error" id="error-movil">{{ $message }}</p>@enderror</div></div>
+<div class="campo socio-foto"><label for="profile_photo">Foto de perfil</label><div class="socio-foto__control"><img src="{{ auth('web')->user()->profile_photo_url }}" alt="Previsualización de la foto de perfil" id="previewFoto" width="96" height="96"><input type="file" id="profile_photo" name="profile_photo" accept="image/jpeg,image/png,image/webp" @if ($errors->has('profile_photo')) aria-invalid="true" aria-describedby="error-profile-photo" @endif></div><p class="campo__ayuda">JPG, PNG o WebP; máximo 2 MB.</p>@error('profile_photo')<p class="campo__error" id="error-profile-photo">{{ $message }}</p>@enderror</div>
+<div class="acciones"><button type="submit" class="boton">Guardar cambios</button><button type="button" class="boton boton--linea" id="btnMostrarPassword" aria-controls="seccionPassword">Cambiar contraseña</button></div></form>
+<form action="{{ route('usuario.logout') }}" method="POST" class="socio-cerrar-sesion">@csrf<button type="submit" class="boton boton--texto">Cerrar sesión</button></form></section>
+<section class="panel seccionPassword" id="seccionPassword" data-password-errors="{{ $errors->has('current_password') || $errors->has('new_password') ? 'true' : 'false' }}" aria-labelledby="titulo-password"><h2 class="panel__titulo" id="titulo-password">Cambiar contraseña</h2><p>Confirma la contraseña actual y elige una nueva de al menos ocho caracteres.</p><form action="{{ route('usuario.cambiarPassword') }}" method="POST" class="formulario formPassword">@csrf @method('PUT')
+<div class="campo"><label for="current_password">Contraseña actual</label><input type="password" id="current_password" name="current_password" autocomplete="current-password" required @if ($errors->has('current_password')) aria-invalid="true" aria-describedby="error-current-password" @endif>@error('current_password')<p class="campo__error" id="error-current-password">{{ $message }}</p>@enderror</div>
+<div class="campo--doble"><div class="campo"><label for="new_password">Nueva contraseña</label><input type="password" id="new_password" name="new_password" autocomplete="new-password" minlength="8" required @if ($errors->has('new_password')) aria-invalid="true" aria-describedby="error-new-password" @endif>@error('new_password')<p class="campo__error" id="error-new-password">{{ $message }}</p>@enderror</div><div class="campo"><label for="new_password_confirmation">Confirmar nueva contraseña</label><input type="password" id="new_password_confirmation" name="new_password_confirmation" autocomplete="new-password" minlength="8" required></div></div>
+<div class="acciones"><button type="submit" class="boton">Actualizar contraseña</button><button type="button" class="boton boton--linea" id="btnOcultarPassword">Cancelar</button></div></form></section>
+</div></section>
 @endsection

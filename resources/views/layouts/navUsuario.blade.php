@@ -1,25 +1,24 @@
-<nav class="nav-usuarioAutenticado">
-    <div class="logoYperfil">
-        <a href="{{ route('usuario.inicio') }}"><img src="{{ asset('img/logoDAW-conTransparencia.png') }}" alt="Logo_Biblioteca DAW" class="foto-logoDAW" width="40" height="40"></a>
-        <a href="{{ route('usuario.perfil') }}"><img src="{{ Auth::user()->profile_photo_url ?? asset('img/default.png') }}" alt="Foto_perfil_usuario {{ Auth::user()->name }}" class="foto-perfilNavUsuario" width="40" height="40"></a>
-
-    </div>
-    <div class="nav-perfil">
-        <ul class="nav-links">
-            <li><a href="{{ route('usuario.inicio') }}">Inicio</a></li>
-        <li><a href="{{ route('usuario.perfil') }}">Perfil</a></li>
-        <li><a href="{{ route('usuario.perfilEditar') }}">Editar Perfil</a></li>
-        <li><a href="{{ route('usuario.prestamos') }}">Préstamos</a></li>
-        <li><a href="{{ route('usuario.alquilar') }}">Alquilar</a></li>
-        <li><a href="{{ route('usuario.comprar') }}">Comprar</a></li>
-        <li><a href="{{ route('usuario.publicar') }}">Publicar</a></li>
-        <li><a href="{{ route('usuario.organizarEvento') }}">Organizar Evento</a></li>
-        <li>
-            <form method="POST" action="{{ route('usuario.logout') }}">
-                @csrf
-                <button type="submit" class="btn-base btn-logout">Logout</button>
-            </form>
-        </li>
+@php
+    $pestanas = [
+        ['ruta' => 'usuario.inicio', 'icono' => 'house', 'texto' => 'Inicio'],
+        ['ruta' => 'usuario.perfil', 'icono' => 'person', 'texto' => 'Perfil'],
+        ['ruta' => 'usuario.prestamos', 'icono' => 'journal-bookmark', 'texto' => 'Préstamos'],
+        ['ruta' => 'usuario.alquilar', 'icono' => 'bookmark-plus', 'texto' => 'Alquilar'],
+        ['ruta' => 'usuario.comprar', 'icono' => 'bag', 'texto' => 'Comprar'],
+        ['ruta' => 'usuario.pagos', 'icono' => 'credit-card', 'texto' => 'Pagos'],
+        ['ruta' => 'usuario.publicar', 'icono' => 'pen', 'texto' => 'Publicar'],
+        ['ruta' => 'usuario.organizarEvento', 'icono' => 'calendar-plus', 'texto' => 'Organizar evento'],
+        ['ruta' => 'usuario.consultas', 'icono' => 'envelope', 'texto' => 'Mis consultas'],
+    ];
+@endphp
+<nav class="barra-usuario" aria-label="Área de socio">
+    <ul class="envoltura">
+        @foreach ($pestanas as $pestana)
+            <li>
+                <a href="{{ route($pestana['ruta']) }}" @if (request()->routeIs($pestana['ruta']) || ($pestana['ruta'] === 'usuario.perfil' && request()->routeIs('usuario.perfilEditar'))) aria-current="page" @endif>
+                    <i class="bi bi-{{ $pestana['icono'] }}" aria-hidden="true"></i>{{ $pestana['texto'] }}
+                </a>
+            </li>
+        @endforeach
     </ul>
-    </div>
 </nav>

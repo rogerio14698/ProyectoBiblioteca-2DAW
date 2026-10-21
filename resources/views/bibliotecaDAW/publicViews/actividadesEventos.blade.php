@@ -1,73 +1,54 @@
 @extends('layouts.app')
 
-@section('title', 'Actividades y Eventos')
+@section('title', 'Actividades y eventos | Biblioteca DAW')
+@section('meta_description', 'Consulta la agenda cultural de la Biblioteca DAW.')
 
 @section('content')
-
-
-    <div class="headerContenido">
-        <h1 class="tituloPagina">Agenda de actividades y eventos</h1>
-        <p class="parrafoTitulo">Bienvenido a la sección de actividades y eventos de la Biblioteca DAW.</p>
-    </div>
-    <section class="actividadesEventos separador">
-        <!-- Al apuntarse se va a poner un contador de personas que se han apuntado, deben de estar registradas -->
-        @foreach ($eventos as $evento)
-            <div class="actividadEventoCard">
-                <div class="eventosTitulo">
-                    {{-- El título enlaza a la página interna del evento --}}
-                    <a href="{{ route('evento.paginaInterna', ['id' => $evento->id]) }}">
-                        <h2 class="tituloCard">{{ $evento->titulo }}</h2>
-                    </a>
-                    <p class="parrafoContenido">{{ $evento->descripcion }}</p>
-                </div>
-                <div class="eventoImagen">
-                    @php
-                    // Comprobamos si la URL ya es un enlace externo.
-                    $url = Str::startsWith($evento->imagen_url, ['http://', 'https://'])
-                    ? $evento->imagen_url
-                    : asset('storage/' . $evento->imagen_url);
-                    @endphp    
-                    <img src="{{ $url }}" alt="Imagen del evento {{ $evento->titulo }}" class="imgEvento"
-                        loading="lazy" width="400" height="250">
-                </div>
-                <div class="eventosFecha">
-                    <p class="fechaEvento">Fecha: <strong>{{ date('d/m', strtotime($evento->fecha_hora)) }}</strong></p>
-                    <p class="horaEvento">Hora: <strong>{{ date('H:i', strtotime($evento->fecha_hora)) }}</strong></p>
-                </div>
-                <div class="eventosPlazas">
-                    <p class="aforoEvento">Aforo: <strong>{{ $evento->aforo }}</strong></p>
-                    <p class="plazasLibres">Plazas libres: <strong>{{ $evento->plazas_libres }}</strong></p>
-                </div>
-                <div class="eventosUbicacion">
-                    <p class="ubicacionEvento">{{ $evento->ubicacion }}</p>
-                    <p class="usuarioEvento">{{ $evento->usuario->name }}</p>
-                </div>
-                <a href="{{ route('evento.paginaInterna', ['id' => $evento->id]) }}" class="btn-base btn-azul">Ver evento</a>
-                {{-- Verifica si el usuario está autenticado --}}
-
-            @if (Auth::check())
-                <a href="{{ route('evento.apuntarse', ['id' => $evento->id]) }}" class="btn-base btn-verde">Apuntarse</a>
+    <section class="capitulo capitulo--tinta">
+        <div class="envoltura">
+            <header class="portadilla">
+                <ol class="migas"><li><a href="{{ url('/biblioteca') }}">Biblioteca</a></li><li aria-current="page">Agenda</li></ol>
+                <h1>Encuentros y <em>lecturas</em></h1>
+                <p class="entradilla">Una agenda para compartir ideas, historias y tiempo en la biblioteca.</p>
+            </header>
+            @if ($eventos->isEmpty())
+                <p class="vacio">No hay actividades programadas por ahora.</p>
             @else
-                <p>Debes iniciar sesión para apuntarte al evento. O enviar tus datos a través del formulario de contacto.</p>
+                <ol class="agenda">
+                    @foreach ($eventos as $evento)
+                        @php $fecha = \Illuminate\Support\Carbon::parse($evento->fecha_hora)->locale('es'); @endphp
+                        <li class="agenda__fila">
+                            <time class="agenda__fecha" datetime="{{ $fecha->toIso8601String() }}">
+                                <span class="agenda__dia">{{ $fecha->format('d') }}</span>
+                                <span class="agenda__mes">{{ \Illuminate\Support\Str::ucfirst($fecha->translatedFormat('M Y · H:i')) }}</span>
+                            </time>
+                            <div class="agenda__cuerpo">
+                                <h3><a href="{{ route('evento.paginaInterna', ['id' => $evento->id]) }}">{{ $evento->titulo }}</a></h3>
+                                <p>{{ \Illuminate\Support\Str::limit($evento->descripcion, 180) }}</p>
+                                <p class="agenda__lugar"><span>{{ $evento->ubicacion }}</span>@if ($evento->aforo)<span>{{ $evento->plazas_libres }} plazas libres</span>@endif</p>
+                            </div>
+                            <p class="agenda__precio">
+                                @if ($evento->esDePago())
+                                    <span class="precio">{{ number_format($evento->precio, 2, ',', '.') }} €</span>
+                                @else
+                                    <span class="insignia insignia--verde">Gratis</span>
+                                @endif
+                            </p>
+                            <span class="agenda__accion" aria-hidden="true"><i class="bi bi-arrow-right"></i></span>
+                        </li>
+                    @endforeach
+                </ol>
+                <nav class="catalogo__paginacion" aria-label="Páginas de la agenda">{{ $eventos->links() }}</nav>
             @endif
-            </div>
-        @endforeach
-    </section>
-
-    {{-- Enlaces de paginación (6 eventos por página) --}}
-    <div class="paginacionEventos paginacionBase paginacionAgenda">
-        {{ $eventos->links() }}
-    </div>
-
-    <section class="contactarEvento separador">
-        <div class="contactarEventoCard">
-            <h2 class="tituloContenido">Crea un evento</h2>
-            <p class="parrafoContenido">¿Quieres crear un evento pero no quieres registrarte?
-                <br> Ponte en contacto con nosotros, lo creamos por ti!
-            </p>
-
-            <a href="{{ route('contacto.create') }}" class="btn-base btn-verde">Contactar</a>
         </div>
     </section>
-
+    <section class="capitulo capitulo--tinta-2 capitulo--compacto">
+        <div class="envoltura">
+            <div class="encabezado">
+                <h2>¿Quieres proponer una actividad?</h2>
+                <p>Cuéntanos tu idea y el equipo de la biblioteca te ayudará a darle forma.</p>
+            </div>
+            <a href="{{ route('contacto.create') }}" class="boton">Contactar con la biblioteca</a>
+        </div>
+    </section>
 @endsection

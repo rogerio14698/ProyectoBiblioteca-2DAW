@@ -41,6 +41,8 @@ class Usuario extends Authenticatable
         'es_escritor_verificado',
         'tipo_escritor',
         'profile_photo_path',
+        'stripe_customer_id',
+        'socio_hasta',
     ];
 
     /**
@@ -53,7 +55,13 @@ class Usuario extends Authenticatable
         return [
             'password' => 'hashed',
             'es_escritor_verificado' => 'boolean',
+            'socio_hasta' => 'date',
         ];
+    }
+
+    public function cuotaSocioAlDia(): bool
+    {
+        return $this->socio_hasta !== null && $this->socio_hasta->endOfDay()->isFuture();
     }
 
     protected static function booted()
@@ -158,5 +166,13 @@ class Usuario extends Authenticatable
     public function metodosPago(): HasMany
     {
         return $this->hasMany(MetodosPago::class, 'usuario_id');
+    }
+
+    /**
+     * Relación: un usuario tiene muchos pagos realizados con Stripe.
+     */
+    public function pagos(): HasMany
+    {
+        return $this->hasMany(Pago::class, 'usuario_id');
     }
 }

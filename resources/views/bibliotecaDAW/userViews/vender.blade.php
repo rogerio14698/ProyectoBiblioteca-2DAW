@@ -1,29 +1,6 @@
 @extends('layouts.app')
-
-@section('title', 'Vender')
-
+@section('title', 'Vender libros')
 @section('content')
-   <div class="contenedor">
-     <h1>Vender</h1>
-    <p>Bienvenido @user a la sección de vender de la Biblioteca DAW.</p>
-
-    <p>-El usuario podrá vender libros de segunda mano a un precio determinado por la biblioteca en funcion del libro, su
-        estado y su formato si fisico o digiytal
-        Tambien da la posibilidad que el usuario pueda vender sus propios libros, dando un espacio para autores freelance.
-        Dependiendo de la cantidad de ventas que tenga el libro el autor recibirá un % de dinero mensualmente.
-        Es decir si en 1 semana se vende 10 libros a fin de mes recibe el dinero establecido por la biblioteca.</p>
-    <h2>Formulario para vender libros</h2>
-    <form action="">
-        <input type="text" placeholder="Título del Libro">
-        <input type="text" placeholder="Autor del Libro">
-        <input type="number" placeholder="Precio del Libro">
-        <select name="formato" id="formato">
-            <option value="fisico">Físico</option>
-            <option value="digital">Digital</option>
-        </select>
-        <input type="file" placeholder="Portada del Libro">
-        <textarea placeholder="Descripción del Libro"></textarea>
-        <button type="submit">Vender</button>
-    </form>
-   </div>
+@include('bibliotecaDAW.userViews._cabeceraSocio', ['titulo' => 'Vender libros en la', 'enfasis' => 'biblioteca', 'entradilla' => 'Estamos preparando un espacio para poner en contacto a lectores y autores de la comunidad.'])
+<section class="capitulo capitulo--tinta-2 capitulo--compacto"><div class="envoltura envoltura--estrecha"><section class="panel socio-estado" aria-labelledby="vender-estado"><p><span class="insignia insignia--neutra">En preparación</span></p><h2 class="panel__titulo" id="vender-estado">La venta entre socios aún no está activa</h2><p>En esta sección podrás encontrar información cuando la biblioteca habilite el proceso de venta. No se aceptan solicitudes de venta desde un formulario porque todavía no hay un flujo de gestión disponible.</p><div class="acciones"><a class="boton" href="{{ route('usuario.publicar') }}">Compartir una publicación digital</a><a class="boton boton--linea" href="{{ route('usuario.consultas') }}">Consultar a la biblioteca</a></div></section></div></section>
 @endsection

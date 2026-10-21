@@ -22,6 +22,8 @@ return new class extends Migration
             $table->enum('formato', ['fisico', 'digital', 'ambos'])->default('ambos');
             $table->enum('opcion_compra', ['compra', 'prestamo']);
             $table->integer('cantidad_ejemplares');
+            // Precio de venta en euros (solo aplica si opcion_compra = 'compra').
+            $table->decimal('precio', 8, 2)->nullable();
 
             // Mueve estas líneas aquí para que queden después de cantidad_ejemplares
             $table->boolean('perdido')->default(false);

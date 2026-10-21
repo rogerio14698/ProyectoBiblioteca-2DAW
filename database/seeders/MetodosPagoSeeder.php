@@ -7,58 +7,41 @@ namespace Database\Seeders;
 use App\Models\MetodosPago;
 use App\Models\Usuario;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
 /**
- * Seeder para crear métodos de pago de ejemplo.
- * Asocia métodos de pago ficticios a los usuarios existentes
- * para demostrar la sección de métodos de pago en el perfil.
- *
- * @sideEffect Crea registros en la tabla 'metodos_pago'.
+ * Tarjetas de ejemplo para la sección "Métodos de pago" del perfil.
+ * Usan el prefijo pm_demo_ para que la app sepa que no existen en Stripe
+ * y no intente desvincularlas al borrarlas.
  */
 class MetodosPagoSeeder extends Seeder
 {
-    /**
-     * Ejecutar el seeder de métodos de pago.
-     * Crea tarjetas de crédito y cuentas PayPal de ejemplo.
-     *
-     * @return void
-     */
     public function run(): void
     {
-        // Obtenemos los usuarios existentes en la base de datos.
-        $usuarios = Usuario::all();
+        $usuarios = Usuario::take(3)->get();
 
-        // Si no hay usuarios, no podemos crear métodos de pago.
         if ($usuarios->isEmpty()) {
             $this->command->warn('No hay usuarios para crear métodos de pago de ejemplo.');
             return;
         }
 
-        // Para cada usuario creamos una tarjeta de crédito y un PayPal.
-        foreach ($usuarios->take(3) as $usuario) {
-            // Tarjeta de crédito ficticia.
-            MetodosPago::create([
-                'usuario_id'   => $usuario->id,
-                'type'         => 'tarjeta_credito',
-                'provider'     => 'Stripe',
-                'token'        => Str::random(32), // Token seguro simulado.
-                'last_four'    => (string) rand(1000, 9999), // Últimos 4 dígitos aleatorios.
-                'paypal_email' => null,
-            ]);
+        $tarjetas = [
+            ['marca' => 'visa', 'last_four' => '4242'],
+            ['marca' => 'mastercard', 'last_four' => '4444'],
+        ];
 
-            // Cuenta PayPal ficticia.
-            MetodosPago::create([
-                'usuario_id'   => $usuario->id,
-                'type'         => 'paypal',
-                'provider'     => 'PayPal',
-                'token'        => Str::random(32), // Token seguro simulado.
-                'last_four'    => null,
-                'paypal_email' => $usuario->email, // Usamos el email del usuario como PayPal.
-            ]);
+        foreach ($usuarios as $usuario) {
+            foreach ($tarjetas as $i => $tarjeta) {
+                MetodosPago::create([
+                    'usuario_id' => $usuario->id,
+                    'stripe_payment_method_id' => 'pm_demo_' . $usuario->id . '_' . $i,
+                    'tipo' => 'card',
+                    'marca' => $tarjeta['marca'],
+                    'last_four' => $tarjeta['last_four'],
+                    'exp_mes' => 12,
+                    'exp_anio' => (int) now()->addYears(3)->format('Y'),
+                    'predeterminado' => $i === 0,
+                ]);
+            }
         }
-
-        // Mensaje informativo en la consola al finalizar.
-        $this->command->info('Métodos de pago de ejemplo creados correctamente.');
     }
 }

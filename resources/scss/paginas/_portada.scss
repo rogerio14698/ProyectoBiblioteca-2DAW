@@ -1,0 +1,255 @@
+@use "../abstracts/tokens" as *;
+
+// =============================================================================
+// Portada (home)
+// =============================================================================
+
+// ---------- 1. Hero: el nombre en dos tintas sobre un grabado de biblioteca ----------
+.portada {
+    position: relative;
+    display: grid;
+    min-height: calc(100svh - var(--alto-cabecera));
+    padding-block: clamp(2.5rem, 2rem + 6vh, 7rem) clamp(1.5rem, 1rem + 2vw, 2.5rem);
+    overflow: clip;
+    isolation: isolate;
+}
+
+.portada__grabado {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    right: calc(var(--margen) * -1);
+    width: min(78vw, 70rem);
+    opacity: 0.5;
+    pointer-events: none;
+
+    @include hasta($bp-md) {
+        top: auto;
+        bottom: 9rem;
+        right: -20vw;
+        width: 130vw;
+        opacity: 0.28;
+    }
+}
+
+.portada__contenido {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: 2.5rem;
+}
+
+.portada__titulo {
+    margin: 0;
+    font-size: var(--paso-display);
+    font-weight: 500;
+    line-height: 0.84;
+    letter-spacing: -0.045em;
+
+    .linea-mascara:nth-child(2) {
+        color: var(--oro);
+        font-style: italic;
+        font-weight: 400;
+        padding-left: 0.6em;
+    }
+}
+
+.portada__pie {
+    display: grid;
+    gap: 2rem;
+    align-items: end;
+
+    @include desde($bp-md) {
+        grid-template-columns: 1fr minmax(0, 30rem);
+    }
+}
+
+.portada__horario {
+    margin: 0;
+    font-size: var(--paso-small);
+    color: var(--texto-suave);
+
+    strong {
+        display: block;
+        margin-bottom: 0.2rem;
+        color: var(--texto);
+        font-family: var(--fuente-display);
+        font-size: var(--paso-lead);
+        font-weight: 400;
+    }
+
+    @include hasta($bp-md) {
+        order: 2;
+    }
+}
+
+.portada__frase {
+    margin: 0 0 1.5rem;
+    font-size: var(--paso-lead);
+    line-height: 1.35;
+}
+
+// ---------- 2. Declaración con cifras ----------
+.declaracion {
+    display: grid;
+    gap: clamp(2.5rem, 1rem + 5vw, 5rem);
+
+    @include desde($bp-md) {
+        grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+        align-items: center;
+    }
+}
+
+.declaracion__texto {
+    margin: 0 0 clamp(2rem, 1rem + 3vw, 3.5rem);
+    max-width: 30ch;
+    font-family: var(--fuente-display);
+    font-size: clamp(1.5rem, 1rem + 1.8vw, 2.25rem);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+
+    em {
+        font-style: italic;
+    }
+}
+
+.cifras-grandes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin: 0;
+
+    div {
+        display: grid;
+        gap: 0.35rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--linea);
+    }
+
+    dt {
+        order: 2;
+        font-size: var(--paso-small);
+        color: var(--texto-suave);
+    }
+
+    dd {
+        margin: 0;
+        font-family: var(--fuente-display);
+        font-size: clamp(2.5rem, 1.5rem + 3.5vw, 5rem);
+        line-height: 0.9;
+        letter-spacing: -0.04em;
+        font-variant-numeric: lining-nums;
+    }
+}
+
+.declaracion__lamina {
+    --giro: 3deg;
+
+    justify-self: center;
+    width: min(100%, 24rem);
+
+    img {
+        aspect-ratio: 4 / 5;
+    }
+}
+
+// ---------- 3. Novedades ----------
+.novedades__pie {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-top: clamp(1.5rem, 1rem + 1vw, 2.5rem);
+}
+
+// ---------- 4. En portada (slides gestionados desde el panel) ----------
+.destacado {
+    display: grid;
+    gap: clamp(2rem, 1rem + 3vw, 4rem);
+    align-items: center;
+
+    @include desde($bp-md) {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+
+    .lamina img {
+        aspect-ratio: 4 / 3;
+    }
+
+    h3 {
+        margin: 0 0 1.25rem;
+        font-size: var(--paso-head);
+        line-height: 0.98;
+        letter-spacing: -0.03em;
+    }
+
+    p {
+        font-size: var(--paso-lead);
+        line-height: 1.4;
+        color: var(--texto-suave);
+        margin-bottom: 2rem;
+    }
+}
+
+.carrusel--uno .carrusel__pista {
+    grid-auto-columns: 100%;
+}
+
+.carrusel__contador {
+    margin: 0;
+    font-size: var(--paso-small);
+    color: var(--texto-suave);
+    font-variant-numeric: tabular-nums;
+}
+
+// ---------- 7. Llamada final ----------
+.llamada {
+    display: grid;
+    gap: 2.5rem;
+    align-content: start;
+
+    h2 {
+        margin: 0;
+        font-size: clamp(3rem, 1rem + 8vw, 9.5rem);
+        line-height: 0.88;
+        letter-spacing: -0.04em;
+
+        em {
+            font-weight: 400;
+        }
+    }
+
+    p {
+        margin: 0 0 1.5rem;
+        font-size: var(--paso-lead);
+        line-height: 1.35;
+        max-width: 36ch;
+    }
+
+    @include desde($bp-md) {
+        min-height: min(80svh, 46rem);
+        align-content: space-between;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 22rem);
+
+        h2 {
+            grid-column: 1 / -1;
+        }
+
+        > div {
+            grid-column: 2;
+        }
+    }
+}
+
+.llamada__grabado {
+    position: absolute;
+    left: -6rem;
+    bottom: -8rem;
+    width: clamp(16rem, 34vw, 30rem);
+    opacity: 0.35;
+    pointer-events: none;
+
+    @include hasta($bp-md) {
+        display: none;
+    }
+}

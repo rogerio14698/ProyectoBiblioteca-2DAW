@@ -1,13 +1,5 @@
-@extends('layouts.app')
-
-@section('title', 'Gestionar Sanciones')
-
+@extends('layouts.admin')
+@section('title', 'Sanciones')
 @section('content')
-    <main class="contenedor paginaEnObras">
-        <div class="enObrasContenido">
-            <h1>Gestionar Sanciones</h1>
-            <p>Estamos trabajando en esta sección. Por el momento no se encuentra disponible.</p>
-        </div>
-    </main>
-
+    <main class="a-vista-admin"><header class="a-titulo"><div><h1>Sanciones</h1><p class="a-subtitulo">Seguimiento de incidencias de usuarios.</p></div></header><section class="a-tarjeta"><p class="a-vacio">Próximamente</p></section></main>
 @endsection

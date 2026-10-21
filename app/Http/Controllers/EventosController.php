@@ -73,6 +73,16 @@ class EventosController extends Controller
         // Buscamos el evento o lanzamos 404.
         $evento = Evento::findOrFail($id);
 
+        // La inscripción requiere sesión iniciada (se guarda en la tabla pivote por usuario).
+        if (! \Illuminate\Support\Facades\Auth::guard('web')->check()) {
+            return redirect()->route('usuario.login.mostrar')->with('error', 'Inicia sesión para apuntarte al evento.');
+        }
+
+        // Los eventos de pago se reservan comprando la entrada con Stripe.
+        if ($evento->esDePago()) {
+            return redirect()->back()->with('error', 'Este evento requiere entrada. Cómprala con el botón de pago.');
+        }
+
         // Verificamos que haya plazas libres antes de inscribir.
         if ($evento->plazas_libres <= 0) {
             return redirect()->back()->with('error', 'No quedan plazas disponibles para este evento.');
@@ -158,6 +168,7 @@ class EventosController extends Controller
             'fecha_hora' => 'required|date',
             'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'ubicacion' => 'required|string|max:255',
+            'precio' => 'nullable|numeric|min:0|max:9999.99',
         ];
 
         if ($hasPrioridadColumn) {
@@ -171,6 +182,7 @@ class EventosController extends Controller
         $nuevoEvento->descripcion = $request->descripcion;
         $nuevoEvento->fecha_hora = $request->fecha_hora;
         $nuevoEvento->ubicacion = $request->ubicacion;
+        $nuevoEvento->precio = (float) ($request->precio ?? 0);
 
         // Solo guardamos prioridad cuando la columna existe realmente en la tabla.
         if ($hasPrioridadColumn) {
@@ -226,6 +238,7 @@ class EventosController extends Controller
             'fecha_hora' => 'required|date',
             'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'ubicacion' => 'required|string|max:255',
+            'precio' => 'nullable|numeric|min:0|max:9999.99',
         ];
 
         if ($hasPrioridadColumn) {
@@ -242,6 +255,7 @@ class EventosController extends Controller
         $evento->descripcion = $request->descripcion;
         $evento->fecha_hora = $request->fecha_hora;
         $evento->ubicacion = $request->ubicacion;
+        $evento->precio = (float) ($request->precio ?? 0);
 
         // Solo guardamos prioridad cuando la columna existe realmente en la tabla.
         if ($hasPrioridadColumn) {

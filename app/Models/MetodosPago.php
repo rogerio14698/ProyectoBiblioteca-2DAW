@@ -3,26 +3,50 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * Método de pago guardado en Stripe. Solo almacena la referencia pm_... y datos visibles.
+ */
 class MetodosPago extends Model
 {
-    // Nombre explícito de la tabla (la migración crea 'metodos_pago', no 'metodos_pagos').
     protected $table = 'metodos_pago';
 
     protected $fillable = [
         'usuario_id',
-        'type',
-        'provider',
-        'token',
+        'stripe_payment_method_id',
+        'tipo',
+        'marca',
         'last_four',
-        'paypal_email'
-    ];
-    protected $casts = [
-        'token' => 'encrypted',
+        'exp_mes',
+        'exp_anio',
+        'predeterminado',
     ];
 
-    public  function usuario()
+    protected $casts = [
+        'predeterminado' => 'boolean',
+        'exp_mes' => 'integer',
+        'exp_anio' => 'integer',
+    ];
+
+    public function usuario(): BelongsTo
     {
         return $this->belongsTo(Usuario::class);
+    }
+
+    public function getEtiquetaAttribute(): string
+    {
+        $marca = $this->marca ? ucfirst($this->marca) : 'Tarjeta';
+
+        return trim($marca . ' ···· ' . $this->last_four);
+    }
+
+    public function getCaducidadAttribute(): ?string
+    {
+        if (! $this->exp_mes || ! $this->exp_anio) {
+            return null;
+        }
+
+        return sprintf('%02d/%02d', $this->exp_mes, $this->exp_anio % 100);
     }
 }

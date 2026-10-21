@@ -1,0 +1,403 @@
+@use "../abstracts/tokens" as *;
+
+// =============================================================================
+// Cabecera del sitio, menú de cuenta y barra del área de socio
+// =============================================================================
+
+.cabecera {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--tinta);
+    color: var(--pergamino);
+    transition: box-shadow var(--medio) var(--ease-salida);
+
+    &[data-desplazada="true"] {
+        box-shadow: 0 1px 0 rgb(241 230 210 / 0.14);
+    }
+}
+
+.cabecera__barra {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    min-height: var(--alto-cabecera);
+}
+
+.marca {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.3em;
+    font-family: var(--fuente-display);
+    font-size: clamp(1.375rem, 1.1rem + 0.9vw, 1.75rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    white-space: nowrap;
+
+    em {
+        color: var(--oro);
+        font-weight: 400;
+    }
+
+    &:hover {
+        color: var(--pergamino);
+
+        em {
+            color: var(--oro-claro);
+        }
+    }
+}
+
+.navegacion {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+}
+
+.navegacion__lista {
+    display: flex;
+    gap: 1.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.navegacion__enlace {
+    position: relative;
+    display: inline-block;
+    padding-block: 0.5rem;
+    font-size: 1rem;
+    text-decoration: none;
+
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0.2rem;
+        height: 2px;
+        background: var(--oro);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform var(--medio) var(--ease-salida);
+    }
+
+    &:hover,
+    &[aria-current="page"] {
+        color: var(--pergamino);
+
+        &::after {
+            transform: scaleX(1);
+        }
+    }
+}
+
+.buscador {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgb(241 230 210 / 0.35);
+    transition: border-color var(--rapido) ease;
+
+    &:focus-within {
+        border-color: var(--oro);
+    }
+
+    input {
+        width: 11rem;
+        min-height: 2.75rem;
+        padding: 0 0.25rem;
+        background: transparent;
+        border: 0;
+        font-size: 1rem;
+
+        &::placeholder {
+            color: #9d8d75;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    button {
+        display: grid;
+        place-items: center;
+        width: 2.75rem;
+        height: 2.75rem;
+        background: none;
+        border: 0;
+        color: var(--pergamino);
+
+        &:hover {
+            color: var(--oro-claro);
+        }
+    }
+}
+
+.cabecera__acciones {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.enlace-cuenta {
+    font-size: 1rem;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+// Botón hamburguesa (solo móvil/tablet)
+.cabecera__menu {
+    display: none;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    background: none;
+    border: 0;
+    position: relative;
+
+    span:not(.visually-hidden) {
+        position: absolute;
+        left: 0.6rem;
+        right: 0.6rem;
+        height: 2px;
+        background: currentColor;
+        transition: transform var(--medio) var(--ease-salida), opacity var(--rapido);
+
+        &:nth-child(1) {
+            top: 1rem;
+        }
+
+        &:nth-child(2) {
+            top: 1.6rem;
+        }
+    }
+
+    &[aria-expanded="true"] span:not(.visually-hidden) {
+        &:nth-child(1) {
+            transform: translateY(0.3rem) rotate(45deg);
+        }
+
+        &:nth-child(2) {
+            transform: translateY(-0.3rem) rotate(-45deg);
+        }
+    }
+}
+
+// Menú de cuenta (desplegable)
+.cuenta {
+    position: relative;
+}
+
+.cuenta__boton {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 2.75rem;
+    padding: 0 0.25rem 0 0;
+    background: none;
+    border: 0;
+    font-size: 1rem;
+
+    img {
+        width: 2.25rem;
+        height: 2.25rem;
+        border-radius: 50%;
+        object-fit: cover;
+        outline: 1px solid var(--oro);
+        outline-offset: 2px;
+    }
+
+    i {
+        font-size: 0.75rem;
+        transition: transform var(--rapido);
+    }
+
+    &[aria-expanded="true"] i {
+        transform: rotate(180deg);
+    }
+}
+
+.cuenta__menu {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.75rem);
+    min-width: 16rem;
+    padding: 0.5rem;
+    background: var(--tinta-3);
+    border: 1px solid rgb(241 230 210 / 0.16);
+    box-shadow: 0 24px 48px rgb(0 0 0 / 0.45);
+
+    &[hidden] {
+        display: none;
+    }
+
+    a,
+    button {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        width: 100%;
+        min-height: 2.75rem;
+        padding: 0 0.75rem;
+        background: none;
+        border: 0;
+        color: var(--pergamino);
+        font-size: 1rem;
+        text-align: left;
+        text-decoration: none;
+
+        &:hover,
+        &:focus-visible {
+            background: rgb(241 230 210 / 0.07);
+            color: var(--oro-claro);
+        }
+    }
+
+    i {
+        width: 1.1rem;
+        color: var(--oro);
+    }
+
+    hr {
+        margin: 0.4rem 0;
+    }
+}
+
+.cuenta__cabecera {
+    padding: 0.75rem;
+    font-size: var(--paso-small);
+    color: #b9a88e;
+
+    strong {
+        display: block;
+        color: var(--pergamino);
+        font-size: 1rem;
+    }
+}
+
+// Móvil y tablet: la navegación se convierte en panel a pantalla completa
+@include hasta($bp-md) {
+    .cabecera__menu {
+        display: block;
+    }
+
+    .navegacion {
+        position: fixed;
+        inset: var(--alto-cabecera) 0 0 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 2rem;
+        padding: 2rem var(--margen) 3rem;
+        background: var(--tinta);
+        overflow-y: auto;
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(-0.75rem);
+        transition: opacity var(--medio) var(--ease-salida), transform var(--medio) var(--ease-salida),
+            visibility 0s linear var(--medio);
+
+        &[data-abierta="true"] {
+            visibility: visible;
+            opacity: 1;
+            transform: none;
+            transition-delay: 0s;
+        }
+    }
+
+    .navegacion__lista {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .navegacion__enlace {
+        display: block;
+        padding-block: 0.6rem;
+        font-family: var(--fuente-display);
+        font-size: clamp(2.25rem, 8vw, 3.25rem);
+        line-height: 1.05;
+
+        &::after {
+            display: none;
+        }
+
+        &[aria-current="page"] {
+            color: var(--oro);
+            font-style: italic;
+        }
+    }
+
+    .buscador {
+        order: -1;
+
+        input {
+            flex: 1;
+            width: auto;
+            font-size: 1.125rem;
+        }
+    }
+
+    .cabecera__acciones {
+        margin-left: auto;
+    }
+
+    .cuenta__boton span {
+        display: none;
+    }
+}
+
+@include hasta($bp-sm) {
+    .cabecera__acciones .enlace-cuenta {
+        display: none;
+    }
+}
+
+body[data-menu-abierto="true"] {
+    overflow: hidden;
+}
+
+// Barra del área de socio: pestañas con subrayado, desplazable en móvil
+.barra-usuario {
+    background: var(--tinta-2);
+    border-bottom: 1px solid rgb(241 230 210 / 0.1);
+
+    ul {
+        display: flex;
+        gap: 1.75rem;
+        margin: 0 auto;
+        padding-block: 0;
+        list-style: none;
+        overflow-x: auto;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        min-height: 3.25rem;
+        border-bottom: 2px solid transparent;
+        color: #c9b89e;
+        font-size: 0.9375rem;
+        text-decoration: none;
+        white-space: nowrap;
+
+        &:hover {
+            color: var(--pergamino);
+        }
+
+        &[aria-current="page"] {
+            color: var(--pergamino);
+            border-bottom-color: var(--oro);
+        }
+    }
+}

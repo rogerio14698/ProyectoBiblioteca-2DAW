@@ -19,6 +19,9 @@ return new class extends Migration
             $table->text('mensaje');
             $table->text('respuesta')->nullable();
             $table->enum('estado', ['pendiente','en_proceso','leido'])->default('pendiente');
+            // Doble confirmación: el mensaje solo llega al admin cuando el remitente confirma su email.
+            $table->string('token_verificacion', 64)->nullable()->unique();
+            $table->timestamp('email_verificado_at')->nullable();
             $table->timestamps();
         });
     }

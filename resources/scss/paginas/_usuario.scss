@@ -1,0 +1,480 @@
+@use "../abstracts/tokens" as *;
+
+// Área de socio: interacción funcional con el mismo lenguaje barroco contemporáneo.
+.portadilla--socio {
+    padding-block: clamp(2rem, 1.5rem + 3vw, 4rem) clamp(1.5rem, 1rem + 2vw, 2.75rem);
+
+    h1 {
+        max-width: 18ch;
+        font-size: clamp(2.75rem, 1.5rem + 5vw, 5.75rem);
+        line-height: 0.96;
+    }
+}
+
+.socio-inicio,
+.socio-publicaciones,
+.socio-dos-paneles {
+    display: grid;
+    gap: var(--hueco);
+
+    @include desde($bp-md) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.socio-inicio {
+    align-items: start;
+
+    @include desde($bp-md) {
+        grid-template-columns: minmax(15rem, 0.85fr) minmax(0, 1.4fr);
+    }
+}
+
+.socio-resumen {
+    .ficha {
+        grid-template-columns: minmax(7rem, max-content) minmax(0, 1fr);
+        gap: 1rem 1.25rem;
+    }
+}
+
+.socio-cifra {
+    font-family: var(--fuente-display);
+    font-size: clamp(2.5rem, 2rem + 2vw, 4rem);
+    font-weight: 500;
+    line-height: 0.9;
+    font-variant-numeric: tabular-nums;
+}
+
+.socio-resumen__acciones,
+.socio-identidad__acciones {
+    margin-top: 1.75rem;
+}
+
+.socio-enlaces {
+    display: grid;
+
+    a {
+        display: grid;
+        gap: 0.35rem;
+        padding-block: 1rem;
+        border-top: 1px solid var(--linea);
+        text-decoration: none;
+
+        > span:first-child {
+            font-family: var(--fuente-display);
+            font-size: clamp(1.35rem, 1.15rem + 0.6vw, 1.8rem);
+            line-height: 1.05;
+        }
+
+        > span:last-child {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            color: var(--texto-suave);
+            font-size: var(--paso-small);
+        }
+
+        &:hover > span:first-child {
+            color: var(--acento);
+        }
+    }
+}
+
+.socio-identidad {
+    display: grid;
+    gap: 2rem;
+    align-items: start;
+
+    @include desde($bp-sm) {
+        grid-template-columns: 9rem minmax(0, 1fr);
+    }
+
+    .ficha {
+        grid-template-columns: minmax(6rem, max-content) minmax(0, 1fr);
+        overflow-wrap: anywhere;
+    }
+}
+
+.socio-avatar,
+.socio-foto__control img {
+    width: 9rem;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border: 1px solid var(--linea);
+    background: var(--superficie);
+}
+
+.socio-edicion {
+    display: grid;
+    gap: var(--hueco);
+
+    > .aviso {
+        margin: 0;
+    }
+}
+
+.socio-cerrar-sesion {
+    margin-top: 1.5rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--linea);
+}
+
+.socio-foto__control {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+}
+
+.seccionPassword {
+    display: none;
+    scroll-margin-top: calc(var(--alto-cabecera) + 1rem);
+}
+
+.seccionPasswordVisible {
+    display: block;
+    animation: socio-revelado 380ms var(--ease-salida) both;
+}
+
+@keyframes socio-revelado {
+    from { opacity: 0; transform: translateY(0.6rem); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.socio-estadisticas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem 1.5rem;
+    margin-bottom: var(--hueco);
+
+    p {
+        display: grid;
+        gap: 0.25rem;
+        margin: 0;
+        padding-top: 0.75rem;
+        border-top: 1px solid var(--linea);
+    }
+
+    span {
+        color: var(--texto-suave);
+        font-size: var(--paso-small);
+    }
+
+    strong {
+        font-family: var(--fuente-display);
+        font-size: clamp(2rem, 1.5rem + 1.5vw, 3rem);
+        font-weight: 500;
+        line-height: 0.95;
+        font-variant-numeric: tabular-nums;
+    }
+
+    @include desde($bp-sm) {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+.socio-filtros {
+    margin-bottom: clamp(2.5rem, 1.5rem + 3vw, 4rem);
+
+    .formulario {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+        align-items: end;
+    }
+
+    .acciones {
+        align-self: end;
+    }
+}
+
+.socio-filtros__busqueda {
+    @include desde($bp-md) {
+        grid-column: span 2;
+    }
+}
+
+.socio-listado,
+.socio-pagos-seccion,
+.socio-eventos,
+.socio-historial__grupo {
+    margin-top: var(--hueco);
+}
+
+.tabla-acciones {
+    align-items: center;
+    gap: 0.5rem;
+
+    form {
+        margin: 0;
+    }
+}
+
+.socio-seccion {
+    margin-block: clamp(2.5rem, 1.5rem + 3vw, 4rem);
+}
+
+.socio-libros {
+    align-items: start;
+}
+
+.socio-libro {
+    display: grid;
+    align-content: start;
+    gap: 0.7rem;
+
+    .libro__enlace {
+        gap: 0.8rem;
+    }
+
+    .libro__portada {
+        aspect-ratio: 3 / 4;
+    }
+
+    .libro__portada img {
+        object-fit: cover;
+    }
+
+    .libro__titulo {
+        overflow-wrap: anywhere;
+    }
+}
+
+.socio-libro__ficha {
+    grid-template-columns: max-content minmax(0, 1fr);
+    gap: 0.35rem 0.75rem;
+}
+
+.socio-libro__formulario {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--linea);
+}
+
+.socio-dos-paneles {
+    margin-top: clamp(2.5rem, 1.5rem + 3vw, 4rem);
+    align-items: start;
+}
+
+.socio-fila {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.75rem 1rem;
+    align-items: center;
+    padding-block: 1rem;
+    border-top: 1px solid var(--linea);
+
+    h3 {
+        margin: 0 0 0.25rem;
+        font-size: 1.15rem;
+        line-height: 1.2;
+    }
+
+    p {
+        margin: 0;
+        color: var(--texto-suave);
+        font-size: var(--paso-small);
+    }
+
+    > form,
+    > .acciones {
+        justify-self: end;
+    }
+}
+
+.socio-cuota {
+    display: grid;
+    gap: 1.5rem;
+    align-items: center;
+    margin-bottom: var(--hueco);
+
+    @include desde($bp-sm) {
+        grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    p:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.socio-cuota__importe {
+    margin-top: 1rem;
+    font-family: var(--fuente-display);
+    font-size: clamp(2rem, 1.5rem + 1vw, 3rem);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+
+    span {
+        font-family: var(--fuente-texto);
+        font-size: var(--paso-small);
+        color: var(--texto-suave);
+    }
+}
+
+.socio-seccion-titulo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem 1.5rem;
+
+    .panel__titulo {
+        margin-bottom: 0;
+    }
+}
+
+.socio-tarjeta {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+
+    h3 {
+        font-size: 1.1rem;
+    }
+
+    @include hasta($bp-sm) {
+        grid-template-columns: minmax(0, 1fr) auto;
+
+        > form:last-child {
+            grid-column: 2;
+        }
+    }
+}
+
+.socio-pruebas {
+    margin: var(--hueco) 0 0;
+    color: var(--texto);
+}
+
+.socio-resultado {
+    display: grid;
+    gap: 1.25rem;
+
+    .ficha {
+        grid-template-columns: minmax(6rem, max-content) minmax(0, 1fr);
+    }
+
+    > p {
+        margin: 0;
+    }
+}
+
+.socio-publicar-form {
+    margin-bottom: var(--hueco);
+}
+
+.socio-publicaciones {
+    align-items: start;
+
+    > .panel {
+        min-width: 0;
+    }
+}
+
+.socio-busqueda-publicacion {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    margin-bottom: 1rem;
+}
+
+.socio-publicacion-fila {
+    grid-template-columns: minmax(0, 1fr) auto;
+
+    h3 {
+        font-family: var(--fuente-display);
+        font-size: 1.25rem;
+    }
+}
+
+.socio-consulta {
+    padding-block: 1.25rem;
+    border-top: 1px solid var(--linea);
+
+    > header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: start;
+        gap: 0.75rem 1rem;
+    }
+
+    h3 {
+        margin: 0 0 0.25rem;
+        font-size: var(--paso-lead);
+    }
+
+    header p,
+    .campo__ayuda {
+        margin: 0;
+        color: var(--texto-suave);
+        font-size: var(--paso-small);
+    }
+}
+
+.socio-consulta__mensaje {
+    margin-block: 1rem;
+    white-space: pre-line;
+}
+
+.socio-consulta__respuesta {
+    padding: 1rem;
+    background: var(--superficie);
+
+    h4 {
+        margin-bottom: 0.5rem;
+    }
+
+    p {
+        margin: 0;
+        white-space: pre-line;
+    }
+}
+
+.socio-estado {
+    h2 {
+        max-width: 22ch;
+    }
+}
+
+.socio-estado__marca {
+    margin-bottom: 1rem;
+}
+
+.texto-suave {
+    color: var(--texto-suave);
+}
+
+@include hasta($bp-sm) {
+    .socio-fila,
+    .socio-publicacion-fila {
+        grid-template-columns: minmax(0, 1fr);
+
+        > form,
+        > .acciones,
+        > .boton {
+            justify-self: start;
+        }
+    }
+
+    .socio-busqueda-publicacion {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .socio-tarjeta > form:last-child {
+        grid-column: auto;
+    }
+
+    .socio-resultado .ficha,
+    .socio-identidad .ficha,
+    .socio-resumen .ficha {
+        grid-template-columns: 1fr;
+        gap: 0.15rem;
+
+        dd + dt {
+            margin-top: 0.7rem;
+        }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .seccionPasswordVisible {
+        animation: none;
+    }
+}
