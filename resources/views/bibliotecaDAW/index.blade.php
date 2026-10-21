@@ -126,12 +126,9 @@
                 <div class="carrusel carrusel--uno" data-carrusel>
                     <div class="carrusel__pista">
                         @foreach ($slideBienvenidas as $slide)
-                            @php
-                                $imagenSlide = Str::startsWith($slide->imagen, ['http://', 'https://']) ? $slide->imagen : asset($slide->imagen);
-                            @endphp
                             <article class="carrusel__item destacado" aria-roledescription="diapositiva" aria-label="{{ $loop->iteration }} de {{ $loop->count }}">
                                 <figure class="lamina">
-                                    <img src="{{ $imagenSlide }}" alt="" loading="lazy" width="800" height="600">
+                                    <img src="{{ $slide->imagen_public_url }}" alt="" loading="lazy" width="800" height="600">
                                 </figure>
                                 <div>
                                     <h3>{{ $slide->titulo }}</h3>
@@ -216,7 +213,7 @@
                 <div class="noticias noticias--destacada">
                     @foreach ($noticias as $noticia)
                         <article class="noticia" data-revelar>
-                            <img src="{{ $noticia->imagen_url }}" alt="" loading="lazy" width="400" height="300">
+                            <img src="{{ $noticia->imagen_public_url }}" alt="" loading="lazy" width="400" height="300">
                             <h3><a href="{{ route('noticia.paginaInterna', $noticia->id) }}">{{ $noticia->titulo }}</a></h3>
                             <p class="noticia__autor">{{ $noticia->autor }}</p>
                         </article>
@@ -279,7 +276,7 @@
                     'startDate' => \Illuminate\Support\Carbon::parse($evento->fecha_hora)->toIso8601String(),
                     'eventAttendanceMode' => 'https://schema.org/OfflineEventAttendanceMode',
                     'eventStatus' => 'https://schema.org/EventScheduled',
-                    'image' => $evento->imagen_url,
+                    'image' => $evento->imagen_public_url,
                     'url' => route('evento.paginaInterna', $evento->id),
                     'location' => [
                         '@type' => 'Place',

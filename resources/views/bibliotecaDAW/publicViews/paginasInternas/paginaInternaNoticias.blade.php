@@ -4,14 +4,6 @@
 @section('og_type', 'article')
 
 @section('content')
-    @php
-        $imagenNoticia = null;
-        if ($noticia->imagen_url) {
-            $imagenNoticia = \Illuminate\Support\Str::startsWith($noticia->imagen_url, ['http://', 'https://'])
-                ? $noticia->imagen_url
-                : asset('storage/' . $noticia->imagen_url);
-        }
-    @endphp
     <section class="capitulo capitulo--tinta">
         <div class="envoltura envoltura--estrecha">
             <article>
@@ -25,7 +17,7 @@
                     </div>
                 </header>
                 @if ($noticia->imagen_url)
-                    <figure class="lamina articulo__figura"><img src="{{ $imagenNoticia }}" alt="Imagen de {{ $noticia->titulo }}" width="1200" height="700"><figcaption>{{ $noticia->titulo }}</figcaption></figure>
+                    <figure class="lamina articulo__figura"><img src="{{ $noticia->imagen_public_url }}" alt="Imagen de {{ $noticia->titulo }}" width="1200" height="700"><figcaption>{{ $noticia->titulo }}</figcaption></figure>
                 @endif
                 <div class="lectura articulo__cuerpo">{!! nl2br(e($noticia->contenido)) !!}</div>
                 <footer class="articulo__pie">

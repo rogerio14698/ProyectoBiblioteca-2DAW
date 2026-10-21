@@ -3,15 +3,7 @@
 @section('title', $evento->titulo . ' | Biblioteca DAW')
 
 @section('content')
-    @php
-        $imagenEvento = null;
-        if ($evento->imagen_url) {
-            $imagenEvento = \Illuminate\Support\Str::startsWith($evento->imagen_url, ['http://', 'https://'])
-                ? $evento->imagen_url
-                : asset('storage/' . $evento->imagen_url);
-        }
-        $fechaEvento = \Illuminate\Support\Carbon::parse($evento->fecha_hora)->locale('es');
-    @endphp
+    @php $fechaEvento = \Illuminate\Support\Carbon::parse($evento->fecha_hora)->locale('es'); @endphp
     <section class="capitulo capitulo--tinta">
         <div class="envoltura">
             <header class="portadilla">
@@ -22,7 +14,7 @@
             <div class="dos-columnas ficha-evento">
                 <article>
                     @if ($evento->imagen_url)
-                        <figure class="lamina ficha-evento__imagen"><img src="{{ $imagenEvento }}" alt="Imagen de {{ $evento->titulo }}" width="1200" height="700"><figcaption>{{ $evento->ubicacion }}</figcaption></figure>
+                        <figure class="lamina ficha-evento__imagen"><img src="{{ $evento->imagen_public_url }}" alt="Imagen de {{ $evento->titulo }}" width="1200" height="700"><figcaption>{{ $evento->ubicacion }}</figcaption></figure>
                     @endif
                     <h2>Sobre el encuentro</h2>
                     <p class="articulo__cuerpo">{{ $evento->descripcion }}</p>

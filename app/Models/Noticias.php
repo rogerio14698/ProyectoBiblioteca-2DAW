@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Support\PublicStoragePath;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -34,4 +35,9 @@ class Noticias extends Model
         'destacado'         => 'boolean',
         'fecha_publicacion' => 'date',
     ];
+
+    public function getImagenPublicUrlAttribute(): ?string
+    {
+        return PublicStoragePath::url($this->imagen_url);
+    }
 }

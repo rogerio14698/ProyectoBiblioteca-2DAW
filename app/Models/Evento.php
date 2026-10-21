@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Database\Factories\EventosFactory;
+use App\Support\PublicStoragePath;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Usuario;
@@ -34,6 +35,11 @@ class Evento extends Model
     protected $casts = [
         'precio' => 'decimal:2',
     ];
+
+    public function getImagenPublicUrlAttribute(): ?string
+    {
+        return PublicStoragePath::url($this->imagen_url);
+    }
 
     public function esDePago(): bool
     {

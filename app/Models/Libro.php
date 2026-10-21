@@ -6,7 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
+use App\Support\PublicStoragePath;
 
 /**
  * Modelo Eloquent para la tabla 'libros'.
@@ -60,12 +60,6 @@ class Libro extends Model
             return asset('img/elPrincipito.jpg');
         }
 
-        // Si empieza por http:// o https:// es una URL externa (del seeder).
-        if (Str::startsWith($this->portada_img, ['http://', 'https://'])) {
-            return $this->portada_img;
-        }
-
-        // Si es un archivo local, devolvemos la ruta completa con asset('storage/...').
-        return asset('storage/' . $this->portada_img);
+        return PublicStoragePath::url($this->portada_img) ?? asset('img/elPrincipito.jpg');
     }
 }

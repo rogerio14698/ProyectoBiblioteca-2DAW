@@ -67,7 +67,7 @@
     <th scope="col">Creada</th>
     <th scope="col">Acciones</th></tr></thead><tbody>
 @forelse ($slidesBienvenida as $slide)<tr><td class="a-num">{{ $slide->posicion ?? '—' }}</td>
-    <td><div class="a-tabla__identidad">@if ($slide->imagen)<img class="a-miniatura a-miniatura--ancha" src="{{ \Illuminate\Support\Str::startsWith($slide->imagen, ['http://', 'https://']) ? $slide->imagen : asset($slide->imagen) }}" alt="" loading="lazy">@endif<strong>{{ $slide->titulo }}</strong></div></td>
+    <td><div class="a-tabla__identidad">@if ($slide->imagen)<img class="a-miniatura a-miniatura--ancha" src="{{ $slide->imagen_public_url }}" alt="" loading="lazy">@endif<strong>{{ $slide->titulo }}</strong></div></td>
     <td class="a-texto-tabla"><div>{{ $slide->descripcion }}</div></td>
     <td>@if ($slide->url)<a class="a-boton a-boton--pequeno" href="{{ $slide->url }}" target="_blank" rel="noopener noreferrer">Ver enlace</a>@else<span class="a-muted">Sin enlace</span>@endif</td>
     <td class="a-fecha">{{ $slide->created_at?->format('d/m/Y H:i') }}</td>

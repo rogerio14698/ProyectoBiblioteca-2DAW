@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Evento;
 use App\Models\Usuario;
+use App\Support\PublicStoragePath;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Schema;
@@ -262,11 +263,10 @@ class EventosController extends Controller
             $evento->prioridad = $request->prioridad ?? 1;
         }
 
-        // Si llega una imagen nueva, borramos la anterior del disco y guardamos la nueva.
+        $previousPath = null;
         if ($request->hasFile('imagen')) {
-            // Eliminamos la imagen anterior si existia en almacenamiento local.
             if ($evento->imagen_url) {
-                Storage::disk('public')->delete($evento->imagen_url);
+                $previousPath = PublicStoragePath::normalize($evento->imagen_url);
             }
             $pathImagen = $request->file('imagen')->store('eventos', 'public');
             $evento->imagen_url = $pathImagen;
@@ -274,6 +274,10 @@ class EventosController extends Controller
 
         // Guardamos los cambios en base de datos.
         $evento->save();
+
+        if ($previousPath !== null && $previousPath !== $evento->imagen_url) {
+            Storage::disk('public')->delete($previousPath);
+        }
 
         // Volvemos a la pantalla principal del carrusel con mensaje de confirmación.
         return redirect()->route('admin.gestionCarrusel')->with('success', 'Evento actualizado correctamente.');
@@ -289,7 +293,10 @@ class EventosController extends Controller
 
         // Eliminamos la imagen del disco si existia antes de borrar el registro.
         if ($evento->imagen_url) {
-            Storage::disk('public')->delete($evento->imagen_url);
+            $imagePath = PublicStoragePath::normalize($evento->imagen_url);
+            if ($imagePath !== null) {
+                Storage::disk('public')->delete($imagePath);
+            }
         }
 
         //Eliminar registros de la base de datos.

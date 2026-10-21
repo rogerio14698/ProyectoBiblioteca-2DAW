@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SlideBienvenida;
+use App\Support\PublicStoragePath;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -68,14 +69,14 @@ class SlideBienvenidaController extends Controller
         // Si el usuario no define posicion, se asigna al final del listado actual.
         $posicionFinal = $validatedData['posicion'] ?? ((SlideBienvenida::max('posicion') ?? 0) + 1);
 
-        // Guardamos la imagen en disco público y persistimos la ruta final para mostrarla.
+        // Guardamos la ruta relativa al disco público para mostrarla en cualquier entorno.
         $pathImagen = $request->file('imagen')->store('slides-bienvenida', 'public');
 
         // Creamos el slide con los datos validados usando asignación masiva segura.
         SlideBienvenida::create([
             'titulo' => $validatedData['titulo'],
             'descripcion' => $validatedData['descripcion'],
-            'imagen' => 'storage/' . $pathImagen,
+            'imagen' => $pathImagen,
             'url' => $validatedData['url'] ?? null,
             'posicion' => $posicionFinal,
         ]);
@@ -123,14 +124,14 @@ class SlideBienvenidaController extends Controller
             'posicion' => 'nullable|integer|min:1',
         ]);
 
-        // Si llega una imagen nueva, borramos la anterior (si era local) y guardamos la nueva.
+        $previousPath = null;
         if ($request->hasFile('imagen')) {
-            if ($slideBienvenida->imagen && str_starts_with($slideBienvenida->imagen, 'storage/')) {
-                Storage::disk('public')->delete(str_replace('storage/', '', $slideBienvenida->imagen));
+            if ($slideBienvenida->imagen) {
+                $previousPath = PublicStoragePath::normalize($slideBienvenida->imagen);
             }
 
             $pathImagen = $request->file('imagen')->store('slides-bienvenida', 'public');
-            $slideBienvenida->imagen = 'storage/' . $pathImagen;
+            $slideBienvenida->imagen = $pathImagen;
         }
 
         // Actualizamos datos editables comunes.
@@ -139,6 +140,10 @@ class SlideBienvenidaController extends Controller
         $slideBienvenida->url = $validatedData['url'] ?? null;
         $slideBienvenida->posicion = $validatedData['posicion'] ?? $slideBienvenida->posicion;
         $slideBienvenida->save();
+
+        if ($previousPath !== null && $previousPath !== $slideBienvenida->imagen) {
+            Storage::disk('public')->delete($previousPath);
+        }
 
         return redirect()->route('admin.gestionHome')->with('success', 'Slide actualizado correctamente.');
     }
@@ -154,7 +159,13 @@ class SlideBienvenidaController extends Controller
         // Buscamos el slide por su ID o lanzamos un 404 si no existe.
         $slide = SlideBienvenida::findOrFail($id);
 
-        // Eliminamos el slide de la base de datos.
+        if ($slide->imagen) {
+            $imagePath = PublicStoragePath::normalize($slide->imagen);
+            if ($imagePath !== null) {
+                Storage::disk('public')->delete($imagePath);
+            }
+        }
+
         $slide->delete();
 
         return redirect()->back()->with('success', 'Slide eliminado correctamente.');

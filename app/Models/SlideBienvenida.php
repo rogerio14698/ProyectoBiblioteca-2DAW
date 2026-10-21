@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\PublicStoragePath;
 use Illuminate\Database\Eloquent\Model;
 
 class SlideBienvenida extends Model
@@ -15,4 +16,8 @@ class SlideBienvenida extends Model
         'posicion',
     ];
 
+    public function getImagenPublicUrlAttribute(): ?string
+    {
+        return PublicStoragePath::url($this->imagen);
+    }
 }

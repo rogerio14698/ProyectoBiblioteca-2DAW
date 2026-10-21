@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Libro;
+use App\Support\PublicStoragePath;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -270,13 +271,17 @@ class LibroController extends Controller
         ]);
 
         try {
+            $previousPath = null;
             if ($request->hasFile('portada_img')) {
                 if (!empty($libro->portada_img) && !Str::startsWith($libro->portada_img, ['http://', 'https://'])) {
-                    Storage::disk('public')->delete($libro->portada_img);
+                    $previousPath = PublicStoragePath::normalize($libro->portada_img);
                 }
                 $validatedData['portada_img'] = $request->file('portada_img')->store('portadas', 'public');
             }
             $libro->update($validatedData);
+            if ($previousPath !== null && $previousPath !== $libro->portada_img) {
+                Storage::disk('public')->delete($previousPath);
+            }
             return redirect()->route('admin.gestionCatalogo')->with('success', 'Libro actualizado correctamente.');
         } catch (\Exception $e) {
             return redirect()->route('admin.gestionCatalogo')->with('error', 'Error al actualizar el libro: ' . $e->getMessage());
@@ -288,7 +293,10 @@ class LibroController extends Controller
         try {
             $libro = Libro::findOrFail($id);
             if (!empty($libro->portada_img) && !Str::startsWith($libro->portada_img, ['http://', 'https://'])) {
-                Storage::disk('public')->delete($libro->portada_img);
+                $imagePath = PublicStoragePath::normalize($libro->portada_img);
+                if ($imagePath !== null) {
+                    Storage::disk('public')->delete($imagePath);
+                }
             }
             $libro->delete();
             return redirect()->route('admin.gestionCatalogo')->with('success', 'Libro eliminado correctamente.');

@@ -66,7 +66,7 @@
     <th scope="col">Prioridad</th>
     <th scope="col" class="a-num">Precio</th>
     <th scope="col">Acciones</th></tr></thead><tbody>
-@forelse ($eventos as $evento)<tr><td><div class="a-tabla__identidad">@if ($evento->imagen_url)@php $urlImagen = \Illuminate\Support\Str::startsWith($evento->imagen_url, ['http://', 'https://']) ? $evento->imagen_url : asset('storage/' . $evento->imagen_url); @endphp<img class="a-miniatura a-miniatura--ancha" src="{{ $urlImagen }}" alt="" loading="lazy">@endif<strong>{{ $evento->titulo }}</strong></div></td>
+@forelse ($eventos as $evento)<tr><td><div class="a-tabla__identidad">@if ($evento->imagen_url)<img class="a-miniatura a-miniatura--ancha" src="{{ $evento->imagen_public_url }}" alt="" loading="lazy">@endif<strong>{{ $evento->titulo }}</strong></div></td>
     <td class="a-texto-tabla"><div>{{ $evento->descripcion }}</div></td>
     <td class="a-fecha">{{ \Illuminate\Support\Carbon::parse($evento->fecha_hora)->format('d/m/Y H:i') }}</td>
     <td>{{ $evento->ubicacion }}</td>
